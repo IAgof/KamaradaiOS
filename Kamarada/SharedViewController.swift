@@ -8,22 +8,54 @@
 
 import UIKit
 import Social
+import AVFoundation
 
 class SharedViewController: UIViewController{
     
+    //MARK: - Outlets
     @IBOutlet weak var socialTableView: UITableView!
-    
     @IBOutlet weak var backgroundShareView: UIView!
-    
     @IBOutlet weak var whatsappImageView: UIImageView!
     @IBOutlet weak var FBImageView: UIImageView!
     @IBOutlet weak var youtubeImageView: UIImageView!
     @IBOutlet weak var gliphyImageView: UIImageView!
     
+    @IBOutlet weak var playImageView: UIImageView!
+    @IBOutlet weak var videoPlayerView: UIView!
+    @IBOutlet weak var videoProgressView: UIProgressView!
+    
+    //MARK: - Variables
+//    var sharedVideoPath: String? {
+//        didSet {
+//            self.createVideoPlayer()
+//        }
+//    }
+    var sharedVideoPath:String = ""
+    var isPlayingVideo:Bool = false
+    var player:AVPlayer?
+    
+    //MARK: - Init
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        self.createVideoPlayer()
         
+        self.setUpImageTaps()
+        
+        //Tap videoView
+        let singleFingerTap:UITapGestureRecognizer = UITapGestureRecognizer.init(target: self, action:#selector(SharedViewController.videoPlayerViewTapped))
+        videoPlayerView.addGestureRecognizer(singleFingerTap)
+        
+        //Bring playImageView to front
+        videoPlayerView.bringSubviewToFront(playImageView)
+        
+    }
+    override func viewWillDisappear(animated: Bool) {
+        print("SharedViewController willDissappear")
+        self.performSegueWithIdentifier("unwindToViewController", sender: self)
+    }
+
+    func setUpImageTaps(){
         //Get actions from ImageViews, could be buttons, but not the same shape image.
         var tapGestureRecognizer = UITapGestureRecognizer(target:self, action:#selector(SharedViewController.whatsappImageTapped(_:)))
         whatsappImageView.userInteractionEnabled = true
@@ -33,15 +65,70 @@ class SharedViewController: UIViewController{
         FBImageView.userInteractionEnabled = true
         FBImageView.addGestureRecognizer(tapGestureRecognizer)
         
-         tapGestureRecognizer = UITapGestureRecognizer(target:self, action:#selector(SharedViewController.youtubeImageTapped(_:)))
+        tapGestureRecognizer = UITapGestureRecognizer(target:self, action:#selector(SharedViewController.youtubeImageTapped(_:)))
         youtubeImageView.userInteractionEnabled = true
         youtubeImageView.addGestureRecognizer(tapGestureRecognizer)
         
-         tapGestureRecognizer = UITapGestureRecognizer(target:self, action:#selector(SharedViewController.gliphyImageTapped(_:)))
+        tapGestureRecognizer = UITapGestureRecognizer(target:self, action:#selector(SharedViewController.gliphyImageTapped(_:)))
         gliphyImageView.userInteractionEnabled = true
         gliphyImageView.addGestureRecognizer(tapGestureRecognizer)
     }
     
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+        
+    }
+    
+    //MARK: - VideoPlayer
+    func createVideoPlayer(){
+        print("Starts video player")
+        let movieURL = NSURL.fileURLWithPath(sharedVideoPath)
+        //to test:
+//        let movieURL = NSURL.fileURLWithPath( NSBundle.mainBundle().pathForResource("video", ofType:"m4v")!)
+        
+        print("El sharedVideoPath: \(sharedVideoPath) \n La movieURL: \(movieURL)")
+        
+        let playerItem:AVPlayerItem = AVPlayerItem.init(URL: movieURL)
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(SharedViewController.onVideoStops),
+                                                         name: AVPlayerItemDidPlayToEndTimeNotification,
+                                                         object: playerItem)
+        player = AVPlayer.init(playerItem: playerItem)
+        
+        let layer = AVPlayerLayer.init()
+        layer.player = player
+        layer.frame = CGRectMake(0,0, self.videoPlayerView.frame.width, self.videoPlayerView.frame.height)
+        self.videoPlayerView.layer.addSublayer(layer)
+    }
+    
+    //MARK: - OnTapp ImageVideo functions
+    func videoPlayerViewTapped(){
+        if isPlayingVideo {//video is playing
+            player!.pause()
+            
+            playImageView.hidden = false
+            isPlayingVideo = false
+            print("Video has stopped")
+        }else{//video has stopped
+            player!.play()
+            
+            playImageView.hidden = true
+            isPlayingVideo = true
+            print("Playing video")
+        }
+      
+
+    }
+    
+    func onVideoStops(){
+        print("Video has finished")
+        
+        player?.currentItem?.seekToTime(kCMTimeZero)
+        isPlayingVideo = false
+        playImageView.hidden = false
+    }
+    //MARK: - OnTapp Image functions
     func whatsappImageTapped(img: AnyObject)
     {
         shareToWhatsApp()
@@ -58,46 +145,25 @@ class SharedViewController: UIViewController{
     {
         shareToGliphy()
     }
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-        
-        
-    }
-    
+
+    //MARK: - Button Actions
     @IBAction func shareButtonClicked(sender: UIButton) {
-        let textToShare = "Swift is awesome!  Check out this website about it!"
         
-        let urlData = NSData(contentsOfURL: NSURL(string:"http://www.steppublishers.com/sites/default/files/stepteen2.mov")!)
+        let movieURL = NSURL.fileURLWithPath(sharedVideoPath)
+
+        let objectsToShare = [movieURL] //comment!, imageData!, myWebsite!]
+        let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
         
-        if ((urlData) != nil){
-            
-            print(urlData)
-            
-            let paths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)
-            let docDirectory = paths[0]
-            let filePath = "\(docDirectory)/tmpVideo.mov"
-            urlData?.writeToFile(filePath, atomically: true)
-            // file saved
-            
-            let videoLink = NSURL(fileURLWithPath: filePath)
-            
-            
-            let objectsToShare = [textToShare,videoLink] //comment!, imageData!, myWebsite!]
-            let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
-            
-            activityVC.setValue("Video", forKey: "subject")
-            
-            //New Excluded Activities Code
-                activityVC.excludedActivityTypes = [ UIActivityTypeAssignToContact, UIActivityTypeCopyToPasteboard, UIActivityTypeMessage, UIActivityTypePostToTencentWeibo, UIActivityTypePostToWeibo, UIActivityTypePrint ]
-            
-            
-            self.presentViewController(activityVC, animated: true, completion: nil)
-        }
+        activityVC.setValue("Video", forKey: "subject")
         
+        //New Excluded Activities Code
+        activityVC.excludedActivityTypes = [ UIActivityTypeAssignToContact, UIActivityTypeCopyToPasteboard, UIActivityTypeMessage, UIActivityTypePostToTencentWeibo, UIActivityTypePostToWeibo, UIActivityTypePrint ]
+        
+        
+        self.presentViewController(activityVC, animated: true, completion: nil)
     }
     
-    //MARK: - Share to diferent social networks
+    //MARK: - Share Functions
     func shareToWhatsApp(){
         let urlWhats = "whatsapp://app"
         if let urlString = urlWhats.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet()) {
@@ -156,5 +222,9 @@ class SharedViewController: UIViewController{
         
         alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
         self.presentViewController(alert, animated: true, completion: nil)
+        
     }
+    
+    
+
 }
