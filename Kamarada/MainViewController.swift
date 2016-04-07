@@ -58,8 +58,6 @@ class MainViewController: UIViewController {
     var colorFilter:GPUImageFilter
     var filterGroup:GPUImageFilterGroup
     var movieWriter:GPUImageMovieWriter!
-    var sourceImage:GPUImagePicture
-    var filterImage:UIImage!
     
     //MARK: - init
     required init(coder aDecoder: NSCoder)
@@ -69,9 +67,6 @@ class MainViewController: UIViewController {
         cropFilter = GPUImageFilter.init()
         colorFilter = GPUImageFilter.init()
         filterGroup = GPUImageFilterGroup.init()
-        
-        let filterImage = UIImage.init(named: "WID-small.jpg")
-        sourceImage = GPUImagePicture.init(image: filterImage, smoothlyScaleOutput: true)
         
         pathToMergeMovie = ""
         super.init(coder: aDecoder)!
@@ -88,29 +83,18 @@ class MainViewController: UIViewController {
         cropFilter = setCropFilter()
         colorFilter = setSepiaFilter()
         
-        videoCamera.runBenchmark = true
-        
-        sourceImage.processImage()
-        
-        let blendFilter = GPUImageAlphaBlendFilter.init()
-
-        videoCamera.addTarget(blendFilter, atTextureLocation: 0)
-        sourceImage.addTarget(blendFilter, atTextureLocation: 1)
-        blendFilter.useNextFrameForImageCapture()
+        videoCamera.addTarget(filterGroup)
         
         //Setup filterGroup
         filterGroup.addFilter(cropFilter)
         filterGroup.addFilter(colorFilter)
-        filterGroup.addFilter(blendFilter)
         
-        cropFilter.addTarget(blendFilter)
-        blendFilter.addTarget(colorFilter)
+        cropFilter.addTarget(colorFilter)
         
         filterGroup.initialFilters = [ cropFilter ]
         filterGroup.terminalFilter = colorFilter
-        //--------------------------------
         
-        blendFilter.addTarget(filterView)
+        filterGroup.addTarget(filterView)
         
         videoCamera.startCameraCapture()
     }
