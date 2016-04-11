@@ -51,6 +51,21 @@ class MainViewController: UIViewController {
     
     var videosArray:[String] = []
     
+    //Timer
+    var timer:NSTimer? = nil;
+    let grainFilters = ["silent_film_overlay_a.png"
+        ,"silent_film_overlay_b.png"
+        ,"silent_film_overlay_c.png"
+        ,"silent_film_overlay_d.png"
+        ,"silent_film_overlay_e.png"
+        ,"silent_film_overlay_f.png"
+        ,"silent_film_overlay_g.png"
+        ,"silent_film_overlay_h.png"
+        ,"silent_film_overlay_i.png"
+        ,"silent_film_overlay_j.png"]
+
+    var countGrainFilters = 0
+    
     //MARK: - GPUImage variables
     var videoCamera: GPUImageVideoCamera
     var blendImage: GPUImagePicture?
@@ -58,6 +73,11 @@ class MainViewController: UIViewController {
     var colorFilter:GPUImageFilter
     var filterGroup:GPUImageFilterGroup
     var movieWriter:GPUImageMovieWriter!
+    
+    //MARK: - Grain filter variables
+    var testImage:UIImage!
+    var blendFilter:GPUImageAlphaBlendFilter
+    var imageSource:GPUImagePicture!
     
     //MARK: - init
     required init(coder aDecoder: NSCoder)
@@ -67,6 +87,9 @@ class MainViewController: UIViewController {
         cropFilter = GPUImageFilter.init()
         colorFilter = GPUImageFilter.init()
         filterGroup = GPUImageFilterGroup.init()
+        
+        blendFilter = GPUImageAlphaBlendFilter.init()
+        imageSource = GPUImagePicture.init()
         
         pathToMergeMovie = ""
         super.init(coder: aDecoder)!
@@ -82,7 +105,7 @@ class MainViewController: UIViewController {
         //Setup filters
         cropFilter = setCropFilter()
         colorFilter = setSepiaFilter()
-        
+
         videoCamera.addTarget(filterGroup)
         
         //Setup filterGroup
@@ -94,9 +117,31 @@ class MainViewController: UIViewController {
         filterGroup.initialFilters = [ cropFilter ]
         filterGroup.terminalFilter = colorFilter
         
-        filterGroup.addTarget(filterView)
+        //Grain filter
+        testImage = UIImage.init(named: "silent_film_overlay_a.png")
+        imageSource = GPUImagePicture.init(image: testImage, smoothlyScaleOutput: true)
+        
+        //Sources to blend filter
+        filterGroup.addTarget(blendFilter, atTextureLocation: 0)
+        imageSource.addTarget(blendFilter, atTextureLocation: 1)
+        
+        imageSource.processImage()
+        
+        blendFilter.useNextFrameForImageCapture()
+        blendFilter.addTarget(filterView)
         
         videoCamera.startCameraCapture()
+        
+        //Timer
+        let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
+        dispatch_async(dispatch_get_global_queue(priority, 0)) {
+            // do some task
+            dispatch_async(dispatch_get_main_queue()) {
+                // update some UI
+                self.startUpdateGrainFilter()
+            }
+        }
+        
     }
     
     override func viewDidLoad() {
@@ -185,6 +230,7 @@ class MainViewController: UIViewController {
         disableOtherButtons(sender as! UIButton)
         print("Remove BWFilter")
     }
+    
     @IBAction func pushSetSepiaFilter(sender: AnyObject) {
         let filter = setSepiaFilter()
         self.replaceColorFilter(filter)
@@ -276,14 +322,28 @@ class MainViewController: UIViewController {
     
     //MARK: - Filter Functions
     
-    //Replaces the actualFilter with the filter argument
-    func replaceColorFilter(filter: GPUImageFilter){
-        cropFilter = setCropFilter()
-        colorFilter = filter
+    func startUpdateGrainFilter() {
         
+        NSTimer.scheduledTimerWithTimeInterval(0.3, target: self, selector: #selector(self.changeGrainFilter), userInfo: nil, repeats: true)
+        
+    }
+    func updateCountGrainFilters() {
+        if(countGrainFilters < (grainFilters.count - 1)){
+            countGrainFilters += 1
+        }else{
+            countGrainFilters = 0
+        }
+    }
+    func changeGrainFilter(){
+//        let countGrainFilters = Int(arc4random_uniform(2))
+//        print("Grain filter to obtain \(countGrainFilters)")
+        
+        let image = UIImage.init(named:grainFilters[countGrainFilters])
+        self.updateCountGrainFilters()
         videoCamera.addTarget(filterGroup)
         
         filterGroup.removeAllTargets()
+        blendFilter.removeAllTargets()
         
         filterGroup.addFilter(cropFilter)
         filterGroup.addFilter(colorFilter)
@@ -293,9 +353,62 @@ class MainViewController: UIViewController {
         filterGroup.initialFilters = [ cropFilter ]
         filterGroup.terminalFilter = colorFilter
         
-        filterGroup.addTarget(filterView)
+        //Grain filter
+        imageSource = GPUImagePicture.init(image: image, smoothlyScaleOutput: true)
+        
+        //Sources to blend filter
+        filterGroup.addTarget(blendFilter, atTextureLocation: 0)
+        imageSource.addTarget(blendFilter, atTextureLocation: 1)
+        blendFilter.mix = 1.0
+        
+        imageSource.processImage()
+        
+        blendFilter.useNextFrameForImageCapture()
+        blendFilter.addTarget(filterView)
+        
+        videoCamera.startCameraCapture()
+        
         if(isRecording){
-            filterGroup.addTarget(movieWriter)
+            blendFilter.addTarget(movieWriter)
+        }
+        
+    }
+    
+    //Replaces the actualFilter with the filter argument
+    func replaceColorFilter(filter: GPUImageFilter){
+        cropFilter = setCropFilter()
+        colorFilter = filter
+        
+        videoCamera.addTarget(filterGroup)
+        
+        filterGroup.removeAllTargets()
+        blendFilter.removeAllTargets()
+        
+        filterGroup.addFilter(cropFilter)
+        filterGroup.addFilter(colorFilter)
+        
+        cropFilter.addTarget(colorFilter)
+        
+        filterGroup.initialFilters = [ cropFilter ]
+        filterGroup.terminalFilter = colorFilter
+        
+        //Grain filter
+        testImage = UIImage.init(named: "filter1.png")
+        imageSource = GPUImagePicture.init(image: testImage, smoothlyScaleOutput: true)
+        
+        //Sources to blend filter
+        filterGroup.addTarget(blendFilter, atTextureLocation: 0)
+        imageSource.addTarget(blendFilter, atTextureLocation: 1)
+        
+        imageSource.processImage()
+        
+        blendFilter.useNextFrameForImageCapture()
+        blendFilter.addTarget(filterView)
+        
+        videoCamera.startCameraCapture()
+        
+        if(isRecording){
+            blendFilter.addTarget(movieWriter)
         }
         
         print("Filter changed")
@@ -337,7 +450,7 @@ class MainViewController: UIViewController {
         self.movieWriter = GPUImageMovieWriter.init(movieURL: movieURL, size: CGSizeMake(640,480))
         self.movieWriter.encodingLiveVideo = true
         
-        filterGroup.addTarget(self.movieWriter)
+        blendFilter.addTarget(self.movieWriter)
         self.movieWriter.startRecording()
         
         print("Recording movie starts")
