@@ -487,8 +487,8 @@
                     <connections>
                         <outlet property="FBImageView" destination="Usf-XF-9wM" id="61b-rL-Zhh"/>
                         <outlet property="backgroundShareView" destination="nkm-aY-E1E" id="CBq-v3-Ylg"/>
-                        <outlet property="gliphyImageView" destination="yVw-wV-Uoe" id="VAj-4I-Ahh"/>
                         <outlet property="playImageView" destination="w5a-jS-c4D" id="z15-6r-oJv"/>
+                        <outlet property="twitterImageView" destination="yVw-wV-Uoe" id="9jR-lU-vYU"/>
                         <outlet property="videoPlayerView" destination="jTO-uf-tP4" id="qjg-jb-WAU"/>
                         <outlet property="videoProgressView" destination="9m8-te-r7y" id="Cfn-VZ-W00"/>
                         <outlet property="whatsappImageView" destination="b7j-Lw-sEI" id="GiX-FN-9ot"/>

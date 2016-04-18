@@ -9,6 +9,8 @@
 import UIKit
 import Social
 import AVFoundation
+import Accounts
+import Photos
 
 class SharedViewController: UIViewController{
     
@@ -18,26 +20,22 @@ class SharedViewController: UIViewController{
     @IBOutlet weak var whatsappImageView: UIImageView!
     @IBOutlet weak var FBImageView: UIImageView!
     @IBOutlet weak var youtubeImageView: UIImageView!
-    @IBOutlet weak var gliphyImageView: UIImageView!
+    @IBOutlet weak var twitterImageView: UIImageView!
     
     @IBOutlet weak var playImageView: UIImageView!
     @IBOutlet weak var videoPlayerView: UIView!
     @IBOutlet weak var videoProgressView: UIProgressView!
     
     //MARK: - Variables
-//    var sharedVideoPath: String? {
-//        didSet {
-//            self.createVideoPlayer()
-//        }
-//    }
-    var sharedVideoPath:String = ""
+    
+//    var sharedVideoPath:String = ""
     var isPlayingVideo:Bool = false
     var player:AVPlayer?
-    
+    var movieURL:NSURL!
+
     //MARK: - Init
     override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        super.viewDidLoad()        // Do any additional setup after loading the view, typically from a nib.
         self.createVideoPlayer()
         
         self.setUpImageTaps()
@@ -48,6 +46,9 @@ class SharedViewController: UIViewController{
         
         //Bring playImageView to front
         videoPlayerView.bringSubviewToFront(playImageView)
+        
+//        //Set movieURL
+//        movieURL = NSURL.fileURLWithPath(sharedVideoPath)
         
     }
     override func viewWillDisappear(animated: Bool) {
@@ -69,9 +70,9 @@ class SharedViewController: UIViewController{
         youtubeImageView.userInteractionEnabled = true
         youtubeImageView.addGestureRecognizer(tapGestureRecognizer)
         
-        tapGestureRecognizer = UITapGestureRecognizer(target:self, action:#selector(SharedViewController.gliphyImageTapped(_:)))
-        gliphyImageView.userInteractionEnabled = true
-        gliphyImageView.addGestureRecognizer(tapGestureRecognizer)
+        tapGestureRecognizer = UITapGestureRecognizer(target:self, action:#selector(SharedViewController.twitterImageTapped(_:)))
+        twitterImageView.userInteractionEnabled = true
+        twitterImageView.addGestureRecognizer(tapGestureRecognizer)
     }
     
     override func didReceiveMemoryWarning() {
@@ -83,13 +84,9 @@ class SharedViewController: UIViewController{
     //MARK: - VideoPlayer
     func createVideoPlayer(){
         print("Starts video player")
-        let movieURL = NSURL.fileURLWithPath(sharedVideoPath)
-        //to test:
-//        let movieURL = NSURL.fileURLWithPath( NSBundle.mainBundle().pathForResource("video", ofType:"m4v")!)
         
-        print("El sharedVideoPath: \(sharedVideoPath) \n La movieURL: \(movieURL)")
-        
-        let playerItem:AVPlayerItem = AVPlayerItem.init(URL: movieURL)
+        let avAsset: AVURLAsset = AVURLAsset(URL: movieURL!, options: nil)
+        let playerItem: AVPlayerItem = AVPlayerItem(asset: avAsset)
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(SharedViewController.onVideoStops),
                                                          name: AVPlayerItemDidPlayToEndTimeNotification,
@@ -141,16 +138,15 @@ class SharedViewController: UIViewController{
     {
         shareToYoutube()
     }
-    func gliphyImageTapped(img: AnyObject)
+    func twitterImageTapped(img: AnyObject)
     {
-        shareToGliphy()
+//        shareToTwitter()
+        shareToInstagram()
     }
 
     //MARK: - Button Actions
     @IBAction func shareButtonClicked(sender: UIButton) {
         
-        let movieURL = NSURL.fileURLWithPath(sharedVideoPath)
-
         let objectsToShare = [movieURL] //comment!, imageData!, myWebsite!]
         let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
         
@@ -171,58 +167,89 @@ class SharedViewController: UIViewController{
                 
                 if UIApplication.sharedApplication().canOpenURL(whatsappURL) {
                     
-                    if let image = UIImage(named: "image") {
-                        if let imageData = UIImageJPEGRepresentation(image, 1.0) {
-                            let tempFile = NSURL(fileURLWithPath: NSHomeDirectory()).URLByAppendingPathComponent("Documents/whatsAppTmp.wai")
-                            do {
-                                try imageData.writeToURL(tempFile, options: .DataWritingAtomic)
-                                let documentInteractionController = UIDocumentInteractionController(URL: tempFile)
-                                documentInteractionController.UTI = "net.whatsapp.image"
-                                documentInteractionController.presentOpenInMenuFromRect(CGRectZero, inView: self.view, animated: true)
-                            } catch {
-                                print(error)
-                            }
-                        }
-                    }
+                    let documentationInteractionController:UIDocumentInteractionController = UIDocumentInteractionController.init(URL: movieURL)
+                    
+                    documentationInteractionController.UTI = "net.whatsapp.movie"
+                    
+                    documentationInteractionController.presentPreviewAnimated(true)
                     
                 } else {
                     // Cannot open whatsapp
-                }
+                    
+                    let alert = UIAlertController(title: "Share", message: "No Whattsapp instaled", preferredStyle: UIAlertControllerStyle.Alert)
+                    
+                    alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+                    self.presentViewController(alert, animated: true, completion: nil)                }
             }
         }
     }
-    
-    func shareToGliphy(){
-        if SLComposeViewController.isAvailableForServiceType(SLServiceTypeTwitter){
-            let twitterSheet:SLComposeViewController = SLComposeViewController(forServiceType: SLServiceTypeTwitter)
-            twitterSheet.setInitialText("Share on Twitter")
-            self.presentViewController(twitterSheet, animated: true, completion: nil)
-        } else {
-            let alert = UIAlertController(title: "Accounts", message: "Please login to a Twitter account to share.", preferredStyle: UIAlertControllerStyle.Alert)
-            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
-            self.presentViewController(alert, animated: true, completion: nil)
+
+    func shareToTwitter(){
+        let accountStore:ACAccountStore = ACAccountStore.init()
+        let accountType:ACAccountType = accountStore.accountTypeWithAccountTypeIdentifier(ACAccountTypeIdentifierTwitter)
+        
+        accountStore.requestAccessToAccountsWithType(accountType, options: nil) { (let granted, let error) in
+            let accounts = accountStore.accountsWithAccountType(accountType)
+            
+            if accounts.count > 0 {
+                let twitterAccount = accounts[0]
+                if(SocialVideoHelper.userHasAccessToTwitter()){
+                    let videoData = NSData(contentsOfURL: self.movieURL)
+                    SocialVideoHelper.uploadTwitterVideo(videoData, comment: "Kamarada video", account: twitterAccount as! ACAccount, withCompletion: nil)
+                }else{
+                    print("No access to Twitter")
+                }
+            }
         }
+
+        
     }
     
-    func shareToFB(){
-        if SLComposeViewController.isAvailableForServiceType(SLServiceTypeFacebook) {
-            let fbShare:SLComposeViewController = SLComposeViewController(forServiceType: SLServiceTypeFacebook)
-            
-            self.presentViewController(fbShare, animated: true, completion: nil)
-            
-        } else {
-            let alert = UIAlertController(title: "Accounts", message: "Please login to a Facebook account to share.", preferredStyle: UIAlertControllerStyle.Alert)
-            
-            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
-            self.presentViewController(alert, animated: true, completion: nil)
+    func shareToInstagram(){
+        //Get last videoAsset on PhotoLibrary
+        let fetchOptions = PHFetchOptions()
+        fetchOptions.sortDescriptors = [NSSortDescriptor(key:"creationDate", ascending:false)]
+        let fetchResult = PHAsset.fetchAssetsWithMediaType(.Video, options: fetchOptions)
+        
+        if let lastAsset = fetchResult.firstObject as? PHAsset {
+            //Share to instagram
+            let instagramURL = NSURL.init(string: "instagram://library?LocalIdentifier=\(lastAsset.localIdentifier)")!
+            if UIApplication.sharedApplication().canOpenURL(instagramURL) {
+                UIApplication.sharedApplication().openURL(instagramURL)
+            }
         }
+        
+
+    }
+   
+    func shareToFB(){
+        let accountStore:ACAccountStore = ACAccountStore.init()
+        let accountType:ACAccountType = accountStore.accountTypeWithAccountTypeIdentifier(ACAccountTypeIdentifierFacebook)
+        
+        let options:NSDictionary = [
+            "ACFacebookAppIdKey" : "123456789",
+            "ACFacebookPermissionsKey" : "publish_stream"]
+//            "ACFacebookAudienceKey" : ACFacebookAudienceEveryone] // Needed only when write permissions are requested
+
+        accountStore.requestAccessToAccountsWithType(accountType, options: options as [NSObject : AnyObject]) { (let granted, let error) in
+            let accounts = accountStore.accountsWithAccountType(accountType)
+            
+            if accounts.count > 0 {
+                let facebookAccount = accounts[0]
+                if(SocialVideoHelper.userHasAccessToFacebook()){
+                    let videoData = NSData(contentsOfURL: self.movieURL)
+                    SocialVideoHelper.uploadFacebookVideo(videoData, comment: "Kamarada video", account: facebookAccount as! ACAccount, withCompletion: nil)
+                }else{
+                    print("No access to Facebook")
+                }
+            }
+        }
+        
+        
     }
     func shareToYoutube(){
-        let alert = UIAlertController(title: "Alert", message: "Not yet", preferredStyle: UIAlertControllerStyle.Alert)
-        
-        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
-        self.presentViewController(alert, animated: true, completion: nil)
-        
+        let instagramURL = NSURL.init(string: "https://www.googleapis.com/youtube/v3/videos")!
+        UIApplication.sharedApplication().openURL(instagramURL)
     }
     
     

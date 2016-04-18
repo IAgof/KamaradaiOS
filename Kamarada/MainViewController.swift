@@ -10,6 +10,7 @@ import UIKit
 import AVFoundation
 import GPUImage
 import AssetsLibrary
+import Photos
 
 class MainViewController: UIViewController {
     
@@ -48,6 +49,7 @@ class MainViewController: UIViewController {
     
     var pathToMovie:String!
     var pathToMergeMovie:String
+    var urlToMergeMovieInPhotoLibrary:NSURL!
     
     var videosArray:[String] = []
     
@@ -324,7 +326,7 @@ class MainViewController: UIViewController {
     
     func startUpdateGrainFilter() {
         
-        NSTimer.scheduledTimerWithTimeInterval(0.3, target: self, selector: #selector(self.changeGrainFilter), userInfo: nil, repeats: true)
+        NSTimer.scheduledTimerWithTimeInterval(0.15, target: self, selector: #selector(self.changeGrainFilter), userInfo: nil, repeats: true)
         
     }
     func updateCountGrainFilters() {
@@ -334,9 +336,8 @@ class MainViewController: UIViewController {
             countGrainFilters = 0
         }
     }
+    
     func changeGrainFilter(){
-//        let countGrainFilters = Int(arc4random_uniform(2))
-//        print("Grain filter to obtain \(countGrainFilters)")
         
         let image = UIImage.init(named:grainFilters[countGrainFilters])
         self.updateCountGrainFilters()
@@ -393,7 +394,7 @@ class MainViewController: UIViewController {
         filterGroup.terminalFilter = colorFilter
         
         //Grain filter
-        testImage = UIImage.init(named: "filter1.png")
+        testImage = UIImage.init(named: "silent_film_overlay_a.png")
         imageSource = GPUImagePicture.init(image: testImage, smoothlyScaleOutput: true)
         
         //Sources to blend filter
@@ -529,8 +530,45 @@ class MainViewController: UIViewController {
         // 6 - Perform the Export
         exporter!.exportAsynchronouslyWithCompletionHandler() {
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                UISaveVideoAtPathToSavedPhotosAlbum(self.pathToMergeMovie, self,#selector(MainViewController.video(_:didFinishSavingWithError:contextInfo:)), nil)
+//                UISaveVideoAtPathToSavedPhotosAlbum(self.pathToMergeMovie, self,#selector(MainViewController.video(_:didFinishSavingWithError:contextInfo:)), nil)
+                self.saveMovieToCameraRoll()
             })
+        }
+    }
+    
+    func saveMovieToCameraRoll() {
+        var videoAssetPlaceholder:PHObjectPlaceholder!
+        
+        //Save in to photoLibrary
+        PHPhotoLibrary.sharedPhotoLibrary().performChanges({
+            let request = PHAssetChangeRequest.creationRequestForAssetFromVideoAtFileURL(NSURL(fileURLWithPath: self.pathToMovie))
+            videoAssetPlaceholder = request!.placeholderForCreatedAsset
+        }) { completed, error in
+            if completed {
+                print("Video is saved!")
+                //Create url to sharedView from PhotoLibrary
+                let localID = videoAssetPlaceholder.localIdentifier
+                let assetID =
+                    localID.stringByReplacingOccurrencesOfString(
+                        "/.*", withString: "",
+                        options: NSStringCompareOptions.RegularExpressionSearch, range: nil)
+                let ext = "mp4"
+                let assetURLStr =
+                    "assets-library://asset/asset.\(ext)?id=\(assetID)&ext=\(ext)"
+                print("assetURLstr \(assetURLStr)")
+                
+                //Assing urlToMergeMovieInPhotoLibrary to global variable.
+                self.urlToMergeMovieInPhotoLibrary = NSURL.init(string: assetURLStr)
+                
+                
+                self.waitingToMergeVideo = false //Stop waiting
+
+                //Async thread to update UI
+                dispatch_async(dispatch_get_main_queue()) {
+                    // update some UI
+                    self.performSegueWithIdentifier("sharedView", sender: nil)
+                }
+            }
         }
     }
     
@@ -546,8 +584,8 @@ class MainViewController: UIViewController {
             
             //Set the values to the next screen
             
-            if let detail:String = self.pathToMergeMovie{
-                controller.sharedVideoPath = detail
+            if let detail:NSURL = self.urlToMergeMovieInPhotoLibrary{
+                controller.movieURL = detail
             }
             controller.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem()
             controller.navigationItem.leftItemsSupplementBackButton = true
@@ -581,4 +619,7 @@ class MainViewController: UIViewController {
             }
         }
     }
+    
+    //MARK: - TEST
+    
 }

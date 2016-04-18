@@ -11,10 +11,10 @@ import UIKit
 class SettingsController: UITableViewController{
     
     var section = ["title_advanced_section":"", "moreInformation":"", "accountActions":""]
-    var items = [["Download Videona"],["legacyAdviceTitle","privacyPolicy","licenses","termsOfService","aboutUsTitle"],
+    var items = [["Download Videona"],["aboutUsTitle","privacyPolicy","licenses","termsOfService","legacyAdviceTitle"],
                  ["exit"]]
     var itemsDescription = Array<Array<String>>()
-    var contentItems = [["Download Videona"],["legacyAdviceContent","privacyPolicyContent","licenseContent","termsOfServiceContent","aboutUsContent"],
+    var contentItems = [["Download Videona"],["aboutUsContent","privacyPolicyContent","licenseContent","termsOfServiceContent","legacyAdviceContent"],
                         ["exit"]]
     var contentItemsDescription = Array<Array<String>>()
     
