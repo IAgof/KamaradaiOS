@@ -541,7 +541,7 @@ class MainViewController: UIViewController {
         
         //Save in to photoLibrary
         PHPhotoLibrary.sharedPhotoLibrary().performChanges({
-            let request = PHAssetChangeRequest.creationRequestForAssetFromVideoAtFileURL(NSURL(fileURLWithPath: self.pathToMovie))
+            let request = PHAssetChangeRequest.creationRequestForAssetFromVideoAtFileURL(NSURL(fileURLWithPath: self.pathToMergeMovie))
             videoAssetPlaceholder = request!.placeholderForCreatedAsset
         }) { completed, error in
             if completed {
@@ -586,7 +586,7 @@ class MainViewController: UIViewController {
             
             if let detail:NSURL = self.urlToMergeMovieInPhotoLibrary{
                 controller.movieURL = detail
-                controller.moviePath  = pathToMovie
+                controller.moviePath  = pathToMergeMovie
             }
             controller.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem()
             controller.navigationItem.leftItemsSupplementBackButton = true

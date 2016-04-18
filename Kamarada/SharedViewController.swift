@@ -64,7 +64,6 @@ class SharedViewController: UIViewController,GIDSignInUIDelegate,GIDSignInDelega
         }else{
             isSharingYoutube = false
         }
-        
     }
     
     func setUpImageTaps(){
@@ -165,7 +164,7 @@ class SharedViewController: UIViewController,GIDSignInUIDelegate,GIDSignInDelega
         activityVC.setValue("Video", forKey: "subject")
         
         //New Excluded Activities Code
-        activityVC.excludedActivityTypes = [ UIActivityTypeAssignToContact, UIActivityTypeCopyToPasteboard, UIActivityTypeMessage,  UIActivityTypePrint ]
+//        activityVC.excludedActivityTypes = [ UIActivityTypeAssignToContact, UIActivityTypeCopyToPasteboard, UIActivityTypeMessage,  UIActivityTypePrint ]
         
         
         self.presentViewController(activityVC, animated: true, completion: nil)
