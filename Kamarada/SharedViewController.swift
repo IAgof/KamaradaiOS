@@ -11,8 +11,9 @@ import Social
 import AVFoundation
 import Accounts
 import Photos
+import Alamofire
 
-class SharedViewController: UIViewController{
+class SharedViewController: UIViewController,GIDSignInUIDelegate, GIDSignInDelegate{
     
     //MARK: - Outlets
     @IBOutlet weak var socialTableView: UITableView!
@@ -28,11 +29,14 @@ class SharedViewController: UIViewController{
     
     //MARK: - Variables
     
-//    var sharedVideoPath:String = ""
+    //    var sharedVideoPath:String = ""
     var isPlayingVideo:Bool = false
     var player:AVPlayer?
     var movieURL:NSURL!
-
+    var moviePath:String!
+    var token:String!
+    var isSharingYoutube:Bool = false
+    
     //MARK: - Init
     override func viewDidLoad() {
         super.viewDidLoad()        // Do any additional setup after loading the view, typically from a nib.
@@ -47,15 +51,22 @@ class SharedViewController: UIViewController{
         //Bring playImageView to front
         videoPlayerView.bringSubviewToFront(playImageView)
         
-//        //Set movieURL
-//        movieURL = NSURL.fileURLWithPath(sharedVideoPath)
+        //Google Sign in
+        GIDSignIn.sharedInstance().uiDelegate = self
+        GIDSignIn.sharedInstance().delegate = self
         
     }
     override func viewWillDisappear(animated: Bool) {
         print("SharedViewController willDissappear")
-        self.performSegueWithIdentifier("unwindToViewController", sender: self)
+        
+        if(!isSharingYoutube){//are not sharing with youtube, have to go to kamarada main view
+            self.performSegueWithIdentifier("unwindToViewController", sender: self)
+        }else{
+            isSharingYoutube = false
+        }
+        
     }
-
+    
     func setUpImageTaps(){
         //Get actions from ImageViews, could be buttons, but not the same shape image.
         var tapGestureRecognizer = UITapGestureRecognizer(target:self, action:#selector(SharedViewController.whatsappImageTapped(_:)))
@@ -114,8 +125,6 @@ class SharedViewController: UIViewController{
             isPlayingVideo = true
             print("Playing video")
         }
-      
-
     }
     
     func onVideoStops(){
@@ -125,6 +134,7 @@ class SharedViewController: UIViewController{
         isPlayingVideo = false
         playImageView.hidden = false
     }
+    
     //MARK: - OnTapp Image functions
     func whatsappImageTapped(img: AnyObject)
     {
@@ -136,14 +146,16 @@ class SharedViewController: UIViewController{
     }
     func youtubeImageTapped(img: AnyObject)
     {
+        isSharingYoutube = true
+        
         shareToYoutube()
     }
     func twitterImageTapped(img: AnyObject)
     {
-//        shareToTwitter()
+        //        shareToTwitter()
         shareToInstagram()
     }
-
+    
     //MARK: - Button Actions
     @IBAction func shareButtonClicked(sender: UIButton) {
         
@@ -153,7 +165,7 @@ class SharedViewController: UIViewController{
         activityVC.setValue("Video", forKey: "subject")
         
         //New Excluded Activities Code
-        activityVC.excludedActivityTypes = [ UIActivityTypeAssignToContact, UIActivityTypeCopyToPasteboard, UIActivityTypeMessage, UIActivityTypePostToTencentWeibo, UIActivityTypePostToWeibo, UIActivityTypePrint ]
+        activityVC.excludedActivityTypes = [ UIActivityTypeAssignToContact, UIActivityTypeCopyToPasteboard, UIActivityTypeMessage,  UIActivityTypePrint ]
         
         
         self.presentViewController(activityVC, animated: true, completion: nil)
@@ -183,27 +195,27 @@ class SharedViewController: UIViewController{
             }
         }
     }
-
-    func shareToTwitter(){
-        let accountStore:ACAccountStore = ACAccountStore.init()
-        let accountType:ACAccountType = accountStore.accountTypeWithAccountTypeIdentifier(ACAccountTypeIdentifierTwitter)
-        
-        accountStore.requestAccessToAccountsWithType(accountType, options: nil) { (let granted, let error) in
-            let accounts = accountStore.accountsWithAccountType(accountType)
-            
-            if accounts.count > 0 {
-                let twitterAccount = accounts[0]
-                if(SocialVideoHelper.userHasAccessToTwitter()){
-                    let videoData = NSData(contentsOfURL: self.movieURL)
-                    SocialVideoHelper.uploadTwitterVideo(videoData, comment: "Kamarada video", account: twitterAccount as! ACAccount, withCompletion: nil)
-                }else{
-                    print("No access to Twitter")
-                }
-            }
-        }
-
-        
-    }
+    
+    //    func shareToTwitter(){
+    //        let accountStore:ACAccountStore = ACAccountStore.init()
+    //        let accountType:ACAccountType = accountStore.accountTypeWithAccountTypeIdentifier(ACAccountTypeIdentifierTwitter)
+    //
+    //        accountStore.requestAccessToAccountsWithType(accountType, options: nil) { (let granted, let error) in
+    //            let accounts = accountStore.accountsWithAccountType(accountType)
+    //
+    //            if accounts.count > 0 {
+    //                let twitterAccount = accounts[0]
+    //                if(SocialVideoHelper.userHasAccessToTwitter()){
+    //                    let videoData = NSData(contentsOfURL: self.movieURL)
+    //                    SocialVideoHelper.uploadTwitterVideo(videoData, comment: "Kamarada video", account: twitterAccount as! ACAccount, withCompletion: nil)
+    //                }else{
+    //                    print("No access to Twitter")
+    //                }
+    //            }
+    //        }
+    //
+    //
+    //    }
     
     func shareToInstagram(){
         //Get last videoAsset on PhotoLibrary
@@ -219,39 +231,130 @@ class SharedViewController: UIViewController{
             }
         }
         
-
+        
     }
-   
+    
     func shareToFB(){
-        let accountStore:ACAccountStore = ACAccountStore.init()
-        let accountType:ACAccountType = accountStore.accountTypeWithAccountTypeIdentifier(ACAccountTypeIdentifierFacebook)
-        
-        let options:NSDictionary = [
-            "ACFacebookAppIdKey" : "123456789",
-            "ACFacebookPermissionsKey" : "publish_stream"]
-//            "ACFacebookAudienceKey" : ACFacebookAudienceEveryone] // Needed only when write permissions are requested
-
-        accountStore.requestAccessToAccountsWithType(accountType, options: options as [NSObject : AnyObject]) { (let granted, let error) in
-            let accounts = accountStore.accountsWithAccountType(accountType)
-            
-            if accounts.count > 0 {
-                let facebookAccount = accounts[0]
-                if(SocialVideoHelper.userHasAccessToFacebook()){
-                    let videoData = NSData(contentsOfURL: self.movieURL)
-                    SocialVideoHelper.uploadFacebookVideo(videoData, comment: "Kamarada video", account: facebookAccount as! ACAccount, withCompletion: nil)
-                }else{
-                    print("No access to Facebook")
-                }
-            }
-        }
-        
         
     }
     func shareToYoutube(){
-        let instagramURL = NSURL.init(string: "https://www.googleapis.com/youtube/v3/videos")!
-        UIApplication.sharedApplication().openURL(instagramURL)
+        let youtubeScope = "https://www.googleapis.com/auth/youtube.upload"
+        let youtubeScope2 = "https://www.googleapis.com/auth/youtube"
+        let youtubeScope3 = "https://www.googleapis.com/auth/youtubepartner"
+        //        let youtubeScope = "https://www.googleapis.com/auth/drive.readonly"
+        
+        GIDSignIn.sharedInstance().scopes.append(youtubeScope)
+        GIDSignIn.sharedInstance().scopes.append(youtubeScope2)
+        GIDSignIn.sharedInstance().scopes.append(youtubeScope3)
+        
+        GIDSignIn.sharedInstance().signIn()
+        
+    }
+    
+    //MARK: - Google methods
+    
+    // Stop the UIActivityIndicatorView animation that was started when the user
+    // pressed the Sign In button
+    func signInWillDispatch(signIn: GIDSignIn!, error: NSError!) {
+        //        myActivityIndicator.stopAnimating()
+    }
+    
+    // Present a view that prompts the user to sign in with Google
+    func signIn(signIn: GIDSignIn!,
+                presentViewController viewController: UIViewController!) {
+        
+        self.presentViewController(viewController, animated: true, completion: nil)
+        
+        print("SignIn")
+    }
+    
+    // Dismiss the "Sign in with Google" view
+    func signIn(signIn: GIDSignIn!,
+                dismissViewController viewController: UIViewController!) {
+        self.dismissViewControllerAnimated(true, completion: nil)
+        
+        print("SignIn Dissmiss")
+        
     }
     
     
+    func signIn(signIn: GIDSignIn!, didSignInForUser user: GIDGoogleUser!, withError error: NSError!) {
+        print("Google Sign In get user token")
+        
+        token = user.authentication.accessToken
+        
+        print("Google Sign In get user token: \(token))")
+        
+        self.postVideoToYouTube(){(result) -> () in
+            print("result \(result)")
+        }
+    }
 
+    //MARK: - Youtube upload
+    func postVideoToYouTube( callback: Bool -> Void){
+        
+        let headers = ["Authorization": "Bearer \(token)"]
+        
+        let title = "Kamarada-\(self.giveMeTimeNow())"
+        let description = "Video grabado con Kamarada"
+        
+        let videoData = NSData.init(contentsOfFile: moviePath)
+        Alamofire.upload(
+            .POST,
+            "https://www.googleapis.com/upload/youtube/v3/videos?part=snippet",
+            headers: headers,
+            multipartFormData: { multipartFormData in
+                multipartFormData.appendBodyPart(data:"{'snippet':{'title' : '\(title)', 'description': '\(description)'}}".dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)!, name :"snippet", mimeType: "application/json")
+
+                multipartFormData.appendBodyPart(data: videoData!, name: "video", fileName: "video.mp4", mimeType: "application/octet-stream")
+                
+            },
+            encodingCompletion: { encodingResult in
+                switch encodingResult {
+                case .Success(let upload, _, _):
+                    upload.responseJSON { response in
+                        print(response)
+                        callback(true)
+                        
+                        self.setAlertSuccessUpload(true)
+                    }
+                case .Failure(_):
+                    callback(false)
+                    self.setAlertSuccessUpload(false)
+                }
+        })
+    }
+    
+    func setAlertSuccessUpload(status: Bool){
+        var message = ""
+        if(status){
+            message = "Success on the upload"
+        }else{
+            message = "Error on the upload try again"
+        }
+        
+        let alert = UIAlertController(title: "Youtube upload", message: message, preferredStyle: UIAlertControllerStyle.Alert)
+
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+        self.presentViewController(alert, animated: true, completion: nil)
+    }
+    
+    //MARK: - Functions
+    
+    //Make the String with date to save videos
+    func giveMeTimeNow()->String{
+        var dateString:String = ""
+        let dateFormatter = NSDateFormatter()
+        
+        let date = NSDate()
+        
+        dateFormatter.locale = NSLocale(localeIdentifier: "es_ES")
+        dateFormatter.dateFormat = "yyyyMMdd-HHmmss"
+        dateFormatter.timeZone = NSTimeZone(forSecondsFromGMT: 3600) //GMT +1
+        dateString = dateFormatter.stringFromDate(date)
+        
+        print("La hora es : \(dateString)")
+        
+        return dateString
+    }
 }

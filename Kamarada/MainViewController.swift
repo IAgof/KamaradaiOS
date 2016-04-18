@@ -586,6 +586,7 @@ class MainViewController: UIViewController {
             
             if let detail:NSURL = self.urlToMergeMovieInPhotoLibrary{
                 controller.movieURL = detail
+                controller.moviePath  = pathToMovie
             }
             controller.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem()
             controller.navigationItem.leftItemsSupplementBackButton = true

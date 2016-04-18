@@ -10,6 +10,7 @@
 		A918CBDF1CAAB670009F2A50 /* SharedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A918CBDE1CAAB670009F2A50 /* SharedViewController.swift */; };
 		A918CBE11CAAD175009F2A50 /* Settings.strings in Resources */ = {isa = PBXBuildFile; fileRef = A918CBE01CAAD175009F2A50 /* Settings.strings */; };
 		A918CBE31CAADC8A009F2A50 /* activity_settings_background.png in Resources */ = {isa = PBXBuildFile; fileRef = A918CBE21CAADC8A009F2A50 /* activity_settings_background.png */; };
+		A944C23C1CC4D88D00FBC03E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A944C23B1CC4D88D00FBC03E /* GoogleService-Info.plist */; };
 		A955F4FD1CA95B0D00B0CF62 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A955F4FC1CA95B0D00B0CF62 /* AppDelegate.swift */; };
 		A955F4FF1CA95B0D00B0CF62 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A955F4FE1CA95B0D00B0CF62 /* MainViewController.swift */; };
 		A955F5021CA95B0D00B0CF62 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A955F5001CA95B0D00B0CF62 /* Main.storyboard */; };
@@ -81,6 +82,7 @@
 		A9F4A1B81CABE39E00B12907 /* WhatsAppIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = A9F4A1B41CABE39E00B12907 /* WhatsAppIcon.png */; };
 		A9F4A1B91CABE39E00B12907 /* GlyphIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = A9F4A1B51CABE39E00B12907 /* GlyphIcon.png */; };
 		A9F4A1BA1CABE39E00B12907 /* FBIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = A9F4A1B61CABE39E00B12907 /* FBIcon.png */; };
+		D7E29E940AE5EB7D2CEB6A00 /* Pods_Kamarada.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08A3D806EE5ED7EA303D26B7 /* Pods_Kamarada.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -135,9 +137,13 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		08A3D806EE5ED7EA303D26B7 /* Pods_Kamarada.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Kamarada.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		14C5A25F518DA8F439A9000A /* Pods-Kamarada.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kamarada.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Kamarada/Pods-Kamarada.debug.xcconfig"; sourceTree = "<group>"; };
+		679A42B7612B072E70607B0E /* Pods-Kamarada.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kamarada.release.xcconfig"; path = "Pods/Target Support Files/Pods-Kamarada/Pods-Kamarada.release.xcconfig"; sourceTree = "<group>"; };
 		A918CBDE1CAAB670009F2A50 /* SharedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharedViewController.swift; sourceTree = "<group>"; };
 		A918CBE01CAAD175009F2A50 /* Settings.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Settings.strings; sourceTree = "<group>"; };
 		A918CBE21CAADC8A009F2A50 /* activity_settings_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = activity_settings_background.png; path = "../../../../Google Drive/Drive Videona/Operations/OP-2016-0003 - Kamarada app/OP-2016-0003 - Recursos para Tablets/activity_settings_background.png"; sourceTree = "<group>"; };
+		A944C23B1CC4D88D00FBC03E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A955F4F91CA95B0D00B0CF62 /* Kamarada.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kamarada.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A955F4FC1CA95B0D00B0CF62 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A955F4FE1CA95B0D00B0CF62 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -197,6 +203,7 @@
 		A970FD231CBBD33E004C7EDD /* silent_film_overlay_h.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = silent_film_overlay_h.png; path = GrainFilter/silent_film_overlay_h.png; sourceTree = "<group>"; };
 		A970FD241CBBD33E004C7EDD /* silent_film_overlay_i.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = silent_film_overlay_i.png; path = GrainFilter/silent_film_overlay_i.png; sourceTree = "<group>"; };
 		A970FD251CBBD33E004C7EDD /* silent_film_overlay_j.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = silent_film_overlay_j.png; path = GrainFilter/silent_film_overlay_j.png; sourceTree = "<group>"; };
+		A9981E011CC501D0001659C3 /* Kamarada-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Kamarada-Bridging-Header.h"; sourceTree = "<group>"; };
 		A9B903751CAA8E68001839C7 /* DetailSettingsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailSettingsController.swift; sourceTree = "<group>"; };
 		A9DE88E41CAE8C9B00767910 /* GPUImage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = GPUImage.xcodeproj; path = ../GPUImage/framework/GPUImage.xcodeproj; sourceTree = "<group>"; };
 		A9DE88F61CAE922200767910 /* FilterOperations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterOperations.swift; sourceTree = "<group>"; };
@@ -223,6 +230,7 @@
 			files = (
 				A9F43F0C1CB54A7000007FD4 /* AssetsLibrary.framework in Frameworks */,
 				A9DE88F01CAE8CA600767910 /* GPUImage.framework in Frameworks */,
+				D7E29E940AE5EB7D2CEB6A00 /* Pods_Kamarada.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -243,6 +251,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		61EFC139E65530636B044E12 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				08A3D806EE5ED7EA303D26B7 /* Pods_Kamarada.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		A955F4F01CA95B0D00B0CF62 = {
 			isa = PBXGroup;
 			children = (
@@ -252,6 +268,8 @@
 				A955F5101CA95B0D00B0CF62 /* KamaradaTests */,
 				A955F51B1CA95B0E00B0CF62 /* KamaradaUITests */,
 				A955F4FA1CA95B0D00B0CF62 /* Products */,
+				FCB765DB3840268312E300C4 /* Pods */,
+				61EFC139E65530636B044E12 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -279,11 +297,13 @@
 				A955F5031CA95B0D00B0CF62 /* Assets.xcassets */,
 				A955F5051CA95B0D00B0CF62 /* LaunchScreen.storyboard */,
 				A955F5081CA95B0D00B0CF62 /* Info.plist */,
+				A944C23B1CC4D88D00FBC03E /* GoogleService-Info.plist */,
 				A9DE89071CAECC5900767910 /* FRAGMENT_SHADER_AQUA.fsh */,
 				A9DE89081CAECC5900767910 /* FRAGMENT_SHADER_EXT_BW.fsh */,
 				A9DE89091CAECC5900767910 /* FRAGMENT_SHADER_SEPIA.fsh */,
 				A9F43F061CB4F13400007FD4 /* Audio */,
 				A9DE89021CAEB75700767910 /* CustomFilter.fsh */,
+				A9981E011CC501D0001659C3 /* Kamarada-Bridging-Header.h */,
 			);
 			path = Kamarada;
 			sourceTree = "<group>";
@@ -417,6 +437,15 @@
 			name = Controllers;
 			sourceTree = "<group>";
 		};
+		FCB765DB3840268312E300C4 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				14C5A25F518DA8F439A9000A /* Pods-Kamarada.debug.xcconfig */,
+				679A42B7612B072E70607B0E /* Pods-Kamarada.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -424,10 +453,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A955F5211CA95B0E00B0CF62 /* Build configuration list for PBXNativeTarget "Kamarada" */;
 			buildPhases = (
+				7AA5FE4DD5FCB9C5AD74FD0C /* Check Pods Manifest.lock */,
 				A955F4F51CA95B0D00B0CF62 /* Sources */,
 				A955F4F61CA95B0D00B0CF62 /* Frameworks */,
 				A955F4F71CA95B0D00B0CF62 /* Resources */,
 				A9DE88F11CAE8CC600767910 /* CopyFiles */,
+				9A5F9C9127D6FDB9920FCC72 /* Embed Pods Frameworks */,
+				F3AAA5F6F1BAF5D9B782018E /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -601,6 +633,7 @@
 				A95EB51A1CA96F53000EAAB0 /* activity_record_skin_leather_icon_normal.png in Resources */,
 				A95EB5081CA96F53000EAAB0 /* activity_record_change_camera_icon_pressed.png in Resources */,
 				A95EB50D1CA96F53000EAAB0 /* activity_record_filter_bw_icon_selected.png in Resources */,
+				A944C23C1CC4D88D00FBC03E /* GoogleService-Info.plist in Resources */,
 				A95EB50A1CA96F53000EAAB0 /* activity_record_filter_blue_icon_selected.png in Resources */,
 				A95EB5241CA96F53000EAAB0 /* common_icon_settings_pressed.png in Resources */,
 				A9DE890B1CAECC5900767910 /* FRAGMENT_SHADER_EXT_BW.fsh in Resources */,
@@ -626,6 +659,54 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		7AA5FE4DD5FCB9C5AD74FD0C /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		9A5F9C9127D6FDB9920FCC72 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Kamarada/Pods-Kamarada-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F3AAA5F6F1BAF5D9B782018E /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Kamarada/Pods-Kamarada-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		A955F4F51CA95B0D00B0CF62 /* Sources */ = {
@@ -786,31 +867,46 @@
 		};
 		A955F5221CA95B0E00B0CF62 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 14C5A25F518DA8F439A9000A /* Pods-Kamarada.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = Kamarada/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Videona.Kamarada;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "Kamarada/Kamarada-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
 		A955F5231CA95B0E00B0CF62 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 679A42B7612B072E70607B0E /* Pods-Kamarada.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = Kamarada/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Videona.Kamarada;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "Kamarada/Kamarada-Bridging-Header.h";
 			};
 			name = Release;
 		};
