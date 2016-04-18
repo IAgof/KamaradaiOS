@@ -24,7 +24,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         assert(configureError == nil, "Error configuring Google services: \(configureError)")
         
         GIDSignIn.sharedInstance().delegate = self
-        return true
+        
+        //FaceBook SDK
+        return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
     }
 
     func applicationWillResignActive(application: UIApplication) {
@@ -43,6 +45,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
 
     func applicationDidBecomeActive(application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    
+        FBSDKAppEvents.activateApp()
     }
 
     func applicationWillTerminate(application: UIApplication) {
@@ -59,12 +63,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     }
     
     func application(application: UIApplication,
-                     openURL url: NSURL, sourceApplication: String?, annotation: AnyObject?) -> Bool {
+                     openURL url: NSURL,
+                             sourceApplication: String?,
+                             annotation: AnyObject?) -> Bool {
         var options: [String: AnyObject] = [UIApplicationOpenURLOptionsSourceApplicationKey: sourceApplication!,
                                             UIApplicationOpenURLOptionsAnnotationKey: annotation!]
         return GIDSignIn.sharedInstance().handleURL(url,
                                                     sourceApplication: sourceApplication,
                                                     annotation: annotation)
+
     }
     
     func signIn(signIn: GIDSignIn!, didSignInForUser user: GIDGoogleUser!,

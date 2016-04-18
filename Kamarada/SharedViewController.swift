@@ -13,7 +13,7 @@ import Accounts
 import Photos
 import Alamofire
 
-class SharedViewController: UIViewController,GIDSignInUIDelegate, GIDSignInDelegate{
+class SharedViewController: UIViewController,GIDSignInUIDelegate,GIDSignInDelegate,FBSDKLoginButtonDelegate{
     
     //MARK: - Outlets
     @IBOutlet weak var socialTableView: UITableView!
@@ -235,13 +235,19 @@ class SharedViewController: UIViewController,GIDSignInUIDelegate, GIDSignInDeleg
     }
     
     func shareToFB(){
-        
+        let video: FBSDKShareVideo = FBSDKShareVideo()
+        video.videoURL = movieURL
+        let content:FBSDKShareVideoContent = FBSDKShareVideoContent()
+        content.video = video
+        let dialog = FBSDKShareDialog.init()
+        dialog.fromViewController = self
+        dialog.shareContent = content
+        dialog.show()
     }
     func shareToYoutube(){
         let youtubeScope = "https://www.googleapis.com/auth/youtube.upload"
         let youtubeScope2 = "https://www.googleapis.com/auth/youtube"
         let youtubeScope3 = "https://www.googleapis.com/auth/youtubepartner"
-        //        let youtubeScope = "https://www.googleapis.com/auth/drive.readonly"
         
         GIDSignIn.sharedInstance().scopes.append(youtubeScope)
         GIDSignIn.sharedInstance().scopes.append(youtubeScope2)
@@ -356,5 +362,55 @@ class SharedViewController: UIViewController,GIDSignInUIDelegate, GIDSignInDeleg
         print("La hora es : \(dateString)")
         
         return dateString
+    }
+    //MARK: - Facebook Delegate Methods
+
+    
+    func loginButton(loginButton: FBSDKLoginButton!, didCompleteWithResult result: FBSDKLoginManagerLoginResult!, error: NSError!) {
+        print("User Logged In")
+        
+        if ((error) != nil)
+        {
+            // Process error
+        }
+        else if result.isCancelled {
+            // Handle cancellations
+        }
+        else {
+            // If you ask for multiple permissions at once, you
+            // should check if specific permissions missing
+            if result.grantedPermissions.contains("email")
+            {
+                // Do work
+            }
+            
+            self.returnUserData()
+        }
+        
+    }
+    
+    func loginButtonDidLogOut(loginButton: FBSDKLoginButton!) {
+        print("User Logged Out")
+    }
+    
+    func returnUserData()
+    {
+        let graphRequest : FBSDKGraphRequest = FBSDKGraphRequest(graphPath: "me", parameters: nil)
+        graphRequest.startWithCompletionHandler({ (connection, result, error) -> Void in
+            
+            if ((error) != nil)
+            {
+                // Process error
+                print("Error: \(error)")
+            }
+            else
+            {
+                print("fetched user: \(result)")
+                let userName : NSString = result.valueForKey("name") as! NSString
+                print("User Name is: \(userName)")
+                let userEmail : NSString = result.valueForKey("email") as! NSString
+                print("User Email is: \(userEmail)")
+            }
+        })
     }
 }
