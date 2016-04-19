@@ -11,6 +11,7 @@ import AVFoundation
 import GPUImage
 import AssetsLibrary
 import Photos
+import QuartzCore
 
 class MainViewController: UIViewController {
     
@@ -27,6 +28,9 @@ class MainViewController: UIViewController {
     @IBOutlet weak var backgroundImage: UIImageView!
     @IBOutlet var filterView: GPUImageView?
     @IBOutlet var activityMonitor: UIActivityIndicatorView!
+    @IBOutlet weak var videoProgress: UIProgressView!
+    @IBOutlet weak var progressImage: UIImageView!
+    @IBOutlet weak var thumbnailImageView: UIImageView!
     
     //Buttons
     @IBOutlet weak var changeBackgroundButton: UIButton!
@@ -41,6 +45,11 @@ class MainViewController: UIViewController {
     @IBOutlet weak var sepiaFilterButton: UIButton!
     @IBOutlet weak var blueFilterButton: UIButton!
     
+    //MARK: - Constants
+    let cornerRadiusThumbnail:CGFloat = 20.0
+    let videoDuration = 15.0
+    let progressSteps = 400.0
+    
     //MARK: - Variables
     var isRecording:Bool = false
     var isRearCamera:Bool = false
@@ -54,6 +63,7 @@ class MainViewController: UIViewController {
     var videosArray:[String] = []
     
     //Timer
+    var progressTimer:NSTimer
     var timer:NSTimer? = nil;
     let grainFilters = ["silent_film_overlay_a.png"
         ,"silent_film_overlay_b.png"
@@ -65,8 +75,9 @@ class MainViewController: UIViewController {
         ,"silent_film_overlay_h.png"
         ,"silent_film_overlay_i.png"
         ,"silent_film_overlay_j.png"]
-
+    
     var countGrainFilters = 0
+    var progressTime = 0.0
     
     //MARK: - GPUImage variables
     var videoCamera: GPUImageVideoCamera
@@ -94,6 +105,9 @@ class MainViewController: UIViewController {
         imageSource = GPUImagePicture.init()
         
         pathToMergeMovie = ""
+        
+        progressTimer = NSTimer.init()
+        
         super.init(coder: aDecoder)!
     }
     
@@ -107,7 +121,7 @@ class MainViewController: UIViewController {
         //Setup filters
         cropFilter = setCropFilter()
         colorFilter = setSepiaFilter()
-
+        
         videoCamera.addTarget(filterGroup)
         
         //Setup filterGroup
@@ -150,7 +164,10 @@ class MainViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         shareButton.enabled = false
-
+        
+        
+        videoProgress.transform = CGAffineTransformScale(videoProgress.transform, 1, 5)
+        
         self.configureView()
     }
     
@@ -192,7 +209,7 @@ class MainViewController: UIViewController {
     }
     
     @IBAction func pushShareButton(sender: AnyObject) {
-//        self.mergeAudioVideo()
+        //        self.mergeAudioVideo()
         print("Starts to merge with audio")
     }
     @IBAction func pushChangeBackground(sender: AnyObject) {
@@ -215,16 +232,16 @@ class MainViewController: UIViewController {
         if(!isRecording){
             self.pathToMovie = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
             self.pathToMovie = self.pathToMovie + "/\(giveMeTimeNow())kamarada.m4v"
-
+            
             recordButton.selected = true
-
+            
             recordVideo()
         }else{
             stopRecordVideo()
             recordButton.selected = false
         }
     }
-
+    
     @IBAction func pushSetBWFilter(sender: AnyObject) {
         let filter = setBWFilter()
         self.replaceColorFilter(filter)
@@ -248,7 +265,90 @@ class MainViewController: UIViewController {
         print("Remove cropFilter")
     }
     
+    //MARK: - Thumbnail functions
+    func setImageToThumbnail(){
+        thumbnailImageView.hidden = false
+        
+        let asset = AVURLAsset(URL: NSURL(fileURLWithPath: videosArray[(videosArray.count - 1)]), options: nil)
+        let imgGenerator = AVAssetImageGenerator(asset: asset)
+        
+        var cgImage:CGImage?
+        do {
+            cgImage =  try imgGenerator.copyCGImageAtTime(kCMTimeZero, actualTime: nil)
+            print("Thumbnail image gets okay")
+            
+            // !! check the error before proceeding
+            let thumbnail = UIImage(CGImage: cgImage!)
+            // lay out this image view, or if it already exists, set its image property to uiImage
+            
+            thumbnailImageView.image = thumbnail
+        } catch {
+            print("Thumbnail error \nSomething went wrong!")
+        }
+
+
+        if(videosArray.count>1){
+            self.removeTextLayer()
+        }
+        
+        self.setCornerToThumbnail()
+    }
+    
+    func setCornerToThumbnail(){
+        thumbnailImageView.layer.cornerRadius = cornerRadiusThumbnail
+        thumbnailImageView.clipsToBounds = true
+        
+        //Set number on thumbnail
+
+        let textLayer = self.getNumberThumbnailText()
+        thumbnailImageView.layer.addSublayer(textLayer)
+        
+        let borderLayer = self.getBorderLayer()
+        thumbnailImageView.layer.addSublayer(borderLayer)
+    }
+    
+    func getNumberThumbnailText() -> CATextLayer{
+        let textLayer = CATextLayer()
+        textLayer.frame = CGRectMake(0,-5,thumbnailImageView.frame.size.width, thumbnailImageView.frame.size.height)
+        
+        let string = String(videosArray.count)
+        textLayer.string = string
+        
+        let myFont = CTFontCreateWithName("Roboto-Regular", 8, nil)
+        
+        textLayer.font = myFont
+        
+        textLayer.foregroundColor = UIColor.init(red: (253/255), green: (171/255), blue: (83/255), alpha: 1).CGColor
+        textLayer.wrapped = true
+        textLayer.alignmentMode = kCAAlignmentCenter
+        textLayer.contentsScale = UIScreen.mainScreen().scale
+        
+        return textLayer
+    }
+    
+    func getBorderLayer() -> CALayer{
+        let borderLayer = CALayer.init()
+        let borderFrame = CGRectMake(0,0,thumbnailImageView.frame.size.width, thumbnailImageView.frame.size.height)
+        
+        //Set properties border layer
+        borderLayer.backgroundColor = UIColor.clearColor().CGColor
+        borderLayer.frame = borderFrame
+        borderLayer.cornerRadius = cornerRadiusThumbnail
+        borderLayer.borderWidth = 3
+        borderLayer.borderColor = UIColor.init(red: (253/255), green: (171/255), blue: (83/255), alpha: 1).CGColor
+        
+        return borderLayer
+    }
+    func removeTextLayer(){
+        for layer in thumbnailImageView.layer.sublayers!{
+            if layer.isKindOfClass(CATextLayer){
+                layer.removeFromSuperlayer()
+            }
+        }
+    }
+    
     //MARK: - Functions
+
     func stateShareAndSettingsButton(){
         if(isRecording){
             settingsButton.enabled = true
@@ -258,14 +358,29 @@ class MainViewController: UIViewController {
             shareButton.enabled = false
         }
     }
+    
     //Reset values when comeBack from shareView
     func resetValues(){
+        print("Reset Values")
+
         self.waitingToMergeVideo = true
         self.videosArray.removeAll()
         pathToMovie = ""
         pathToMergeMovie = ""
+        
+        progressTime = 0.0
+        
+        for layer in thumbnailImageView.layer.sublayers! {
+            layer.removeFromSuperlayer()
+        }
     }
     
+    func resetUIValues(){
+        videoProgress.setProgress(0, animated: false)
+        thumbnailImageView.hidden = true
+        self.shareButton.enabled = false
+    }
+
     //Choose only the filter who has tapped
     func disableOtherButtons(button: UIButton){
         //Disable all buttons
@@ -441,7 +556,7 @@ class MainViewController: UIViewController {
     }
     
     //MARK: - Record Functions
-
+    
     func recordVideo(){
         self.stateShareAndSettingsButton()
         
@@ -457,8 +572,23 @@ class MainViewController: UIViewController {
         print("Recording movie starts")
         
         isRecording=true
+        
+        //Start timer
+        let videoStepDuration = videoDuration / progressSteps
+        progressTimer = NSTimer.scheduledTimerWithTimeInterval(videoStepDuration, target: self, selector: #selector(self.updateProgressBar), userInfo: nil, repeats: true)
+        
     }
-    
+    func updateProgressBar(){
+        let delay = videoDuration/(progressSteps*Double(videoDuration))
+        
+        progressTime  += delay
+        if(progressTime >= 1.0){
+            videoProgress.setProgress(0.75, animated: false)
+            progressTime = 0.75
+        }else{
+            videoProgress.setProgress(Float(progressTime), animated: true)
+        }
+    }
     func stopRecordVideo(){ //Stop Recording
         self.stateShareAndSettingsButton()
         
@@ -466,12 +596,19 @@ class MainViewController: UIViewController {
         
         filterGroup.removeTarget(movieWriter)
         videoCamera.audioEncodingTarget = nil
+        
         self.movieWriter.finishRecordingWithCompletionHandler{ () -> Void in
             self.isRecording=false
             
-            print("Record Movie Completed")
+            print("Stop recording video")
         }
         self.shareButton.enabled = true
+        
+        //Stop progressview
+        progressTimer.invalidate()
+        
+        //set thumbnail
+        self.setImageToThumbnail()
     }
     
     //Merge videos in VideosArray and export to Documents folder and PhotoLibrary
@@ -493,7 +630,7 @@ class MainViewController: UIViewController {
             let videoURL: NSURL = NSURL.init(fileURLWithPath: path)
             let videoAsset = AVAsset.init(URL: videoURL)
             
- 
+            
             do {
                 try videoTrack.insertTimeRange(CMTimeRangeMake(kCMTimeZero, videoAsset.duration),
                                                ofTrack: videoAsset.tracksWithMediaType(AVMediaTypeVideo)[0] ,
@@ -504,8 +641,8 @@ class MainViewController: UIViewController {
                 print("Error trying to create videoTrack")
             }
         }
-
-
+        
+        
         // 3.2 - Audio track
         let audioTrack = mixComposition.addMutableTrackWithMediaType(AVMediaTypeAudio, preferredTrackID: 0)
         do {
@@ -530,7 +667,7 @@ class MainViewController: UIViewController {
         // 6 - Perform the Export
         exporter!.exportAsynchronouslyWithCompletionHandler() {
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
-//                UISaveVideoAtPathToSavedPhotosAlbum(self.pathToMergeMovie, self,#selector(MainViewController.video(_:didFinishSavingWithError:contextInfo:)), nil)
+                //                UISaveVideoAtPathToSavedPhotosAlbum(self.pathToMergeMovie, self,#selector(MainViewController.video(_:didFinishSavingWithError:contextInfo:)), nil)
                 self.saveMovieToCameraRoll()
             })
         }
@@ -562,7 +699,7 @@ class MainViewController: UIViewController {
                 
                 
                 self.waitingToMergeVideo = false //Stop waiting
-
+                
                 //Async thread to update UI
                 dispatch_async(dispatch_get_main_queue()) {
                     // update some UI
@@ -575,7 +712,7 @@ class MainViewController: UIViewController {
     //MARK: - Segues
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-
+        
         print("prepareForSegue to share")
         
         if segue.identifier == "sharedView" {
@@ -596,7 +733,7 @@ class MainViewController: UIViewController {
         var returned = false
         if identifier == "sharedView" {
             self.mergeAudioVideo()
-                //Set the values to the next screen
+            //Set the values to the next screen
             if !waitingToMergeVideo{
                 
                 returned = true
@@ -609,14 +746,14 @@ class MainViewController: UIViewController {
     
     //When you came from sharedViewController comes here
     @IBAction func backFromShareView(segue:UIStoryboardSegue) {
-        print("Reset Values")
+        print("backFromShareView")
         let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
         dispatch_async(dispatch_get_global_queue(priority, 0)) {
             // do some task
             self.resetValues()
             dispatch_async(dispatch_get_main_queue()) {
                 // update some UI
-                self.shareButton.enabled = false
+                self.resetUIValues()
             }
         }
     }

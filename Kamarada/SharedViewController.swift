@@ -25,6 +25,8 @@ class SharedViewController: UIViewController,GIDSignInUIDelegate,GIDSignInDelega
     
     @IBOutlet weak var playImageView: UIImageView!
     @IBOutlet weak var videoPlayerView: UIView!
+   
+    //Timer
     @IBOutlet weak var videoProgressView: UIProgressView!
     
     //MARK: - Variables
@@ -36,6 +38,12 @@ class SharedViewController: UIViewController,GIDSignInUIDelegate,GIDSignInDelega
     var moviePath:String!
     var token:String!
     var isSharingYoutube:Bool = false
+    
+    //Timer
+    var progressTimer:NSTimer!
+    var progressTime = 0.0
+    var videoDuration = 0.0
+    let progressSteps = 400.0
     
     //MARK: - Init
     override func viewDidLoad() {
@@ -55,6 +63,7 @@ class SharedViewController: UIViewController,GIDSignInUIDelegate,GIDSignInDelega
         GIDSignIn.sharedInstance().uiDelegate = self
         GIDSignIn.sharedInstance().delegate = self
         
+        videoProgressView.transform = CGAffineTransformScale(videoProgressView.transform, 1, 3)
     }
     override func viewWillDisappear(animated: Bool) {
         print("SharedViewController willDissappear")
@@ -103,6 +112,9 @@ class SharedViewController: UIViewController,GIDSignInUIDelegate,GIDSignInDelega
                                                          object: playerItem)
         player = AVPlayer.init(playerItem: playerItem)
         
+        //Get video duration to player progressView
+        videoDuration = avAsset.duration.seconds
+        
         let layer = AVPlayerLayer.init()
         layer.player = player
         layer.frame = CGRectMake(0,0, self.videoPlayerView.frame.width, self.videoPlayerView.frame.height)
@@ -112,18 +124,53 @@ class SharedViewController: UIViewController,GIDSignInUIDelegate,GIDSignInDelega
     //MARK: - OnTapp ImageVideo functions
     func videoPlayerViewTapped(){
         if isPlayingVideo {//video is playing
-            player!.pause()
-            
-            playImageView.hidden = false
-            isPlayingVideo = false
-            print("Video has stopped")
+            self.pauseVideoPlayer()
         }else{//video has stopped
-            player!.play()
-            
-            playImageView.hidden = true
-            isPlayingVideo = true
-            print("Playing video")
+            self.playVideoPlayer()
         }
+    }
+    
+
+    //MARK: - Progress Bar
+    func updateProgressBar(){
+        
+        let delay = videoDuration/(progressSteps*Double(videoDuration))
+        
+        progressTime  += delay
+        
+        if((progressTime <= 1.0)){
+            videoProgressView.setProgress(Float(progressTime), animated: false)
+            print("progress time = \(progressTime)")
+        }else{
+            progressTime = 0.0
+            print("Reset progress time")
+        }
+    }
+    
+    //MARK: - Video Player functions
+    func pauseVideoPlayer(){
+        player!.pause()
+        
+        playImageView.hidden = false
+        isPlayingVideo = false
+        
+        progressTimer.invalidate()
+        
+        print("Video has stopped")
+    }
+    
+    func playVideoPlayer(){
+        player!.play()
+        
+        playImageView.hidden = true
+        isPlayingVideo = true
+        
+        //Start timer
+        
+        let videoStepDuration = videoDuration / progressSteps
+        progressTimer = NSTimer.scheduledTimerWithTimeInterval(videoStepDuration, target: self, selector: #selector(self.updateProgressBar), userInfo: nil, repeats: true)
+        
+        print("Playing video")
     }
     
     func onVideoStops(){
@@ -132,6 +179,9 @@ class SharedViewController: UIViewController,GIDSignInUIDelegate,GIDSignInDelega
         player?.currentItem?.seekToTime(kCMTimeZero)
         isPlayingVideo = false
         playImageView.hidden = false
+        
+        videoProgressView.setProgress(0, animated: false)
+        progressTimer.invalidate()
     }
     
     //MARK: - OnTapp Image functions
@@ -165,7 +215,6 @@ class SharedViewController: UIViewController,GIDSignInUIDelegate,GIDSignInDelega
         
         //New Excluded Activities Code
 //        activityVC.excludedActivityTypes = [ UIActivityTypeAssignToContact, UIActivityTypeCopyToPasteboard, UIActivityTypeMessage,  UIActivityTypePrint ]
-        
         
         self.presentViewController(activityVC, animated: true, completion: nil)
     }
