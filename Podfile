@@ -6,6 +6,7 @@ use_frameworks!
 target 'Kamarada' do
 pod 'Google/SignIn'
 pod 'Alamofire', '~> 3.3'
+pod 'Mixpanel'
 end
 
 target 'KamaradaTests' do

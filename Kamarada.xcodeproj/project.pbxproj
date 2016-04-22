@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A900E45F1CC8CD0300C44271 /* AnalitycsConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A900E45E1CC8CD0300C44271 /* AnalitycsConstants.swift */; };
+		A900E4631CC8DD5800C44271 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A900E4621CC8DD5800C44271 /* Alamofire.framework */; };
+		A900E4661CC8DDAF00C44271 /* Mixpanel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A900E4651CC8DDAF00C44271 /* Mixpanel.framework */; };
+		A900E46A1CC8E36A00C44271 /* ConfigPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = A900E4691CC8E36A00C44271 /* ConfigPreferences.swift */; };
+		A900E4F91CC9026800C44271 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = A900E4F81CC9026800C44271 /* Utils.swift */; };
 		A90E10ED1CC62DBF00FC3172 /* testCorner.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = A90E10EC1CC62DBF00FC3172 /* testCorner.jpeg */; };
 		A90E10F21CC6425800FC3172 /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A90E10F01CC6413B00FC3172 /* Roboto-Regular.ttf */; };
 		A918CBDF1CAAB670009F2A50 /* SharedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A918CBDE1CAAB670009F2A50 /* SharedViewController.swift */; };
@@ -145,6 +150,11 @@
 		08A3D806EE5ED7EA303D26B7 /* Pods_Kamarada.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Kamarada.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		14C5A25F518DA8F439A9000A /* Pods-Kamarada.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kamarada.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Kamarada/Pods-Kamarada.debug.xcconfig"; sourceTree = "<group>"; };
 		679A42B7612B072E70607B0E /* Pods-Kamarada.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kamarada.release.xcconfig"; path = "Pods/Target Support Files/Pods-Kamarada/Pods-Kamarada.release.xcconfig"; sourceTree = "<group>"; };
+		A900E45E1CC8CD0300C44271 /* AnalitycsConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnalitycsConstants.swift; sourceTree = "<group>"; };
+		A900E4621CC8DD5800C44271 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = "../../../Library/Developer/Xcode/DerivedData/Kamarada-dinxfvnocuhspbeeinhppkwnisvd/Build/Products/Debug-iphoneos/Alamofire.framework"; sourceTree = "<group>"; };
+		A900E4651CC8DDAF00C44271 /* Mixpanel.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Mixpanel.framework; path = "../../../Library/Developer/Xcode/DerivedData/Kamarada-dinxfvnocuhspbeeinhppkwnisvd/Build/Products/Debug-iphoneos/Mixpanel.framework"; sourceTree = "<group>"; };
+		A900E4691CC8E36A00C44271 /* ConfigPreferences.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfigPreferences.swift; sourceTree = "<group>"; };
+		A900E4F81CC9026800C44271 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		A90E10EC1CC62DBF00FC3172 /* testCorner.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = testCorner.jpeg; path = ../../../../Downloads/testCorner.jpeg; sourceTree = "<group>"; };
 		A90E10F01CC6413B00FC3172 /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Roboto-Regular.ttf"; path = "../../../../Downloads/roboto/Roboto-Regular.ttf"; sourceTree = "<group>"; };
 		A918CBDE1CAAB670009F2A50 /* SharedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharedViewController.swift; sourceTree = "<group>"; };
@@ -238,6 +248,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A900E4661CC8DDAF00C44271 /* Mixpanel.framework in Frameworks */,
+				A900E4631CC8DD5800C44271 /* Alamofire.framework in Frameworks */,
 				A9F43F0C1CB54A7000007FD4 /* AssetsLibrary.framework in Frameworks */,
 				A9981E0D1CC50695001659C3 /* FBSDKCoreKit.framework in Frameworks */,
 				A9981E0F1CC50695001659C3 /* FBSDKShareKit.framework in Frameworks */,
@@ -267,12 +279,24 @@
 		61EFC139E65530636B044E12 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A900E4651CC8DDAF00C44271 /* Mixpanel.framework */,
+				A900E4621CC8DD5800C44271 /* Alamofire.framework */,
 				A9981E0A1CC50695001659C3 /* FBSDKCoreKit.framework */,
 				A9981E0B1CC50695001659C3 /* FBSDKLoginKit.framework */,
 				A9981E0C1CC50695001659C3 /* FBSDKShareKit.framework */,
 				08A3D806EE5ED7EA303D26B7 /* Pods_Kamarada.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A900E4FA1CC9026C00C44271 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				A900E45E1CC8CD0300C44271 /* AnalitycsConstants.swift */,
+				A900E4691CC8E36A00C44271 /* ConfigPreferences.swift */,
+				A900E4F81CC9026800C44271 /* Utils.swift */,
+			);
+			name = Utils;
 			sourceTree = "<group>";
 		};
 		A90E10F11CC6413E00FC3172 /* Fonts */ = {
@@ -312,17 +336,18 @@
 			children = (
 				A9DE88FA1CAE922800767910 /* Data Model */,
 				A955F4FC1CA95B0D00B0CF62 /* AppDelegate.swift */,
+				A900E4FA1CC9026C00C44271 /* Utils */,
 				A9F4A1B21CABCAC700B12907 /* Controllers */,
 				A918CBE01CAAD175009F2A50 /* Settings.strings */,
-				A955F5001CA95B0D00B0CF62 /* Main.storyboard */,
 				A9DBA8671CB6A18A00F3E3F5 /* GrainFilter */,
 				A9F43F081CB5353C00007FD4 /* VideoTest */,
 				A95EB4E41CA96F39000EAAB0 /* Images */,
 				A955F5031CA95B0D00B0CF62 /* Assets.xcassets */,
 				A955F5051CA95B0D00B0CF62 /* LaunchScreen.storyboard */,
+				A955F5001CA95B0D00B0CF62 /* Main.storyboard */,
 				A955F5081CA95B0D00B0CF62 /* Info.plist */,
-				A90E10F11CC6413E00FC3172 /* Fonts */,
 				A944C23B1CC4D88D00FBC03E /* GoogleService-Info.plist */,
+				A90E10F11CC6413E00FC3172 /* Fonts */,
 				A9DE89071CAECC5900767910 /* FRAGMENT_SHADER_AQUA.fsh */,
 				A9DE89081CAECC5900767910 /* FRAGMENT_SHADER_EXT_BW.fsh */,
 				A9DE89091CAECC5900767910 /* FRAGMENT_SHADER_SEPIA.fsh */,
@@ -742,12 +767,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				A9DE88F91CAE922200767910 /* FilterOperationTypes.swift in Sources */,
+				A900E45F1CC8CD0300C44271 /* AnalitycsConstants.swift in Sources */,
 				A918CBDF1CAAB670009F2A50 /* SharedViewController.swift in Sources */,
 				A9DE89001CAEA30E00767910 /* TestViewController.swift in Sources */,
 				A95EB5281CA97AD7000EAAB0 /* SettingsController.swift in Sources */,
 				A9B903761CAA8E68001839C7 /* DetailSettingsController.swift in Sources */,
 				A9DE88F81CAE922200767910 /* FilterOperations.swift in Sources */,
+				A900E4F91CC9026800C44271 /* Utils.swift in Sources */,
 				A955F4FF1CA95B0D00B0CF62 /* MainViewController.swift in Sources */,
+				A900E46A1CC8E36A00C44271 /* ConfigPreferences.swift in Sources */,
 				A955F4FD1CA95B0D00B0CF62 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -908,6 +936,7 @@
 				INFOPLIST_FILE = Kamarada/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				"OTHER_SWIFT_FLAGS[arch=*]" = "-DDEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = Videona.Kamarada;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -931,6 +960,7 @@
 				INFOPLIST_FILE = Kamarada/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				"OTHER_SWIFT_FLAGS[arch=*]" = "-DRELEASE";
 				PRODUCT_BUNDLE_IDENTIFIER = Videona.Kamarada;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";

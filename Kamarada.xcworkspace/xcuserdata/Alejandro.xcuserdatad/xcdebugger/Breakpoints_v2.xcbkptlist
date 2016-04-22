@@ -6,16 +6,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "No"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Kamarada/SharedViewController.swift"
-            timestampString = "482672115.722468"
+            timestampString = "483009075.032994"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "265"
-            endingLineNumber = "265"
-            landmarkName = "signIn(_:presentViewController:)"
+            startingLineNumber = "528"
+            endingLineNumber = "528"
+            landmarkName = "updateNumTotalVideosShared()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -25,29 +25,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Kamarada/SharedViewController.swift"
-            timestampString = "482672115.722468"
+            filePath = "Kamarada/AppDelegate.swift"
+            timestampString = "483011986.908641"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "296"
-            endingLineNumber = "296"
-            landmarkName = "postVideoToYouTube(_:)"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Kamarada/SharedViewController.swift"
-            timestampString = "482672343.606821"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "241"
-            endingLineNumber = "241"
-            landmarkName = "shareToYoutube()"
+            startingLineNumber = "55"
+            endingLineNumber = "55"
+            landmarkName = "sendTimeInActivity(_:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

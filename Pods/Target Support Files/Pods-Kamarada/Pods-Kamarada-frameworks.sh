@@ -85,7 +85,9 @@ strip_invalid_archs() {
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods-Kamarada/Alamofire.framework"
+  install_framework "Pods-Kamarada/Mixpanel.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods-Kamarada/Alamofire.framework"
+  install_framework "Pods-Kamarada/Mixpanel.framework"
 fi

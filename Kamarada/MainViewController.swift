@@ -12,6 +12,7 @@ import GPUImage
 import AssetsLibrary
 import Photos
 import QuartzCore
+import Mixpanel
 
 class MainViewController: UIViewController {
     
@@ -49,6 +50,9 @@ class MainViewController: UIViewController {
     let cornerRadiusThumbnail:CGFloat = 20.0
     let videoDuration = 15.0
     let progressSteps = 400.0
+    let resolution = AVCaptureSessionPreset640x480
+    var clipDuration = 0.0
+    let preferences = NSUserDefaults.standardUserDefaults()
     
     //MARK: - Variables
     var isRecording:Bool = false
@@ -61,6 +65,10 @@ class MainViewController: UIViewController {
     var urlToMergeMovieInPhotoLibrary:NSURL!
     
     var videosArray:[String] = []
+    var cola: NSOperationQueue
+    
+    //MIXPANEL
+    var mixpanel:Mixpanel
     
     //Timer
     var progressTimer:NSTimer
@@ -95,7 +103,7 @@ class MainViewController: UIViewController {
     //MARK: - init
     required init(coder aDecoder: NSCoder)
     {
-        videoCamera = GPUImageVideoCamera(sessionPreset: AVCaptureSessionPreset640x480, cameraPosition: .Back)
+        videoCamera = GPUImageVideoCamera(sessionPreset: resolution, cameraPosition: .Back)
         videoCamera.outputImageOrientation = .Portrait;
         cropFilter = GPUImageFilter.init()
         colorFilter = GPUImageFilter.init()
@@ -108,12 +116,21 @@ class MainViewController: UIViewController {
         
         progressTimer = NSTimer.init()
         
+        cola = NSOperationQueue.init()
+        cola.maxConcurrentOperationCount = 1
+        
+        #if DEBUG
+            mixpanel = Mixpanel.init(token: AnalyticsConstants().MIXPANEL_TOKEN, andFlushInterval: 2)
+        #else
+            mixpanel = Mixpanel.sharedInstanceWithToken(AnalyticsConstants().MIXPANEL_TOKEN)
+        #endif
+        
         super.init(coder: aDecoder)!
     }
     
     var filterOperation: FilterOperationInterface? {
         didSet {
-            self.configureView()
+            //            self.configureView()
         }
     }
     
@@ -141,12 +158,15 @@ class MainViewController: UIViewController {
         filterGroup.addTarget(blendFilter, atTextureLocation: 0)
         imageSource.addTarget(blendFilter, atTextureLocation: 1)
         
-        imageSource.processImage()
         
-        blendFilter.useNextFrameForImageCapture()
-        blendFilter.addTarget(filterView)
-        
-        videoCamera.startCameraCapture()
+        cola.addOperationWithBlock({
+            self.imageSource.processImage()
+
+            self.blendFilter.useNextFrameForImageCapture()
+            self.blendFilter.addTarget(self.filterView)
+            
+            self.videoCamera.startCameraCapture()
+        })
         
         //Timer
         let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
@@ -162,9 +182,11 @@ class MainViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        mixpanel.identify(mixpanel.distinctId);
+        
         // Do any additional setup after loading the view, typically from a nib.
         shareButton.enabled = false
-        
         
         videoProgress.transform = CGAffineTransformScale(videoProgress.transform, 1, 5)
         
@@ -178,12 +200,19 @@ class MainViewController: UIViewController {
     
     //MARK: - Button actions
     @IBAction func pushRearFrontCamera(sender: AnyObject) {
+        self.changeCamera()
+    }
+    func changeCamera(){
         videoCamera.rotateCamera()
         if isRearCamera {
+            self.sendUserInteractedTracking(AnalyticsConstants().CHANGE_CAMERA, result: "back");
+            
             flashButton.enabled = true
             rearFrontCameraButton.selected = false
             isRearCamera = false
         }else{
+            self.sendUserInteractedTracking(AnalyticsConstants().CHANGE_CAMERA, result: "front");
+            
             flashButton.enabled = false
             rearFrontCameraButton.selected = true
             isRearCamera = true
@@ -195,9 +224,13 @@ class MainViewController: UIViewController {
             do {
                 try device.lockForConfiguration()
                 if (device.torchMode == AVCaptureTorchMode.On) {
+                    sendUserInteractedTracking(AnalyticsConstants().CHANGE_FLASH, result: "true");
+                    
                     device.torchMode = AVCaptureTorchMode.Off
                     flashButton.selected = false
                 } else {
+                    sendUserInteractedTracking(AnalyticsConstants().CHANGE_FLASH, result: "false");
+                    
                     try device.setTorchModeOnWithLevel(1.0)
                     flashButton.selected = true
                 }
@@ -213,25 +246,19 @@ class MainViewController: UIViewController {
         print("Starts to merge with audio")
     }
     @IBAction func pushChangeBackground(sender: AnyObject) {
-        if(backgroundChange==false){//Change to leatherBackground
-            let image : UIImage = UIImage(named:woodBackground)!
-            backgroundImage.image = image
-            changeBackgroundButton.setImage(UIImage(named: leatherImageButton), forState:.Normal)
-            
-            backgroundChange=true
-        }else{//Change to woodBackground
-            let image : UIImage = UIImage(named:leatherBackground)!
-            backgroundImage.image = image
-            changeBackgroundButton.setImage(UIImage(named: woodImageButton), forState:.Normal)
-            
-            backgroundChange=false
+        if(backgroundChange==false){
+            self.sendUserInteractedTracking(AnalyticsConstants().CHANGE_SKIN, result: AnalyticsConstants().SKIN_LEATHER);
+            self.changeToLeatherSkin()
+        }else{
+            self.sendUserInteractedTracking(AnalyticsConstants().CHANGE_SKIN, result: AnalyticsConstants().SKIN_WOOD);
+            self.changeToWoodSkin()
         }
     }
     
     @IBAction func pushRecord(sender: AnyObject) {
         if(!isRecording){
             self.pathToMovie = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
-            self.pathToMovie = self.pathToMovie + "/\(giveMeTimeNow())kamarada.m4v"
+            self.pathToMovie = self.pathToMovie + "/\(Utils().giveMeTimeNow())kamarada.m4v"
             
             recordButton.selected = true
             
@@ -285,8 +312,8 @@ class MainViewController: UIViewController {
         } catch {
             print("Thumbnail error \nSomething went wrong!")
         }
-
-
+        
+        
         if(videosArray.count>1){
             self.removeTextLayer()
         }
@@ -299,7 +326,7 @@ class MainViewController: UIViewController {
         thumbnailImageView.clipsToBounds = true
         
         //Set number on thumbnail
-
+        
         let textLayer = self.getNumberThumbnailText()
         thumbnailImageView.layer.addSublayer(textLayer)
         
@@ -348,7 +375,7 @@ class MainViewController: UIViewController {
     }
     
     //MARK: - Functions
-
+    
     func stateShareAndSettingsButton(){
         if(isRecording){
             settingsButton.enabled = true
@@ -362,7 +389,7 @@ class MainViewController: UIViewController {
     //Reset values when comeBack from shareView
     func resetValues(){
         print("Reset Values")
-
+        
         self.waitingToMergeVideo = true
         self.videosArray.removeAll()
         pathToMovie = ""
@@ -380,7 +407,7 @@ class MainViewController: UIViewController {
         thumbnailImageView.hidden = true
         self.shareButton.enabled = false
     }
-
+    
     //Choose only the filter who has tapped
     func disableOtherButtons(button: UIButton){
         //Disable all buttons
@@ -390,23 +417,6 @@ class MainViewController: UIViewController {
         
         //Enable selected button
         button.selected = true
-    }
-    
-    //Make the String with date to save videos
-    func giveMeTimeNow()->String{
-        var dateString:String = ""
-        let dateFormatter = NSDateFormatter()
-        
-        let date = NSDate()
-        
-        dateFormatter.locale = NSLocale(localeIdentifier: "es_ES")
-        dateFormatter.dateFormat = "yyyyMMdd-HHmmss"
-        dateFormatter.timeZone = NSTimeZone(forSecondsFromGMT: 3600) //GMT +1
-        dateString = dateFormatter.stringFromDate(date)
-        
-        print("La hora es : \(dateString)")
-        
-        return dateString
     }
     
     //When video has saved in photoLibrary comes here
@@ -435,6 +445,24 @@ class MainViewController: UIViewController {
         dispatch_after(time, dispatch_get_main_queue(), {
             alert.dismissViewControllerAnimated(true, completion: nil)
         })
+    }
+    
+    //MARK: - Change background functions
+    func changeToLeatherSkin(){
+        //Change to leatherBackground
+        let image : UIImage = UIImage(named:woodBackground)!
+        backgroundImage.image = image
+        changeBackgroundButton.setImage(UIImage(named: leatherImageButton), forState:.Normal)
+        
+        backgroundChange=true
+    }
+    
+    func changeToWoodSkin(){//Change to woodBackground
+        let image : UIImage = UIImage(named:leatherBackground)!
+        backgroundImage.image = image
+        changeBackgroundButton.setImage(UIImage(named: woodImageButton), forState:.Normal)
+        
+        backgroundChange=false
     }
     
     //MARK: - Filter Functions
@@ -477,17 +505,18 @@ class MainViewController: UIViewController {
         imageSource.addTarget(blendFilter, atTextureLocation: 1)
         blendFilter.mix = 1.0
         
-        imageSource.processImage()
-        
-        blendFilter.useNextFrameForImageCapture()
-        blendFilter.addTarget(filterView)
-        
-        videoCamera.startCameraCapture()
-        
-        if(isRecording){
-            blendFilter.addTarget(movieWriter)
-        }
-        
+        cola.addOperationWithBlock({
+            self.imageSource.processImage()
+            
+            self.blendFilter.useNextFrameForImageCapture()
+            self.blendFilter.addTarget(self.filterView)
+            
+            self.videoCamera.startCameraCapture()
+            
+            if(self.isRecording){
+                self.blendFilter.addTarget(self.movieWriter)
+            }
+        })
     }
     
     //Replaces the actualFilter with the filter argument
@@ -516,16 +545,19 @@ class MainViewController: UIViewController {
         filterGroup.addTarget(blendFilter, atTextureLocation: 0)
         imageSource.addTarget(blendFilter, atTextureLocation: 1)
         
-        imageSource.processImage()
         
-        blendFilter.useNextFrameForImageCapture()
-        blendFilter.addTarget(filterView)
-        
-        videoCamera.startCameraCapture()
-        
-        if(isRecording){
-            blendFilter.addTarget(movieWriter)
-        }
+        cola.addOperationWithBlock({
+            self.imageSource.processImage()
+
+            self.blendFilter.useNextFrameForImageCapture()
+            self.blendFilter.addTarget(self.filterView)
+            
+            self.videoCamera.startCameraCapture()
+            
+            if(self.isRecording){
+                self.blendFilter.addTarget(self.movieWriter)
+            }
+        })
         
         print("Filter changed")
     }
@@ -558,6 +590,8 @@ class MainViewController: UIViewController {
     //MARK: - Record Functions
     
     func recordVideo(){
+        mixpanel.timeEvent(AnalyticsConstants().VIDEO_RECORDED);
+        
         self.stateShareAndSettingsButton()
         
         let movieURL = NSURL.fileURLWithPath(pathToMovie)
@@ -609,10 +643,19 @@ class MainViewController: UIViewController {
         
         //set thumbnail
         self.setImageToThumbnail()
+        
+        //MIXPANEL
+        self.trackTotalVideosRecordedSuperProperty()
+        self.sendVideoRecordedTracking()
+        self.updateTotalVideosRecorded()
+        self.sendUserInteractedTracking(AnalyticsConstants().RECORD, result: AnalyticsConstants().STOP);
+
     }
     
     //Merge videos in VideosArray and export to Documents folder and PhotoLibrary
     func mergeAudioVideo() {
+        mixpanel.timeEvent(AnalyticsConstants().VIDEO_EXPORTED);
+        
         var videoTotalTime:CMTime = kCMTimeZero
         
         // 1 - Create AVMutableComposition object. This object will hold your AVMutableCompositionTrack instances.
@@ -638,10 +681,10 @@ class MainViewController: UIViewController {
                 print("el tiempo total del video es: \(videoTotalTime.seconds)")
                 videoTotalTime = CMTimeAdd(videoTotalTime, videoAsset.duration)
             } catch _ {
+                mixpanel.track(AnalyticsConstants().VIDEO_EXPORTED);
                 print("Error trying to create videoTrack")
             }
         }
-        
         
         // 3.2 - Audio track
         let audioTrack = mixComposition.addMutableTrackWithMediaType(AVMediaTypeAudio, preferredTrackID: 0)
@@ -655,7 +698,7 @@ class MainViewController: UIViewController {
         
         // 4 - Get path
         let documentDirectory = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
-        self.pathToMergeMovie = (documentDirectory as NSString).stringByAppendingPathComponent("mergeKamaradaVideo-\(giveMeTimeNow()).m4v")
+        self.pathToMergeMovie = (documentDirectory as NSString).stringByAppendingPathComponent("mergeKamaradaVideo-\(Utils().giveMeTimeNow()).m4v")
         let url = NSURL(fileURLWithPath: self.pathToMergeMovie)
         
         // 5 - Create Exporter
@@ -668,6 +711,8 @@ class MainViewController: UIViewController {
         exporter!.exportAsynchronouslyWithCompletionHandler() {
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
                 //                UISaveVideoAtPathToSavedPhotosAlbum(self.pathToMergeMovie, self,#selector(MainViewController.video(_:didFinishSavingWithError:contextInfo:)), nil)
+                self.clipDuration = videoTotalTime.seconds
+                self.sendExportedVideoMetadataTracking()
                 self.saveMovieToCameraRoll()
             })
         }
@@ -713,7 +758,7 @@ class MainViewController: UIViewController {
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
-        print("prepareForSegue to share")
+        print("prepareForSegue")
         
         if segue.identifier == "sharedView" {
             //Define next screen
@@ -727,8 +772,11 @@ class MainViewController: UIViewController {
             }
             controller.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem()
             controller.navigationItem.leftItemsSupplementBackButton = true
+        }else if segue.identifier == "settingsView" {
+            self.sendUserInteractedTracking(AnalyticsConstants().INTERACTION_OPEN_SETTINGS, result: "");
         }
     }
+    
     override func shouldPerformSegueWithIdentifier(identifier: String, sender: AnyObject?) -> Bool {
         var returned = false
         if identifier == "sharedView" {
@@ -758,6 +806,108 @@ class MainViewController: UIViewController {
         }
     }
     
-    //MARK: - TEST
+    //MARK: - MIXPANEL
+    //FOR VIPER: in Android this is in Activity.
     
+    func sendUserInteractedTracking(interaction:String, result:String ) {
+        //JSON properties
+        let userInteractionsProperties =
+            [
+                AnalyticsConstants().ACTIVITY : String(object_getClass(self)),
+                AnalyticsConstants().RECORDING: isRecording,
+                AnalyticsConstants().INTERACTION: interaction,
+                AnalyticsConstants().RESULT: result,
+                ]
+        mixpanel.track(AnalyticsConstants().USER_INTERACTED, properties: userInteractionsProperties as [NSObject : AnyObject])
+    }
+    
+    func sendFilterSelectedTracking(name:String,code:String) {
+        //JSON properties
+        let userInteractionsProperties =
+            [
+                AnalyticsConstants().TYPE: AnalyticsConstants().TYPE_COLOR,
+                AnalyticsConstants().NAME: name,
+                AnalyticsConstants().CODE: code,
+                AnalyticsConstants().RECORDING: isRecording,
+                ]
+        mixpanel.track(AnalyticsConstants().FILTER_SELECTED, properties: userInteractionsProperties as [NSObject : AnyObject])
+    }
+    
+    //FOR VIPER: in Android this is in Presenter.
+    func trackTotalVideosRecordedSuperProperty() {
+        var numPreviousVideosRecorded:Int
+        let properties = mixpanel.currentSuperProperties()
+        if !properties.isEmpty{
+            numPreviousVideosRecorded = properties[AnalyticsConstants().TOTAL_VIDEOS_RECORDED] as! Int
+        }else{
+            numPreviousVideosRecorded = 0
+        }
+        
+        numPreviousVideosRecorded += 1
+        
+        //JSON properties
+        
+        let totalVideoRecordedSuperProperty = [AnalyticsConstants().TOTAL_VIDEOS_RECORDED: numPreviousVideosRecorded]
+        
+        mixpanel.registerSuperProperties(totalVideoRecordedSuperProperty)
+    }
+    
+    func sendVideoRecordedTracking() {
+        let totalVideosRecorded = preferences.integerForKey(ConfigPreferences().TOTAL_VIDEOS_RECORDED)
+        //JSON properties
+        let videoRecordedProperties =
+            [
+                AnalyticsConstants().VIDEO_LENGTH: getClipDuration(),
+                AnalyticsConstants().RESOLUTION: getResolution(),
+                AnalyticsConstants().TOTAL_VIDEOS_RECORDED: totalVideosRecorded,
+                AnalyticsConstants().DOUBLE_HOUR_AND_MINUTES: Utils().getDoubleHourAndMinutes(),
+                ]
+        mixpanel.track(AnalyticsConstants().VIDEO_RECORDED, properties: videoRecordedProperties as [NSObject : AnyObject])
+        self.updateUserProfileProperties()
+    }
+    
+    func updateTotalVideosRecorded() {
+        var numTotalVideosRecorded = preferences.integerForKey(ConfigPreferences().TOTAL_VIDEOS_RECORDED)
+        numTotalVideosRecorded += 1
+        
+        preferences.setInteger(numTotalVideosRecorded, forKey: ConfigPreferences().TOTAL_VIDEOS_RECORDED)
+    }
+    
+    func getClipDuration() -> Double{
+        return clipDuration
+    }
+    
+    func getResolution() -> String{
+        return resolution
+    }
+    
+    func updateUserProfileProperties() {
+        var quality = ""
+        
+        if preferences.objectForKey(ConfigPreferences().QUALITY) == nil {
+            //  Doesn't exist
+        } else {
+            quality = preferences.stringForKey(ConfigPreferences().QUALITY)!
+        }
+        //JSON properties
+        let userProfileProperties =
+            [
+                AnalyticsConstants().RESOLUTION: resolution,
+                AnalyticsConstants().QUALITY: quality,
+                ]
+        
+        mixpanel.people.set(userProfileProperties)
+        mixpanel.people.increment(AnalyticsConstants().TOTAL_VIDEOS_RECORDED,by: 1)
+        mixpanel.people.set([AnalyticsConstants().LAST_VIDEO_RECORDED:Utils().giveMeTimeNow()])
+    }
+    func sendExportedVideoMetadataTracking() {
+        let videoRecordedProperties =
+            [
+                AnalyticsConstants().VIDEO_LENGTH: getClipDuration(),
+                AnalyticsConstants().RESOLUTION: getResolution(),
+                AnalyticsConstants().NUMBER_OF_CLIPS: videosArray.count,
+                AnalyticsConstants().DOUBLE_HOUR_AND_MINUTES: Utils().getDoubleHourAndMinutes(),
+                ]
+        mixpanel.track(AnalyticsConstants().VIDEO_EXPORTED, properties: videoRecordedProperties as [NSObject : AnyObject])
+    }
 }

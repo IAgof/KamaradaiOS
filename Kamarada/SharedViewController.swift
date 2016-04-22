@@ -12,6 +12,8 @@ import AVFoundation
 import Accounts
 import Photos
 import Alamofire
+import Mixpanel
+
 
 class SharedViewController: UIViewController,GIDSignInUIDelegate,GIDSignInDelegate,FBSDKLoginButtonDelegate{
     
@@ -30,6 +32,8 @@ class SharedViewController: UIViewController,GIDSignInUIDelegate,GIDSignInDelega
     @IBOutlet weak var videoProgressView: UIProgressView!
     
     //MARK: - Variables
+    //MIXPANEL
+    let mixpanel = Mixpanel.sharedInstanceWithToken(AnalyticsConstants().MIXPANEL_TOKEN)
     
     //    var sharedVideoPath:String = ""
     var isPlayingVideo:Bool = false
@@ -45,6 +49,9 @@ class SharedViewController: UIViewController,GIDSignInUIDelegate,GIDSignInDelega
     var videoDuration = 0.0
     let progressSteps = 400.0
     
+    //MARK: - Constants
+    let preferences = NSUserDefaults.standardUserDefaults()
+
     //MARK: - Init
     override func viewDidLoad() {
         super.viewDidLoad()        // Do any additional setup after loading the view, typically from a nib.
@@ -64,6 +71,7 @@ class SharedViewController: UIViewController,GIDSignInUIDelegate,GIDSignInDelega
         GIDSignIn.sharedInstance().delegate = self
         
         videoProgressView.transform = CGAffineTransformScale(videoProgressView.transform, 1, 3)
+        
     }
     override func viewWillDisappear(animated: Bool) {
         print("SharedViewController willDissappear")
@@ -207,6 +215,8 @@ class SharedViewController: UIViewController,GIDSignInUIDelegate,GIDSignInDelega
     
     //MARK: - Button Actions
     @IBAction func shareButtonClicked(sender: UIButton) {
+        self.updateNumTotalVideosShared()
+        self.trackVideoShared("")
         
         let objectsToShare = [movieURL] //comment!, imageData!, myWebsite!]
         let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
@@ -221,6 +231,9 @@ class SharedViewController: UIViewController,GIDSignInUIDelegate,GIDSignInDelega
     
     //MARK: - Share Functions
     func shareToWhatsApp(){
+        self.updateNumTotalVideosShared()
+        trackVideoShared(AnalyticsConstants().WHATSAPP);
+
         let urlWhats = "whatsapp://app"
         if let urlString = urlWhats.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet()) {
             if let whatsappURL = NSURL(string: urlString) {
@@ -266,6 +279,9 @@ class SharedViewController: UIViewController,GIDSignInUIDelegate,GIDSignInDelega
     //    }
     
     func shareToInstagram(){
+        self.updateNumTotalVideosShared()
+        trackVideoShared(AnalyticsConstants().INSTAGRAM);
+
         //Get last videoAsset on PhotoLibrary
         let fetchOptions = PHFetchOptions()
         fetchOptions.sortDescriptors = [NSSortDescriptor(key:"creationDate", ascending:false)]
@@ -283,6 +299,9 @@ class SharedViewController: UIViewController,GIDSignInUIDelegate,GIDSignInDelega
     }
     
     func shareToFB(){
+        self.updateNumTotalVideosShared()
+        trackVideoShared(AnalyticsConstants().FACEBOOK);
+
         let video: FBSDKShareVideo = FBSDKShareVideo()
         video.videoURL = movieURL
         let content:FBSDKShareVideoContent = FBSDKShareVideoContent()
@@ -293,6 +312,9 @@ class SharedViewController: UIViewController,GIDSignInUIDelegate,GIDSignInDelega
         dialog.show()
     }
     func shareToYoutube(){
+        self.updateNumTotalVideosShared()
+        trackVideoShared(AnalyticsConstants().YOUTUBE);
+
         let youtubeScope = "https://www.googleapis.com/auth/youtube.upload"
         let youtubeScope2 = "https://www.googleapis.com/auth/youtube"
         let youtubeScope3 = "https://www.googleapis.com/auth/youtubepartner"
@@ -460,5 +482,51 @@ class SharedViewController: UIViewController,GIDSignInUIDelegate,GIDSignInDelega
                 print("User Email is: \(userEmail)")
             }
         })
+    }
+    
+    //MARK: - MIXPANEL
+    //FOR VIPER: in Android this is in Activity.
+    
+    func trackVideoShared(socialNetwork:String) {
+    trackVideoSharedSuperProperties()
+        
+        //JSON properties
+        let socialNetworkProperties =
+            [
+                AnalyticsConstants().SOCIAL_NETWORK : socialNetwork,
+                AnalyticsConstants().VIDEO_LENGTH: videoDuration,
+                AnalyticsConstants().RESOLUTION: AnalyticsConstants().RESOLUTION,
+                AnalyticsConstants().NUMBER_OF_CLIPS: "*",
+                AnalyticsConstants().TOTAL_VIDEOS_SHARED: preferences.integerForKey(ConfigPreferences().TOTAL_VIDEOS_SHARED),
+                AnalyticsConstants().DOUBLE_HOUR_AND_MINUTES: Utils().getDoubleHourAndMinutes(),
+                ]
+        mixpanel.track(AnalyticsConstants().VIDEO_SHARED, properties: socialNetworkProperties as [NSObject : AnyObject])
+
+        mixpanel.people.increment(AnalyticsConstants().TOTAL_VIDEOS_SHARED,by: 1)
+        mixpanel.people.set(AnalyticsConstants().LAST_VIDEO_SHARED,to: Utils().giveMeTimeNow())
+    }
+    
+    func trackVideoSharedSuperProperties() {
+        var numPreviousVideosShared:Int
+        let properties = mixpanel.currentSuperProperties()
+        if !properties.isEmpty{
+            numPreviousVideosShared = properties[AnalyticsConstants().TOTAL_VIDEOS_SHARED] as! Int
+        }else{
+            numPreviousVideosShared = 0
+        }
+        
+        numPreviousVideosShared += 1
+        
+        //JSON properties
+        
+        let updateSuperProperties = [AnalyticsConstants().TOTAL_VIDEOS_SHARED: numPreviousVideosShared]
+        
+        mixpanel.registerSuperProperties(updateSuperProperties)
+    }
+    
+    func updateNumTotalVideosShared(){
+        var totalVideosShared = preferences.integerForKey(ConfigPreferences().TOTAL_VIDEOS_SHARED)
+        totalVideosShared += 1
+        preferences.setInteger(totalVideosShared, forKey: ConfigPreferences().TOTAL_VIDEOS_SHARED)
     }
 }
