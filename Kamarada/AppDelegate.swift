@@ -14,10 +14,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
 
     var window: UIWindow?
     var mixpanel:Mixpanel?
-
+    var initState = "firstTime"
+    
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
-        
+        print("START Kamarada")
         //Google Sign in
         // Initialize sign-in
         var configureError: NSError?
@@ -28,11 +29,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         //MIXPANEL
         Mixpanel.sharedInstanceWithToken(AnalyticsConstants().MIXPANEL_TOKEN)
         mixpanel = Mixpanel.sharedInstance()
-        mixpanel!.track(AnalyticsConstants().TIME_IN_ACTIVITY)
+        mixpanel!.timeEvent(AnalyticsConstants().TIME_IN_ACTIVITY)
+        
+        //Init MixPanel
+        dispatch_async(dispatch_get_main_queue()) {
+            self.setupStartApp()
+            self.trackUserProfileGeneralTraits()
+            self.sendStartupAppTracking()
+        }
         
         //FaceBook SDK
         return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         
+
     }
 
     func applicationWillResignActive(application: UIApplication) {
@@ -47,16 +56,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
         print("\nEnter in applicationDidEnterBackground\n")
         self.sendTimeInActivity(application)
-    }
-    
-    func sendTimeInActivity(application: UIApplication){
-        let navigationController = application.windows[0].rootViewController as! UINavigationController
-        let whatClass = String(object_getClass(navigationController.topViewController))
-        print("what class is \(whatClass)")
-        
-        let viewProperties = [AnalyticsConstants().ACTIVITY:whatClass]
-        mixpanel!.track(AnalyticsConstants().TIME_IN_ACTIVITY, properties: viewProperties)
-        mixpanel!.flush()
     }
     
     func applicationWillEnterForeground(application: UIApplication) {
@@ -117,5 +116,105 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         // ...
     }
     
+    // MIXPANEL
+    func sendTimeInActivity(application: UIApplication){
+        print("Sending AnalyticsConstants().TIME_IN_ACTIVITY")
+        //NOT WORKING -- falta el comienzo time_event para arrancar el contador
+        
+        let navigationController = application.windows[0].rootViewController as! UINavigationController
+        let whatClass = String(object_getClass(navigationController.topViewController))
+        print("what class is \(whatClass)")
+        
+        let viewProperties = [AnalyticsConstants().ACTIVITY:whatClass]
+        mixpanel!.track(AnalyticsConstants().TIME_IN_ACTIVITY, properties: viewProperties)
+        mixpanel!.flush()
+    }
+    
+    func sendStartupAppTracking() {
+        let initAppProperties = [AnalyticsConstants().TYPE:AnalyticsConstants().TYPE_ORGANIC,
+                                 AnalyticsConstants().INIT_STATE:initState,
+                                 AnalyticsConstants().DOUBLE_HOUR_AND_MINUTES: Utils().getDoubleHourAndMinutes()]
+        mixpanel?.track(AnalyticsConstants().APP_STARTED, properties: initAppProperties as [NSObject : AnyObject])
+    }
+    
+    func setupStartApp() {
+        let defaults = NSUserDefaults.standardUserDefaults()
+        
+        let currentAppVersion = NSBundle.mainBundle().objectForInfoDictionaryKey("CFBundleShortVersionString") as! String
+        let previousVersion = defaults.stringForKey("appVersion")
+        if previousVersion == nil {
+            // first launch
+            defaults.setObject(currentAppVersion, forKey: "appVersion")
+            defaults.synchronize()
+            
+            print("First time")
+            initState = "firstTime"
+            
+            trackUserProfile();
+            trackCreatedSuperProperty();
+            trackAppStartupProperties(true);
+            
+        } else if previousVersion == currentAppVersion {
+            // same version
+            print("Same version")
+            initState = "returning"
+            
+            trackAppStartupProperties(false);
+            
+        } else {
+            // other version
+            defaults.setObject(currentAppVersion, forKey: "appVersion")
+            defaults.synchronize()
+            
+            print("Update to \(currentAppVersion)")
+            initState = "upgrade"
+            
+            trackUserProfile();
+            trackAppStartupProperties(false);
+        }
+    }
+    
+    
+    func trackAppStartupProperties(state:Bool) {
+        var appUseCount:Int
+        let properties = mixpanel!.currentSuperProperties()
+        if let count = properties[AnalyticsConstants().APP_USE_COUNT]{
+            appUseCount = count as! Int
+        }else{
+            appUseCount = 0
+        }
+        appUseCount += 1
+
+        let appStartupSuperProperties = [AnalyticsConstants().APP_USE_COUNT:appUseCount,
+                                 AnalyticsConstants().FIRST_TIME:state,
+                                 AnalyticsConstants().APP: "Kamarada"]
+        mixpanel?.registerSuperProperties(appStartupSuperProperties as [NSObject : AnyObject])
+    }
+    func trackUserProfile() {
+        let udid = UIDevice.currentDevice().identifierForVendor!.UUIDString
+        print("The user id is = \(udid)")
+        mixpanel!.identify(udid)
+        //        mixpanel.getPeople().identify(androidId);
+        let userProfileProperties = [AnalyticsConstants().CREATED:Utils().giveMeTimeNow()]
+        mixpanel?.people.setOnce(userProfileProperties)
+    }
+    
+    func trackUserProfileGeneralTraits() {
+        mixpanel?.people.increment(AnalyticsConstants().APP_USE_COUNT,by: 1)
+
+        let locale = NSLocale.preferredLanguages()[0]
+        let lang = NSLocale.currentLocale().objectForKey(NSLocaleLanguageCode)
+        
+        let userProfileProperties = [AnalyticsConstants().TYPE:AnalyticsConstants().TYPE_PAID,
+                                         AnalyticsConstants().LOCALE:locale,
+                                         AnalyticsConstants().LANG: lang!] as [NSObject : AnyObject]
+        
+        mixpanel?.people.set(userProfileProperties)
+    }
+    
+    func trackCreatedSuperProperty() {
+        let createdSuperProperty = [AnalyticsConstants().CREATED: Utils().giveMeTimeNow()]
+        mixpanel?.registerSuperPropertiesOnce(createdSuperProperty)
+    }
 }
 

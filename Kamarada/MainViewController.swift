@@ -183,8 +183,18 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        mixpanel.identify(mixpanel.distinctId);
+//        mixpanel.identify(mixpanel.distinctId);
+//        mixpanel.people.set([AnalyticsConstants().TYPE:AnalyticsConstants().TYPE_PAID])
+        //Search first launch, superproperty
+        //        mixpanel.people.set([AnalyticsConstants().TYPE:AnalyticsConstants().TYPE_PAID])
+        //App use count
+        //        mixpanel.people.set([AnalyticsConstants().TYPE:AnalyticsConstants().TYPE_PAID])
+        //LAN and LOCALE
+        //        mixpanel.people.set([AnalyticsConstants().TYPE:AnalyticsConstants().TYPE_PAID])
+        // Superproperty app:Kamarada
         
+        //App started
+        //        TRACK
         // Do any additional setup after loading the view, typically from a nib.
         shareButton.enabled = false
         
@@ -224,12 +234,12 @@ class MainViewController: UIViewController {
             do {
                 try device.lockForConfiguration()
                 if (device.torchMode == AVCaptureTorchMode.On) {
-                    sendUserInteractedTracking(AnalyticsConstants().CHANGE_FLASH, result: "true");
+                    sendUserInteractedTracking(AnalyticsConstants().CHANGE_FLASH, result: "false");
                     
                     device.torchMode = AVCaptureTorchMode.Off
                     flashButton.selected = false
                 } else {
-                    sendUserInteractedTracking(AnalyticsConstants().CHANGE_FLASH, result: "false");
+                    sendUserInteractedTracking(AnalyticsConstants().CHANGE_FLASH, result: "true");
                     
                     try device.setTorchModeOnWithLevel(1.0)
                     flashButton.selected = true
@@ -247,10 +257,10 @@ class MainViewController: UIViewController {
     }
     @IBAction func pushChangeBackground(sender: AnyObject) {
         if(backgroundChange==false){
-            self.sendUserInteractedTracking(AnalyticsConstants().CHANGE_SKIN, result: AnalyticsConstants().SKIN_LEATHER);
+            self.sendUserInteractedTracking(AnalyticsConstants().CHANGE_SKIN, result: AnalyticsConstants().SKIN_WOOD);
             self.changeToLeatherSkin()
         }else{
-            self.sendUserInteractedTracking(AnalyticsConstants().CHANGE_SKIN, result: AnalyticsConstants().SKIN_WOOD);
+            self.sendUserInteractedTracking(AnalyticsConstants().CHANGE_SKIN, result: AnalyticsConstants().SKIN_LEATHER);
             self.changeToWoodSkin()
         }
     }
@@ -275,6 +285,10 @@ class MainViewController: UIViewController {
         
         disableOtherButtons(sender as! UIButton)
         print("Remove BWFilter")
+        
+        //MIXPANEL
+        self.sendFilterSelectedTracking(AnalyticsConstants().FILTER_NAME_MONO, code: AnalyticsConstants().FILTER_CODE_MONO)
+        
     }
     
     @IBAction func pushSetSepiaFilter(sender: AnyObject) {
@@ -283,6 +297,9 @@ class MainViewController: UIViewController {
         
         disableOtherButtons(sender as! UIButton)
         print("Remove Sepia Target")
+        
+        //MIXPANEL
+        self.sendFilterSelectedTracking(AnalyticsConstants().FILTER_NAME_SEPIA, code: AnalyticsConstants().FILTER_CODE_SEPIA)
     }
     @IBAction func pushSetBlueFilter(sender: AnyObject) {
         let filter = setBlueFilter()
@@ -290,6 +307,9 @@ class MainViewController: UIViewController {
         
         disableOtherButtons(sender as! UIButton)
         print("Remove cropFilter")
+        
+        //MIXPANEL
+        self.sendFilterSelectedTracking(AnalyticsConstants().FILTER_NAME_AQUA, code: AnalyticsConstants().FILTER_CODE_AQUA)
     }
     
     //MARK: - Thumbnail functions
@@ -591,7 +611,8 @@ class MainViewController: UIViewController {
     
     func recordVideo(){
         mixpanel.timeEvent(AnalyticsConstants().VIDEO_RECORDED);
-        
+        self.sendUserInteractedTracking(AnalyticsConstants().RECORD, result: AnalyticsConstants().START);
+
         self.stateShareAndSettingsButton()
         
         let movieURL = NSURL.fileURLWithPath(pathToMovie)
@@ -605,7 +626,7 @@ class MainViewController: UIViewController {
         
         print("Recording movie starts")
         
-        isRecording=true
+        isRecording = true
         
         //Start timer
         let videoStepDuration = videoDuration / progressSteps
@@ -645,15 +666,17 @@ class MainViewController: UIViewController {
         self.setImageToThumbnail()
         
         //MIXPANEL
+        self.setClipDuration()
+        
         self.trackTotalVideosRecordedSuperProperty()
         self.sendVideoRecordedTracking()
         self.updateTotalVideosRecorded()
         self.sendUserInteractedTracking(AnalyticsConstants().RECORD, result: AnalyticsConstants().STOP);
-
     }
     
     //Merge videos in VideosArray and export to Documents folder and PhotoLibrary
     func mergeAudioVideo() {
+        
         mixpanel.timeEvent(AnalyticsConstants().VIDEO_EXPORTED);
         
         var videoTotalTime:CMTime = kCMTimeZero
@@ -712,6 +735,8 @@ class MainViewController: UIViewController {
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
                 //                UISaveVideoAtPathToSavedPhotosAlbum(self.pathToMergeMovie, self,#selector(MainViewController.video(_:didFinishSavingWithError:contextInfo:)), nil)
                 self.clipDuration = videoTotalTime.seconds
+                print("la duracion del clip es \(self.clipDuration)")
+                
                 self.sendExportedVideoMetadataTracking()
                 self.saveMovieToCameraRoll()
             })
@@ -755,7 +780,6 @@ class MainViewController: UIViewController {
     }
     
     //MARK: - Segues
-    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
         print("prepareForSegue")
@@ -769,6 +793,7 @@ class MainViewController: UIViewController {
             if let detail:NSURL = self.urlToMergeMovieInPhotoLibrary{
                 controller.movieURL = detail
                 controller.moviePath  = pathToMergeMovie
+                controller.numberOfClips = videosArray.count
             }
             controller.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem()
             controller.navigationItem.leftItemsSupplementBackButton = true
@@ -837,8 +862,9 @@ class MainViewController: UIViewController {
     func trackTotalVideosRecordedSuperProperty() {
         var numPreviousVideosRecorded:Int
         let properties = mixpanel.currentSuperProperties()
-        if !properties.isEmpty{
-            numPreviousVideosRecorded = properties[AnalyticsConstants().TOTAL_VIDEOS_RECORDED] as! Int
+      
+        if let prop = properties[AnalyticsConstants().TOTAL_VIDEOS_RECORDED]{
+            numPreviousVideosRecorded = prop as! Int
         }else{
             numPreviousVideosRecorded = 0
         }
@@ -853,13 +879,13 @@ class MainViewController: UIViewController {
     }
     
     func sendVideoRecordedTracking() {
-        let totalVideosRecorded = preferences.integerForKey(ConfigPreferences().TOTAL_VIDEOS_RECORDED)
+        //        let totalVideosRecorded = preferences.integerForKey(ConfigPreferences().TOTAL_VIDEOS_RECORDED)
         //JSON properties
         let videoRecordedProperties =
             [
                 AnalyticsConstants().VIDEO_LENGTH: getClipDuration(),
                 AnalyticsConstants().RESOLUTION: getResolution(),
-                AnalyticsConstants().TOTAL_VIDEOS_RECORDED: totalVideosRecorded,
+//                AnalyticsConstants().TOTAL_VIDEOS_RECORDED: totalVideosRecorded,
                 AnalyticsConstants().DOUBLE_HOUR_AND_MINUTES: Utils().getDoubleHourAndMinutes(),
                 ]
         mixpanel.track(AnalyticsConstants().VIDEO_RECORDED, properties: videoRecordedProperties as [NSObject : AnyObject])
@@ -876,7 +902,14 @@ class MainViewController: UIViewController {
     func getClipDuration() -> Double{
         return clipDuration
     }
-    
+    func setClipDuration(){
+        let videoURL: NSURL = NSURL.init(fileURLWithPath: pathToMovie!)
+        let videoAsset = AVAsset.init(URL: videoURL)
+        
+        clipDuration = videoAsset.duration.seconds
+        
+        print("Clip duration = \(clipDuration)")
+    }
     func getResolution() -> String{
         return resolution
     }
@@ -899,6 +932,7 @@ class MainViewController: UIViewController {
         mixpanel.people.set(userProfileProperties)
         mixpanel.people.increment(AnalyticsConstants().TOTAL_VIDEOS_RECORDED,by: 1)
         mixpanel.people.set([AnalyticsConstants().LAST_VIDEO_RECORDED:Utils().giveMeTimeNow()])
+        
     }
     func sendExportedVideoMetadataTracking() {
         let videoRecordedProperties =

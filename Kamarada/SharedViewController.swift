@@ -32,6 +32,7 @@ class SharedViewController: UIViewController,GIDSignInUIDelegate,GIDSignInDelega
     @IBOutlet weak var videoProgressView: UIProgressView!
     
     //MARK: - Variables
+    
     //MIXPANEL
     let mixpanel = Mixpanel.sharedInstanceWithToken(AnalyticsConstants().MIXPANEL_TOKEN)
     
@@ -42,6 +43,7 @@ class SharedViewController: UIViewController,GIDSignInUIDelegate,GIDSignInDelega
     var moviePath:String!
     var token:String!
     var isSharingYoutube:Bool = false
+    var numberOfClips = 0
     
     //Timer
     var progressTimer:NSTimer!
@@ -496,7 +498,7 @@ class SharedViewController: UIViewController,GIDSignInUIDelegate,GIDSignInDelega
                 AnalyticsConstants().SOCIAL_NETWORK : socialNetwork,
                 AnalyticsConstants().VIDEO_LENGTH: videoDuration,
                 AnalyticsConstants().RESOLUTION: AnalyticsConstants().RESOLUTION,
-                AnalyticsConstants().NUMBER_OF_CLIPS: "*",
+                AnalyticsConstants().NUMBER_OF_CLIPS: numberOfClips,
                 AnalyticsConstants().TOTAL_VIDEOS_SHARED: preferences.integerForKey(ConfigPreferences().TOTAL_VIDEOS_SHARED),
                 AnalyticsConstants().DOUBLE_HOUR_AND_MINUTES: Utils().getDoubleHourAndMinutes(),
                 ]
@@ -509,8 +511,9 @@ class SharedViewController: UIViewController,GIDSignInUIDelegate,GIDSignInDelega
     func trackVideoSharedSuperProperties() {
         var numPreviousVideosShared:Int
         let properties = mixpanel.currentSuperProperties()
-        if !properties.isEmpty{
-            numPreviousVideosShared = properties[AnalyticsConstants().TOTAL_VIDEOS_SHARED] as! Int
+        
+        if let prop = properties[AnalyticsConstants().TOTAL_VIDEOS_SHARED]{
+            numPreviousVideosShared = prop as! Int
         }else{
             numPreviousVideosShared = 0
         }
