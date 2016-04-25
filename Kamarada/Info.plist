@@ -27,7 +27,7 @@
 		<dict>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>fb140192636381315</string>
+				<string>fb230314837338398</string>
 			</array>
 		</dict>
 		<dict>
@@ -50,9 +50,9 @@
 	<key>CFBundleVersion</key>
 	<string>1</string>
 	<key>FacebookAppID</key>
-	<string>140192636381315</string>
+	<string>230314837338398</string>
 	<key>FacebookDisplayName</key>
-	<string>Camarada_test</string>
+	<string>Kamarada</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>instagram</string>

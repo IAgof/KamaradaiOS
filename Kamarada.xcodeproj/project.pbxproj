@@ -17,7 +17,6 @@
 		A918CBDF1CAAB670009F2A50 /* SharedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A918CBDE1CAAB670009F2A50 /* SharedViewController.swift */; };
 		A918CBE11CAAD175009F2A50 /* Settings.strings in Resources */ = {isa = PBXBuildFile; fileRef = A918CBE01CAAD175009F2A50 /* Settings.strings */; };
 		A918CBE31CAADC8A009F2A50 /* activity_settings_background.png in Resources */ = {isa = PBXBuildFile; fileRef = A918CBE21CAADC8A009F2A50 /* activity_settings_background.png */; };
-		A944C23C1CC4D88D00FBC03E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A944C23B1CC4D88D00FBC03E /* GoogleService-Info.plist */; };
 		A955F4FD1CA95B0D00B0CF62 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A955F4FC1CA95B0D00B0CF62 /* AppDelegate.swift */; };
 		A955F4FF1CA95B0D00B0CF62 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A955F4FE1CA95B0D00B0CF62 /* MainViewController.swift */; };
 		A955F5021CA95B0D00B0CF62 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A955F5001CA95B0D00B0CF62 /* Main.storyboard */; };
@@ -75,6 +74,7 @@
 		A9981E0E1CC50695001659C3 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9981E0B1CC50695001659C3 /* FBSDKLoginKit.framework */; };
 		A9981E0F1CC50695001659C3 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9981E0C1CC50695001659C3 /* FBSDKShareKit.framework */; };
 		A9B903761CAA8E68001839C7 /* DetailSettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B903751CAA8E68001839C7 /* DetailSettingsController.swift */; };
+		A9CB568B1CCE2E6D00E39F11 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A9CB568A1CCE2E6D00E39F11 /* GoogleService-Info.plist */; };
 		A9DE88F01CAE8CA600767910 /* GPUImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9DE88ED1CAE8C9B00767910 /* GPUImage.framework */; };
 		A9DE88F21CAE8CDB00767910 /* GPUImage.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = A9DE88ED1CAE8C9B00767910 /* GPUImage.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A9DE88F81CAE922200767910 /* FilterOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DE88F61CAE922200767910 /* FilterOperations.swift */; };
@@ -160,7 +160,6 @@
 		A918CBDE1CAAB670009F2A50 /* SharedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharedViewController.swift; sourceTree = "<group>"; };
 		A918CBE01CAAD175009F2A50 /* Settings.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Settings.strings; sourceTree = "<group>"; };
 		A918CBE21CAADC8A009F2A50 /* activity_settings_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = activity_settings_background.png; path = "../../../../Google Drive/Drive Videona/Operations/OP-2016-0003 - Kamarada app/OP-2016-0003 - Recursos para Tablets/activity_settings_background.png"; sourceTree = "<group>"; };
-		A944C23B1CC4D88D00FBC03E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A955F4F91CA95B0D00B0CF62 /* Kamarada.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kamarada.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A955F4FC1CA95B0D00B0CF62 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A955F4FE1CA95B0D00B0CF62 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -225,6 +224,7 @@
 		A9981E0B1CC50695001659C3 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		A9981E0C1CC50695001659C3 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKShareKit.framework; sourceTree = "<group>"; };
 		A9B903751CAA8E68001839C7 /* DetailSettingsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailSettingsController.swift; sourceTree = "<group>"; };
+		A9CB568A1CCE2E6D00E39F11 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A9DE88E41CAE8C9B00767910 /* GPUImage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = GPUImage.xcodeproj; path = ../GPUImage/framework/GPUImage.xcodeproj; sourceTree = "<group>"; };
 		A9DE88F61CAE922200767910 /* FilterOperations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterOperations.swift; sourceTree = "<group>"; };
 		A9DE88F71CAE922200767910 /* FilterOperationTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterOperationTypes.swift; sourceTree = "<group>"; };
@@ -345,8 +345,8 @@
 				A955F5031CA95B0D00B0CF62 /* Assets.xcassets */,
 				A955F5051CA95B0D00B0CF62 /* LaunchScreen.storyboard */,
 				A955F5001CA95B0D00B0CF62 /* Main.storyboard */,
+				A9CB568A1CCE2E6D00E39F11 /* GoogleService-Info.plist */,
 				A955F5081CA95B0D00B0CF62 /* Info.plist */,
-				A944C23B1CC4D88D00FBC03E /* GoogleService-Info.plist */,
 				A90E10F11CC6413E00FC3172 /* Fonts */,
 				A9DE89071CAECC5900767910 /* FRAGMENT_SHADER_AQUA.fsh */,
 				A9DE89081CAECC5900767910 /* FRAGMENT_SHADER_EXT_BW.fsh */,
@@ -655,6 +655,7 @@
 				A970FD2B1CBBD33E004C7EDD /* silent_film_overlay_f.png in Resources */,
 				A90E10ED1CC62DBF00FC3172 /* testCorner.jpeg in Resources */,
 				A95EB50E1CA96F53000EAAB0 /* activity_record_filter_bw_icon_selected(2).png in Resources */,
+				A9CB568B1CCE2E6D00E39F11 /* GoogleService-Info.plist in Resources */,
 				A95EB51B1CA96F53000EAAB0 /* activity_record_skin_leather_icon_pressed.png in Resources */,
 				A95EB50F1CA96F53000EAAB0 /* activity_record_filter_sepia_icon_normal.png in Resources */,
 				A918CBE31CAADC8A009F2A50 /* activity_settings_background.png in Resources */,
@@ -686,7 +687,6 @@
 				A95EB51A1CA96F53000EAAB0 /* activity_record_skin_leather_icon_normal.png in Resources */,
 				A95EB5081CA96F53000EAAB0 /* activity_record_change_camera_icon_pressed.png in Resources */,
 				A95EB50D1CA96F53000EAAB0 /* activity_record_filter_bw_icon_selected.png in Resources */,
-				A944C23C1CC4D88D00FBC03E /* GoogleService-Info.plist in Resources */,
 				A95EB50A1CA96F53000EAAB0 /* activity_record_filter_blue_icon_selected.png in Resources */,
 				A95EB5241CA96F53000EAAB0 /* common_icon_settings_pressed.png in Resources */,
 				A9DE890B1CAECC5900767910 /* FRAGMENT_SHADER_EXT_BW.fsh in Resources */,
