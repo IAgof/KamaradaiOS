@@ -14,7 +14,7 @@ import Photos
 import QuartzCore
 import Mixpanel
 
-class MainViewController: UIViewController {
+class MainViewController: UIViewController{
     
     //MARK: - Background constants
     let woodBackground = "activity_record_background_wood.png"
@@ -200,12 +200,18 @@ class MainViewController: UIViewController {
         
         videoProgress.transform = CGAffineTransformScale(videoProgress.transform, 1, 5)
         
+        self.startTimeInActivityEvent()
+        
         self.configureView()
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        self.sendTimeInActivity()
     }
     
     //MARK: - Button actions
@@ -633,6 +639,7 @@ class MainViewController: UIViewController {
         progressTimer = NSTimer.scheduledTimerWithTimeInterval(videoStepDuration, target: self, selector: #selector(self.updateProgressBar), userInfo: nil, repeats: true)
         
     }
+    
     func updateProgressBar(){
         let delay = videoDuration/(progressSteps*Double(videoDuration))
         
@@ -644,6 +651,7 @@ class MainViewController: UIViewController {
             videoProgress.setProgress(Float(progressTime), animated: true)
         }
     }
+    
     func stopRecordVideo(){ //Stop Recording
         self.stateShareAndSettingsButton()
         
@@ -656,6 +664,8 @@ class MainViewController: UIViewController {
             self.isRecording=false
             
             print("Stop recording video")
+            
+            self.saveClipToCameraRoll()
         }
         self.shareButton.enabled = true
         
@@ -779,6 +789,34 @@ class MainViewController: UIViewController {
         }
     }
     
+    
+    func saveClipToCameraRoll() {
+        print("Save clip to Camera Roll")
+
+        var videoAssetPlaceholder:PHObjectPlaceholder!
+        
+        //Save in to photoLibrary
+        PHPhotoLibrary.sharedPhotoLibrary().performChanges({
+            let request = PHAssetChangeRequest.creationRequestForAssetFromVideoAtFileURL(NSURL(fileURLWithPath: self.pathToMovie))
+            
+            videoAssetPlaceholder = request!.placeholderForCreatedAsset
+        }) { completed, error in
+            if completed {
+                print("Clip is saved!")
+                //Create url to sharedView from PhotoLibrary
+                let localID = videoAssetPlaceholder.localIdentifier
+                let assetID =
+                    localID.stringByReplacingOccurrencesOfString(
+                        "/.*", withString: "",
+                        options: NSStringCompareOptions.RegularExpressionSearch, range: nil)
+                let ext = "mp4"
+                let assetURLStr =
+                    "assets-library://asset/asset.\(ext)?id=\(assetID)&ext=\(ext)"
+                print("assetURLstr \(assetURLStr)")
+            }
+        }
+    }
+    
     //MARK: - Segues
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
@@ -885,7 +923,6 @@ class MainViewController: UIViewController {
             [
                 AnalyticsConstants().VIDEO_LENGTH: getClipDuration(),
                 AnalyticsConstants().RESOLUTION: getResolution(),
-//                AnalyticsConstants().TOTAL_VIDEOS_RECORDED: totalVideosRecorded,
                 AnalyticsConstants().DOUBLE_HOUR_AND_MINUTES: Utils().getDoubleHourAndMinutes(),
                 ]
         mixpanel.track(AnalyticsConstants().VIDEO_RECORDED, properties: videoRecordedProperties as [NSObject : AnyObject])
@@ -902,6 +939,7 @@ class MainViewController: UIViewController {
     func getClipDuration() -> Double{
         return clipDuration
     }
+    
     func setClipDuration(){
         let videoURL: NSURL = NSURL.init(fileURLWithPath: pathToMovie!)
         let videoAsset = AVAsset.init(URL: videoURL)
@@ -943,5 +981,21 @@ class MainViewController: UIViewController {
                 AnalyticsConstants().DOUBLE_HOUR_AND_MINUTES: Utils().getDoubleHourAndMinutes(),
                 ]
         mixpanel.track(AnalyticsConstants().VIDEO_EXPORTED, properties: videoRecordedProperties as [NSObject : AnyObject])
+    }
+    
+    func startTimeInActivityEvent(){
+        mixpanel.timeEvent(AnalyticsConstants().TIME_IN_ACTIVITY)
+        print("Sending startTimeInActivityEvent")
+ }
+    func sendTimeInActivity() {
+        print("Sending AnalyticsConstants().TIME_IN_ACTIVITY")
+        //NOT WORKING -- falta el comienzo time_event para arrancar el contador
+        
+        let whatClass = String(object_getClass(self))
+        print("what class is \(whatClass)")
+        
+        let viewProperties = [AnalyticsConstants().ACTIVITY:whatClass]
+        mixpanel.track(AnalyticsConstants().TIME_IN_ACTIVITY, properties: viewProperties)
+        mixpanel.flush()
     }
 }

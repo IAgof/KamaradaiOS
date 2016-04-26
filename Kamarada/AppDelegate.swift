@@ -29,7 +29,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         //MIXPANEL
         Mixpanel.sharedInstanceWithToken(AnalyticsConstants().MIXPANEL_TOKEN)
         mixpanel = Mixpanel.sharedInstance()
-        mixpanel!.timeEvent(AnalyticsConstants().TIME_IN_ACTIVITY)
         
         //Init MixPanel
         dispatch_async(dispatch_get_main_queue()) {
@@ -55,7 +54,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
         print("\nEnter in applicationDidEnterBackground\n")
-        self.sendTimeInActivity(application)
     }
     
     func applicationWillEnterForeground(application: UIApplication) {
@@ -116,19 +114,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         // ...
     }
     
-    // MIXPANEL
-    func sendTimeInActivity(application: UIApplication){
-        print("Sending AnalyticsConstants().TIME_IN_ACTIVITY")
-        //NOT WORKING -- falta el comienzo time_event para arrancar el contador
-        
-        let navigationController = application.windows[0].rootViewController as! UINavigationController
-        let whatClass = String(object_getClass(navigationController.topViewController))
-        print("what class is \(whatClass)")
-        
-        let viewProperties = [AnalyticsConstants().ACTIVITY:whatClass]
-        mixpanel!.track(AnalyticsConstants().TIME_IN_ACTIVITY, properties: viewProperties)
-        mixpanel!.flush()
-    }
+    
+    // MARK: - MIXPANEL
     
     func sendStartupAppTracking() {
         let initAppProperties = [AnalyticsConstants().TYPE:AnalyticsConstants().TYPE_ORGANIC,

@@ -79,7 +79,6 @@
 		A9DE88F21CAE8CDB00767910 /* GPUImage.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = A9DE88ED1CAE8C9B00767910 /* GPUImage.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A9DE88F81CAE922200767910 /* FilterOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DE88F61CAE922200767910 /* FilterOperations.swift */; };
 		A9DE88F91CAE922200767910 /* FilterOperationTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DE88F71CAE922200767910 /* FilterOperationTypes.swift */; };
-		A9DE89001CAEA30E00767910 /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DE88FF1CAEA30E00767910 /* TestViewController.swift */; };
 		A9DE89031CAEB75800767910 /* CustomFilter.fsh in Resources */ = {isa = PBXBuildFile; fileRef = A9DE89021CAEB75700767910 /* CustomFilter.fsh */; };
 		A9DE890A1CAECC5900767910 /* FRAGMENT_SHADER_AQUA.fsh in Resources */ = {isa = PBXBuildFile; fileRef = A9DE89071CAECC5900767910 /* FRAGMENT_SHADER_AQUA.fsh */; };
 		A9DE890B1CAECC5900767910 /* FRAGMENT_SHADER_EXT_BW.fsh in Resources */ = {isa = PBXBuildFile; fileRef = A9DE89081CAECC5900767910 /* FRAGMENT_SHADER_EXT_BW.fsh */; };
@@ -228,7 +227,6 @@
 		A9DE88E41CAE8C9B00767910 /* GPUImage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = GPUImage.xcodeproj; path = ../GPUImage/framework/GPUImage.xcodeproj; sourceTree = "<group>"; };
 		A9DE88F61CAE922200767910 /* FilterOperations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterOperations.swift; sourceTree = "<group>"; };
 		A9DE88F71CAE922200767910 /* FilterOperationTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterOperationTypes.swift; sourceTree = "<group>"; };
-		A9DE88FF1CAEA30E00767910 /* TestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
 		A9DE89021CAEB75700767910 /* CustomFilter.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = CustomFilter.fsh; sourceTree = "<group>"; };
 		A9DE89071CAECC5900767910 /* FRAGMENT_SHADER_AQUA.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = FRAGMENT_SHADER_AQUA.fsh; sourceTree = "<group>"; };
 		A9DE89081CAECC5900767910 /* FRAGMENT_SHADER_EXT_BW.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = FRAGMENT_SHADER_EXT_BW.fsh; sourceTree = "<group>"; };
@@ -480,7 +478,6 @@
 			isa = PBXGroup;
 			children = (
 				A955F4FE1CA95B0D00B0CF62 /* MainViewController.swift */,
-				A9DE88FF1CAEA30E00767910 /* TestViewController.swift */,
 				A9B903751CAA8E68001839C7 /* DetailSettingsController.swift */,
 				A918CBDE1CAAB670009F2A50 /* SharedViewController.swift */,
 				A95EB5271CA97AD7000EAAB0 /* SettingsController.swift */,
@@ -769,7 +766,6 @@
 				A9DE88F91CAE922200767910 /* FilterOperationTypes.swift in Sources */,
 				A900E45F1CC8CD0300C44271 /* AnalitycsConstants.swift in Sources */,
 				A918CBDF1CAAB670009F2A50 /* SharedViewController.swift in Sources */,
-				A9DE89001CAEA30E00767910 /* TestViewController.swift in Sources */,
 				A95EB5281CA97AD7000EAAB0 /* SettingsController.swift in Sources */,
 				A9B903761CAA8E68001839C7 /* DetailSettingsController.swift in Sources */,
 				A9DE88F81CAE922200767910 /* FilterOperations.swift in Sources */,

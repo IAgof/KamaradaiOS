@@ -74,6 +74,7 @@ class SharedViewController: UIViewController,GIDSignInUIDelegate,GIDSignInDelega
         
         videoProgressView.transform = CGAffineTransformScale(videoProgressView.transform, 1, 3)
         
+        self.startTimeInActivityEvent()        
     }
     override func viewWillDisappear(animated: Bool) {
         print("SharedViewController willDissappear")
@@ -83,8 +84,11 @@ class SharedViewController: UIViewController,GIDSignInUIDelegate,GIDSignInDelega
         }else{
             isSharingYoutube = false
         }
+        
+        self.sendTimeInActivity()
+
     }
-    
+
     func setUpImageTaps(){
         //Get actions from ImageViews, could be buttons, but not the same shape image.
         var tapGestureRecognizer = UITapGestureRecognizer(target:self, action:#selector(SharedViewController.whatsappImageTapped(_:)))
@@ -532,4 +536,20 @@ class SharedViewController: UIViewController,GIDSignInUIDelegate,GIDSignInDelega
         totalVideosShared += 1
         preferences.setInteger(totalVideosShared, forKey: ConfigPreferences().TOTAL_VIDEOS_SHARED)
     }
+    
+    func startTimeInActivityEvent(){
+        mixpanel.timeEvent(AnalyticsConstants().TIME_IN_ACTIVITY)
+    }
+    func sendTimeInActivity() {
+        print("Sending AnalyticsConstants().TIME_IN_ACTIVITY")
+        //NOT WORKING -- falta el comienzo time_event para arrancar el contador
+        
+        let whatClass = String(object_getClass(self))
+        print("what class is \(whatClass)")
+        
+        let viewProperties = [AnalyticsConstants().ACTIVITY:whatClass]
+        mixpanel.track(AnalyticsConstants().TIME_IN_ACTIVITY, properties: viewProperties)
+        mixpanel.flush()
+    }
+    
 }

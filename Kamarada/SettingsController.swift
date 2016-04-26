@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Mixpanel
 
 class SettingsController: UITableViewController{
     
@@ -18,14 +19,28 @@ class SettingsController: UITableViewController{
                         ["exit"]]
     var contentItemsDescription = Array<Array<String>>()
     
+    #if DEBUG
+    var mixpanel = Mixpanel.init(token: AnalyticsConstants().MIXPANEL_TOKEN, andFlushInterval: 2)
+    #else
+    var mixpanel = Mixpanel.sharedInstanceWithToken(AnalyticsConstants().MIXPANEL_TOKEN)
+    #endif
+    
+    //MARK: - LifeCycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
         tableView.backgroundView = UIImageView(image: UIImage(named: "activity_settings_background.png"))
         
+        self.startTimeInActivityEvent()
+
         fillArrays()
         animateTable()
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        self.sendTimeInActivity()
     }
     
     //Get from Settings.strings the correct Strings to fill de tableView
@@ -209,5 +224,19 @@ class SettingsController: UITableViewController{
         self.presentViewController(alert, animated: true, completion: nil)
     }
     
+    func startTimeInActivityEvent(){
+        mixpanel.timeEvent(AnalyticsConstants().TIME_IN_ACTIVITY)
+    }
+    func sendTimeInActivity() {
+        print("Sending AnalyticsConstants().TIME_IN_ACTIVITY")
+        //NOT WORKING -- falta el comienzo time_event para arrancar el contador
+        
+        let whatClass = String(object_getClass(self))
+        print("what class is \(whatClass)")
+        
+        let viewProperties = [AnalyticsConstants().ACTIVITY:whatClass]
+        mixpanel.track(AnalyticsConstants().TIME_IN_ACTIVITY, properties: viewProperties)
+        mixpanel.flush()
+    }
 
 }
