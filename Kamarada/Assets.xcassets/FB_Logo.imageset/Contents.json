@@ -1,9 +1,6 @@
 {
   "images" : [
     {
-      "idiom" : "iphone"
-    },
-    {
       "idiom" : "iphone",
       "filename" : "FB-fLogo-White-broadcast.png",
       "scale" : "1x"
@@ -17,6 +14,16 @@
       "idiom" : "iphone",
       "filename" : "FB-fLogo-White-broadcast@3X.png",
       "scale" : "3x"
+    },
+    {
+      "idiom" : "ipad",
+      "filename" : "FB-fLogo-White-broadcast@2x-1.png",
+      "scale" : "1x"
+    },
+    {
+      "idiom" : "ipad",
+      "filename" : "FB-fLogo-White-broadcast@3x-1.png",
+      "scale" : "2x"
     }
   ],
   "info" : {

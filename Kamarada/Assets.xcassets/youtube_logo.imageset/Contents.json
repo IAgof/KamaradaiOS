@@ -1,9 +1,6 @@
 {
   "images" : [
     {
-      "idiom" : "iphone"
-    },
-    {
       "idiom" : "iphone",
       "filename" : "youtube logo.png",
       "scale" : "1x"
@@ -17,6 +14,16 @@
       "idiom" : "iphone",
       "filename" : "youtube logo@3X.png",
       "scale" : "3x"
+    },
+    {
+      "idiom" : "ipad",
+      "filename" : "youtube logo@2x-1.png",
+      "scale" : "1x"
+    },
+    {
+      "idiom" : "ipad",
+      "filename" : "youtube logo@3x-1.png",
+      "scale" : "2x"
     }
   ],
   "info" : {

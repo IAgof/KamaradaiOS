@@ -183,8 +183,8 @@ class MainViewController: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        mixpanel.identify(mixpanel.distinctId);
-//        mixpanel.people.set([AnalyticsConstants().TYPE:AnalyticsConstants().TYPE_PAID])
+        //        mixpanel.identify(mixpanel.distinctId);
+        //        mixpanel.people.set([AnalyticsConstants().TYPE:AnalyticsConstants().TYPE_PAID])
         //Search first launch, superproperty
         //        mixpanel.people.set([AnalyticsConstants().TYPE:AnalyticsConstants().TYPE_PAID])
         //App use count
@@ -592,7 +592,7 @@ class MainViewController: UIViewController{
     //MARK: - SetUpFilters
     func setCropFilter() -> GPUImageFilter{
         //Crop the image to get 4:3 aspect ratio
-        let filter:GPUImageCropFilter = GPUImageCropFilter.init(cropRegion: CGRectMake(0.0, 0.0, 1.0, 0.75 ))
+        let filter:GPUImageCropFilter = GPUImageCropFilter.init(cropRegion: CGRectMake(0.0, 0.0, 1.0, 0.55 ))
         
         return filter
     }
