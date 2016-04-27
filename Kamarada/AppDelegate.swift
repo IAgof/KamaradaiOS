@@ -11,14 +11,14 @@ import Mixpanel
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
-
+    
     var window: UIWindow?
     var mixpanel:Mixpanel?
     var initState = "firstTime"
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
-        print("START Kamarada")
+        Utils().debugLog("START Kamarada")
         //Google Sign in
         // Initialize sign-in
         var configureError: NSError?
@@ -27,8 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         
         GIDSignIn.sharedInstance().delegate = self
         //MIXPANEL
-        Mixpanel.sharedInstanceWithToken(AnalyticsConstants().MIXPANEL_TOKEN)
-        mixpanel = Mixpanel.sharedInstance()
+        mixpanel = Mixpanel.sharedInstanceWithToken(AnalyticsConstants().MIXPANEL_TOKEN)
         
         //Init MixPanel
         dispatch_async(dispatch_get_main_queue()) {
@@ -40,14 +39,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         //FaceBook SDK
         return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         
-
+        
     }
-
+    
     func applicationWillResignActive(application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
-        print("\nEnter in applicationWillResignActive\n")
-       self.saveVideoIfIsRecording()
+        Utils().debugLog("\nEnter in applicationWillResignActive\n")
+        self.saveVideoIfIsRecording()
     }
     
     func saveVideoIfIsRecording(){
@@ -58,7 +57,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
                     if(myViewController.isRecording){
                         myViewController.pushStopRecording()
                     }
-                    print("Found the view controller")
+                    Utils().debugLog("Found the view controller")
                 }
             }
         }
@@ -67,25 +66,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     func applicationDidEnterBackground(application: UIApplication) {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
-        print("\nEnter in applicationDidEnterBackground\n")
+        Utils().debugLog("\nEnter in applicationDidEnterBackground\n")
     }
     
     func applicationWillEnterForeground(application: UIApplication) {
         // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
     }
-
+    
     func applicationDidBecomeActive(application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-    
+        
         FBSDKAppEvents.activateApp()
     }
     
     func applicationWillTerminate(application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
-
-
-
+    
+    
+    
     func application(application: UIApplication,
                      openURL url: NSURL, options: [String: AnyObject]) -> Bool {
         return GIDSignIn.sharedInstance().handleURL(url,
@@ -102,7 +101,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         return GIDSignIn.sharedInstance().handleURL(url,
                                                     sourceApplication: sourceApplication,
                                                     annotation: annotation)
-
+        
     }
     
     func signIn(signIn: GIDSignIn!, didSignInForUser user: GIDGoogleUser!,
@@ -116,9 +115,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
             let familyName = user.profile.familyName
             let email = user.profile.email
             // ...
-            print("userID: \(userId) \n idToken: \(idToken) \n fullName: \(fullName) \n givenName: \(givenName) \n familyName: \(familyName) \n email: \(email) \n")
+            Utils().debugLog("userID: \(userId) \n idToken: \(idToken) \n fullName: \(fullName) \n givenName: \(givenName) \n familyName: \(familyName) \n email: \(email) \n")
         } else {
-            print("\(error.localizedDescription)")
+            Utils().debugLog("\(error.localizedDescription)")
         }
     }
     
@@ -148,7 +147,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
             defaults.setObject(currentAppVersion, forKey: "appVersion")
             defaults.synchronize()
             
-            print("First time")
+            Utils().debugLog("setupStartApp First time")
             initState = "firstTime"
             
             trackUserProfile();
@@ -157,7 +156,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
             
         } else if previousVersion == currentAppVersion {
             // same version
-            print("Same version")
+            Utils().debugLog("setupStartApp Same version")
             initState = "returning"
             
             trackAppStartupProperties(false);
@@ -167,7 +166,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
             defaults.setObject(currentAppVersion, forKey: "appVersion")
             defaults.synchronize()
             
-            print("Update to \(currentAppVersion)")
+            Utils().debugLog("setupStartApp Update to \(currentAppVersion)")
             initState = "upgrade"
             
             trackUserProfile();
@@ -177,6 +176,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     
     
     func trackAppStartupProperties(state:Bool) {
+        Utils().debugLog("trackAppStartupProperties")
+        mixpanel!.identify(Utils().udid)
+        
         var appUseCount:Int
         let properties = mixpanel!.currentSuperProperties()
         if let count = properties[AnalyticsConstants().APP_USE_COUNT]{
@@ -185,30 +187,39 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
             appUseCount = 0
         }
         appUseCount += 1
-
-        let appStartupSuperProperties = [AnalyticsConstants().APP_USE_COUNT:appUseCount,
-                                 AnalyticsConstants().FIRST_TIME:state,
-                                 AnalyticsConstants().APP: "Kamarada"]
+        
+        Utils().debugLog("App USE COUNT \(appUseCount)")
+        
+        let appStartupSuperProperties = [AnalyticsConstants().APP_USE_COUNT:NSNumber.init(int: Int32(appUseCount)),
+                                         AnalyticsConstants().FIRST_TIME:state,
+                                         AnalyticsConstants().APP: "Kamarada"]
         mixpanel?.registerSuperProperties(appStartupSuperProperties as [NSObject : AnyObject])
     }
     func trackUserProfile() {
-        let udid = UIDevice.currentDevice().identifierForVendor!.UUIDString
-        print("The user id is = \(udid)")
-        mixpanel!.identify(udid)
-        //        mixpanel.getPeople().identify(androidId);
+        Utils().debugLog("The user id is = \(Utils().udid)")
+        
+        mixpanel!.identify(Utils().udid)
         let userProfileProperties = [AnalyticsConstants().CREATED:Utils().giveMeTimeNow()]
         mixpanel?.people.setOnce(userProfileProperties)
     }
     
     func trackUserProfileGeneralTraits() {
-        mixpanel?.people.increment(AnalyticsConstants().APP_USE_COUNT,by: 1)
-
-        let locale = NSLocale.preferredLanguages()[0]
-        let lang = NSLocale.currentLocale().objectForKey(NSLocaleLanguageCode)
+        mixpanel!.identify(Utils().udid)
         
+        Utils().debugLog("trackUserProfileGeneralTraits")
+        
+        let increment:NSNumber = NSNumber.init(integer: 1)
+        Utils().debugLog("App USE COUNT Increment by: \(increment)")
+        
+        mixpanel?.people.increment(AnalyticsConstants().APP_USE_COUNT,by: increment)
+        
+        let locale = NSLocale.preferredLanguages()[0]
+        
+//        let lang = NSLocale.currentLocale().objectForKey(NSLocaleLanguageCode)
+        let langISO = NSLocale.currentLocale().ISO639_2LanguageCode()
         let userProfileProperties = [AnalyticsConstants().TYPE:AnalyticsConstants().TYPE_PAID,
-                                         AnalyticsConstants().LOCALE:locale,
-                                         AnalyticsConstants().LANG: lang!] as [NSObject : AnyObject]
+                                     AnalyticsConstants().LOCALE:locale,
+                                     AnalyticsConstants().LANG: langISO!] as [NSObject : AnyObject]
         
         mixpanel?.people.set(userProfileProperties)
     }

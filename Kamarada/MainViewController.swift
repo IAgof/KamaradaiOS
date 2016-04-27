@@ -96,7 +96,7 @@ class MainViewController: UIViewController{
     var movieWriter:GPUImageMovieWriter!
     
     //MARK: - Grain filter variables
-    var testImage:UIImage!
+    var blendUIImage:UIImage!
     var blendFilter:GPUImageAlphaBlendFilter
     var imageSource:GPUImagePicture!
     
@@ -119,11 +119,7 @@ class MainViewController: UIViewController{
         cola = NSOperationQueue.init()
         cola.maxConcurrentOperationCount = 1
         
-        #if DEBUG
-            mixpanel = Mixpanel.init(token: AnalyticsConstants().MIXPANEL_TOKEN, andFlushInterval: 2)
-        #else
-            mixpanel = Mixpanel.sharedInstanceWithToken(AnalyticsConstants().MIXPANEL_TOKEN)
-        #endif
+        mixpanel = Mixpanel.sharedInstanceWithToken(AnalyticsConstants().MIXPANEL_TOKEN)
         
         super.init(coder: aDecoder)!
     }
@@ -151,8 +147,8 @@ class MainViewController: UIViewController{
         filterGroup.terminalFilter = colorFilter
         
         //Grain filter
-        testImage = UIImage.init(named: "silent_film_overlay_a.png")
-        imageSource = GPUImagePicture.init(image: testImage, smoothlyScaleOutput: true)
+        blendUIImage = UIImage.init(named: "silent_film_overlay_a.png")
+        imageSource = GPUImagePicture.init(image: blendUIImage, smoothlyScaleOutput: true)
         
         //Sources to blend filter
         filterGroup.addTarget(blendFilter, atTextureLocation: 0)
@@ -213,7 +209,7 @@ class MainViewController: UIViewController{
     }
     
     override func viewWillDisappear(animated: Bool) {
-       print("MainViewController will dissappear")
+       Utils().debugLog("MainViewController will dissappear")
         self.sendTimeInActivity()
         
         if(isRecording){
@@ -266,7 +262,7 @@ class MainViewController: UIViewController{
     
     @IBAction func pushShareButton(sender: AnyObject) {
         //        self.mergeAudioVideo()
-        print("Starts to merge with audio")
+        Utils().debugLog("Starts to merge with audio")
     }
     @IBAction func pushChangeBackground(sender: AnyObject) {
         if(backgroundChange==false){
@@ -291,7 +287,7 @@ class MainViewController: UIViewController{
         self.replaceColorFilter(filter)
         
         disableOtherButtons(sender as! UIButton)
-        print("Remove BWFilter")
+        Utils().debugLog("Remove BWFilter")
         
         //MIXPANEL
         self.sendFilterSelectedTracking(AnalyticsConstants().FILTER_NAME_MONO, code: AnalyticsConstants().FILTER_CODE_MONO)
@@ -303,7 +299,7 @@ class MainViewController: UIViewController{
         self.replaceColorFilter(filter)
         
         disableOtherButtons(sender as! UIButton)
-        print("Remove Sepia Target")
+        Utils().debugLog("Remove Sepia Target")
         
         //MIXPANEL
         self.sendFilterSelectedTracking(AnalyticsConstants().FILTER_NAME_SEPIA, code: AnalyticsConstants().FILTER_CODE_SEPIA)
@@ -313,7 +309,7 @@ class MainViewController: UIViewController{
         self.replaceColorFilter(filter)
         
         disableOtherButtons(sender as! UIButton)
-        print("Remove cropFilter")
+        Utils().debugLog("Remove cropFilter")
         
         //MIXPANEL
         self.sendFilterSelectedTracking(AnalyticsConstants().FILTER_NAME_AQUA, code: AnalyticsConstants().FILTER_CODE_AQUA)
@@ -329,7 +325,7 @@ class MainViewController: UIViewController{
         var cgImage:CGImage?
         do {
             cgImage =  try imgGenerator.copyCGImageAtTime(kCMTimeZero, actualTime: nil)
-            print("Thumbnail image gets okay")
+            Utils().debugLog("Thumbnail image gets okay")
             
             // !! check the error before proceeding
             let thumbnail = UIImage(CGImage: cgImage!)
@@ -337,7 +333,7 @@ class MainViewController: UIViewController{
             
             thumbnailImageView.image = thumbnail
         } catch {
-            print("Thumbnail error \nSomething went wrong!")
+            Utils().debugLog("Thumbnail error \nSomething went wrong!")
         }
         
         
@@ -403,6 +399,35 @@ class MainViewController: UIViewController{
     
     //MARK: - Functions
     
+    //AlertView never used
+    func alertviewTwoSeconds(title: String , message: String){
+        let alert = UIAlertController(title: title , message: message, preferredStyle: .Alert)
+        presentViewController(alert, animated: true, completion: nil)
+        
+        // Delay the dismissal by 5 seconds
+        let delay = 2.0 * Double(NSEC_PER_SEC)
+        let time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
+        dispatch_after(time, dispatch_get_main_queue(), {
+            alert.dismissViewControllerAnimated(true, completion: nil)
+        })
+    }
+    
+    func showAlertVideoSave(title: String , message: String){
+        //Shows an alertview at the bottom of the view and removes after 2 seconds
+        
+        let alert = UIAlertController(title: title , message: message, preferredStyle: .ActionSheet)
+        
+        
+        presentViewController(alert, animated: true, completion: nil)
+        
+        // Delay the dismissal by 5 seconds
+        let delay = 1.0 * Double(NSEC_PER_SEC)
+        let time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
+        dispatch_after(time, dispatch_get_main_queue(), {
+            alert.dismissViewControllerAnimated(true, completion: nil)
+        })
+    }
+    
     func stateShareAndSettingsButton(){
         if(isRecording){
             settingsButton.enabled = true
@@ -415,7 +440,7 @@ class MainViewController: UIViewController{
     
     //Reset values when comeBack from shareView
     func resetValues(){
-        print("Reset Values")
+        Utils().debugLog("Reset Values")
         
         self.waitingToMergeVideo = true
         self.videosArray.removeAll()
@@ -450,28 +475,15 @@ class MainViewController: UIViewController{
     func video(videoPath: NSString, didFinishSavingWithError error: NSError?, contextInfo:UnsafePointer<Void>) {
         if error == nil {
             performSegueWithIdentifier("sharedView", sender: nil)
-            print("Save Successfully")
+            Utils().debugLog("Save Successfully")
         } else {
             let title = "Save error"
             let message = error?.localizedDescription
             
             self.alertviewTwoSeconds(title, message: message!)
-            print("Save error")
+            Utils().debugLog("Save error")
         }
         waitingToMergeVideo = false //Stop waiting
-    }
-    
-    //AlertView never used
-    func alertviewTwoSeconds(title: String , message: String){
-        let alert = UIAlertController(title: title , message: message, preferredStyle: .Alert)
-        presentViewController(alert, animated: true, completion: nil)
-        
-        // Delay the dismissal by 5 seconds
-        let delay = 2.0 * Double(NSEC_PER_SEC)
-        let time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
-        dispatch_after(time, dispatch_get_main_queue(), {
-            alert.dismissViewControllerAnimated(true, completion: nil)
-        })
     }
     
     //MARK: - Change background functions
@@ -565,8 +577,8 @@ class MainViewController: UIViewController{
         filterGroup.terminalFilter = colorFilter
         
         //Grain filter
-        testImage = UIImage.init(named: "silent_film_overlay_a.png")
-        imageSource = GPUImagePicture.init(image: testImage, smoothlyScaleOutput: true)
+        blendUIImage = UIImage.init(named: "silent_film_overlay_a.png")
+        imageSource = GPUImagePicture.init(image: blendUIImage, smoothlyScaleOutput: true)
         
         //Sources to blend filter
         filterGroup.addTarget(blendFilter, atTextureLocation: 0)
@@ -586,7 +598,7 @@ class MainViewController: UIViewController{
             }
         })
         
-        print("Filter changed")
+        Utils().debugLog("Filter changed")
     }
     
     //MARK: - SetUpFilters
@@ -638,14 +650,14 @@ class MainViewController: UIViewController{
         
         let movieURL = NSURL.fileURLWithPath(pathToMovie)
         
-        print("PathToMovie: \(pathToMovie)")
+        Utils().debugLog("PathToMovie: \(pathToMovie)")
         self.movieWriter = GPUImageMovieWriter.init(movieURL: movieURL, size: CGSizeMake(640,480))
         self.movieWriter.encodingLiveVideo = true
         
         blendFilter.addTarget(self.movieWriter)
         self.movieWriter.startRecording()
         
-        print("Recording movie starts")
+        Utils().debugLog("Recording movie starts")
         
         isRecording = true
         
@@ -668,7 +680,8 @@ class MainViewController: UIViewController{
     }
     
     func stopRecordVideo(){ //Stop Recording
-        print("Starting to stop record video")
+        
+        Utils().debugLog("Starting to stop record video")
         
         self.stateShareAndSettingsButton()
         
@@ -679,8 +692,10 @@ class MainViewController: UIViewController{
         
         self.movieWriter.finishRecordingWithCompletionHandler{ () -> Void in
             self.isRecording=false
-            
-            print("Stop recording video")
+
+            self.showAlertVideoSave("Video export", message: "Your clip has been saved into photogallery")
+
+            Utils().debugLog("Stop recording video")
             
             self.saveClipToCameraRoll()
         }
@@ -728,11 +743,11 @@ class MainViewController: UIViewController{
                 try videoTrack.insertTimeRange(CMTimeRangeMake(kCMTimeZero, videoAsset.duration),
                                                ofTrack: videoAsset.tracksWithMediaType(AVMediaTypeVideo)[0] ,
                                                atTime: videoTotalTime)
-                print("el tiempo total del video es: \(videoTotalTime.seconds)")
+                Utils().debugLog("el tiempo total del video es: \(videoTotalTime.seconds)")
                 videoTotalTime = CMTimeAdd(videoTotalTime, videoAsset.duration)
             } catch _ {
                 mixpanel.track(AnalyticsConstants().VIDEO_EXPORTED);
-                print("Error trying to create videoTrack")
+                Utils().debugLog("Error trying to create videoTrack")
             }
         }
         
@@ -743,7 +758,7 @@ class MainViewController: UIViewController{
                                            ofTrack: audioAsset.tracksWithMediaType(AVMediaTypeAudio)[0] ,
                                            atTime: kCMTimeZero)
         } catch _ {
-            print("Error trying to create audioTrack")
+            Utils().debugLog("Error trying to create audioTrack")
         }
         
         // 4 - Get path
@@ -762,7 +777,7 @@ class MainViewController: UIViewController{
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
                 //                UISaveVideoAtPathToSavedPhotosAlbum(self.pathToMergeMovie, self,#selector(MainViewController.video(_:didFinishSavingWithError:contextInfo:)), nil)
                 self.clipDuration = videoTotalTime.seconds
-                print("la duracion del clip es \(self.clipDuration)")
+                Utils().debugLog("la duracion del clip es \(self.clipDuration)")
                 
                 self.sendExportedVideoMetadataTracking()
                 self.saveMovieToCameraRoll()
@@ -779,7 +794,7 @@ class MainViewController: UIViewController{
             videoAssetPlaceholder = request!.placeholderForCreatedAsset
         }) { completed, error in
             if completed {
-                print("Video is saved!")
+                Utils().debugLog("Video is saved!")
                 //Create url to sharedView from PhotoLibrary
                 let localID = videoAssetPlaceholder.localIdentifier
                 let assetID =
@@ -789,7 +804,7 @@ class MainViewController: UIViewController{
                 let ext = "mp4"
                 let assetURLStr =
                     "assets-library://asset/asset.\(ext)?id=\(assetID)&ext=\(ext)"
-                print("assetURLstr \(assetURLStr)")
+                Utils().debugLog("assetURLstr \(assetURLStr)")
                 
                 //Assing urlToMergeMovieInPhotoLibrary to global variable.
                 self.urlToMergeMovieInPhotoLibrary = NSURL.init(string: assetURLStr)
@@ -808,7 +823,7 @@ class MainViewController: UIViewController{
     
     
     func saveClipToCameraRoll() {
-        print("Save clip to Camera Roll")
+        Utils().debugLog("Save clip to Camera Roll")
 
         var videoAssetPlaceholder:PHObjectPlaceholder!
         
@@ -819,7 +834,7 @@ class MainViewController: UIViewController{
             videoAssetPlaceholder = request!.placeholderForCreatedAsset
         }) { completed, error in
             if completed {
-                print("Clip is saved!")
+                Utils().debugLog("Clip is saved!")
                 //Create url to sharedView from PhotoLibrary
                 let localID = videoAssetPlaceholder.localIdentifier
                 let assetID =
@@ -829,7 +844,7 @@ class MainViewController: UIViewController{
                 let ext = "mp4"
                 let assetURLStr =
                     "assets-library://asset/asset.\(ext)?id=\(assetID)&ext=\(ext)"
-                print("assetURLstr \(assetURLStr)")
+                Utils().debugLog("assetURLstr \(assetURLStr)")
             }
         }
     }
@@ -837,7 +852,7 @@ class MainViewController: UIViewController{
     //MARK: - Segues
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
-        print("prepareForSegue")
+        Utils().debugLog("prepareForSegue")
         
         if segue.identifier == "sharedView" {
             //Define next screen
@@ -875,7 +890,7 @@ class MainViewController: UIViewController{
     
     //When you came from sharedViewController comes here
     @IBAction func backFromShareView(segue:UIStoryboardSegue) {
-        print("backFromShareView")
+        Utils().debugLog("backFromShareView")
         let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
         dispatch_async(dispatch_get_global_queue(priority, 0)) {
             // do some task
@@ -964,13 +979,16 @@ class MainViewController: UIViewController{
         
         clipDuration = videoAsset.duration.seconds
         
-        print("Clip duration = \(clipDuration)")
+        Utils().debugLog("Clip duration = \(clipDuration)")
     }
     func getResolution() -> String{
         return resolution
     }
     
     func updateUserProfileProperties() {
+        Utils().debugLog("updateUserProfileProperties")
+        mixpanel.identify(Utils().udid)
+        
         var quality = ""
         
         if preferences.objectForKey(ConfigPreferences().QUALITY) == nil {
@@ -986,7 +1004,7 @@ class MainViewController: UIViewController{
                 ]
         
         mixpanel.people.set(userProfileProperties)
-        mixpanel.people.increment(AnalyticsConstants().TOTAL_VIDEOS_RECORDED,by: 1)
+        mixpanel.people.increment(AnalyticsConstants().TOTAL_VIDEOS_RECORDED,by: NSNumber.init(int: Int32(1)))
         mixpanel.people.set([AnalyticsConstants().LAST_VIDEO_RECORDED:Utils().giveMeTimeNow()])
         
     }
@@ -1003,14 +1021,14 @@ class MainViewController: UIViewController{
     
     func startTimeInActivityEvent(){
         mixpanel.timeEvent(AnalyticsConstants().TIME_IN_ACTIVITY)
-        print("Sending startTimeInActivityEvent")
+        Utils().debugLog("Sending startTimeInActivityEvent")
  }
     func sendTimeInActivity() {
-        print("Sending AnalyticsConstants().TIME_IN_ACTIVITY")
+        Utils().debugLog("Sending AnalyticsConstants().TIME_IN_ACTIVITY")
         //NOT WORKING -- falta el comienzo time_event para arrancar el contador
         
         let whatClass = String(object_getClass(self))
-        print("what class is \(whatClass)")
+        Utils().debugLog("what class is \(whatClass)")
         
         let viewProperties = [AnalyticsConstants().ACTIVITY:whatClass]
         mixpanel.track(AnalyticsConstants().TIME_IN_ACTIVITY, properties: viewProperties)

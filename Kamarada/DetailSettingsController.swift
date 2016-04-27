@@ -57,11 +57,11 @@ class DetailSettingsController: UIViewController {
         mixpanel.timeEvent(AnalyticsConstants().TIME_IN_ACTIVITY)
     }
     func sendTimeInActivity() {
-        print("Sending AnalyticsConstants().TIME_IN_ACTIVITY")
+        Utils().debugLog("Sending AnalyticsConstants().TIME_IN_ACTIVITY")
         //NOT WORKING -- falta el comienzo time_event para arrancar el contador
         
         let whatClass = String(object_getClass(self))
-        print("what class is \(whatClass)")
+        Utils().debugLog("what class is \(whatClass)")
         
         let viewProperties = [AnalyticsConstants().ACTIVITY:whatClass]
         mixpanel.track(AnalyticsConstants().TIME_IN_ACTIVITY, properties: viewProperties)

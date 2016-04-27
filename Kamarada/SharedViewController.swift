@@ -82,11 +82,11 @@ class SharedViewController: UIViewController,GIDSignInUIDelegate,GIDSignInDelega
 
     }
     override func viewWillAppear(animated: Bool) {
-        print("SharedViewController will Appear")
+        Utils().debugLog("SharedViewController will Appear")
         self.navigationController?.navigationBar.hidden = true
     }
     override func viewWillDisappear(animated: Bool) {
-        print("SharedViewController willDissappear")
+        Utils().debugLog("SharedViewController willDissappear")
         
         if(!isSharingYoutube){//are not sharing with youtube, have to go to kamarada main view
 //            self.performSegueWithIdentifier("unwindToViewController", sender: self)
@@ -130,7 +130,7 @@ class SharedViewController: UIViewController,GIDSignInUIDelegate,GIDSignInDelega
     
     //MARK: - VideoPlayer
     func createVideoPlayer(){
-        print("Starts video player")
+        Utils().debugLog("Starts video player")
         
         let avAsset: AVURLAsset = AVURLAsset(URL: movieURL!, options: nil)
         let playerItem: AVPlayerItem = AVPlayerItem(asset: avAsset)
@@ -168,10 +168,10 @@ class SharedViewController: UIViewController,GIDSignInUIDelegate,GIDSignInDelega
         
         if((progressTime <= 1.0)){
             videoProgressView.setProgress(Float(progressTime), animated: false)
-            //            print("progress time = \(progressTime)")
+            //            Utils().debugLog("progress time = \(progressTime)")
         }else{
             progressTime = 0.0
-            print("Reset progress time")
+            Utils().debugLog("Reset progress time")
         }
     }
     
@@ -184,7 +184,7 @@ class SharedViewController: UIViewController,GIDSignInUIDelegate,GIDSignInDelega
         
         progressTimer.invalidate()
         
-        print("Video has stopped")
+        Utils().debugLog("Video has stopped")
     }
     
     func playVideoPlayer(){
@@ -198,11 +198,11 @@ class SharedViewController: UIViewController,GIDSignInUIDelegate,GIDSignInDelega
         let videoStepDuration = videoDuration / progressSteps
         progressTimer = NSTimer.scheduledTimerWithTimeInterval(videoStepDuration, target: self, selector: #selector(self.updateProgressBar), userInfo: nil, repeats: true)
         
-        print("Playing video")
+        Utils().debugLog("Playing video")
     }
     
     func onVideoStops(){
-        print("Video has finished")
+        Utils().debugLog("Video has finished")
         
         player?.currentItem?.seekToTime(kCMTimeZero)
         isPlayingVideo = false
@@ -290,7 +290,7 @@ class SharedViewController: UIViewController,GIDSignInUIDelegate,GIDSignInDelega
     //                    let videoData = NSData(contentsOfURL: self.movieURL)
     //                    SocialVideoHelper.uploadTwitterVideo(videoData, comment: "Kamarada video", account: twitterAccount as! ACAccount, withCompletion: nil)
     //                }else{
-    //                    print("No access to Twitter")
+    //                    Utils().debugLog("No access to Twitter")
     //                }
     //            }
     //        }
@@ -361,7 +361,7 @@ class SharedViewController: UIViewController,GIDSignInUIDelegate,GIDSignInDelega
         
         self.presentViewController(viewController, animated: true, completion: nil)
         
-        print("SignIn")
+        Utils().debugLog("SignIn")
     }
     
     // Dismiss the "Sign in with Google" view
@@ -369,20 +369,20 @@ class SharedViewController: UIViewController,GIDSignInUIDelegate,GIDSignInDelega
                 dismissViewController viewController: UIViewController!) {
         self.dismissViewControllerAnimated(true, completion: nil)
         
-        print("SignIn Dissmiss")
+        Utils().debugLog("SignIn Dissmiss")
         
     }
     
     
     func signIn(signIn: GIDSignIn!, didSignInForUser user: GIDGoogleUser!, withError error: NSError!) {
-        print("Google Sign In get user token")
+        Utils().debugLog("Google Sign In get user token")
         
         token = user.authentication.accessToken
         
-        print("Google Sign In get user token: \(token))")
+        Utils().debugLog("Google Sign In get user token: \(token))")
         
         self.postVideoToYouTube(){(result) -> () in
-            print("result \(result)")
+            Utils().debugLog("result \(result)")
         }
     }
 
@@ -449,7 +449,7 @@ class SharedViewController: UIViewController,GIDSignInUIDelegate,GIDSignInDelega
         dateFormatter.timeZone = NSTimeZone(forSecondsFromGMT: 3600) //GMT +1
         dateString = dateFormatter.stringFromDate(date)
         
-        print("La hora es : \(dateString)")
+        Utils().debugLog("La hora es : \(dateString)")
         
         return dateString
     }
@@ -457,7 +457,7 @@ class SharedViewController: UIViewController,GIDSignInUIDelegate,GIDSignInDelega
 
     
     func loginButton(loginButton: FBSDKLoginButton!, didCompleteWithResult result: FBSDKLoginManagerLoginResult!, error: NSError!) {
-        print("User Logged In")
+        Utils().debugLog("User Logged In")
         
         if ((error) != nil)
         {
@@ -480,7 +480,7 @@ class SharedViewController: UIViewController,GIDSignInUIDelegate,GIDSignInDelega
     }
     
     func loginButtonDidLogOut(loginButton: FBSDKLoginButton!) {
-        print("User Logged Out")
+        Utils().debugLog("User Logged Out")
     }
     
     func returnUserData()
@@ -491,15 +491,15 @@ class SharedViewController: UIViewController,GIDSignInUIDelegate,GIDSignInDelega
             if ((error) != nil)
             {
                 // Process error
-                print("Error: \(error)")
+                Utils().debugLog("Error: \(error)")
             }
             else
             {
-                print("fetched user: \(result)")
+                Utils().debugLog("fetched user: \(result)")
                 let userName : NSString = result.valueForKey("name") as! NSString
-                print("User Name is: \(userName)")
+                Utils().debugLog("User Name is: \(userName)")
                 let userEmail : NSString = result.valueForKey("email") as! NSString
-                print("User Email is: \(userEmail)")
+                Utils().debugLog("User Email is: \(userEmail)")
             }
         })
     }
@@ -509,6 +509,7 @@ class SharedViewController: UIViewController,GIDSignInUIDelegate,GIDSignInDelega
     
     func trackVideoShared(socialNetwork:String) {
     trackVideoSharedSuperProperties()
+        mixpanel.identify(Utils().udid)
         
         //JSON properties
         let socialNetworkProperties =
@@ -522,7 +523,7 @@ class SharedViewController: UIViewController,GIDSignInUIDelegate,GIDSignInDelega
                 ]
         mixpanel.track(AnalyticsConstants().VIDEO_SHARED, properties: socialNetworkProperties as [NSObject : AnyObject])
 
-        mixpanel.people.increment(AnalyticsConstants().TOTAL_VIDEOS_SHARED,by: 1)
+        mixpanel.people.increment(AnalyticsConstants().TOTAL_VIDEOS_SHARED,by: NSNumber.init(int: Int32(1)))
         mixpanel.people.set(AnalyticsConstants().LAST_VIDEO_SHARED,to: Utils().giveMeTimeNow())
     }
     
@@ -555,11 +556,11 @@ class SharedViewController: UIViewController,GIDSignInUIDelegate,GIDSignInDelega
         mixpanel.timeEvent(AnalyticsConstants().TIME_IN_ACTIVITY)
     }
     func sendTimeInActivity() {
-        print("Sending AnalyticsConstants().TIME_IN_ACTIVITY")
+        Utils().debugLog("Sending AnalyticsConstants().TIME_IN_ACTIVITY")
         //NOT WORKING -- falta el comienzo time_event para arrancar el contador
         
         let whatClass = String(object_getClass(self))
-        print("what class is \(whatClass)")
+        Utils().debugLog("what class is \(whatClass)")
         
         let viewProperties = [AnalyticsConstants().ACTIVITY:whatClass]
         mixpanel.track(AnalyticsConstants().TIME_IN_ACTIVITY, properties: viewProperties)

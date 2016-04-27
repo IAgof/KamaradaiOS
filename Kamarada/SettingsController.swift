@@ -72,7 +72,7 @@ class SettingsController: UITableViewController{
                     value: "",
                     table: "Settings")
                 
-                //                print("Para la \(myValue) El valor del texto es\n")// \(message)")
+                //                Utils().debugLog("Para la \(myValue) El valor del texto es\n")// \(message)")
                 
                 newRow.append(message)
             }
@@ -89,7 +89,7 @@ class SettingsController: UITableViewController{
                     value: "",
                     table: "Settings")
                 
-                //                print("Para la \(myValue) El valor del texto es\n")// \(message)")
+                //                Utils().debugLog("Para la \(myValue) El valor del texto es\n")// \(message)")
                 
                 newRow.append(message)
             }
@@ -186,7 +186,7 @@ class SettingsController: UITableViewController{
                 if(detail=="Download Videona"){
                     UIApplication.sharedApplication().openURL(NSURL(string: "http://videona.com")!)
                     
-                    print("Go to download")
+                    Utils().debugLog("Go to download")
                     
                     //Change the selected background view of the cell.
                     [self.tableView .deselectRowAtIndexPath(indexPath, animated: true)]
@@ -198,7 +198,7 @@ class SettingsController: UITableViewController{
                     //Change the selected background view of the cell.
                     [self.tableView .deselectRowAtIndexPath(indexPath, animated: true)]
                     
-                    print("Exit application")
+                    Utils().debugLog("Exit application")
                     returned = false
                 }else{
                     returned = true
@@ -230,11 +230,11 @@ class SettingsController: UITableViewController{
         mixpanel.timeEvent(AnalyticsConstants().TIME_IN_ACTIVITY)
     }
     func sendTimeInActivity() {
-        print("Sending AnalyticsConstants().TIME_IN_ACTIVITY")
+        Utils().debugLog("Sending AnalyticsConstants().TIME_IN_ACTIVITY")
         //NOT WORKING -- falta el comienzo time_event para arrancar el contador
         
         let whatClass = String(object_getClass(self))
-        print("what class is \(whatClass)")
+        Utils().debugLog("what class is \(whatClass)")
         
         let viewProperties = [AnalyticsConstants().ACTIVITY:whatClass]
         mixpanel.track(AnalyticsConstants().TIME_IN_ACTIVITY, properties: viewProperties)

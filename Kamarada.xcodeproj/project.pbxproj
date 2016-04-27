@@ -12,6 +12,8 @@
 		A900E4661CC8DDAF00C44271 /* Mixpanel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A900E4651CC8DDAF00C44271 /* Mixpanel.framework */; };
 		A900E46A1CC8E36A00C44271 /* ConfigPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = A900E4691CC8E36A00C44271 /* ConfigPreferences.swift */; };
 		A900E4F91CC9026800C44271 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = A900E4F81CC9026800C44271 /* Utils.swift */; };
+		A9093CE41CD111C000A099A6 /* NSLocale+ISO639_2.m in Sources */ = {isa = PBXBuildFile; fileRef = A9093CE31CD111C000A099A6 /* NSLocale+ISO639_2.m */; };
+		A9093CE71CD1134D00A099A6 /* iso639_2.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A9093CE61CD1134D00A099A6 /* iso639_2.bundle */; };
 		A90E10ED1CC62DBF00FC3172 /* testCorner.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = A90E10EC1CC62DBF00FC3172 /* testCorner.jpeg */; };
 		A90E10F21CC6425800FC3172 /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A90E10F01CC6413B00FC3172 /* Roboto-Regular.ttf */; };
 		A918CBDF1CAAB670009F2A50 /* SharedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A918CBDE1CAAB670009F2A50 /* SharedViewController.swift */; };
@@ -155,14 +157,17 @@
 		A900E4651CC8DDAF00C44271 /* Mixpanel.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Mixpanel.framework; path = "../../../Library/Developer/Xcode/DerivedData/Kamarada-dinxfvnocuhspbeeinhppkwnisvd/Build/Products/Debug-iphoneos/Mixpanel.framework"; sourceTree = "<group>"; };
 		A900E4691CC8E36A00C44271 /* ConfigPreferences.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfigPreferences.swift; sourceTree = "<group>"; };
 		A900E4F81CC9026800C44271 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		A9093CE21CD111C000A099A6 /* NSLocale+ISO639_2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSLocale+ISO639_2.h"; sourceTree = "<group>"; };
+		A9093CE31CD111C000A099A6 /* NSLocale+ISO639_2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSLocale+ISO639_2.m"; sourceTree = "<group>"; };
+		A9093CE61CD1134D00A099A6 /* iso639_2.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = iso639_2.bundle; sourceTree = "<group>"; };
 		A90E10EC1CC62DBF00FC3172 /* testCorner.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = testCorner.jpeg; path = ../../../../Downloads/testCorner.jpeg; sourceTree = "<group>"; };
 		A90E10F01CC6413B00FC3172 /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Roboto-Regular.ttf"; path = "../../../../Downloads/roboto/Roboto-Regular.ttf"; sourceTree = "<group>"; };
-		A918CBDE1CAAB670009F2A50 /* SharedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharedViewController.swift; sourceTree = "<group>"; };
+		A918CBDE1CAAB670009F2A50 /* SharedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = SharedViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		A918CBE01CAAD175009F2A50 /* Settings.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Settings.strings; sourceTree = "<group>"; };
 		A918CBE21CAADC8A009F2A50 /* activity_settings_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = activity_settings_background.png; path = "../../../../Google Drive/Drive Videona/Operations/OP-2016-0003 - Kamarada app/OP-2016-0003 - Recursos para Tablets/activity_settings_background.png"; sourceTree = "<group>"; };
 		A955F4F91CA95B0D00B0CF62 /* Kamarada.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kamarada.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A955F4FC1CA95B0D00B0CF62 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		A955F4FE1CA95B0D00B0CF62 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		A955F4FE1CA95B0D00B0CF62 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = MainViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		A955F5011CA95B0D00B0CF62 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A955F5031CA95B0D00B0CF62 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A955F5061CA95B0D00B0CF62 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -207,7 +212,7 @@
 		A95EB5031CA96F53000EAAB0 /* common_icon_settings_pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = common_icon_settings_pressed.png; path = "../../../../Downloads/OP-2016-0003 - iconos originales aplicacion kamarada/common_icon_settings_pressed.png"; sourceTree = "<group>"; };
 		A95EB5041CA96F53000EAAB0 /* dialog_export_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = dialog_export_background.png; path = "../../../../Downloads/OP-2016-0003 - iconos originales aplicacion kamarada/dialog_export_background.png"; sourceTree = "<group>"; };
 		A95EB5051CA96F53000EAAB0 /* dialog_export_progress_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = dialog_export_progress_icon.png; path = "../../../../Downloads/OP-2016-0003 - iconos originales aplicacion kamarada/dialog_export_progress_icon.png"; sourceTree = "<group>"; };
-		A95EB5271CA97AD7000EAAB0 /* SettingsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
+		A95EB5271CA97AD7000EAAB0 /* SettingsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = SettingsController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		A95EB5291CA98730000EAAB0 /* launch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = launch.png; path = ../../../../Downloads/launch.png; sourceTree = "<group>"; };
 		A970FD1C1CBBD33E004C7EDD /* silent_film_overlay_a.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = silent_film_overlay_a.png; path = GrainFilter/silent_film_overlay_a.png; sourceTree = "<group>"; };
 		A970FD1D1CBBD33E004C7EDD /* silent_film_overlay_b.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = silent_film_overlay_b.png; path = GrainFilter/silent_film_overlay_b.png; sourceTree = "<group>"; };
@@ -223,7 +228,7 @@
 		A9981E0A1CC50695001659C3 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		A9981E0B1CC50695001659C3 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		A9981E0C1CC50695001659C3 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKShareKit.framework; sourceTree = "<group>"; };
-		A9B903751CAA8E68001839C7 /* DetailSettingsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailSettingsController.swift; sourceTree = "<group>"; };
+		A9B903751CAA8E68001839C7 /* DetailSettingsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = DetailSettingsController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		A9CB568A1CCE2E6D00E39F11 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A9D75DAC1CCFAE7F00C8FF20 /* LaunchScreenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LaunchScreenViewController.swift; sourceTree = "<group>"; };
 		A9DE88E41CAE8C9B00767910 /* GPUImage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = GPUImage.xcodeproj; path = ../GPUImage/framework/GPUImage.xcodeproj; sourceTree = "<group>"; };
@@ -299,6 +304,16 @@
 			name = Utils;
 			sourceTree = "<group>";
 		};
+		A9093CE11CD111AD00A099A6 /* ISO639-2 */ = {
+			isa = PBXGroup;
+			children = (
+				A9093CE61CD1134D00A099A6 /* iso639_2.bundle */,
+				A9093CE21CD111C000A099A6 /* NSLocale+ISO639_2.h */,
+				A9093CE31CD111C000A099A6 /* NSLocale+ISO639_2.m */,
+			);
+			name = "ISO639-2";
+			sourceTree = "<group>";
+		};
 		A90E10F11CC6413E00FC3172 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
@@ -346,6 +361,7 @@
 				A955F5051CA95B0D00B0CF62 /* LaunchScreen.storyboard */,
 				A955F5001CA95B0D00B0CF62 /* Main.storyboard */,
 				A9CB568A1CCE2E6D00E39F11 /* GoogleService-Info.plist */,
+				A9093CE11CD111AD00A099A6 /* ISO639-2 */,
 				A955F5081CA95B0D00B0CF62 /* Info.plist */,
 				A90E10F11CC6413E00FC3172 /* Fonts */,
 				A9DE89071CAECC5900767910 /* FRAGMENT_SHADER_AQUA.fsh */,
@@ -667,6 +683,7 @@
 				A95EB5221CA96F53000EAAB0 /* common_icon_play_on_normal.png in Resources */,
 				A95EB5161CA96F53000EAAB0 /* activity_record_screen_content.png in Resources */,
 				A95EB5131CA96F53000EAAB0 /* activity_record_flash_icon_pressed copia.png in Resources */,
+				A9093CE71CD1134D00A099A6 /* iso639_2.bundle in Resources */,
 				A970FD271CBBD33E004C7EDD /* silent_film_overlay_b.png in Resources */,
 				A95EB5111CA96F53000EAAB0 /* activity_record_filter_sepia_icon_selected(2).png in Resources */,
 				A95EB51E1CA96F53000EAAB0 /* activity_share_add_icon_normal.png in Resources */,
@@ -770,6 +787,7 @@
 				A900E45F1CC8CD0300C44271 /* AnalitycsConstants.swift in Sources */,
 				A918CBDF1CAAB670009F2A50 /* SharedViewController.swift in Sources */,
 				A95EB5281CA97AD7000EAAB0 /* SettingsController.swift in Sources */,
+				A9093CE41CD111C000A099A6 /* NSLocale+ISO639_2.m in Sources */,
 				A9B903761CAA8E68001839C7 /* DetailSettingsController.swift in Sources */,
 				A9DE88F81CAE922200767910 /* FilterOperations.swift in Sources */,
 				A900E4F91CC9026800C44271 /* Utils.swift in Sources */,
