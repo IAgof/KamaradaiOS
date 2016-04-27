@@ -37,6 +37,8 @@ class SettingsController: UITableViewController{
 
         fillArrays()
         animateTable()
+        
+        self.navigationController?.navigationBar.hidden = false
     }
     
     override func viewWillDisappear(animated: Bool) {

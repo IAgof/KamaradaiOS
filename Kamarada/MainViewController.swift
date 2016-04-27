@@ -26,7 +26,7 @@ class MainViewController: UIViewController{
     //MARK: - Outlets
     
     //Views
-    @IBOutlet weak var backgroundImage: UIImageView!
+    @IBOutlet weak var backgroundImageView: UIImageView!
     @IBOutlet var filterView: GPUImageView?
     @IBOutlet var activityMonitor: UIActivityIndicatorView!
     @IBOutlet weak var videoProgress: UIProgressView!
@@ -200,6 +200,8 @@ class MainViewController: UIViewController{
         
         videoProgress.transform = CGAffineTransformScale(videoProgress.transform, 1, 5)
         
+        self.navigationController?.navigationBar.hidden = true
+        
         self.startTimeInActivityEvent()
         
         self.configureView()
@@ -211,7 +213,12 @@ class MainViewController: UIViewController{
     }
     
     override func viewWillDisappear(animated: Bool) {
+       print("MainViewController will dissappear")
         self.sendTimeInActivity()
+        
+        if(isRecording){
+            stopRecordVideo()
+        }
     }
     
     //MARK: - Button actions
@@ -273,15 +280,9 @@ class MainViewController: UIViewController{
     
     @IBAction func pushRecord(sender: AnyObject) {
         if(!isRecording){
-            self.pathToMovie = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
-            self.pathToMovie = self.pathToMovie + "/\(Utils().giveMeTimeNow())kamarada.m4v"
-            
-            recordButton.selected = true
-            
-            recordVideo()
+            self.pushStartRecording()
         }else{
-            stopRecordVideo()
-            recordButton.selected = false
+            self.pushStopRecording()
         }
     }
     
@@ -477,7 +478,7 @@ class MainViewController: UIViewController{
     func changeToLeatherSkin(){
         //Change to leatherBackground
         let image : UIImage = UIImage(named:woodBackground)!
-        backgroundImage.image = image
+        backgroundImageView.image = image
         changeBackgroundButton.setImage(UIImage(named: leatherImageButton), forState:.Normal)
         
         backgroundChange=true
@@ -485,7 +486,7 @@ class MainViewController: UIViewController{
     
     func changeToWoodSkin(){//Change to woodBackground
         let image : UIImage = UIImage(named:leatherBackground)!
-        backgroundImage.image = image
+        backgroundImageView.image = image
         changeBackgroundButton.setImage(UIImage(named: woodImageButton), forState:.Normal)
         
         backgroundChange=false
@@ -615,6 +616,20 @@ class MainViewController: UIViewController{
     
     //MARK: - Record Functions
     
+    func pushStartRecording(){
+        self.pathToMovie = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
+        self.pathToMovie = self.pathToMovie + "/\(Utils().giveMeTimeNow())kamarada.m4v"
+        
+        recordButton.selected = true
+        
+        recordVideo()
+    }
+    
+    func pushStopRecording(){
+        stopRecordVideo()
+        recordButton.selected = false
+    }
+    
     func recordVideo(){
         mixpanel.timeEvent(AnalyticsConstants().VIDEO_RECORDED);
         self.sendUserInteractedTracking(AnalyticsConstants().RECORD, result: AnalyticsConstants().START);
@@ -653,6 +668,8 @@ class MainViewController: UIViewController{
     }
     
     func stopRecordVideo(){ //Stop Recording
+        print("Starting to stop record video")
+        
         self.stateShareAndSettingsButton()
         
         videosArray.append(pathToMovie)
@@ -832,6 +849,7 @@ class MainViewController: UIViewController{
                 controller.movieURL = detail
                 controller.moviePath  = pathToMergeMovie
                 controller.numberOfClips = videosArray.count
+                controller.backgroundImage = backgroundImageView.image!
             }
             controller.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem()
             controller.navigationItem.leftItemsSupplementBackButton = true

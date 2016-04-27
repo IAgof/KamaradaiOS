@@ -24,6 +24,7 @@ class SharedViewController: UIViewController,GIDSignInUIDelegate,GIDSignInDelega
     @IBOutlet weak var FBImageView: UIImageView!
     @IBOutlet weak var youtubeImageView: UIImageView!
     @IBOutlet weak var twitterImageView: UIImageView!
+    @IBOutlet weak var backgroundImageView: UIImageView!
     
     @IBOutlet weak var playImageView: UIImageView!
     @IBOutlet weak var videoPlayerView: UIView!
@@ -44,6 +45,7 @@ class SharedViewController: UIViewController,GIDSignInUIDelegate,GIDSignInDelega
     var token:String!
     var isSharingYoutube:Bool = false
     var numberOfClips = 0
+    var backgroundImage:UIImage!
     
     //Timer
     var progressTimer:NSTimer!
@@ -74,13 +76,20 @@ class SharedViewController: UIViewController,GIDSignInUIDelegate,GIDSignInDelega
         
         videoProgressView.transform = CGAffineTransformScale(videoProgressView.transform, 1, 3)
         
-        self.startTimeInActivityEvent()        
+        self.startTimeInActivityEvent()
+        
+        self.setShareBackgroundImage(backgroundImage)
+
+    }
+    override func viewWillAppear(animated: Bool) {
+        print("SharedViewController will Appear")
+        self.navigationController?.navigationBar.hidden = true
     }
     override func viewWillDisappear(animated: Bool) {
         print("SharedViewController willDissappear")
         
         if(!isSharingYoutube){//are not sharing with youtube, have to go to kamarada main view
-            self.performSegueWithIdentifier("unwindToViewController", sender: self)
+//            self.performSegueWithIdentifier("unwindToViewController", sender: self)
         }else{
             isSharingYoutube = false
         }
@@ -112,6 +121,11 @@ class SharedViewController: UIViewController,GIDSignInUIDelegate,GIDSignInDelega
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
         
+    }
+    
+    //MARK: - Change background
+    func setShareBackgroundImage(image:UIImage){
+        backgroundImageView.image = image
     }
     
     //MARK: - VideoPlayer
@@ -154,7 +168,7 @@ class SharedViewController: UIViewController,GIDSignInUIDelegate,GIDSignInDelega
         
         if((progressTime <= 1.0)){
             videoProgressView.setProgress(Float(progressTime), animated: false)
-            print("progress time = \(progressTime)")
+            //            print("progress time = \(progressTime)")
         }else{
             progressTime = 0.0
             print("Reset progress time")
@@ -551,5 +565,5 @@ class SharedViewController: UIViewController,GIDSignInUIDelegate,GIDSignInDelega
         mixpanel.track(AnalyticsConstants().TIME_IN_ACTIVITY, properties: viewProperties)
         mixpanel.flush()
     }
-    
+
 }

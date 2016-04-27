@@ -39,6 +39,9 @@ class DetailSettingsController: UIViewController {
         self.startTimeInActivityEvent()
 
         configureView()
+        
+        self.navigationController?.navigationBar.hidden = false
+
     }
     
     override func viewWillDisappear(animated: Bool) {
