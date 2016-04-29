@@ -10,12 +10,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Kamarada/SharedViewController.swift"
-            timestampString = "483009075.032994"
+            timestampString = "483613069.880824"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "528"
-            endingLineNumber = "528"
-            landmarkName = "updateNumTotalVideosShared()"
+            startingLineNumber = "98"
+            endingLineNumber = "98"
+            landmarkName = "viewWillDisappear(_:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -25,13 +25,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Kamarada/AppDelegate.swift"
-            timestampString = "483011986.908641"
+            filePath = "Kamarada/MainViewController.swift"
+            timestampString = "483612994.402813"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "55"
-            endingLineNumber = "55"
-            landmarkName = "sendTimeInActivity(_:)"
+            startingLineNumber = "939"
+            endingLineNumber = "939"
+            landmarkName = "trackTotalVideosRecordedSuperProperty()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

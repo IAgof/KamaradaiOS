@@ -81,6 +81,11 @@ class SharedViewController: UIViewController,GIDSignInUIDelegate,GIDSignInDelega
         self.setShareBackgroundImage(backgroundImage)
 
     }
+    
+    override func prefersStatusBarHidden() -> Bool {
+        return true
+    }
+    
     override func viewWillAppear(animated: Bool) {
         Utils().debugLog("SharedViewController will Appear")
         self.navigationController?.navigationBar.hidden = true

@@ -2,7 +2,7 @@
   "images" : [
     {
       "idiom" : "iphone",
-      "filename" : "activity_record_background_wood@3x-1.png",
+      "filename" : "activity_record_background_wood@2x-1.png",
       "scale" : "1x"
     },
     {
@@ -17,10 +17,12 @@
     },
     {
       "idiom" : "ipad",
+      "filename" : "activity_record_background_wood@2x-2.png",
       "scale" : "1x"
     },
     {
       "idiom" : "ipad",
+      "filename" : "activity_record_background_wood@3x-1.png",
       "scale" : "2x"
     }
   ],

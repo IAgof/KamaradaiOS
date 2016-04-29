@@ -2,7 +2,6 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" initialViewController="01J-lp-oVM">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -18,33 +17,26 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="launch.png" translatesAutoresizingMaskIntoConstraints="NO" id="7CQ-1H-fZ6">
-                                <rect key="frame" x="28" y="60" width="358" height="313"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="7CQ-1H-fZ6" secondAttribute="height" multiplier="323:282" id="A5N-qP-IhF"/>
-                                </constraints>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="v 9.0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8rr-cg-tle">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="v 1.0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8rr-cg-tle">
                                 <rect key="frame" x="370" y="716" width="24" height="12"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Splash" translatesAutoresizingMaskIntoConstraints="NO" id="xC0-a7-wIq">
+                                <rect key="frame" x="20" y="28" width="374" height="680"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="7CQ-1H-fZ6" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leadingMargin" constant="8" id="41w-a2-iux"/>
                             <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="8rr-cg-tle" secondAttribute="bottom" constant="8" id="4h7-B7-oWo"/>
+                            <constraint firstItem="xC0-a7-wIq" firstAttribute="top" secondItem="Llm-lL-Icb" secondAttribute="bottom" constant="8" symbolic="YES" id="R2X-bu-Rws"/>
+                            <constraint firstItem="xC0-a7-wIq" firstAttribute="trailing" secondItem="8rr-cg-tle" secondAttribute="trailing" id="Tk6-hS-L0N"/>
                             <constraint firstItem="8rr-cg-tle" firstAttribute="trailing" secondItem="Ze5-6b-2t3" secondAttribute="trailingMargin" id="b1v-uO-d87"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="7CQ-1H-fZ6" secondAttribute="trailing" constant="8" id="lGH-Os-8Qd"/>
-                            <constraint firstItem="7CQ-1H-fZ6" firstAttribute="top" secondItem="Llm-lL-Icb" secondAttribute="bottom" constant="40" id="pqX-GG-Pka"/>
-                            <constraint firstItem="7CQ-1H-fZ6" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="q3G-vH-qSK"/>
+                            <constraint firstItem="xC0-a7-wIq" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leadingMargin" id="chm-dQ-Lha"/>
+                            <constraint firstItem="xC0-a7-wIq" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="kYU-qP-RpU"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="q3G-vH-qSK"/>
-                            </mask>
-                        </variation>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
                 </viewController>
@@ -54,6 +46,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="launch.png" width="1080" height="742"/>
+        <image name="Splash" width="311" height="552"/>
     </resources>
 </document>

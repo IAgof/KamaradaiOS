@@ -1,6 +1,0 @@
-framework module YouToobAPI {
-  umbrella header "YouToobAPI.h"
-
-  export *
-  module * { export * }
-}

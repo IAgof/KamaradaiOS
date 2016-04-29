@@ -41,6 +41,10 @@ class SettingsController: UITableViewController{
         self.navigationController?.navigationBar.hidden = false
     }
     
+    override func prefersStatusBarHidden() -> Bool {
+        return true
+    }
+    
     override func viewWillDisappear(animated: Bool) {
         self.sendTimeInActivity()
     }
