@@ -47,6 +47,7 @@ class SharedViewController: UIViewController,GIDSignInUIDelegate,GIDSignInDelega
     var isSharingYoutube:Bool = false
     var numberOfClips = 0
     var backgroundImage:UIImage!
+    var documentationInteractionController:UIDocumentInteractionController!
     
     //Timer
     var progressTimer:NSTimer!
@@ -246,7 +247,7 @@ class SharedViewController: UIViewController,GIDSignInUIDelegate,GIDSignInDelega
         
         let movie:NSURL = NSURL.fileURLWithPath(moviePath)
         
-        let documentationInteractionController:UIDocumentInteractionController = UIDocumentInteractionController.init(URL: movie)
+        documentationInteractionController = UIDocumentInteractionController.init(URL: movie)
         
         documentationInteractionController.UTI = "public.movie"
         
@@ -261,9 +262,9 @@ class SharedViewController: UIViewController,GIDSignInUIDelegate,GIDSignInDelega
         //NSURL(string: urlString!) {
         if UIApplication.sharedApplication().canOpenURL(NSURL(string: "whatsapp://app")!) {
         
-            let movie:NSURL = self.copyToWhatsappExtension(moviePath)
-            
-            let documentationInteractionController:UIDocumentInteractionController = UIDocumentInteractionController.init(URL: movie)
+            let movie:NSURL = NSURL.fileURLWithPath(moviePath)
+    
+            documentationInteractionController = UIDocumentInteractionController.init(URL: movie)
             
             documentationInteractionController.UTI = "net.whatsapp.movie"
             
@@ -301,23 +302,6 @@ class SharedViewController: UIViewController,GIDSignInUIDelegate,GIDSignInDelega
     //
     //    }
     
-    func copyToWhatsappExtension(moviePath:String) -> NSURL {
-
-        let destPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true).first!
-        let fileManager = NSFileManager.defaultManager()
-        let fullDestPath = NSURL(fileURLWithPath: destPath).URLByAppendingPathComponent("\(giveMeTimeNow())whatsappShare.wam")
-        let fullDestPathString = fullDestPath.path
-       
-        print(fileManager.fileExistsAtPath(moviePath)) // prints true
-        
-        do{
-            try fileManager.copyItemAtPath(moviePath, toPath: fullDestPathString!)
-        }catch{
-            print("\n")
-            print(error)
-        }
-        return fullDestPath
-    }
     func shareToInstagram(){
         self.updateNumTotalVideosShared()
         trackVideoShared(AnalyticsConstants().INSTAGRAM);
