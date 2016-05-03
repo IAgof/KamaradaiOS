@@ -81,6 +81,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     
     func applicationWillTerminate(application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+        self.removeAllTempFiles()
     }
     
     
@@ -227,6 +228,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     func trackCreatedSuperProperty() {
         let createdSuperProperty = [AnalyticsConstants().CREATED: Utils().giveMeTimeNow()]
         mixpanel?.registerSuperPropertiesOnce(createdSuperProperty)
+    }
+    
+    func removeAllTempFiles(){
+        print("Remove all temporally files")
+        
+        let fm = NSFileManager.defaultManager()
+        do {
+            let folderPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
+            let paths = try fm.contentsOfDirectoryAtPath(folderPath)
+            for path in paths
+            {
+                try fm.removeItemAtPath("\(folderPath)/\(path)")
+            }
+        } catch{
+            print("error removeAllTempFiles ")
+        }
     }
 }
 
