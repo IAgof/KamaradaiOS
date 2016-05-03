@@ -42,6 +42,7 @@ class SharedViewController: UIViewController,GIDSignInUIDelegate,GIDSignInDelega
     var player:AVPlayer?
     var movieURL:NSURL!
     var moviePath:String!
+    var movieInternalPath:String!
     var token:String!
     var isSharingYoutube:Bool = false
     var numberOfClips = 0
@@ -243,42 +244,39 @@ class SharedViewController: UIViewController,GIDSignInUIDelegate,GIDSignInDelega
         self.updateNumTotalVideosShared()
         self.trackVideoShared("")
         
-        let objectsToShare = [movieURL] //comment!, imageData!, myWebsite!]
-        let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
+        let movie:NSURL = NSURL.fileURLWithPath(moviePath)
         
-        activityVC.setValue("Video", forKey: "subject")
+        let documentationInteractionController:UIDocumentInteractionController = UIDocumentInteractionController.init(URL: movie)
         
-        //New Excluded Activities Code
-//        activityVC.excludedActivityTypes = [ UIActivityTypeAssignToContact, UIActivityTypeCopyToPasteboard, UIActivityTypeMessage,  UIActivityTypePrint ]
+        documentationInteractionController.UTI = "public.movie"
         
-        self.presentViewController(activityVC, animated: true, completion: nil)
+        documentationInteractionController.presentOpenInMenuFromRect(CGRectZero, inView: self.view, animated: true)
     }
     
     //MARK: - Share Functions
     func shareToWhatsApp(){
         self.updateNumTotalVideosShared()
         trackVideoShared(AnalyticsConstants().WHATSAPP);
-
-        let urlWhats = "whatsapp://app"
-        if let urlString = urlWhats.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet()) {
-            if let whatsappURL = NSURL(string: urlString) {
-                
-                if UIApplication.sharedApplication().canOpenURL(whatsappURL) {
-                    
-                    let documentationInteractionController:UIDocumentInteractionController = UIDocumentInteractionController.init(URL: movieURL)
-                    
-                    documentationInteractionController.UTI = "net.whatsapp.movie"
-                    
-                    documentationInteractionController.presentPreviewAnimated(true)
-                    
-                } else {
-                    // Cannot open whatsapp
-                    
-                    let alert = UIAlertController(title: "Share", message: "No Whattsapp instaled", preferredStyle: UIAlertControllerStyle.Alert)
-                    
-                    alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
-                    self.presentViewController(alert, animated: true, completion: nil)                }
-            }
+        
+        //NSURL(string: urlString!) {
+        if UIApplication.sharedApplication().canOpenURL(NSURL(string: "whatsapp://app")!) {
+        
+            let movie:NSURL = self.copyToWhatsappExtension(moviePath)
+            
+            let documentationInteractionController:UIDocumentInteractionController = UIDocumentInteractionController.init(URL: movie)
+            
+            documentationInteractionController.UTI = "net.whatsapp.movie"
+            
+            documentationInteractionController.presentOpenInMenuFromRect(CGRectZero, inView: self.view, animated: true)
+        }else{
+            // create the alert
+            let alert = UIAlertController(title: "Whatsapp", message: "No Whatsapp installed", preferredStyle: UIAlertControllerStyle.Alert)
+            
+            // add the actions (buttons)
+            alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
+            
+            // show the alert
+            self.presentViewController(alert, animated: true, completion: nil)
         }
     }
     
@@ -303,6 +301,23 @@ class SharedViewController: UIViewController,GIDSignInUIDelegate,GIDSignInDelega
     //
     //    }
     
+    func copyToWhatsappExtension(moviePath:String) -> NSURL {
+
+        let destPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true).first!
+        let fileManager = NSFileManager.defaultManager()
+        let fullDestPath = NSURL(fileURLWithPath: destPath).URLByAppendingPathComponent("\(giveMeTimeNow())whatsappShare.wam")
+        let fullDestPathString = fullDestPath.path
+       
+        print(fileManager.fileExistsAtPath(moviePath)) // prints true
+        
+        do{
+            try fileManager.copyItemAtPath(moviePath, toPath: fullDestPathString!)
+        }catch{
+            print("\n")
+            print(error)
+        }
+        return fullDestPath
+    }
     func shareToInstagram(){
         self.updateNumTotalVideosShared()
         trackVideoShared(AnalyticsConstants().INSTAGRAM);

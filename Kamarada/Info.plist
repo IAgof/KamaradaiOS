@@ -31,7 +31,7 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>videona.kamarada</string>
+				<string>com.Videona.Kamarada</string>
 			</array>
 		</dict>
 		<dict>
@@ -44,7 +44,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>2</string>
 	<key>FacebookAppID</key>
 	<string>230314837338398</string>
 	<key>FacebookDisplayName</key>
@@ -53,6 +53,7 @@
 	<false/>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
+		<string>whatsapp</string>
 		<string>instagram</string>
 		<string>fbapi</string>
 		<string>fb-messenger-api</string>

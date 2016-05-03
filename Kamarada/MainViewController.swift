@@ -131,33 +131,33 @@ class MainViewController: UIViewController{
     }
     
     func configureView() {
-        //Setup filters
-        cropFilter = setCropFilter()
-        colorFilter = setSepiaFilter()
-        
-        videoCamera.addTarget(filterGroup)
-        
-        //Setup filterGroup
-        filterGroup.addFilter(cropFilter)
-        filterGroup.addFilter(colorFilter)
-        
-        cropFilter.addTarget(colorFilter)
-        
-        filterGroup.initialFilters = [ cropFilter ]
-        filterGroup.terminalFilter = colorFilter
-        
-        //Grain filter
-        blendUIImage = UIImage.init(named: "silent_film_overlay_a.png")
-        imageSource = GPUImagePicture.init(image: blendUIImage, smoothlyScaleOutput: true)
-        
-        //Sources to blend filter
-        filterGroup.addTarget(blendFilter, atTextureLocation: 0)
-        imageSource.addTarget(blendFilter, atTextureLocation: 1)
-        
-        
         cola.addOperationWithBlock({
+            //Setup filters
+            self.cropFilter = self.setCropFilter()
+            self.colorFilter = self.setSepiaFilter()
+            
+            self.videoCamera.addTarget(self.filterGroup)
+            
+            //Setup filterGroup
+            self.filterGroup.addFilter(self.cropFilter)
+            self.filterGroup.addFilter(self.colorFilter)
+            
+            self.cropFilter.addTarget(self.colorFilter)
+            
+            self.filterGroup.initialFilters = [ self.cropFilter ]
+            self.filterGroup.terminalFilter = self.colorFilter
+            
+            //Grain filter
+            self.blendUIImage = UIImage.init(named: "silent_film_overlay_a.png")
+            self.imageSource = GPUImagePicture.init(image: self.blendUIImage, smoothlyScaleOutput: true)
+            
+            //Sources to blend filter
+            self.filterGroup.addTarget(self.blendFilter, atTextureLocation: 0)
+            self.imageSource.addTarget(self.blendFilter, atTextureLocation: 1)
+            
+            
             self.imageSource.processImage()
-
+            
             self.blendFilter.useNextFrameForImageCapture()
             self.blendFilter.addTarget(self.filterView)
             
@@ -183,19 +183,6 @@ class MainViewController: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //        mixpanel.identify(mixpanel.distinctId);
-        //        mixpanel.people.set([AnalyticsConstants().TYPE:AnalyticsConstants().TYPE_PAID])
-        //Search first launch, superproperty
-        //        mixpanel.people.set([AnalyticsConstants().TYPE:AnalyticsConstants().TYPE_PAID])
-        //App use count
-        //        mixpanel.people.set([AnalyticsConstants().TYPE:AnalyticsConstants().TYPE_PAID])
-        //LAN and LOCALE
-        //        mixpanel.people.set([AnalyticsConstants().TYPE:AnalyticsConstants().TYPE_PAID])
-        // Superproperty app:Kamarada
-        
-        //App started
-        //        TRACK
-        // Do any additional setup after loading the view, typically from a nib.
         shareButton.enabled = false
         
         videoProgress.transform = CGAffineTransformScale(videoProgress.transform, 1, 5)
@@ -524,31 +511,31 @@ class MainViewController: UIViewController{
     }
     
     func changeGrainFilter(){
-        
-        let image = UIImage.init(named:grainFilters[countGrainFilters])
-        self.updateCountGrainFilters()
-        videoCamera.addTarget(filterGroup)
-        
-        filterGroup.removeAllTargets()
-        blendFilter.removeAllTargets()
-        
-        filterGroup.addFilter(cropFilter)
-        filterGroup.addFilter(colorFilter)
-        
-        cropFilter.addTarget(colorFilter)
-        
-        filterGroup.initialFilters = [ cropFilter ]
-        filterGroup.terminalFilter = colorFilter
-        
-        //Grain filter
-        imageSource = GPUImagePicture.init(image: image, smoothlyScaleOutput: true)
-        
-        //Sources to blend filter
-        filterGroup.addTarget(blendFilter, atTextureLocation: 0)
-        imageSource.addTarget(blendFilter, atTextureLocation: 1)
-        blendFilter.mix = 1.0
-        
         cola.addOperationWithBlock({
+            
+            let image = UIImage.init(named:self.grainFilters[self.countGrainFilters])
+            self.updateCountGrainFilters()
+            self.videoCamera.addTarget(self.filterGroup)
+            
+            self.filterGroup.removeAllTargets()
+            self.blendFilter.removeAllTargets()
+            
+            self.filterGroup.addFilter(self.cropFilter)
+            self.filterGroup.addFilter(self.colorFilter)
+            
+            self.cropFilter.addTarget(self.colorFilter)
+            
+            self.filterGroup.initialFilters = [ self.cropFilter ]
+            self.filterGroup.terminalFilter = self.colorFilter
+            
+            //Grain filter
+            self.imageSource = GPUImagePicture.init(image: image, smoothlyScaleOutput: true)
+            
+            //Sources to blend filter
+            self.filterGroup.addTarget(self.blendFilter, atTextureLocation: 0)
+            self.imageSource.addTarget(self.blendFilter, atTextureLocation: 1)
+            self.blendFilter.mix = 1.0
+            
             self.imageSource.processImage()
             
             self.blendFilter.useNextFrameForImageCapture()
@@ -564,34 +551,34 @@ class MainViewController: UIViewController{
     
     //Replaces the actualFilter with the filter argument
     func replaceColorFilter(filter: GPUImageFilter){
-        cropFilter = setCropFilter()
-        colorFilter = filter
-        
-        videoCamera.addTarget(filterGroup)
-        
-        filterGroup.removeAllTargets()
-        blendFilter.removeAllTargets()
-        
-        filterGroup.addFilter(cropFilter)
-        filterGroup.addFilter(colorFilter)
-        
-        cropFilter.addTarget(colorFilter)
-        
-        filterGroup.initialFilters = [ cropFilter ]
-        filterGroup.terminalFilter = colorFilter
-        
-        //Grain filter
-        blendUIImage = UIImage.init(named: "silent_film_overlay_a.png")
-        imageSource = GPUImagePicture.init(image: blendUIImage, smoothlyScaleOutput: true)
-        
-        //Sources to blend filter
-        filterGroup.addTarget(blendFilter, atTextureLocation: 0)
-        imageSource.addTarget(blendFilter, atTextureLocation: 1)
-        
-        
         cola.addOperationWithBlock({
+            self.cropFilter = self.setCropFilter()
+            self.colorFilter = filter
+            
+            self.videoCamera.addTarget(self.filterGroup)
+            
+            self.filterGroup.removeAllTargets()
+            self.blendFilter.removeAllTargets()
+            
+            self.filterGroup.addFilter(self.cropFilter)
+            self.filterGroup.addFilter(self.colorFilter)
+            
+            self.cropFilter.addTarget(self.colorFilter)
+            
+            self.filterGroup.initialFilters = [ self.cropFilter ]
+            self.filterGroup.terminalFilter = self.colorFilter
+            
+            //Grain filter
+            self.blendUIImage = UIImage.init(named: "silent_film_overlay_a.png")
+            self.imageSource = GPUImagePicture.init(image: self.blendUIImage, smoothlyScaleOutput: true)
+            
+            //Sources to blend filter
+            self.filterGroup.addTarget(self.blendFilter, atTextureLocation: 0)
+            self.imageSource.addTarget(self.blendFilter, atTextureLocation: 1)
+            
+            
             self.imageSource.processImage()
-
+            
             self.blendFilter.useNextFrameForImageCapture()
             self.blendFilter.addTarget(self.filterView)
             
@@ -882,6 +869,8 @@ class MainViewController: UIViewController{
         if identifier == "sharedView" {
             self.mergeAudioVideo()
             //Set the values to the next screen
+            cola.cancelAllOperations()
+            
             if !waitingToMergeVideo{
                 
                 returned = true
