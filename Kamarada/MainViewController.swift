@@ -539,12 +539,20 @@ class MainViewController: UIViewController{
             self.imageSource.processImage()
             
             self.blendFilter.useNextFrameForImageCapture()
-            self.blendFilter.addTarget(self.filterView)
+            let maskFilter = self.setMaskFilter()
+            
+            self.blendFilter.addTarget(maskFilter)
+            
+            maskFilter.addTarget(self.filterView)
             
             self.videoCamera.startCameraCapture()
             
             if(self.isRecording){
-                self.blendFilter.addTarget(self.movieWriter)
+                let writerMaskFilter = self.setMaskFilter()
+                
+                self.blendFilter.addTarget(writerMaskFilter)
+                writerMaskFilter.addTarget(self.movieWriter)
+                
             }
         })
     }
@@ -580,12 +588,20 @@ class MainViewController: UIViewController{
             self.imageSource.processImage()
             
             self.blendFilter.useNextFrameForImageCapture()
-            self.blendFilter.addTarget(self.filterView)
+            let maskFilter = self.setMaskFilter()
+            
+            self.blendFilter.addTarget(maskFilter)
+            
+            maskFilter.addTarget(self.filterView)
             
             self.videoCamera.startCameraCapture()
             
             if(self.isRecording){
-                self.blendFilter.addTarget(self.movieWriter)
+                let writerMaskFilter = self.setMaskFilter()
+                
+                self.blendFilter.addTarget(writerMaskFilter)
+                writerMaskFilter.addTarget(self.movieWriter)
+                
             }
         })
         
@@ -593,6 +609,12 @@ class MainViewController: UIViewController{
     }
     
     //MARK: - SetUpFilters
+    func setMaskFilter() -> GPUImageOpacityFilter{
+        let filter = GPUImageOpacityFilter()
+        filter.opacity = 0.0
+        
+        return filter
+    }
     func setCropFilter() -> GPUImageFilter{
         //Crop the image to get 4:3 aspect ratio
         let filter:GPUImageCropFilter = GPUImageCropFilter.init(cropRegion: CGRectMake(0.0, 0.0, 1.0, 0.55 ))
@@ -645,7 +667,6 @@ class MainViewController: UIViewController{
         self.movieWriter = GPUImageMovieWriter.init(movieURL: movieURL, size: CGSizeMake(640,480))
         self.movieWriter.encodingLiveVideo = true
         
-        blendFilter.addTarget(self.movieWriter)
         self.movieWriter.startRecording()
         
         Utils().debugLog("Recording movie starts")
