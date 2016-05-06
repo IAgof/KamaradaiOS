@@ -152,7 +152,10 @@ class MainViewController: UIViewController{
             self.imageSource = GPUImagePicture.init(image: self.blendUIImage, smoothlyScaleOutput: true)
             
             //Sources to blend filter
-            self.filterGroup.addTarget(self.blendFilter, atTextureLocation: 0)
+            let maskFilterGroup = self.setMaskFilter()
+            self.filterGroup.addTarget(maskFilterGroup)
+            
+            maskFilterGroup.addTarget(self.blendFilter, atTextureLocation: 0)
             self.imageSource.addTarget(self.blendFilter, atTextureLocation: 1)
             
             
@@ -439,7 +442,6 @@ class MainViewController: UIViewController{
         pathToMergeMovie = ""
         
         progressTime = 0.0
-        
         for layer in thumbnailImageView.layer.sublayers! {
             layer.removeFromSuperlayer()
         }
@@ -449,6 +451,8 @@ class MainViewController: UIViewController{
         videoProgress.setProgress(0, animated: false)
         thumbnailImageView.hidden = true
         self.shareButton.enabled = false
+        
+        timer = NSTimer.scheduledTimerWithTimeInterval(0.15, target: self, selector: #selector(self.changeGrainFilter), userInfo: nil, repeats: true)
     }
     
     //Choose only the filter who has tapped
@@ -499,7 +503,7 @@ class MainViewController: UIViewController{
     
     func startUpdateGrainFilter() {
         
-        NSTimer.scheduledTimerWithTimeInterval(0.15, target: self, selector: #selector(self.changeGrainFilter), userInfo: nil, repeats: true)
+       timer = NSTimer.scheduledTimerWithTimeInterval(0.15, target: self, selector: #selector(self.changeGrainFilter), userInfo: nil, repeats: true)
         
     }
     func updateCountGrainFilters() {
@@ -517,28 +521,24 @@ class MainViewController: UIViewController{
             self.updateCountGrainFilters()
             self.videoCamera.addTarget(self.filterGroup)
             
-            self.filterGroup.removeAllTargets()
-            self.blendFilter.removeAllTargets()
-            
-            self.filterGroup.addFilter(self.cropFilter)
-            self.filterGroup.addFilter(self.colorFilter)
-            
-            self.cropFilter.addTarget(self.colorFilter)
-            
-            self.filterGroup.initialFilters = [ self.cropFilter ]
-            self.filterGroup.terminalFilter = self.colorFilter
+            self.removeFilterTargets()
             
             //Grain filter
             self.imageSource = GPUImagePicture.init(image: image, smoothlyScaleOutput: true)
             
             //Sources to blend filter
-            self.filterGroup.addTarget(self.blendFilter, atTextureLocation: 0)
+            let maskFilterGroup = self.setMaskFilter()
+            self.filterGroup.addTarget(maskFilterGroup)
+            
+            maskFilterGroup.addTarget(self.blendFilter, atTextureLocation: 0)
             self.imageSource.addTarget(self.blendFilter, atTextureLocation: 1)
+
             self.blendFilter.mix = 1.0
             
             self.imageSource.processImage()
             
             self.blendFilter.useNextFrameForImageCapture()
+            
             let maskFilter = self.setMaskFilter()
             
             self.blendFilter.addTarget(maskFilter)
@@ -547,14 +547,23 @@ class MainViewController: UIViewController{
             
             self.videoCamera.startCameraCapture()
             
-            if(self.isRecording){
-                let writerMaskFilter = self.setMaskFilter()
-                
-                self.blendFilter.addTarget(writerMaskFilter)
-                writerMaskFilter.addTarget(self.movieWriter)
-                
-            }
+            self.sendOutputToWriter()
         })
+    }
+    
+    func sendOutputToWriter(){
+        if(self.isRecording){
+            let writerMaskFilter = self.setMaskFilter()
+            
+            self.blendFilter.addTarget(writerMaskFilter)
+            writerMaskFilter.addTarget(self.movieWriter)
+            
+        }
+    }
+    
+    func removeFilterTargets(){
+        self.blendFilter.removeAllTargets()
+        self.filterGroup.removeAllTargets()
     }
     
     //Replaces the actualFilter with the filter argument
@@ -567,6 +576,8 @@ class MainViewController: UIViewController{
             
             self.filterGroup.removeAllTargets()
             self.blendFilter.removeAllTargets()
+            
+            self.filterGroup = GPUImageFilterGroup()
             
             self.filterGroup.addFilter(self.cropFilter)
             self.filterGroup.addFilter(self.colorFilter)
@@ -596,13 +607,7 @@ class MainViewController: UIViewController{
             
             self.videoCamera.startCameraCapture()
             
-            if(self.isRecording){
-                let writerMaskFilter = self.setMaskFilter()
-                
-                self.blendFilter.addTarget(writerMaskFilter)
-                writerMaskFilter.addTarget(self.movieWriter)
-                
-            }
+            self.sendOutputToWriter()
         })
         
         Utils().debugLog("Filter changed")
@@ -692,7 +697,6 @@ class MainViewController: UIViewController{
     }
     
     func stopRecordVideo(){ //Stop Recording
-        
         Utils().debugLog("Starting to stop record video")
         
         self.stateShareAndSettingsButton()
@@ -710,6 +714,9 @@ class MainViewController: UIViewController{
             Utils().debugLog("Stop recording video")
             
             self.saveClipToCameraRoll()
+            self.movieWriter.endProcessing()
+            self.movieWriter = nil
+            
         }
         self.shareButton.enabled = true
         
@@ -732,7 +739,8 @@ class MainViewController: UIViewController{
     func mergeAudioVideo() {
         
         mixpanel.timeEvent(AnalyticsConstants().VIDEO_EXPORTED);
-        
+        timer?.invalidate()
+
         var videoTotalTime:CMTime = kCMTimeZero
         
         // 1 - Create AVMutableComposition object. This object will hold your AVMutableCompositionTrack instances.
