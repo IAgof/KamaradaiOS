@@ -152,7 +152,10 @@ class SharedViewController: UIViewController,GIDSignInUIDelegate,GIDSignInDelega
         
         let layer = AVPlayerLayer.init()
         layer.player = player
-        layer.frame = CGRectMake(0,0, self.videoPlayerView.frame.width, self.videoPlayerView.frame.height)
+       
+        self.videoPlayerView.layoutIfNeeded()
+        let offsset = CGFloat(-20)
+        layer.frame = CGRectMake(0,0, (self.videoPlayerView.bounds.width + offsset) , (self.videoPlayerView.bounds.height + offsset))
         self.videoPlayerView.layer.addSublayer(layer)
     }
     
