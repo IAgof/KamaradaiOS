@@ -47,7 +47,6 @@ class MainViewController: UIViewController{
     @IBOutlet weak var blueFilterButton: UIButton!
     
     //MARK: - Constants
-    let cornerRadiusThumbnail:CGFloat = 20.0
     let videoDuration = 15.0
     let progressSteps = 400.0
     let resolution = AVCaptureSessionPreset640x480
@@ -67,7 +66,8 @@ class MainViewController: UIViewController{
     var videosArray:[String] = []
     var cola: NSOperationQueue
     var shareDialogController:UIViewController?
-    
+    var cornerRadiusThumbnail:CGFloat = 20.0
+
     //MIXPANEL
     var mixpanel:Mixpanel
     
@@ -327,7 +327,10 @@ class MainViewController: UIViewController{
             Utils().debugLog("Thumbnail image gets okay")
             
             // !! check the error before proceeding
-            let thumbnail = UIImage(CGImage: cgImage!)
+            var thumbnail = UIImage(CGImage: cgImage!)
+            settingsButton.layoutIfNeeded()
+            let settingsButtonWidth = settingsButton.frame.width
+            thumbnail = self.resizeImage(thumbnail, newWidth: settingsButtonWidth)
             // lay out this image view, or if it already exists, set its image property to uiImage
             
             thumbnailImageView.image = thumbnail
@@ -338,11 +341,21 @@ class MainViewController: UIViewController{
         if(videosArray.count>1){
             self.removeTextLayer()
         }
-        
+
         self.setCornerToThumbnail()
     }
-    
+    func resizeImage(image: UIImage, newWidth: CGFloat) -> UIImage {
+        
+        UIGraphicsBeginImageContext(CGSizeMake(newWidth, newWidth))
+        image.drawInRect(CGRectMake(0, 0, newWidth, newWidth))
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return newImage
+    }
     func setCornerToThumbnail(){
+        cornerRadiusThumbnail = settingsButton.frame.width/2
+        
         thumbnailImageView.layer.cornerRadius = cornerRadiusThumbnail
         thumbnailImageView.clipsToBounds = true
         
@@ -357,6 +370,7 @@ class MainViewController: UIViewController{
     
     func getNumberThumbnailText() -> CATextLayer{
         let textLayer = CATextLayer()
+        
         textLayer.frame = CGRectMake(0,-5,thumbnailImageView.frame.size.width, thumbnailImageView.frame.size.height)
         
         let string = String(videosArray.count)
@@ -415,11 +429,12 @@ class MainViewController: UIViewController{
         
         let alert = UIAlertController(title: title , message: message, preferredStyle: .ActionSheet)
         
+        alert.popoverPresentationController?.sourceView = self.view
         
         presentViewController(alert, animated: true, completion: nil)
         
         // Delay the dismissal by 5 seconds
-        let delay = 0.5 * Double(NSEC_PER_SEC)
+        let delay = 0.8 * Double(NSEC_PER_SEC)
         let time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
         dispatch_after(time, dispatch_get_main_queue(), {
             alert.dismissViewControllerAnimated(true, completion: nil)
@@ -730,7 +745,11 @@ class MainViewController: UIViewController{
         progressTimer.invalidate()
         
         //set thumbnail
-        self.setImageToThumbnail()
+        //Async thread to update UI
+        dispatch_async(dispatch_get_main_queue()) {
+            // update some UI
+            self.setImageToThumbnail()
+        }
         
         //MIXPANEL
         self.setClipDuration()
