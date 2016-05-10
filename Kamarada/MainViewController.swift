@@ -66,7 +66,7 @@ class MainViewController: UIViewController{
     
     var videosArray:[String] = []
     var cola: NSOperationQueue
-    var alertVideoExported:UIAlertController?
+    var shareDialogController:UIViewController?
     
     //MIXPANEL
     var mixpanel:Mixpanel
@@ -250,8 +250,7 @@ class MainViewController: UIViewController{
     
     @IBAction func pushShareButton(sender: AnyObject) {
         //        self.mergeAudioVideo()
-        self.showVideoExportedAlert("Export video", message: "video is exporting, wait please")
-        
+        self.showShareDialog()
         Utils().debugLog("Starts to merge with audio")
     }
     @IBAction func pushChangeBackground(sender: AnyObject) {
@@ -839,9 +838,10 @@ class MainViewController: UIViewController{
                 //Async thread to update UI
                 dispatch_async(dispatch_get_main_queue()) {
                     // update some UI
-                    self.alertVideoExported!.dismissViewControllerAnimated(true, completion: { () -> Void in
+                    self.shareDialogController!.dismissViewControllerAnimated(true, completion: { () -> Void in
                         self.performSegueWithIdentifier("sharedView", sender: nil)
-                    })                }
+                    })
+                }
             }
         }
     }
@@ -874,25 +874,27 @@ class MainViewController: UIViewController{
         }
     }
     
-    func showVideoExportedAlert(title: String , message: String){
-        alertVideoExported = UIAlertController(title: title , message: message, preferredStyle: .Alert)
+    func showShareDialog(){
         
-        let image = UIImage.init(named: "dialog_export_background")
-        let imageHeight = image?.size.height
-        let imageWidth = image?.size.width
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        shareDialogController = storyboard.instantiateViewControllerWithIdentifier("shareDialog") as UIViewController
         
-        let aspectRatio = imageWidth!/imageHeight!
+        shareDialogController!.modalPresentationStyle = UIModalPresentationStyle.Popover
         
-        let witdth = self.view.frame.width*0.7
-        let height = witdth/aspectRatio
+        let popoverPresentationController = shareDialogController!.popoverPresentationController
         
-        let imageView = UIImageView(frame: CGRectMake(0, 0, witdth, height))
-        imageView.image = image
+        // result is an optional (but should not be nil if modalPresentationStyle is popover)
+        if let _popoverPresentationController = popoverPresentationController {
+            
+            // set the view from which to pop up
+            _popoverPresentationController.sourceView = self.view;
+            _popoverPresentationController.sourceRect = CGRectMake(CGRectGetMidX(self.view.bounds), CGRectGetMidY(self.view.bounds),0,0)
+            _popoverPresentationController.permittedArrowDirections = UIPopoverArrowDirection();
+            // present (id iPhone it is a modal automatic full screen)
+            self.presentViewController(shareDialogController!, animated: true, completion: nil)
+        }
         
-        alertVideoExported!.view.addSubview(imageView)
-        
-        presentViewController(alertVideoExported!, animated: true, completion: nil)
-      }
+    }
     
     //MARK: - Segues
     

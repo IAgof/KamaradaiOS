@@ -6,6 +6,39 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
+        <!--View Controller-->
+        <scene sceneID="zeq-Ml-sEa">
+            <objects>
+                <viewController storyboardIdentifier="shareDialog" useStoryboardIdentifierAsRestorationIdentifier="YES" id="VSj-bg-v8L" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="csP-0k-U0C"/>
+                        <viewControllerLayoutGuide type="bottom" id="YLc-qr-ZqY"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="kqx-7L-BOy">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dialog_export_background" translatesAutoresizingMaskIntoConstraints="NO" id="8Og-TF-9i6">
+                                <rect key="frame" x="36" y="218" width="248" height="132"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="8Og-TF-9i6" secondAttribute="height" multiplier="15:8" id="zA1-ud-0py"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="8Og-TF-9i6" secondAttribute="trailing" constant="20" id="B7e-Qe-Gl3"/>
+                            <constraint firstItem="8Og-TF-9i6" firstAttribute="centerX" secondItem="kqx-7L-BOy" secondAttribute="centerX" id="InM-Fc-t0y"/>
+                            <constraint firstItem="8Og-TF-9i6" firstAttribute="leading" secondItem="kqx-7L-BOy" secondAttribute="leadingMargin" constant="20" id="P2Q-I7-xBR"/>
+                            <constraint firstItem="8Og-TF-9i6" firstAttribute="centerY" secondItem="kqx-7L-BOy" secondAttribute="centerY" id="mX8-QX-UA9"/>
+                        </constraints>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="78T-d4-esE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-416" y="-1138"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="H2U-Ik-JN7">
             <objects>
@@ -595,6 +628,7 @@
         <image name="common_icon_play_on_normal" width="78" height="78"/>
         <image name="common_icon_settings_normal" width="44" height="44"/>
         <image name="common_icon_settings_pressed" width="44" height="44"/>
+        <image name="dialog_export_background" width="567" height="340"/>
         <image name="record_activity_progress_bar" width="233" height="15"/>
         <image name="youtube_logo" width="40" height="40"/>
     </resources>
