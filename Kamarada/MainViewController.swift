@@ -162,8 +162,6 @@ class MainViewController: UIViewController{
         
         videoProgress.transform = CGAffineTransformScale(videoProgress.transform, 1, 5)
         
-        self.navigationController?.navigationBar.hidden = true
-        
         self.startTimeInActivityEvent()
         
         self.configureView()
@@ -175,6 +173,11 @@ class MainViewController: UIViewController{
         Utils().debugLog("didReceiveMemoryWarning")
     }
     
+    override func viewWillAppear(animated: Bool) {
+        Utils().debugLog("MainViewController will willAppear")
+
+        self.navigationController?.navigationBar.hidden = true
+    }
     override func viewWillDisappear(animated: Bool) {
        Utils().debugLog("MainViewController will dissappear")
         self.sendTimeInActivity()
