@@ -13,6 +13,7 @@ import AssetsLibrary
 import Photos
 import QuartzCore
 import Mixpanel
+import Device_swift
 
 class MainViewController: UIViewController{
     
@@ -54,6 +55,7 @@ class MainViewController: UIViewController{
     let preferences = NSUserDefaults.standardUserDefaults()
     
     //MARK: - Variables
+    var blendProcessing :CGSize?
     var isRecording:Bool = false
     var isRearCamera:Bool = false
     var backgroundChange:Bool = false
@@ -64,10 +66,16 @@ class MainViewController: UIViewController{
     var urlToMergeMovieInPhotoLibrary:NSURL!
     
     var videosArray:[String] = []
-    var cola: NSOperationQueue
+    //    var cola: NSOperationQueue
+    lazy var cola:NSOperationQueue = {
+        var queue = NSOperationQueue()
+        queue.name = "Image Filtration queue"
+        queue.maxConcurrentOperationCount = 1
+        return queue
+    }()
     var shareDialogController:UIViewController?
     var cornerRadiusThumbnail:CGFloat = 20.0
-
+    
     //MIXPANEL
     var mixpanel:Mixpanel
     
@@ -84,6 +92,19 @@ class MainViewController: UIViewController{
         ,"silent_film_overlay_h.png"
         ,"silent_film_overlay_i.png"
         ,"silent_film_overlay_j.png"]
+    
+    let grainFilters320x240 = ["silent_film_overlay_a_320_240.png"
+        ,"silent_film_overlay_b_320_240.png"
+        ,"silent_film_overlay_c_320_240.png"
+        ,"silent_film_overlay_d_320_240.png"
+        ,"silent_film_overlay_e_320_240.png"
+        ,"silent_film_overlay_f_320_240.png"
+        ,"silent_film_overlay_g_320_240.png"
+        ,"silent_film_overlay_h_320_240.png"
+        ,"silent_film_overlay_i_320_240.png"
+        ,"silent_film_overlay_j_320_240.png"]
+    
+    
     var grainImageFilter:[UIImage] = []
     
     var countGrainFilters = 0
@@ -110,33 +131,28 @@ class MainViewController: UIViewController{
         colorFilter = GPUImageFilter.init()
         
         blendFilter = GPUImageNormalBlendFilter.init()
-
+        
         imageSource = GPUImagePicture.init()
         
         pathToMergeMovie = ""
         
         progressTimer = NSTimer.init()
         
-        cola = NSOperationQueue.init()
-        cola.maxConcurrentOperationCount = 1
+        //        cola = NSOperationQueue.init()
+        //        cola.maxConcurrentOperationCount = 1
         
         mixpanel = Mixpanel.sharedInstanceWithToken(AnalyticsConstants().MIXPANEL_TOKEN)
         
         super.init(coder: aDecoder)!
     }
     
-    var filterOperation: FilterOperationInterface? {
-        didSet {
-            //            self.configureView()
-        }
-    }
-    
     func configureView() {
         //Setup filters
         self.cropFilter = self.setCropFilter()
         self.colorFilter = self.setSepiaFilter()
-        self.blendFilter.forceProcessingAtSize(filterView!.sizeInPixels)
-
+        
+        self.blendFilter.forceProcessingAtSize(blendProcessing!)
+        
         //Timer
         let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
         dispatch_async(dispatch_get_global_queue(priority, 0)) {
@@ -175,11 +191,11 @@ class MainViewController: UIViewController{
     
     override func viewWillAppear(animated: Bool) {
         Utils().debugLog("MainViewController will willAppear")
-
+        
         self.navigationController?.navigationBar.hidden = true
     }
     override func viewWillDisappear(animated: Bool) {
-       Utils().debugLog("MainViewController will dissappear")
+        Utils().debugLog("MainViewController will dissappear")
         self.sendTimeInActivity()
         
         if(isRecording){
@@ -192,8 +208,24 @@ class MainViewController: UIViewController{
     }
     
     func loadGrainImages(){
-        for filter in self.grainFilters{
-            let image = UIImage.init(named:filter)
+        let filterArray:[AnyObject]?
+        let deviceType = UIDevice.currentDevice().deviceType
+        blendProcessing = CGSizeMake(320, 240)
+
+        switch deviceType {
+        case (.IPad2 ):filterArray = grainFilters320x240
+            print("Ipad 2 ")
+        case (.IPad ):filterArray = grainFilters320x240
+            print("Ipad ")
+            
+        default: filterArray = grainFilters
+            blendProcessing = CGSizeMake(640, 480)
+            print("Default device 640*480 ")
+
+        }
+        
+        for filter in filterArray!{
+            let image = UIImage.init(named:filter as! String)
             self.grainImageFilter.append(image!)
         }
     }
@@ -210,19 +242,17 @@ class MainViewController: UIViewController{
             if self.isRearCamera {
                 self.sendUserInteractedTracking(AnalyticsConstants().CHANGE_CAMERA, result: "back");
                 
-                self.flashButton.enabled = true
-                self.isRearCamera = false
                 dispatch_async(dispatch_get_main_queue()) {
-                    // update some UI
+                    self.flashButton.enabled = true
+                    self.isRearCamera = false
                     self.rearFrontCameraButton.selected = false
                 }
+                
             }else{
                 self.sendUserInteractedTracking(AnalyticsConstants().CHANGE_CAMERA, result: "front");
-                
-                self.flashButton.enabled = false
-                 self.isRearCamera = true
                 dispatch_async(dispatch_get_main_queue()) {
-                    // update some UI
+                    self.flashButton.enabled = false
+                    self.isRearCamera = true
                     self.rearFrontCameraButton.selected = true
                 }
             }
@@ -276,41 +306,52 @@ class MainViewController: UIViewController{
     
     @IBAction func pushSetBWFilter(sender: AnyObject) {
         if(!self.BWFilterButton.selected){
-            let filter = setBWFilter()
-            self.replaceColorFilter(filter)
-            
-            disableOtherButtons(sender as! UIButton)
-            Utils().debugLog("Remove BWFilter")
-            
-            //MIXPANEL
-            self.sendFilterSelectedTracking(AnalyticsConstants().FILTER_NAME_MONO, code: AnalyticsConstants().FILTER_CODE_MONO)
+            let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
+            dispatch_async(dispatch_get_global_queue(priority, 0)) {
+                let filter = self.setBWFilter()
+                self.replaceColorFilter(filter)
+        
+                //MIXPANEL
+                self.sendFilterSelectedTracking(AnalyticsConstants().FILTER_NAME_MONO, code: AnalyticsConstants().FILTER_CODE_MONO)
+                dispatch_async(dispatch_get_main_queue()) {
+                    self.disableOtherButtons(sender as! UIButton)
+                    Utils().debugLog("Remove BWFilter")
+                }
+            }
         }
     }
     
     @IBAction func pushSetSepiaFilter(sender: AnyObject) {
         if(!self.sepiaFilterButton.selected){
-        let filter = setSepiaFilter()
-        self.replaceColorFilter(filter)
-        
-        disableOtherButtons(sender as! UIButton)
-        Utils().debugLog("Remove Sepia Target")
-        
-        //MIXPANEL
-        self.sendFilterSelectedTracking(AnalyticsConstants().FILTER_NAME_SEPIA, code: AnalyticsConstants().FILTER_CODE_SEPIA)
+            let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
+            dispatch_async(dispatch_get_global_queue(priority, 0)) {
+                let filter = self.setSepiaFilter()
+                self.replaceColorFilter(filter)
+                
+                //MIXPANEL
+                self.sendFilterSelectedTracking(AnalyticsConstants().FILTER_NAME_MONO, code: AnalyticsConstants().FILTER_CODE_MONO)
+                dispatch_async(dispatch_get_main_queue()) {
+                    self.disableOtherButtons(sender as! UIButton)
+                    Utils().debugLog("Remove Sepia Filter")
+                }
+            }
         }
     }
     
     @IBAction func pushSetBlueFilter(sender: AnyObject) {
         if(!self.blueFilterButton.selected) {
-            
-        let filter = setBlueFilter()
-        self.replaceColorFilter(filter)
-        
-        disableOtherButtons(sender as! UIButton)
-        Utils().debugLog("Remove Blue Target")
-        
-        //MIXPANEL
-        self.sendFilterSelectedTracking(AnalyticsConstants().FILTER_NAME_AQUA, code: AnalyticsConstants().FILTER_CODE_AQUA)
+            let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
+            dispatch_async(dispatch_get_global_queue(priority, 0)) {
+                let filter = self.setBlueFilter()
+                self.replaceColorFilter(filter)
+                
+                //MIXPANEL
+                self.sendFilterSelectedTracking(AnalyticsConstants().FILTER_NAME_MONO, code: AnalyticsConstants().FILTER_CODE_MONO)
+                dispatch_async(dispatch_get_main_queue()) {
+                    self.disableOtherButtons(sender as! UIButton)
+                    Utils().debugLog("Remove blue filter")
+                }
+            }
         }
     }
     
@@ -341,7 +382,7 @@ class MainViewController: UIViewController{
         if(videosArray.count>1){
             self.removeTextLayer()
         }
-
+        
         self.setCornerToThumbnail()
     }
     func resizeImage(image: UIImage, newWidth: CGFloat) -> UIImage {
@@ -523,7 +564,7 @@ class MainViewController: UIViewController{
     
     func startUpdateGrainFilter() {
         
-       timer = NSTimer.scheduledTimerWithTimeInterval(0.25, target: self, selector: #selector(self.changeGrainFilter), userInfo: nil, repeats: true)
+        timer = NSTimer.scheduledTimerWithTimeInterval(0.25, target: self, selector: #selector(self.changeGrainFilter), userInfo: nil, repeats: true)
         
     }
     func updateCountGrainFilters() {
@@ -533,43 +574,6 @@ class MainViewController: UIViewController{
             countGrainFilters = 0
         }
     }
-    
-//    func changeGrainFilter(){
-//        cola.addOperationWithBlock({
-//            
-//            let image = UIImage.init(named:self.grainFilters[self.countGrainFilters])
-//            self.updateCountGrainFilters()
-//            self.videoCamera.addTarget(self.filterGroup)
-//            
-//            self.removeFilterTargets()
-//            
-//            //Grain filter
-//            self.imageSource = GPUImagePicture.init(image: image, smoothlyScaleOutput: true)
-//            
-//            //Sources to blend filter
-//            let maskFilterGroup = self.setMaskFilter()
-//            self.filterGroup.addTarget(maskFilterGroup)
-//            
-//            maskFilterGroup.addTarget(self.blendFilter, atTextureLocation: 0)
-//            self.imageSource.addTarget(self.blendFilter, atTextureLocation: 1)
-//
-////            self.blendFilter.mix = 1.0
-//            
-//            self.imageSource.processImage()
-//            
-//            self.blendFilter.useNextFrameForImageCapture()
-//            
-//            let maskFilter = self.setMaskFilter()
-//            
-//            self.blendFilter.addTarget(maskFilter)
-//            
-//            maskFilter.addTarget(self.filterView)
-//            
-//            self.videoCamera.startCameraCapture()
-//            
-//            self.sendOutputToWriter()
-//        })
-//    }
     
     func changeGrainFilter(){
         cola.addOperationWithBlock({
@@ -587,8 +591,6 @@ class MainViewController: UIViewController{
             self.colorFilter.addTarget(self.blendFilter as GPUImageInput, atTextureLocation: 0)
             self.imageSource.addTarget(self.blendFilter as GPUImageInput, atTextureLocation: 1)
             
-            //            self.blendFilter.mix = 1.0
-            
             self.imageSource.processImage()
             
             self.blendFilter.useNextFrameForImageCapture()
@@ -597,29 +599,30 @@ class MainViewController: UIViewController{
             
             self.blendFilter.addTarget(maskFilter as GPUImageInput)
             
-            maskFilter.addTarget(self.filterView)
+            //Async thread to update UI
+            dispatch_async(dispatch_get_main_queue()) {
+                // update some UI
+                maskFilter.addTarget(self.filterView)
+            }
             
             self.videoCamera.startCameraCapture()
             
             self.sendOutputToWriter()
+            
         })
     }
     
     func sendOutputToWriter(){
         if(self.isRecording){
-            let writerMaskFilter = self.setMaskFilter()
-            
-            self.blendFilter.addTarget(writerMaskFilter)
-            writerMaskFilter.addTarget(self.movieWriter)
-            
+            let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
+            dispatch_async(dispatch_get_global_queue(priority, 0)) {
+                let writerMaskFilter = self.setMaskFilter()
+                
+                self.blendFilter.addTarget(writerMaskFilter)
+                writerMaskFilter.addTarget(self.movieWriter)
+            }
         }
     }
-    
-//    func removeFilterTargets(){
-//        
-//        self.blendFilter.removeAllTargets()
-//        self.filterGroup.removeAllTargets()
-//    }
     
     func removeFilterTargets(){
         self.blendFilter.removeAllTargets()
@@ -627,7 +630,7 @@ class MainViewController: UIViewController{
         self.colorFilter.removeAllTargets()
     }
     
-    //Replaces the actualFilter with the filter argument   
+    //Replaces the actualFilter with the filter argument
     func replaceColorFilter(filter: GPUImageFilter){
         self.colorFilter = filter
         
@@ -684,7 +687,7 @@ class MainViewController: UIViewController{
     func recordVideo(){
         mixpanel.timeEvent(AnalyticsConstants().VIDEO_RECORDED);
         self.sendUserInteractedTracking(AnalyticsConstants().RECORD, result: AnalyticsConstants().START);
-
+        
         self.stateShareAndSettingsButton()
         
         let movieURL = NSURL.fileURLWithPath(pathToMovie)
@@ -718,26 +721,30 @@ class MainViewController: UIViewController{
     }
     
     func stopRecordVideo(){ //Stop Recording
-        Utils().debugLog("Starting to stop record video")
         
-        self.stateShareAndSettingsButton()
-        
-        videosArray.append(pathToMovie)
-        
-//        filterGroup.removeTarget(movieWriter)
-        videoCamera.audioEncodingTarget = nil
-        
-        self.movieWriter.finishRecordingWithCompletionHandler{ () -> Void in
-            self.isRecording=false
-
-            self.showAlertVideoSave("Video export", message: "Your clip has been saved into photogallery")
-
-            Utils().debugLog("Stop recording video")
+        let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
+        dispatch_async(dispatch_get_global_queue(priority, 0)) {
+            // do some task
+            Utils().debugLog("Starting to stop record video")
             
-            self.saveClipToCameraRoll()
-            self.movieWriter.endProcessing()
-            self.movieWriter = nil
+            self.stateShareAndSettingsButton()
             
+            self.videosArray.append(self.pathToMovie)
+            
+            //        filterGroup.removeTarget(movieWriter)
+            self.videoCamera.audioEncodingTarget = nil
+            
+            self.movieWriter.finishRecordingWithCompletionHandler{ () -> Void in
+                self.isRecording=false
+                
+                self.showAlertVideoSave("Video export", message: "Your clip has been saved into photogallery")
+                
+                Utils().debugLog("Stop recording video")
+                
+                self.saveClipToCameraRoll()
+                self.movieWriter.endProcessing()
+                self.movieWriter = nil
+            }
         }
         self.shareButton.enabled = true
         
@@ -765,7 +772,7 @@ class MainViewController: UIViewController{
         
         mixpanel.timeEvent(AnalyticsConstants().VIDEO_EXPORTED);
         timer?.invalidate()
-
+        
         var videoTotalTime:CMTime = kCMTimeZero
         
         // 1 - Create AVMutableComposition object. This object will hold your AVMutableCompositionTrack instances.
@@ -820,7 +827,6 @@ class MainViewController: UIViewController{
         // 6 - Perform the Export
         exporter!.exportAsynchronouslyWithCompletionHandler() {
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                //                UISaveVideoAtPathToSavedPhotosAlbum(self.pathToMergeMovie, self,#selector(MainViewController.video(_:didFinishSavingWithError:contextInfo:)), nil)
                 self.clipDuration = videoTotalTime.seconds
                 Utils().debugLog("la duracion del clip es \(self.clipDuration)")
                 
@@ -871,7 +877,7 @@ class MainViewController: UIViewController{
     
     func saveClipToCameraRoll() {
         Utils().debugLog("Save clip to Camera Roll")
-
+        
         var videoAssetPlaceholder:PHObjectPlaceholder!
         
         //Save in to photoLibrary
@@ -901,21 +907,12 @@ class MainViewController: UIViewController{
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         shareDialogController = storyboard.instantiateViewControllerWithIdentifier("shareDialog") as UIViewController
         
-        shareDialogController!.modalPresentationStyle = UIModalPresentationStyle.Popover
+        self.navigationController?.definesPresentationContext = true
         
-        let popoverPresentationController = shareDialogController!.popoverPresentationController
+        shareDialogController?.modalTransitionStyle = UIModalTransitionStyle.CrossDissolve
+        shareDialogController?.modalPresentationStyle = UIModalPresentationStyle.CurrentContext
         
-        // result is an optional (but should not be nil if modalPresentationStyle is popover)
-        if let _popoverPresentationController = popoverPresentationController {
-            
-            // set the view from which to pop up
-            _popoverPresentationController.sourceView = self.view;
-            _popoverPresentationController.sourceRect = CGRectMake(CGRectGetMidX(self.view.bounds), CGRectGetMidY(self.view.bounds),0,0)
-            _popoverPresentationController.permittedArrowDirections = UIPopoverArrowDirection();
-            // present (id iPhone it is a modal automatic full screen)
-            self.presentViewController(shareDialogController!, animated: true, completion: nil)
-        }
-        
+        self.presentViewController(shareDialogController!, animated: true, completion: nil)
     }
     
     //MARK: - Segues
@@ -923,9 +920,9 @@ class MainViewController: UIViewController{
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
         Utils().debugLog("prepareForSegue")
-
+        
         if segue.identifier == "sharedView" {
-
+            
             //Define next screen
             let controller = segue.destinationViewController as! SharedViewController
             
@@ -946,7 +943,7 @@ class MainViewController: UIViewController{
     
     override func shouldPerformSegueWithIdentifier(identifier: String, sender: AnyObject?) -> Bool {
         Utils().debugLog("shouldPerformSegueWithIdentifier")
-
+        
         var returned = false
         if identifier == "sharedView" {
             self.mergeAudioVideo()
@@ -1008,7 +1005,7 @@ class MainViewController: UIViewController{
     func trackTotalVideosRecordedSuperProperty() {
         var numPreviousVideosRecorded:Int
         let properties = mixpanel.currentSuperProperties()
-      
+        
         if let prop = properties[AnalyticsConstants().TOTAL_VIDEOS_RECORDED]{
             numPreviousVideosRecorded = prop as! Int
         }else{
@@ -1097,7 +1094,7 @@ class MainViewController: UIViewController{
     func startTimeInActivityEvent(){
         mixpanel.timeEvent(AnalyticsConstants().TIME_IN_ACTIVITY)
         Utils().debugLog("Sending startTimeInActivityEvent")
- }
+    }
     func sendTimeInActivity() {
         Utils().debugLog("Sending AnalyticsConstants().TIME_IN_ACTIVITY")
         //NOT WORKING -- falta el comienzo time_event para arrancar el contador

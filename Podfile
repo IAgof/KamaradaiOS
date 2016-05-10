@@ -7,6 +7,7 @@ target 'Kamarada' do
 pod 'Google/SignIn'
 pod 'Alamofire', '~> 3.3'
 pod 'Mixpanel'
+pod 'Device.swift'
 end
 
 target 'KamaradaTests' do

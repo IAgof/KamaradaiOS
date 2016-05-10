@@ -9,31 +9,49 @@
         <!--View Controller-->
         <scene sceneID="zeq-Ml-sEa">
             <objects>
-                <viewController storyboardIdentifier="shareDialog" useStoryboardIdentifierAsRestorationIdentifier="YES" id="VSj-bg-v8L" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="shareDialog" modalPresentationStyle="overCurrentContext" useStoryboardIdentifierAsRestorationIdentifier="YES" id="VSj-bg-v8L" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="csP-0k-U0C"/>
                         <viewControllerLayoutGuide type="bottom" id="YLc-qr-ZqY"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="kqx-7L-BOy">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                    <view key="view" opaque="NO" contentMode="scaleToFill" id="kqx-7L-BOy">
+                        <rect key="frame" x="0.0" y="0.0" width="315" height="180"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dialog_export_background" translatesAutoresizingMaskIntoConstraints="NO" id="8Og-TF-9i6">
-                                <rect key="frame" x="36" y="218" width="248" height="132"/>
+                                <rect key="frame" x="-5" y="-2" width="328" height="184"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="8Og-TF-9i6" secondAttribute="height" multiplier="15:8" id="zA1-ud-0py"/>
+                                    <constraint firstAttribute="width" secondItem="8Og-TF-9i6" secondAttribute="height" multiplier="16:9" id="wgX-d9-4zo"/>
                                 </constraints>
                             </imageView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="Q7Y-ae-IT2">
+                                <rect key="frame" x="148" y="80" width="20" height="20"/>
+                                <color key="color" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailingMargin" secondItem="8Og-TF-9i6" secondAttribute="trailing" constant="20" id="B7e-Qe-Gl3"/>
-                            <constraint firstItem="8Og-TF-9i6" firstAttribute="centerX" secondItem="kqx-7L-BOy" secondAttribute="centerX" id="InM-Fc-t0y"/>
-                            <constraint firstItem="8Og-TF-9i6" firstAttribute="leading" secondItem="kqx-7L-BOy" secondAttribute="leadingMargin" constant="20" id="P2Q-I7-xBR"/>
-                            <constraint firstItem="8Og-TF-9i6" firstAttribute="centerY" secondItem="kqx-7L-BOy" secondAttribute="centerY" id="mX8-QX-UA9"/>
+                            <constraint firstItem="8Og-TF-9i6" firstAttribute="leading" secondItem="kqx-7L-BOy" secondAttribute="leadingMargin" constant="-21" id="1xz-Zv-hlP"/>
+                            <constraint firstItem="8Og-TF-9i6" firstAttribute="centerY" secondItem="kqx-7L-BOy" secondAttribute="centerY" id="AfD-aw-t6N"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="8Og-TF-9i6" secondAttribute="trailing" constant="-24" id="Hwx-xj-nA9"/>
+                            <constraint firstItem="Q7Y-ae-IT2" firstAttribute="centerX" secondItem="kqx-7L-BOy" secondAttribute="centerX" id="JvX-R8-A3s"/>
+                            <constraint firstItem="8Og-TF-9i6" firstAttribute="leading" secondItem="kqx-7L-BOy" secondAttribute="leadingMargin" constant="-20" id="ZEa-Ri-8H4"/>
+                            <constraint firstItem="YLc-qr-ZqY" firstAttribute="top" secondItem="8Og-TF-9i6" secondAttribute="bottom" id="eH1-Bh-LXi"/>
+                            <constraint firstItem="Q7Y-ae-IT2" firstAttribute="centerY" secondItem="kqx-7L-BOy" secondAttribute="centerY" id="hkt-lS-Tt8"/>
+                            <constraint firstItem="8Og-TF-9i6" firstAttribute="top" secondItem="csP-0k-U0C" secondAttribute="bottom" id="sJ9-Fk-Ggd"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="ZEa-Ri-8H4"/>
+                                <exclude reference="sJ9-Fk-Ggd"/>
+                                <exclude reference="eH1-Bh-LXi"/>
+                            </mask>
+                        </variation>
                     </view>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <value key="contentSizeForViewInPopover" type="size" width="320" height="200"/>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="315" height="180"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="78T-d4-esE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

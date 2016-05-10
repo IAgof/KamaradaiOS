@@ -9,6 +9,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Device.swift.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Mixpanel.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -32,7 +37,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>96D8DB5B52851ED449E3FCF56BE51C86</key>
+		<key>8C3C7A92FEE47C6B42A93313B4BA2AA4</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>A83BFD7B1032B445646F53AD680641A9</key>
 		<dict>
 			<key>primary</key>
 			<true/>

@@ -1,5 +1,6 @@
 PODS:
   - Alamofire (3.3.1)
+  - Device.swift (0.3.1)
   - Google/Core (2.0.4):
     - GoogleInterchangeUtilities (~> 1.0)
     - GoogleNetworkingUtilities (~> 1.0)
@@ -31,11 +32,13 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire (~> 3.3)
+  - Device.swift
   - Google/SignIn
   - Mixpanel
 
 SPEC CHECKSUMS:
   Alamofire: 369bc67b6f5ac33ded3648d7bd21c5bfb91c2ecc
+  Device.swift: d396648eebcfc424944acfdb7391817e4bdec4e9
   Google: d0932824c5b97c96be489aa6f4e8cd6c294d637d
   GoogleAppUtilities: 974598e8ed618c74ead33541d9caffbc3d144266
   GoogleAuthUtilities: 79e4143c77a08081a480b08df27a066cc8944f43

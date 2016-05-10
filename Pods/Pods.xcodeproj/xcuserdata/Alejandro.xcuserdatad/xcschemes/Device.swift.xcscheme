@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = 'B9492CE8A0B6F704A9B39E1A'
-               BlueprintName = 'Pods-Kamarada'
+               BlueprintIdentifier = 'AB0516FE8FF8B3CA64C67F7E'
+               BlueprintName = 'Device.swift'
                ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'Pods_Kamarada.framework'>
+               BuildableName = 'Device_swift.framework'>
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
