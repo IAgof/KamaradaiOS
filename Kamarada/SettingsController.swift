@@ -12,10 +12,10 @@ import Mixpanel
 class SettingsController: UITableViewController{
     
     var section = ["title_advanced_section":"", "moreInformation":"", "accountActions":""]
-    var items = [["Download Videona"],["aboutUsTitle","privacyPolicy","licenses","termsOfService","legacyAdviceTitle"],
+    var items = [["Visit Videona"],["aboutUsTitle","privacyPolicy","licenses","termsOfService","legacyAdviceTitle"],
                  ["exit"]]
     var itemsDescription = Array<Array<String>>()
-    var contentItems = [["Download Videona"],["aboutUsContent","privacyPolicyContent","licenseContent","termsOfServiceContent","legacyAdviceContent"],
+    var contentItems = [["Visit Videona"],["aboutUsContent","privacyPolicyContent","licenseContent","termsOfServiceContent","legacyAdviceContent"],
                         ["exit"]]
     var contentItemsDescription = Array<Array<String>>()
     
@@ -187,7 +187,7 @@ class SettingsController: UITableViewController{
                 //Set the values to the next screen
                 let detail = self.contentItemsDescription[indexPath.section][indexPath.row]
                 
-                if(detail=="Download Videona"){
+                if(detail=="Visit Videona"){
                     UIApplication.sharedApplication().openURL(NSURL(string: "http://videona.com")!)
                     
                     Utils().debugLog("Go to download")
