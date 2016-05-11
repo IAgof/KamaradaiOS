@@ -95,6 +95,8 @@ class SharedViewController: UIViewController,GIDSignInUIDelegate,GIDSignInDelega
     override func viewWillDisappear(animated: Bool) {
         Utils().debugLog("SharedViewController willDissappear")
         
+        pauseVideoPlayer()
+        
         if(!isSharingYoutube){//are not sharing with youtube, have to go to kamarada main view
 //            self.performSegueWithIdentifier("unwindToViewController", sender: self)
         }else{
@@ -192,7 +194,9 @@ class SharedViewController: UIViewController,GIDSignInUIDelegate,GIDSignInDelega
         playImageView.hidden = false
         isPlayingVideo = false
         
-        progressTimer.invalidate()
+        if let progress = progressTimer{
+            progress.invalidate()
+        }
         
         Utils().debugLog("Video has stopped")
     }
