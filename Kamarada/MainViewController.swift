@@ -66,13 +66,7 @@ class MainViewController: UIViewController{
     var urlToMergeMovieInPhotoLibrary:NSURL!
     
     var videosArray:[String] = []
-    //    var cola: NSOperationQueue
-    lazy var cola:NSOperationQueue = {
-        var queue = NSOperationQueue()
-        queue.name = "Image Filtration queue"
-        queue.maxConcurrentOperationCount = 1
-        return queue
-    }()
+
     var shareDialogController:UIViewController?
     var cornerRadiusThumbnail:CGFloat = 20.0
     
@@ -112,34 +106,32 @@ class MainViewController: UIViewController{
     
     //MARK: - GPUImage variables
     var videoCamera: GPUImageVideoCamera
-    var blendImage: GPUImagePicture?
+ 
     var cropFilter:GPUImageFilter
     var colorFilter:GPUImageFilter
+    var filter:GPUImageBrightnessFilter!
+    var blendFilter:GPUImageNormalBlendFilter
+
+    var uiElementInput: GPUImageUIElement!
+    var imageGrainView:UIImageView!
+    
     var movieWriter:GPUImageMovieWriter!
     
-    //MARK: - Grain filter variables
-    var blendUIImage:UIImage!
-    var blendFilter:GPUImageNormalBlendFilter
-    var imageSource:GPUImagePicture!
     
     //MARK: - init
     required init(coder aDecoder: NSCoder)
     {
         videoCamera = GPUImageVideoCamera(sessionPreset: resolution, cameraPosition: .Back)
         videoCamera.outputImageOrientation = .Portrait;
-        cropFilter = GPUImageFilter.init()
-        colorFilter = GPUImageFilter.init()
-        
-        blendFilter = GPUImageNormalBlendFilter.init()
-        
-        imageSource = GPUImagePicture.init()
+     
+        cropFilter = GPUImageFilter()
+        colorFilter = GPUImageFilter()
+        filter = GPUImageBrightnessFilter()
+        blendFilter = GPUImageNormalBlendFilter()
         
         pathToMergeMovie = ""
         
         progressTimer = NSTimer.init()
-        
-        //        cola = NSOperationQueue.init()
-        //        cola.maxConcurrentOperationCount = 1
         
         mixpanel = Mixpanel.sharedInstanceWithToken(AnalyticsConstants().MIXPANEL_TOKEN)
         
@@ -163,6 +155,7 @@ class MainViewController: UIViewController{
             }
         }
         
+        self.setUpFilters()
     }
     
     override func prefersStatusBarHidden() -> Bool {
@@ -310,7 +303,7 @@ class MainViewController: UIViewController{
             dispatch_async(dispatch_get_global_queue(priority, 0)) {
                 let filter = self.setBWFilter()
                 self.replaceColorFilter(filter)
-        
+                
                 //MIXPANEL
                 self.sendFilterSelectedTracking(AnalyticsConstants().FILTER_NAME_MONO, code: AnalyticsConstants().FILTER_CODE_MONO)
                 dispatch_async(dispatch_get_main_queue()) {
@@ -513,7 +506,7 @@ class MainViewController: UIViewController{
         self.shareButton.enabled = false
         
         //Starts grain filter effect
-        timer = NSTimer.scheduledTimerWithTimeInterval(0.25, target: self, selector: #selector(self.changeGrainFilter), userInfo: nil, repeats: true)
+        timer = NSTimer.scheduledTimerWithTimeInterval(0.25, target: self, selector: #selector(self.updateGrainImage), userInfo: nil, repeats: true)
     }
     
     //Choose only the filter who has tapped
@@ -564,7 +557,7 @@ class MainViewController: UIViewController{
     
     func startUpdateGrainFilter() {
         
-        timer = NSTimer.scheduledTimerWithTimeInterval(0.25, target: self, selector: #selector(self.changeGrainFilter), userInfo: nil, repeats: true)
+        timer = NSTimer.scheduledTimerWithTimeInterval(0.25, target: self, selector: #selector(self.updateGrainImage), userInfo: nil, repeats: true)
         
     }
     func updateCountGrainFilters() {
@@ -575,41 +568,38 @@ class MainViewController: UIViewController{
         }
     }
     
-    func changeGrainFilter(){
-        cola.addOperationWithBlock({
-            
-            self.updateCountGrainFilters()
-            self.removeFilterTargets()
-            
-            self.videoCamera.addTarget(self.cropFilter as GPUImageInput)
-            
-            self.cropFilter.addTarget(self.colorFilter as GPUImageInput)
-            
-            //Grain filter
-            self.imageSource = GPUImagePicture.init(image: self.grainImageFilter[self.countGrainFilters], smoothlyScaleOutput: true)
-            
-            self.colorFilter.addTarget(self.blendFilter as GPUImageInput, atTextureLocation: 0)
-            self.imageSource.addTarget(self.blendFilter as GPUImageInput, atTextureLocation: 1)
-            
-            self.imageSource.processImage()
-            
-            self.blendFilter.useNextFrameForImageCapture()
-            
-            let maskFilter = self.setMaskFilter()
-            
-            self.blendFilter.addTarget(maskFilter as GPUImageInput)
-            
-            //Async thread to update UI
-            dispatch_async(dispatch_get_main_queue()) {
-                // update some UI
-                maskFilter.addTarget(self.filterView)
-            }
-            
-            self.videoCamera.startCameraCapture()
-            
-            self.sendOutputToWriter()
-            
-        })
+    func setUpFilters(){
+        
+        self.removeFilterTargets()
+        
+        videoCamera.addTarget(cropFilter)
+        
+        cropFilter.addTarget(colorFilter)
+        colorFilter.addTarget(filter)
+        
+        imageGrainView = UIImageView.init(frame: CGRect(x: 0, y: 0, width: 640, height: 480))
+        
+        imageGrainView.image = grainImageFilter[0]
+        
+        uiElementInput = GPUImageUIElement(view: imageGrainView)
+        
+        filter.addTarget(blendFilter)
+        uiElementInput.addTarget(blendFilter)
+      
+        blendFilter.addTarget(filterView)
+        
+        filter.frameProcessingCompletionBlock = { filter, time in
+            self.uiElementInput.update()
+        }
+        
+        videoCamera.startCameraCapture()
+        
+        self.sendOutputToWriter()
+    }
+    
+    func updateGrainImage(){
+        imageGrainView.image = grainImageFilter[countGrainFilters]
+        self.updateCountGrainFilters()
     }
     
     func sendOutputToWriter(){
@@ -634,6 +624,8 @@ class MainViewController: UIViewController{
     func replaceColorFilter(filter: GPUImageFilter){
         self.colorFilter = filter
         
+        self.setUpFilters()
+
         Utils().debugLog("Filter changed")
     }
     
@@ -677,6 +669,9 @@ class MainViewController: UIViewController{
         recordButton.selected = true
         
         recordVideo()
+        
+        self.sendOutputToWriter()
+
     }
     
     func pushStopRecording(){
@@ -947,8 +942,6 @@ class MainViewController: UIViewController{
         var returned = false
         if identifier == "sharedView" {
             self.mergeAudioVideo()
-            //Set the values to the next screen
-            cola.cancelAllOperations()
             
             if !waitingToMergeVideo{
                 
