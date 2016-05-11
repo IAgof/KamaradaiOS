@@ -112,6 +112,7 @@ class MainViewController: UIViewController{
     var colorFilter:GPUImageFilter
     var filter:GPUImageBrightnessFilter!
     var blendFilter:GPUImageNormalBlendFilter
+    var writerMaskFilter: GPUImageFilter?
 
     var uiElementInput: GPUImageUIElement!
     var imageGrainView:UIImageView!
@@ -600,10 +601,10 @@ class MainViewController: UIViewController{
         if(self.isRecording){
             let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
             dispatch_async(dispatch_get_global_queue(priority, 0)) {
-                let writerMaskFilter = self.setMaskFilter()
+                self.writerMaskFilter = self.setMaskFilter()
                 
-                self.blendFilter.addTarget(writerMaskFilter)
-                writerMaskFilter.addTarget(self.movieWriter)
+                self.blendFilter.addTarget(self.writerMaskFilter)
+                self.writerMaskFilter!.addTarget(self.movieWriter)
             }
         }
     }
@@ -719,7 +720,8 @@ class MainViewController: UIViewController{
             
             self.videosArray.append(self.pathToMovie)
             
-            //        filterGroup.removeTarget(movieWriter)
+            self.writerMaskFilter!.removeAllTargets()
+            
             self.videoCamera.audioEncodingTarget = nil
             
             self.movieWriter.finishRecordingWithCompletionHandler{ () -> Void in
