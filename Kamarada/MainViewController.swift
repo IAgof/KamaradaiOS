@@ -206,10 +206,10 @@ class MainViewController: UIViewController{
         blendProcessing = CGSizeMake(320, 240)
 
         switch deviceType {
-        case (.IPad2 ):filterArray = grainFilters320x240
-            print("Ipad 2 ")
-        case (.IPad ):filterArray = grainFilters320x240
-            print("Ipad ")
+//        case (.IPad2 ):filterArray = grainFilters320x240
+//            print("Ipad 2 ")
+//        case (.IPad ):filterArray = grainFilters320x240
+//            print("Ipad ")
             
         default: filterArray = grainFilters
             blendProcessing = CGSizeMake(640, 480)
