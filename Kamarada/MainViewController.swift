@@ -727,7 +727,6 @@ class MainViewController: UIViewController{
             // do some task
             Utils().debugLog("Starting to stop record video")
             
-            self.stateShareAndSettingsButton()
             
             self.videosArray.append(self.pathToMovie)
             
@@ -755,6 +754,7 @@ class MainViewController: UIViewController{
         //Async thread to update UI
         dispatch_async(dispatch_get_main_queue()) {
             // update some UI
+            self.stateShareAndSettingsButton()
             self.setImageToThumbnail()
         }
         
