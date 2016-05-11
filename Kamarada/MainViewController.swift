@@ -53,6 +53,7 @@ class MainViewController: UIViewController{
     let resolution = AVCaptureSessionPreset640x480
     var clipDuration = 0.0
     let preferences = NSUserDefaults.standardUserDefaults()
+    let graingImageTimeRefresh = 0.20
     
     //MARK: - Variables
     var blendProcessing :CGSize?
@@ -506,7 +507,7 @@ class MainViewController: UIViewController{
         self.shareButton.enabled = false
         
         //Starts grain filter effect
-        timer = NSTimer.scheduledTimerWithTimeInterval(0.25, target: self, selector: #selector(self.updateGrainImage), userInfo: nil, repeats: true)
+        timer = NSTimer.scheduledTimerWithTimeInterval(graingImageTimeRefresh, target: self, selector: #selector(self.updateGrainImage), userInfo: nil, repeats: true)
     }
     
     //Choose only the filter who has tapped
@@ -557,15 +558,8 @@ class MainViewController: UIViewController{
     
     func startUpdateGrainFilter() {
         
-        timer = NSTimer.scheduledTimerWithTimeInterval(0.25, target: self, selector: #selector(self.updateGrainImage), userInfo: nil, repeats: true)
+        timer = NSTimer.scheduledTimerWithTimeInterval(graingImageTimeRefresh, target: self, selector: #selector(self.updateGrainImage), userInfo: nil, repeats: true)
         
-    }
-    func updateCountGrainFilters() {
-        if(countGrainFilters < (grainFilters.count - 1)){
-            countGrainFilters += 1
-        }else{
-            countGrainFilters = 0
-        }
     }
     
     func setUpFilters(){
@@ -598,8 +592,8 @@ class MainViewController: UIViewController{
     }
     
     func updateGrainImage(){
-        imageGrainView.image = grainImageFilter[countGrainFilters]
-        self.updateCountGrainFilters()
+        let nGrainFilter = Int (arc4random_uniform(UInt32( grainFilters.count)))
+        imageGrainView.image = grainImageFilter[nGrainFilter]
     }
     
     func sendOutputToWriter(){
