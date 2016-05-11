@@ -28,7 +28,7 @@ class SharedViewController: UIViewController,GIDSignInUIDelegate,GIDSignInDelega
     
     @IBOutlet weak var playImageView: UIImageView!
     @IBOutlet weak var videoPlayerView: UIView!
-   
+    
     //Timer
     @IBOutlet weak var videoProgressView: UIProgressView!
     
@@ -57,7 +57,7 @@ class SharedViewController: UIViewController,GIDSignInUIDelegate,GIDSignInDelega
     
     //MARK: - Constants
     let preferences = NSUserDefaults.standardUserDefaults()
-
+    
     //MARK: - Init
     override func viewDidLoad() {
         super.viewDidLoad()        // Do any additional setup after loading the view, typically from a nib.
@@ -81,7 +81,7 @@ class SharedViewController: UIViewController,GIDSignInUIDelegate,GIDSignInDelega
         self.startTimeInActivityEvent()
         
         self.setShareBackgroundImage(backgroundImage)
-
+        
     }
     
     override func prefersStatusBarHidden() -> Bool {
@@ -98,15 +98,15 @@ class SharedViewController: UIViewController,GIDSignInUIDelegate,GIDSignInDelega
         pauseVideoPlayer()
         
         if(!isSharingYoutube){//are not sharing with youtube, have to go to kamarada main view
-//            self.performSegueWithIdentifier("unwindToViewController", sender: self)
+            //            self.performSegueWithIdentifier("unwindToViewController", sender: self)
         }else{
             isSharingYoutube = false
         }
         
         self.sendTimeInActivity()
-
+        
     }
-
+    
     func setUpImageTaps(){
         //Get actions from ImageViews, could be buttons, but not the same shape image.
         var tapGestureRecognizer = UITapGestureRecognizer(target:self, action:#selector(SharedViewController.whatsappImageTapped(_:)))
@@ -154,7 +154,7 @@ class SharedViewController: UIViewController,GIDSignInUIDelegate,GIDSignInDelega
         
         let layer = AVPlayerLayer.init()
         layer.player = player
-       
+        
         self.videoPlayerView.layoutIfNeeded()
         let offsset = CGFloat(-20)
         layer.frame = CGRectMake(0,0, (self.videoPlayerView.bounds.width + offsset) , (self.videoPlayerView.bounds.height + offsset))
@@ -170,7 +170,7 @@ class SharedViewController: UIViewController,GIDSignInUIDelegate,GIDSignInDelega
         }
     }
     
-
+    
     //MARK: - Progress Bar
     func updateProgressBar(){
         
@@ -268,9 +268,9 @@ class SharedViewController: UIViewController,GIDSignInUIDelegate,GIDSignInDelega
         
         //NSURL(string: urlString!) {
         if UIApplication.sharedApplication().canOpenURL(NSURL(string: "whatsapp://app")!) {
-        
+            
             let movie:NSURL = NSURL.fileURLWithPath(moviePath)
-    
+            
             documentationInteractionController = UIDocumentInteractionController.init(URL: movie)
             
             documentationInteractionController.UTI = "net.whatsapp.movie"
@@ -312,7 +312,7 @@ class SharedViewController: UIViewController,GIDSignInUIDelegate,GIDSignInDelega
     func shareToInstagram(){
         self.updateNumTotalVideosShared()
         trackVideoShared(AnalyticsConstants().INSTAGRAM);
-
+        
         //Get last videoAsset on PhotoLibrary
         let fetchOptions = PHFetchOptions()
         fetchOptions.sortDescriptors = [NSSortDescriptor(key:"creationDate", ascending:false)]
@@ -332,7 +332,7 @@ class SharedViewController: UIViewController,GIDSignInUIDelegate,GIDSignInDelega
     func shareToFB(){
         self.updateNumTotalVideosShared()
         trackVideoShared(AnalyticsConstants().FACEBOOK);
-
+        
         let video: FBSDKShareVideo = FBSDKShareVideo()
         video.videoURL = movieURL
         let content:FBSDKShareVideoContent = FBSDKShareVideoContent()
@@ -345,7 +345,7 @@ class SharedViewController: UIViewController,GIDSignInUIDelegate,GIDSignInDelega
     func shareToYoutube(){
         self.updateNumTotalVideosShared()
         trackVideoShared(AnalyticsConstants().YOUTUBE);
-
+        
         let youtubeScope = "https://www.googleapis.com/auth/youtube.upload"
         let youtubeScope2 = "https://www.googleapis.com/auth/youtube"
         let youtubeScope3 = "https://www.googleapis.com/auth/youtubepartner"
@@ -388,15 +388,20 @@ class SharedViewController: UIViewController,GIDSignInUIDelegate,GIDSignInDelega
     func signIn(signIn: GIDSignIn!, didSignInForUser user: GIDGoogleUser!, withError error: NSError!) {
         Utils().debugLog("Google Sign In get user token")
         
-        token = user.authentication.accessToken
-        
-        Utils().debugLog("Google Sign In get user token: \(token))")
-        
-        self.postVideoToYouTube(){(result) -> () in
-            Utils().debugLog("result \(result)")
+        //Error control
+        if (error == nil) {
+            token = user.authentication.accessToken
+            
+            Utils().debugLog("Google Sign In get user token: \(token))")
+            
+            self.postVideoToYouTube(){(result) -> () in
+                Utils().debugLog("result \(result)")
+            }
+        } else {
+            Utils().debugLog("\(error.localizedDescription)")
         }
     }
-
+    
     //MARK: - Youtube upload
     func postVideoToYouTube( callback: Bool -> Void){
         
@@ -412,7 +417,7 @@ class SharedViewController: UIViewController,GIDSignInUIDelegate,GIDSignInDelega
             headers: headers,
             multipartFormData: { multipartFormData in
                 multipartFormData.appendBodyPart(data:"{'snippet':{'title' : '\(title)', 'description': '\(description)'}}".dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)!, name :"snippet", mimeType: "application/json")
-
+                
                 multipartFormData.appendBodyPart(data: videoData!, name: "video", fileName: "video.mp4", mimeType: "application/octet-stream")
                 
             },
@@ -441,7 +446,7 @@ class SharedViewController: UIViewController,GIDSignInUIDelegate,GIDSignInDelega
         }
         
         let alert = UIAlertController(title: "Youtube upload", message: message, preferredStyle: UIAlertControllerStyle.Alert)
-
+        
         alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
         self.presentViewController(alert, animated: true, completion: nil)
     }
@@ -465,7 +470,7 @@ class SharedViewController: UIViewController,GIDSignInUIDelegate,GIDSignInDelega
         return dateString
     }
     //MARK: - Facebook Delegate Methods
-
+    
     
     func loginButton(loginButton: FBSDKLoginButton!, didCompleteWithResult result: FBSDKLoginManagerLoginResult!, error: NSError!) {
         Utils().debugLog("User Logged In")
@@ -519,7 +524,7 @@ class SharedViewController: UIViewController,GIDSignInUIDelegate,GIDSignInDelega
     //FOR VIPER: in Android this is in Activity.
     
     func trackVideoShared(socialNetwork:String) {
-    trackVideoSharedSuperProperties()
+        trackVideoSharedSuperProperties()
         mixpanel.identify(Utils().udid)
         
         //JSON properties
@@ -533,7 +538,7 @@ class SharedViewController: UIViewController,GIDSignInUIDelegate,GIDSignInDelega
                 AnalyticsConstants().DOUBLE_HOUR_AND_MINUTES: Utils().getDoubleHourAndMinutes(),
                 ]
         mixpanel.track(AnalyticsConstants().VIDEO_SHARED, properties: socialNetworkProperties as [NSObject : AnyObject])
-
+        
         mixpanel.people.increment(AnalyticsConstants().TOTAL_VIDEOS_SHARED,by: NSNumber.init(int: Int32(1)))
         mixpanel.people.set(AnalyticsConstants().LAST_VIDEO_SHARED,to: Utils().giveMeTimeNow())
     }
@@ -577,5 +582,5 @@ class SharedViewController: UIViewController,GIDSignInUIDelegate,GIDSignInDelega
         mixpanel.track(AnalyticsConstants().TIME_IN_ACTIVITY, properties: viewProperties)
         mixpanel.flush()
     }
-
+    
 }
