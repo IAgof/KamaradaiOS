@@ -13,11 +13,11 @@
             buildForProfiling = "YES"
             buildForArchiving = "YES">
             <BuildableReference
-               BuildableIdentifier = 'primary'
-               BlueprintIdentifier = 'B9492CE8A0B6F704A9B39E1A'
-               BlueprintName = 'Pods-Kamarada'
-               ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'Pods_Kamarada.framework'>
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "A83BFD7B1032B445646F53AD680641A9"
+               BlueprintName = "Pods-Kamarada"
+               ReferencedContainer = "container:Pods.xcodeproj"
+               BuildableName = "Pods_Kamarada.framework">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

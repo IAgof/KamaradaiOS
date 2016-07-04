@@ -1069,6 +1069,7 @@ class MainViewController: UIViewController{
         mixpanel.people.set([AnalyticsConstants().LAST_VIDEO_RECORDED:Utils().giveMeTimeNow()])
         
     }
+    
     func sendExportedVideoMetadataTracking() {
         let videoRecordedProperties =
             [
@@ -1084,6 +1085,7 @@ class MainViewController: UIViewController{
         mixpanel.timeEvent(AnalyticsConstants().TIME_IN_ACTIVITY)
         Utils().debugLog("Sending startTimeInActivityEvent")
     }
+    
     func sendTimeInActivity() {
         Utils().debugLog("Sending AnalyticsConstants().TIME_IN_ACTIVITY")
         //NOT WORKING -- falta el comienzo time_event para arrancar el contador

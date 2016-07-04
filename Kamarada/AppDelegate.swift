@@ -15,7 +15,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     var window: UIWindow?
     var mixpanel:Mixpanel?
     var initState = "firstTime"
-    
+    let appDependencies = AppDependencies()
+
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         Utils().debugLog("START Kamarada")
@@ -26,6 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         assert(configureError == nil, "Error configuring Google services: \(configureError)")
         
         GIDSignIn.sharedInstance().delegate = self
+        
         //MIXPANEL
         mixpanel = Mixpanel.sharedInstanceWithToken(AnalyticsConstants().MIXPANEL_TOKEN)
         
@@ -162,6 +164,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
             
             trackAppStartupProperties(false);
             
+            appDependencies.installRecordToRootViewControllerIntoWindow(window!)
+
         } else {
             // other version
             defaults.setObject(currentAppVersion, forKey: "appVersion")

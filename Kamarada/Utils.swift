@@ -39,12 +39,24 @@ class Utils{
     
     func debugLog(logMessage:String){
         #if DEBUG
-            print(logMessage)
+            print("\n \(logMessage)")
         #endif
     }
     
     func getUDID() -> String{
         return udid
+    }
+    
+    func getStringByKeyFromSettings(key:String) -> String {
+        return NSBundle.mainBundle().localizedStringForKey(key,value: "",table: "Settings")
+    }
+    
+    func getStringByKeyFromShare(key:String) -> String {
+        return NSBundle.mainBundle().localizedStringForKey(key,value: "",table: "Share")
+    }
+    
+    func getStringByKeyFromIntro(key:String) -> String {
+        return NSBundle.mainBundle().localizedStringForKey(key,value: "",table: "Intro")
     }
     
 }

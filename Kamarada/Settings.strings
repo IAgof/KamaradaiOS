@@ -6,6 +6,7 @@
   Copyright © 2016 Videona. All rights reserved.
 */
 
+
 "permissionsDeniedMessage" = "Videona needs some permissions to use the camera or record audio.\nWithout them Videona can\'t continue and will be closed.";
 "CloseBecauseOfPermissionsTitle" = "Permissions not granted";
 

@@ -37,9 +37,57 @@
 		A91AD87F1CE200F20026867B /* silent_film_overlay_h_320_240.png in Resources */ = {isa = PBXBuildFile; fileRef = A91AD8751CE200F20026867B /* silent_film_overlay_h_320_240.png */; };
 		A91AD8801CE200F20026867B /* silent_film_overlay_i_320_240.png in Resources */ = {isa = PBXBuildFile; fileRef = A91AD8761CE200F20026867B /* silent_film_overlay_i_320_240.png */; };
 		A91AD8811CE200F20026867B /* silent_film_overlay_j_320_240.png in Resources */ = {isa = PBXBuildFile; fileRef = A91AD8771CE200F20026867B /* silent_film_overlay_j_320_240.png */; };
+		A9301F8D1D23AF3E00C414A0 /* RootWireframe.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9301F8C1D23AF3E00C414A0 /* RootWireframe.swift */; };
+		A9301F911D23AF8400C414A0 /* KamaradaController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9301F901D23AF8400C414A0 /* KamaradaController.swift */; };
+		A9301F941D23AFBD00C414A0 /* KamaradaTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9301F931D23AFBD00C414A0 /* KamaradaTracker.swift */; };
+		A9301FAA1D23B1EE00C414A0 /* SettingsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9301FA91D23B1EE00C414A0 /* SettingsInteractor.swift */; };
+		A9301FAD1D23B1F900C414A0 /* SettingsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9301FAB1D23B1F900C414A0 /* SettingsPresenter.swift */; };
+		A9301FAE1D23B1F900C414A0 /* SettingsPresenterInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9301FAC1D23B1F900C414A0 /* SettingsPresenterInterface.swift */; };
+		A9301FB41D23B21F00C414A0 /* SettingsInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9301FB31D23B21F00C414A0 /* SettingsInterface.swift */; };
+		A9301FB61D23B24D00C414A0 /* SettingsWireframe.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9301FB51D23B24D00C414A0 /* SettingsWireframe.swift */; };
+		A9301FBA1D23B28F00C414A0 /* SettingsInteractorInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9301FB91D23B28F00C414A0 /* SettingsInteractorInterface.swift */; };
+		A9301FBC1D23B2FB00C414A0 /* SettingsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9301FBB1D23B2FB00C414A0 /* SettingsProvider.swift */; };
+		A9301FBE1D23B31900C414A0 /* SettingsContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9301FBD1D23B31900C414A0 /* SettingsContent.swift */; };
+		A9301FC01D23B32F00C414A0 /* SettingsConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9301FBF1D23B32F00C414A0 /* SettingsConstants.swift */; };
+		A9301FC91D23B3CD00C414A0 /* ShareWireframe.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9301FC81D23B3CD00C414A0 /* ShareWireframe.swift */; };
+		A9301FCC1D23B41000C414A0 /* ShareInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9301FCA1D23B41000C414A0 /* ShareInterface.swift */; };
+		A9301FCD1D23B41000C414A0 /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9301FCB1D23B41000C414A0 /* ShareViewController.swift */; };
+		A9301FD01D23B41B00C414A0 /* SharePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9301FCE1D23B41B00C414A0 /* SharePresenter.swift */; };
+		A9301FD11D23B41B00C414A0 /* SharePresenterInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9301FCF1D23B41B00C414A0 /* SharePresenterInterface.swift */; };
+		A9301FD51D23B44800C414A0 /* ShareInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9301FD31D23B44800C414A0 /* ShareInteractor.swift */; };
+		A9301FD61D23B44800C414A0 /* ShareInteractorInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9301FD41D23B44800C414A0 /* ShareInteractorInterface.swift */; };
+		A9301FDD1D23B45B00C414A0 /* ShareFacebookInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9301FD71D23B45B00C414A0 /* ShareFacebookInteractor.swift */; };
+		A9301FDE1D23B45B00C414A0 /* ShareInstagramInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9301FD81D23B45B00C414A0 /* ShareInstagramInteractor.swift */; };
+		A9301FDF1D23B45B00C414A0 /* ShareSocialNetworkInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9301FD91D23B45B00C414A0 /* ShareSocialNetworkInteractor.swift */; };
+		A9301FE01D23B45B00C414A0 /* ShareTwitterInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9301FDA1D23B45B00C414A0 /* ShareTwitterInteractor.swift */; };
+		A9301FE11D23B45B00C414A0 /* ShareWhatsappInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9301FDB1D23B45B00C414A0 /* ShareWhatsappInteractor.swift */; };
+		A9301FE21D23B45B00C414A0 /* ShareYoutubeInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9301FDC1D23B45B00C414A0 /* ShareYoutubeInteractor.swift */; };
+		A9301FE51D23B46A00C414A0 /* SocialNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9301FE31D23B46A00C414A0 /* SocialNetwork.swift */; };
+		A9301FE61D23B46A00C414A0 /* SocialNetworkProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9301FE41D23B46A00C414A0 /* SocialNetworkProvider.swift */; };
+		A9301FEF1D23B4CC00C414A0 /* RecordWireframe.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9301FEE1D23B4CC00C414A0 /* RecordWireframe.swift */; };
+		A9301FF21D23B4D600C414A0 /* RecordPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9301FF01D23B4D600C414A0 /* RecordPresenter.swift */; };
+		A9301FF31D23B4D600C414A0 /* RecordPresenterInterfaceIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9301FF11D23B4D600C414A0 /* RecordPresenterInterfaceIO.swift */; };
+		A9301FF61D23B4DD00C414A0 /* RecordController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9301FF41D23B4DD00C414A0 /* RecordController.swift */; };
+		A9301FF71D23B4DD00C414A0 /* RecordViewInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9301FF51D23B4DD00C414A0 /* RecordViewInterface.swift */; };
+		A9301FF91D23B4FE00C414A0 /* RecorderConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9301FF81D23B4FE00C414A0 /* RecorderConstants.swift */; };
+		A93020061D23B60000C414A0 /* CameraRecorderInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A93020041D23B60000C414A0 /* CameraRecorderInteractor.swift */; };
+		A93020071D23B60000C414A0 /* CameraRecorderInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = A93020051D23B60000C414A0 /* CameraRecorderInterface.swift */; };
+		A93020091D23B60A00C414A0 /* ExporterInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A93020081D23B60A00C414A0 /* ExporterInteractor.swift */; };
+		A930200D1D23B62800C414A0 /* AddFilterInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A930200A1D23B62800C414A0 /* AddFilterInteractor.swift */; };
+		A930200E1D23B62800C414A0 /* ChangeFilterInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A930200B1D23B62800C414A0 /* ChangeFilterInteractor.swift */; };
+		A930200F1D23B62800C414A0 /* RemoveFilterInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A930200C1D23B62800C414A0 /* RemoveFilterInteractor.swift */; };
+		A93020131D23B65400C414A0 /* TimerInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A93020111D23B65400C414A0 /* TimerInteractor.swift */; };
+		A93020141D23B65400C414A0 /* TimerInteractorInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = A93020121D23B65400C414A0 /* TimerInteractorInterface.swift */; };
+		A93020161D23B65D00C414A0 /* ThumbnailInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A93020151D23B65D00C414A0 /* ThumbnailInteractor.swift */; };
+		A93020181D23B68B00C414A0 /* AppDependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = A93020171D23B68B00C414A0 /* AppDependencies.swift */; };
+		A953390A1D2530B0006890E7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A95339081D2530B0006890E7 /* Main.storyboard */; };
+		A953390D1D2535F2006890E7 /* FlashInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A953390C1D2535F2006890E7 /* FlashInteractor.swift */; };
+		A953390F1D253922006890E7 /* AVResolutionParse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A953390E1D253922006890E7 /* AVResolutionParse.swift */; };
+		A95339121D253950006890E7 /* ClipsAlbum.swift in Sources */ = {isa = PBXBuildFile; fileRef = A95339101D253950006890E7 /* ClipsAlbum.swift */; };
+		A95339131D253950006890E7 /* ExportedAlbum.swift in Sources */ = {isa = PBXBuildFile; fileRef = A95339111D253950006890E7 /* ExportedAlbum.swift */; };
+		A95339151D2539E5006890E7 /* ShareConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A95339141D2539E5006890E7 /* ShareConstants.swift */; };
 		A955F4FD1CA95B0D00B0CF62 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A955F4FC1CA95B0D00B0CF62 /* AppDelegate.swift */; };
 		A955F4FF1CA95B0D00B0CF62 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A955F4FE1CA95B0D00B0CF62 /* MainViewController.swift */; };
-		A955F5021CA95B0D00B0CF62 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A955F5001CA95B0D00B0CF62 /* Main.storyboard */; };
 		A955F5041CA95B0D00B0CF62 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A955F5031CA95B0D00B0CF62 /* Assets.xcassets */; };
 		A955F5071CA95B0D00B0CF62 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A955F5051CA95B0D00B0CF62 /* LaunchScreen.storyboard */; };
 		A955F5121CA95B0D00B0CF62 /* KamaradaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A955F5111CA95B0D00B0CF62 /* KamaradaTests.swift */; };
@@ -56,6 +104,11 @@
 		A9DE88F91CAE922200767910 /* FilterOperationTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DE88F71CAE922200767910 /* FilterOperationTypes.swift */; };
 		A9F43F031CB4F13000007FD4 /* kamarada_audio.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A9F43F021CB4F13000007FD4 /* kamarada_audio.mp3 */; };
 		A9F43F0C1CB54A7000007FD4 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9F43F0B1CB54A7000007FD4 /* AssetsLibrary.framework */; };
+		A9F777AC1D268386008D479B /* TwitterVideoUpload.m in Sources */ = {isa = PBXBuildFile; fileRef = A9F777AB1D268386008D479B /* TwitterVideoUpload.m */; };
+		A9F777B31D268D22008D479B /* filter_free.png in Resources */ = {isa = PBXBuildFile; fileRef = A9F777B21D268D22008D479B /* filter_free.png */; };
+		A9F777B71D269E8F008D479B /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9F777B61D269E8F008D479B /* SettingsViewController.swift */; };
+		A9F777BE1D2A4448008D479B /* CameraInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9F777BC1D2A4448008D479B /* CameraInteractor.swift */; };
+		A9F777BF1D2A4448008D479B /* CameraInteractorInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9F777BD1D2A4448008D479B /* CameraInteractorInterface.swift */; };
 		D7E29E940AE5EB7D2CEB6A00 /* Pods_Kamarada.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08A3D806EE5ED7EA303D26B7 /* Pods_Kamarada.framework */; };
 /* End PBXBuildFile section */
 
@@ -145,10 +198,58 @@
 		A91AD8751CE200F20026867B /* silent_film_overlay_h_320_240.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = silent_film_overlay_h_320_240.png; sourceTree = "<group>"; };
 		A91AD8761CE200F20026867B /* silent_film_overlay_i_320_240.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = silent_film_overlay_i_320_240.png; sourceTree = "<group>"; };
 		A91AD8771CE200F20026867B /* silent_film_overlay_j_320_240.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = silent_film_overlay_j_320_240.png; sourceTree = "<group>"; };
+		A9301F8C1D23AF3E00C414A0 /* RootWireframe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootWireframe.swift; sourceTree = "<group>"; };
+		A9301F901D23AF8400C414A0 /* KamaradaController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KamaradaController.swift; sourceTree = "<group>"; };
+		A9301F931D23AFBD00C414A0 /* KamaradaTracker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KamaradaTracker.swift; sourceTree = "<group>"; };
+		A9301FA91D23B1EE00C414A0 /* SettingsInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsInteractor.swift; path = Modules/Settings/SettingsInteractor.swift; sourceTree = "<group>"; };
+		A9301FAB1D23B1F900C414A0 /* SettingsPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsPresenter.swift; path = Modules/Settings/SettingsPresenter.swift; sourceTree = "<group>"; };
+		A9301FAC1D23B1F900C414A0 /* SettingsPresenterInterface.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsPresenterInterface.swift; path = Modules/Settings/SettingsPresenterInterface.swift; sourceTree = "<group>"; };
+		A9301FB31D23B21F00C414A0 /* SettingsInterface.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsInterface.swift; sourceTree = "<group>"; };
+		A9301FB51D23B24D00C414A0 /* SettingsWireframe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsWireframe.swift; path = Modules/Settings/SettingsWireframe.swift; sourceTree = "<group>"; };
+		A9301FB91D23B28F00C414A0 /* SettingsInteractorInterface.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsInteractorInterface.swift; sourceTree = "<group>"; };
+		A9301FBB1D23B2FB00C414A0 /* SettingsProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsProvider.swift; sourceTree = "<group>"; };
+		A9301FBD1D23B31900C414A0 /* SettingsContent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsContent.swift; sourceTree = "<group>"; };
+		A9301FBF1D23B32F00C414A0 /* SettingsConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsConstants.swift; sourceTree = "<group>"; };
+		A9301FC81D23B3CD00C414A0 /* ShareWireframe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ShareWireframe.swift; path = Modules/Share/ShareWireframe.swift; sourceTree = "<group>"; };
+		A9301FCA1D23B41000C414A0 /* ShareInterface.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ShareInterface.swift; path = Modules/Share/ShareInterface.swift; sourceTree = "<group>"; };
+		A9301FCB1D23B41000C414A0 /* ShareViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ShareViewController.swift; path = Modules/Share/ShareViewController.swift; sourceTree = "<group>"; };
+		A9301FCE1D23B41B00C414A0 /* SharePresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SharePresenter.swift; path = Modules/Share/SharePresenter.swift; sourceTree = "<group>"; };
+		A9301FCF1D23B41B00C414A0 /* SharePresenterInterface.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SharePresenterInterface.swift; path = Modules/Share/SharePresenterInterface.swift; sourceTree = "<group>"; };
+		A9301FD31D23B44800C414A0 /* ShareInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ShareInteractor.swift; path = Modules/Share/ShareInteractor.swift; sourceTree = "<group>"; };
+		A9301FD41D23B44800C414A0 /* ShareInteractorInterface.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ShareInteractorInterface.swift; path = Modules/Share/ShareInteractorInterface.swift; sourceTree = "<group>"; };
+		A9301FD71D23B45B00C414A0 /* ShareFacebookInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ShareFacebookInteractor.swift; path = Modules/Share/ShareFacebookInteractor.swift; sourceTree = "<group>"; };
+		A9301FD81D23B45B00C414A0 /* ShareInstagramInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ShareInstagramInteractor.swift; path = Modules/Share/ShareInstagramInteractor.swift; sourceTree = "<group>"; };
+		A9301FD91D23B45B00C414A0 /* ShareSocialNetworkInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ShareSocialNetworkInteractor.swift; path = Modules/Share/ShareSocialNetworkInteractor.swift; sourceTree = "<group>"; };
+		A9301FDA1D23B45B00C414A0 /* ShareTwitterInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ShareTwitterInteractor.swift; path = Modules/Share/ShareTwitterInteractor.swift; sourceTree = "<group>"; };
+		A9301FDB1D23B45B00C414A0 /* ShareWhatsappInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ShareWhatsappInteractor.swift; path = Modules/Share/ShareWhatsappInteractor.swift; sourceTree = "<group>"; };
+		A9301FDC1D23B45B00C414A0 /* ShareYoutubeInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ShareYoutubeInteractor.swift; path = Modules/Share/ShareYoutubeInteractor.swift; sourceTree = "<group>"; };
+		A9301FE31D23B46A00C414A0 /* SocialNetwork.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SocialNetwork.swift; path = Modules/Share/SocialNetwork.swift; sourceTree = "<group>"; };
+		A9301FE41D23B46A00C414A0 /* SocialNetworkProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SocialNetworkProvider.swift; path = Modules/Share/SocialNetworkProvider.swift; sourceTree = "<group>"; };
+		A9301FEE1D23B4CC00C414A0 /* RecordWireframe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RecordWireframe.swift; path = Modules/Recorder/RecordWireframe.swift; sourceTree = "<group>"; };
+		A9301FF01D23B4D600C414A0 /* RecordPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RecordPresenter.swift; path = Modules/Recorder/RecordPresenter.swift; sourceTree = "<group>"; };
+		A9301FF11D23B4D600C414A0 /* RecordPresenterInterfaceIO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RecordPresenterInterfaceIO.swift; path = Modules/Recorder/RecordPresenterInterfaceIO.swift; sourceTree = "<group>"; };
+		A9301FF41D23B4DD00C414A0 /* RecordController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RecordController.swift; path = Modules/Recorder/RecordController.swift; sourceTree = "<group>"; };
+		A9301FF51D23B4DD00C414A0 /* RecordViewInterface.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RecordViewInterface.swift; path = Modules/Recorder/RecordViewInterface.swift; sourceTree = "<group>"; };
+		A9301FF81D23B4FE00C414A0 /* RecorderConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RecorderConstants.swift; path = Modules/Recorder/RecorderConstants.swift; sourceTree = "<group>"; };
+		A93020041D23B60000C414A0 /* CameraRecorderInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CameraRecorderInteractor.swift; path = Modules/Recorder/CameraRecorderInteractor.swift; sourceTree = "<group>"; };
+		A93020051D23B60000C414A0 /* CameraRecorderInterface.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CameraRecorderInterface.swift; path = Modules/Recorder/CameraRecorderInterface.swift; sourceTree = "<group>"; };
+		A93020081D23B60A00C414A0 /* ExporterInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExporterInteractor.swift; path = Modules/Recorder/ExporterInteractor.swift; sourceTree = "<group>"; };
+		A930200A1D23B62800C414A0 /* AddFilterInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddFilterInteractor.swift; path = Modules/Recorder/AddFilterInteractor.swift; sourceTree = "<group>"; };
+		A930200B1D23B62800C414A0 /* ChangeFilterInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChangeFilterInteractor.swift; path = Modules/Recorder/ChangeFilterInteractor.swift; sourceTree = "<group>"; };
+		A930200C1D23B62800C414A0 /* RemoveFilterInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RemoveFilterInteractor.swift; path = Modules/Recorder/RemoveFilterInteractor.swift; sourceTree = "<group>"; };
+		A93020111D23B65400C414A0 /* TimerInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TimerInteractor.swift; path = Modules/Recorder/TimerInteractor.swift; sourceTree = "<group>"; };
+		A93020121D23B65400C414A0 /* TimerInteractorInterface.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TimerInteractorInterface.swift; path = Modules/Recorder/TimerInteractorInterface.swift; sourceTree = "<group>"; };
+		A93020151D23B65D00C414A0 /* ThumbnailInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ThumbnailInteractor.swift; path = Modules/Recorder/ThumbnailInteractor.swift; sourceTree = "<group>"; };
+		A93020171D23B68B00C414A0 /* AppDependencies.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDependencies.swift; sourceTree = "<group>"; };
+		A95339091D2530B0006890E7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		A953390C1D2535F2006890E7 /* FlashInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FlashInteractor.swift; path = Modules/Recorder/FlashInteractor.swift; sourceTree = "<group>"; };
+		A953390E1D253922006890E7 /* AVResolutionParse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AVResolutionParse.swift; sourceTree = "<group>"; };
+		A95339101D253950006890E7 /* ClipsAlbum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ClipsAlbum.swift; path = Modules/Recorder/KamaradaAlbum/ClipsAlbum.swift; sourceTree = "<group>"; };
+		A95339111D253950006890E7 /* ExportedAlbum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExportedAlbum.swift; path = Modules/Recorder/KamaradaAlbum/ExportedAlbum.swift; sourceTree = "<group>"; };
+		A95339141D2539E5006890E7 /* ShareConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ShareConstants.swift; path = Modules/Share/ShareConstants.swift; sourceTree = "<group>"; };
 		A955F4F91CA95B0D00B0CF62 /* Kamarada.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kamarada.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A955F4FC1CA95B0D00B0CF62 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A955F4FE1CA95B0D00B0CF62 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = MainViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		A955F5011CA95B0D00B0CF62 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A955F5031CA95B0D00B0CF62 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A955F5061CA95B0D00B0CF62 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A955F5081CA95B0D00B0CF62 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -170,6 +271,12 @@
 		A9DE88F71CAE922200767910 /* FilterOperationTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterOperationTypes.swift; sourceTree = "<group>"; };
 		A9F43F021CB4F13000007FD4 /* kamarada_audio.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = kamarada_audio.mp3; path = Audio/kamarada_audio.mp3; sourceTree = "<group>"; };
 		A9F43F0B1CB54A7000007FD4 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
+		A9F777AA1D268386008D479B /* TwitterVideoUpload.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TwitterVideoUpload.h; path = Modules/Share/TwitterVideoUpload.h; sourceTree = "<group>"; };
+		A9F777AB1D268386008D479B /* TwitterVideoUpload.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TwitterVideoUpload.m; path = Modules/Share/TwitterVideoUpload.m; sourceTree = "<group>"; };
+		A9F777B21D268D22008D479B /* filter_free.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = filter_free.png; path = ../../../VIDEONA_REPO_ONLY_TO_COMPARE/Videona/Videona/filter_free.png; sourceTree = "<group>"; };
+		A9F777B61D269E8F008D479B /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsViewController.swift; path = Modules/Settings/SettingsViewController.swift; sourceTree = "<group>"; };
+		A9F777BC1D2A4448008D479B /* CameraInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CameraInteractor.swift; path = Modules/Recorder/CameraInteractor.swift; sourceTree = "<group>"; };
+		A9F777BD1D2A4448008D479B /* CameraInteractorInterface.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CameraInteractorInterface.swift; path = Modules/Recorder/CameraInteractorInterface.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -221,8 +328,7 @@
 		A900E4FA1CC9026C00C44271 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				A900E45E1CC8CD0300C44271 /* AnalitycsConstants.swift */,
-				A900E4691CC8E36A00C44271 /* ConfigPreferences.swift */,
+				A953390E1D253922006890E7 /* AVResolutionParse.swift */,
 				A900E4F81CC9026800C44271 /* Utils.swift */,
 			);
 			name = Utils;
@@ -263,6 +369,372 @@
 			name = "320*240";
 			sourceTree = "<group>";
 		};
+		A9301F831D23AEAD00C414A0 /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				A9301F921D23AFAB00C414A0 /* Mixpanel Tracker */,
+				A9301F881D23AEC600C414A0 /* Settings */,
+				A9301F871D23AEC100C414A0 /* Share */,
+				A9301F861D23AEB400C414A0 /* Recorder */,
+			);
+			name = Modules;
+			sourceTree = "<group>";
+		};
+		A9301F861D23AEB400C414A0 /* Recorder */ = {
+			isa = PBXGroup;
+			children = (
+				A9301FE81D23B4AC00C414A0 /* App Logic */,
+				A9301FE71D23B4A400C414A0 /* User Interface */,
+			);
+			name = Recorder;
+			sourceTree = "<group>";
+		};
+		A9301F871D23AEC100C414A0 /* Share */ = {
+			isa = PBXGroup;
+			children = (
+				A9301FC21D23B39400C414A0 /* App Logic */,
+				A9301FC11D23B38800C414A0 /* User Interface */,
+			);
+			name = Share;
+			sourceTree = "<group>";
+		};
+		A9301F881D23AEC600C414A0 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				A9301F961D23B08B00C414A0 /* App Logic */,
+				A9301F951D23B07200C414A0 /* User Interface */,
+			);
+			name = Settings;
+			sourceTree = "<group>";
+		};
+		A9301F891D23AED400C414A0 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				A9301F8F1D23AF6C00C414A0 /* User Interface */,
+				A9301F8E1D23AF5D00C414A0 /* Constants */,
+				A9301F8B1D23AF2900C414A0 /* Wireframe */,
+				A9E0BFE61CD3558A0087D089 /* Resources */,
+				A900E4FA1CC9026C00C44271 /* Utils */,
+				A9093CE11CD111AD00A099A6 /* ISO639-2 */,
+			);
+			name = Common;
+			sourceTree = "<group>";
+		};
+		A9301F8A1D23AF0A00C414A0 /* StoryBoard */ = {
+			isa = PBXGroup;
+			children = (
+				A95339081D2530B0006890E7 /* Main.storyboard */,
+				A955F5051CA95B0D00B0CF62 /* LaunchScreen.storyboard */,
+			);
+			name = StoryBoard;
+			sourceTree = "<group>";
+		};
+		A9301F8B1D23AF2900C414A0 /* Wireframe */ = {
+			isa = PBXGroup;
+			children = (
+				A9301F8C1D23AF3E00C414A0 /* RootWireframe.swift */,
+			);
+			name = Wireframe;
+			sourceTree = "<group>";
+		};
+		A9301F8E1D23AF5D00C414A0 /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				A900E45E1CC8CD0300C44271 /* AnalitycsConstants.swift */,
+				A900E4691CC8E36A00C44271 /* ConfigPreferences.swift */,
+			);
+			name = Constants;
+			sourceTree = "<group>";
+		};
+		A9301F8F1D23AF6C00C414A0 /* User Interface */ = {
+			isa = PBXGroup;
+			children = (
+				A9301F901D23AF8400C414A0 /* KamaradaController.swift */,
+			);
+			name = "User Interface";
+			sourceTree = "<group>";
+		};
+		A9301F921D23AFAB00C414A0 /* Mixpanel Tracker */ = {
+			isa = PBXGroup;
+			children = (
+				A9301F931D23AFBD00C414A0 /* KamaradaTracker.swift */,
+			);
+			name = "Mixpanel Tracker";
+			sourceTree = "<group>";
+		};
+		A9301F951D23B07200C414A0 /* User Interface */ = {
+			isa = PBXGroup;
+			children = (
+				A9301F991D23B09A00C414A0 /* Presenter */,
+				A9301F981D23B09500C414A0 /* View */,
+				A9301F971D23B09100C414A0 /* Wireframe */,
+			);
+			name = "User Interface";
+			sourceTree = "<group>";
+		};
+		A9301F961D23B08B00C414A0 /* App Logic */ = {
+			isa = PBXGroup;
+			children = (
+				A9301F9B1D23B0A400C414A0 /* Model */,
+				A9301F9A1D23B0A000C414A0 /* Interactor */,
+			);
+			name = "App Logic";
+			sourceTree = "<group>";
+		};
+		A9301F971D23B09100C414A0 /* Wireframe */ = {
+			isa = PBXGroup;
+			children = (
+				A9301FB51D23B24D00C414A0 /* SettingsWireframe.swift */,
+			);
+			name = Wireframe;
+			sourceTree = "<group>";
+		};
+		A9301F981D23B09500C414A0 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				A9F777B61D269E8F008D479B /* SettingsViewController.swift */,
+				A9301FB31D23B21F00C414A0 /* SettingsInterface.swift */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		A9301F991D23B09A00C414A0 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				A9301FAB1D23B1F900C414A0 /* SettingsPresenter.swift */,
+				A9301FAC1D23B1F900C414A0 /* SettingsPresenterInterface.swift */,
+			);
+			name = Presenter;
+			sourceTree = "<group>";
+		};
+		A9301F9A1D23B0A000C414A0 /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				A9301FA91D23B1EE00C414A0 /* SettingsInteractor.swift */,
+				A9301FB91D23B28F00C414A0 /* SettingsInteractorInterface.swift */,
+			);
+			name = Interactor;
+			sourceTree = "<group>";
+		};
+		A9301F9B1D23B0A400C414A0 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				A9301FBB1D23B2FB00C414A0 /* SettingsProvider.swift */,
+				A9301FBD1D23B31900C414A0 /* SettingsContent.swift */,
+				A9301FBF1D23B32F00C414A0 /* SettingsConstants.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		A9301FC11D23B38800C414A0 /* User Interface */ = {
+			isa = PBXGroup;
+			children = (
+				A9301FC51D23B3B300C414A0 /* Presenter */,
+				A9301FC41D23B3AD00C414A0 /* View */,
+				A9301FC31D23B3A800C414A0 /* Wireframe */,
+			);
+			name = "User Interface";
+			sourceTree = "<group>";
+		};
+		A9301FC21D23B39400C414A0 /* App Logic */ = {
+			isa = PBXGroup;
+			children = (
+				A9301FC71D23B3BE00C414A0 /* Interactor */,
+				A9301FC61D23B3BA00C414A0 /* Model */,
+			);
+			name = "App Logic";
+			sourceTree = "<group>";
+		};
+		A9301FC31D23B3A800C414A0 /* Wireframe */ = {
+			isa = PBXGroup;
+			children = (
+				A9301FC81D23B3CD00C414A0 /* ShareWireframe.swift */,
+			);
+			name = Wireframe;
+			sourceTree = "<group>";
+		};
+		A9301FC41D23B3AD00C414A0 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				A9301FCA1D23B41000C414A0 /* ShareInterface.swift */,
+				A9301FCB1D23B41000C414A0 /* ShareViewController.swift */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		A9301FC51D23B3B300C414A0 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				A9301FCE1D23B41B00C414A0 /* SharePresenter.swift */,
+				A9301FCF1D23B41B00C414A0 /* SharePresenterInterface.swift */,
+			);
+			name = Presenter;
+			sourceTree = "<group>";
+		};
+		A9301FC61D23B3BA00C414A0 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				A95339141D2539E5006890E7 /* ShareConstants.swift */,
+				A9301FE31D23B46A00C414A0 /* SocialNetwork.swift */,
+				A9301FE41D23B46A00C414A0 /* SocialNetworkProvider.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		A9301FC71D23B3BE00C414A0 /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				A9301FD21D23B43500C414A0 /* ShareSocialNetworkInteractor */,
+				A9301FD31D23B44800C414A0 /* ShareInteractor.swift */,
+				A9301FD41D23B44800C414A0 /* ShareInteractorInterface.swift */,
+			);
+			name = Interactor;
+			sourceTree = "<group>";
+		};
+		A9301FD21D23B43500C414A0 /* ShareSocialNetworkInteractor */ = {
+			isa = PBXGroup;
+			children = (
+				A9F777AF1D26838A008D479B /* TwitterVideoUpload */,
+				A9301FD71D23B45B00C414A0 /* ShareFacebookInteractor.swift */,
+				A9301FD81D23B45B00C414A0 /* ShareInstagramInteractor.swift */,
+				A9301FD91D23B45B00C414A0 /* ShareSocialNetworkInteractor.swift */,
+				A9301FDA1D23B45B00C414A0 /* ShareTwitterInteractor.swift */,
+				A9301FDB1D23B45B00C414A0 /* ShareWhatsappInteractor.swift */,
+				A9301FDC1D23B45B00C414A0 /* ShareYoutubeInteractor.swift */,
+			);
+			name = ShareSocialNetworkInteractor;
+			sourceTree = "<group>";
+		};
+		A9301FE71D23B4A400C414A0 /* User Interface */ = {
+			isa = PBXGroup;
+			children = (
+				A9301FEB1D23B4BB00C414A0 /* Presenter */,
+				A9301FEA1D23B4B600C414A0 /* View */,
+				A9301FE91D23B4B100C414A0 /* Wireframe */,
+			);
+			name = "User Interface";
+			sourceTree = "<group>";
+		};
+		A9301FE81D23B4AC00C414A0 /* App Logic */ = {
+			isa = PBXGroup;
+			children = (
+				A9301FED1D23B4C400C414A0 /* Interactor */,
+				A9301FEC1D23B4C000C414A0 /* Model */,
+			);
+			name = "App Logic";
+			sourceTree = "<group>";
+		};
+		A9301FE91D23B4B100C414A0 /* Wireframe */ = {
+			isa = PBXGroup;
+			children = (
+				A9301FEE1D23B4CC00C414A0 /* RecordWireframe.swift */,
+			);
+			name = Wireframe;
+			sourceTree = "<group>";
+		};
+		A9301FEA1D23B4B600C414A0 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				A9301FF41D23B4DD00C414A0 /* RecordController.swift */,
+				A9301FF51D23B4DD00C414A0 /* RecordViewInterface.swift */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		A9301FEB1D23B4BB00C414A0 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				A9301FF01D23B4D600C414A0 /* RecordPresenter.swift */,
+				A9301FF11D23B4D600C414A0 /* RecordPresenterInterfaceIO.swift */,
+			);
+			name = Presenter;
+			sourceTree = "<group>";
+		};
+		A9301FEC1D23B4C000C414A0 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				A9301FF81D23B4FE00C414A0 /* RecorderConstants.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		A9301FED1D23B4C400C414A0 /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				A9F777BC1D2A4448008D479B /* CameraInteractor.swift */,
+				A9F777BD1D2A4448008D479B /* CameraInteractorInterface.swift */,
+				A93020031D23B5E300C414A0 /* ThumbnailInteractor */,
+				A93020021D23B5DC00C414A0 /* TimerInteractor */,
+				A93020011D23B5D600C414A0 /* FlashInteractor */,
+				A93020101D23B62A00C414A0 /* FiltersInteractor */,
+				A93020001D23B5CD00C414A0 /* ExporterInteractor */,
+				A9301FFF1D23B5C100C414A0 /* RecorderInteractor */,
+				A9301FFE1D23B52000C414A0 /* Kamarada Album */,
+			);
+			name = Interactor;
+			sourceTree = "<group>";
+		};
+		A9301FFE1D23B52000C414A0 /* Kamarada Album */ = {
+			isa = PBXGroup;
+			children = (
+				A95339101D253950006890E7 /* ClipsAlbum.swift */,
+				A95339111D253950006890E7 /* ExportedAlbum.swift */,
+			);
+			name = "Kamarada Album";
+			sourceTree = "<group>";
+		};
+		A9301FFF1D23B5C100C414A0 /* RecorderInteractor */ = {
+			isa = PBXGroup;
+			children = (
+				A93020041D23B60000C414A0 /* CameraRecorderInteractor.swift */,
+				A93020051D23B60000C414A0 /* CameraRecorderInterface.swift */,
+			);
+			name = RecorderInteractor;
+			sourceTree = "<group>";
+		};
+		A93020001D23B5CD00C414A0 /* ExporterInteractor */ = {
+			isa = PBXGroup;
+			children = (
+				A93020081D23B60A00C414A0 /* ExporterInteractor.swift */,
+			);
+			name = ExporterInteractor;
+			sourceTree = "<group>";
+		};
+		A93020011D23B5D600C414A0 /* FlashInteractor */ = {
+			isa = PBXGroup;
+			children = (
+				A953390C1D2535F2006890E7 /* FlashInteractor.swift */,
+			);
+			name = FlashInteractor;
+			sourceTree = "<group>";
+		};
+		A93020021D23B5DC00C414A0 /* TimerInteractor */ = {
+			isa = PBXGroup;
+			children = (
+				A93020111D23B65400C414A0 /* TimerInteractor.swift */,
+				A93020121D23B65400C414A0 /* TimerInteractorInterface.swift */,
+			);
+			name = TimerInteractor;
+			sourceTree = "<group>";
+		};
+		A93020031D23B5E300C414A0 /* ThumbnailInteractor */ = {
+			isa = PBXGroup;
+			children = (
+				A93020151D23B65D00C414A0 /* ThumbnailInteractor.swift */,
+			);
+			name = ThumbnailInteractor;
+			sourceTree = "<group>";
+		};
+		A93020101D23B62A00C414A0 /* FiltersInteractor */ = {
+			isa = PBXGroup;
+			children = (
+				A930200A1D23B62800C414A0 /* AddFilterInteractor.swift */,
+				A930200B1D23B62800C414A0 /* ChangeFilterInteractor.swift */,
+				A930200C1D23B62800C414A0 /* RemoveFilterInteractor.swift */,
+			);
+			name = FiltersInteractor;
+			sourceTree = "<group>";
+		};
 		A955F4F01CA95B0D00B0CF62 = {
 			isa = PBXGroup;
 			children = (
@@ -290,17 +762,17 @@
 		A955F4FB1CA95B0D00B0CF62 /* Kamarada */ = {
 			isa = PBXGroup;
 			children = (
-				A9093CE11CD111AD00A099A6 /* ISO639-2 */,
+				A9F777B21D268D22008D479B /* filter_free.png */,
+				A9301F891D23AED400C414A0 /* Common */,
+				A9301F831D23AEAD00C414A0 /* Modules */,
 				A9DE88FA1CAE922800767910 /* Data Model */,
-				A900E4FA1CC9026C00C44271 /* Utils */,
 				A9F4A1B21CABCAC700B12907 /* Controllers */,
-				A9E0BFE61CD3558A0087D089 /* Resources */,
-				A9E0BFE71CD355950087D089 /* Plist */,
 				A955F5031CA95B0D00B0CF62 /* Assets.xcassets */,
+				A9E0BFE71CD355950087D089 /* Plist */,
 				A955F4FC1CA95B0D00B0CF62 /* AppDelegate.swift */,
-				A955F5051CA95B0D00B0CF62 /* LaunchScreen.storyboard */,
-				A955F5001CA95B0D00B0CF62 /* Main.storyboard */,
+				A93020171D23B68B00C414A0 /* AppDependencies.swift */,
 				A9981E011CC501D0001659C3 /* Kamarada-Bridging-Header.h */,
+				A9301F8A1D23AF0A00C414A0 /* StoryBoard */,
 			);
 			path = Kamarada;
 			sourceTree = "<group>";
@@ -396,6 +868,15 @@
 				A95EB5271CA97AD7000EAAB0 /* SettingsController.swift */,
 			);
 			name = Controllers;
+			sourceTree = "<group>";
+		};
+		A9F777AF1D26838A008D479B /* TwitterVideoUpload */ = {
+			isa = PBXGroup;
+			children = (
+				A9F777AA1D268386008D479B /* TwitterVideoUpload.h */,
+				A9F777AB1D268386008D479B /* TwitterVideoUpload.m */,
+			);
+			name = TwitterVideoUpload;
 			sourceTree = "<group>";
 		};
 		FCB765DB3840268312E300C4 /* Pods */ = {
@@ -547,6 +1028,7 @@
 				A91AD87D1CE200F20026867B /* silent_film_overlay_f_320_240.png in Resources */,
 				A918CBE11CAAD175009F2A50 /* Settings.strings in Resources */,
 				A91AD87C1CE200F20026867B /* silent_film_overlay_e_320_240.png in Resources */,
+				A953390A1D2530B0006890E7 /* Main.storyboard in Resources */,
 				A91AD87F1CE200F20026867B /* silent_film_overlay_h_320_240.png in Resources */,
 				A91AD8631CE1F4DE0026867B /* silent_film_overlay_a.png in Resources */,
 				A91AD86B1CE1F4DE0026867B /* silent_film_overlay_i.png in Resources */,
@@ -561,12 +1043,12 @@
 				A91AD8691CE1F4DE0026867B /* silent_film_overlay_g.png in Resources */,
 				A91AD86A1CE1F4DE0026867B /* silent_film_overlay_h.png in Resources */,
 				A91AD86C1CE1F4DE0026867B /* silent_film_overlay_j.png in Resources */,
-				A955F5021CA95B0D00B0CF62 /* Main.storyboard in Resources */,
 				A91AD8681CE1F4DE0026867B /* silent_film_overlay_f.png in Resources */,
 				A9093CE71CD1134D00A099A6 /* iso639_2.bundle in Resources */,
 				A91AD87A1CE200F20026867B /* silent_film_overlay_c_320_240.png in Resources */,
 				A91AD8801CE200F20026867B /* silent_film_overlay_i_320_240.png in Resources */,
 				A9F43F031CB4F13000007FD4 /* kamarada_audio.mp3 in Resources */,
+				A9F777B31D268D22008D479B /* filter_free.png in Resources */,
 				A91AD8671CE1F4DE0026867B /* silent_film_overlay_e.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -640,17 +1122,69 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A9301FDF1D23B45B00C414A0 /* ShareSocialNetworkInteractor.swift in Sources */,
+				A9301FF61D23B4DD00C414A0 /* RecordController.swift in Sources */,
+				A9301FEF1D23B4CC00C414A0 /* RecordWireframe.swift in Sources */,
+				A93020061D23B60000C414A0 /* CameraRecorderInteractor.swift in Sources */,
+				A9301FF71D23B4DD00C414A0 /* RecordViewInterface.swift in Sources */,
+				A93020071D23B60000C414A0 /* CameraRecorderInterface.swift in Sources */,
+				A9301FDD1D23B45B00C414A0 /* ShareFacebookInteractor.swift in Sources */,
+				A9301F941D23AFBD00C414A0 /* KamaradaTracker.swift in Sources */,
 				A9DE88F91CAE922200767910 /* FilterOperationTypes.swift in Sources */,
+				A9301FE01D23B45B00C414A0 /* ShareTwitterInteractor.swift in Sources */,
+				A9301FD01D23B41B00C414A0 /* SharePresenter.swift in Sources */,
+				A9301FD61D23B44800C414A0 /* ShareInteractorInterface.swift in Sources */,
+				A9301FF91D23B4FE00C414A0 /* RecorderConstants.swift in Sources */,
 				A900E45F1CC8CD0300C44271 /* AnalitycsConstants.swift in Sources */,
 				A918CBDF1CAAB670009F2A50 /* SharedViewController.swift in Sources */,
 				A95EB5281CA97AD7000EAAB0 /* SettingsController.swift in Sources */,
+				A9301FAE1D23B1F900C414A0 /* SettingsPresenterInterface.swift in Sources */,
 				A9093CE41CD111C000A099A6 /* NSLocale+ISO639_2.m in Sources */,
+				A93020161D23B65D00C414A0 /* ThumbnailInteractor.swift in Sources */,
 				A9B903761CAA8E68001839C7 /* DetailSettingsController.swift in Sources */,
+				A9301FDE1D23B45B00C414A0 /* ShareInstagramInteractor.swift in Sources */,
+				A93020141D23B65400C414A0 /* TimerInteractorInterface.swift in Sources */,
+				A9301FAD1D23B1F900C414A0 /* SettingsPresenter.swift in Sources */,
+				A93020181D23B68B00C414A0 /* AppDependencies.swift in Sources */,
+				A9301FF31D23B4D600C414A0 /* RecordPresenterInterfaceIO.swift in Sources */,
+				A9301FE61D23B46A00C414A0 /* SocialNetworkProvider.swift in Sources */,
+				A95339121D253950006890E7 /* ClipsAlbum.swift in Sources */,
+				A93020131D23B65400C414A0 /* TimerInteractor.swift in Sources */,
+				A9301FC91D23B3CD00C414A0 /* ShareWireframe.swift in Sources */,
+				A930200D1D23B62800C414A0 /* AddFilterInteractor.swift in Sources */,
+				A9301F911D23AF8400C414A0 /* KamaradaController.swift in Sources */,
+				A9301FF21D23B4D600C414A0 /* RecordPresenter.swift in Sources */,
 				A9DE88F81CAE922200767910 /* FilterOperations.swift in Sources */,
+				A9301FE21D23B45B00C414A0 /* ShareYoutubeInteractor.swift in Sources */,
+				A9301FBC1D23B2FB00C414A0 /* SettingsProvider.swift in Sources */,
 				A900E4F91CC9026800C44271 /* Utils.swift in Sources */,
+				A9F777AC1D268386008D479B /* TwitterVideoUpload.m in Sources */,
+				A9301FE51D23B46A00C414A0 /* SocialNetwork.swift in Sources */,
+				A9301FCC1D23B41000C414A0 /* ShareInterface.swift in Sources */,
+				A9301FE11D23B45B00C414A0 /* ShareWhatsappInteractor.swift in Sources */,
+				A95339131D253950006890E7 /* ExportedAlbum.swift in Sources */,
+				A9301F8D1D23AF3E00C414A0 /* RootWireframe.swift in Sources */,
+				A9F777B71D269E8F008D479B /* SettingsViewController.swift in Sources */,
+				A930200F1D23B62800C414A0 /* RemoveFilterInteractor.swift in Sources */,
+				A95339151D2539E5006890E7 /* ShareConstants.swift in Sources */,
+				A9F777BE1D2A4448008D479B /* CameraInteractor.swift in Sources */,
+				A93020091D23B60A00C414A0 /* ExporterInteractor.swift in Sources */,
 				A955F4FF1CA95B0D00B0CF62 /* MainViewController.swift in Sources */,
+				A9301FC01D23B32F00C414A0 /* SettingsConstants.swift in Sources */,
+				A9301FAA1D23B1EE00C414A0 /* SettingsInteractor.swift in Sources */,
 				A900E46A1CC8E36A00C44271 /* ConfigPreferences.swift in Sources */,
+				A9F777BF1D2A4448008D479B /* CameraInteractorInterface.swift in Sources */,
+				A9301FD51D23B44800C414A0 /* ShareInteractor.swift in Sources */,
+				A953390D1D2535F2006890E7 /* FlashInteractor.swift in Sources */,
+				A9301FB61D23B24D00C414A0 /* SettingsWireframe.swift in Sources */,
+				A9301FBA1D23B28F00C414A0 /* SettingsInteractorInterface.swift in Sources */,
+				A930200E1D23B62800C414A0 /* ChangeFilterInteractor.swift in Sources */,
+				A953390F1D253922006890E7 /* AVResolutionParse.swift in Sources */,
 				A955F4FD1CA95B0D00B0CF62 /* AppDelegate.swift in Sources */,
+				A9301FD11D23B41B00C414A0 /* SharePresenterInterface.swift in Sources */,
+				A9301FCD1D23B41000C414A0 /* ShareViewController.swift in Sources */,
+				A9301FBE1D23B31900C414A0 /* SettingsContent.swift in Sources */,
+				A9301FB41D23B21F00C414A0 /* SettingsInterface.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -691,10 +1225,10 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		A955F5001CA95B0D00B0CF62 /* Main.storyboard */ = {
+		A95339081D2530B0006890E7 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				A955F5011CA95B0D00B0CF62 /* Base */,
+				A95339091D2530B0006890E7 /* Base */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -813,7 +1347,7 @@
 				"OTHER_SWIFT_FLAGS[arch=*]" = "-DDEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Videona.Kamarada;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "3bb30cbd-3101-4c52-9ed3-d9cb17b7199e";
+				PROVISIONING_PROFILE = "31430f87-f05d-4bfc-945a-7fb5e7250854";
 				SWIFT_OBJC_BRIDGING_HEADER = "Kamarada/Kamarada-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -838,7 +1372,7 @@
 				"OTHER_SWIFT_FLAGS[arch=*]" = "-DRELEASE";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Videona.Kamarada;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "3bb30cbd-3101-4c52-9ed3-d9cb17b7199e";
+				PROVISIONING_PROFILE = "31430f87-f05d-4bfc-945a-7fb5e7250854";
 				SWIFT_OBJC_BRIDGING_HEADER = "Kamarada/Kamarada-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

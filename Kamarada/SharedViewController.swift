@@ -335,8 +335,10 @@ class SharedViewController: UIViewController,GIDSignInUIDelegate,GIDSignInDelega
         
         let video: FBSDKShareVideo = FBSDKShareVideo()
         video.videoURL = movieURL
+      
         let content:FBSDKShareVideoContent = FBSDKShareVideoContent()
         content.video = video
+       
         let dialog = FBSDKShareDialog.init()
         dialog.fromViewController = self
         dialog.shareContent = content

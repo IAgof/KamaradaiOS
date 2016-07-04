@@ -83,5 +83,34 @@ class AnalyticsConstants {
     let INSTAGRAM = "Instagram"
     let FACEBOOK = "Facebook"
     let YOUTUBE = "Youtube"
+    
+    /**
+     * Values from videoan app, should delete some ones
+     */
+    let DATE = "date" // Beta Leaved event property
+    
+    let FILTER_TYPE_COLOR = "color"
+    let FILTER_TYPE_DISTORTION = "distortion"
+    let FILTER_TYPE_OVERLAY = "overlay"
+    let INTERACTION_OPEN_DRAWER = "drawer opened"
+    let CAMERA_BACK = "back"
+    let CAMERA_FRONT = "front"
+    let CLEAR_FILTER = "clearFilter"
+    let SET_FILTER_GROUP = "setFilterGroup"
+    let FILTER_GROUP_OVERLAY = "overlay"
+    let FILTER_GROUP_SHADER = "shader"
+    let FILTERS_COMBINED = "filtersCombined"
+    let COMBINED = "combined"
+    
+    let INIT_STATE_FIRST_TIME = "firstTime"
+    let INIT_STATE_RETURNING = "returning"
+    let INIT_STATE_UPGRADE = "upgrade"
+    let APP_SHARED_NAME = "appShared"
+    let LINK = "link"
+    let SOURCE_APP = "sourceApp"
+    let DESTINATION = "destination"
+    let SOURCE_APP_VIDEONA = "Videona"
+    let DESTINATION_KAMARADA_PLAY = "Kamarada Google Play"
+    let DESTINATION_KAMARADA_ITUNES = "Kamarada Itunes"
 }
 
