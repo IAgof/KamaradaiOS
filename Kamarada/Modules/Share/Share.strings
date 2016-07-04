@@ -1,0 +1,22 @@
+/* 
+  Share.strings
+  Videona
+
+  Created by Alejandro Arjonilla Garcia on 16/6/16.
+  Copyright © 2016 Videona. All rights reserved.
+*/
+
+"OK" = "OK";
+"uploadingVideo" = "Uploading video";
+"pleaseWait" = "Please wait";
+"descriptionYoutube" = "Video recorded with Kamarada app #Kamarada";
+"titleYoutube" = "Videona %s";
+"uploadSuccesfull" = "Video upload successfully";
+"uploadFail" = "Video upload failed";
+"videonaHastagh" = "#VideonaTime";
+"kamaradaHastagh" = "#Kamarada";
+"twitterNoAcces" = "No access to Twitter account";
+"twitterMaxLenght" = "Video max lenght 30 seconds";
+"twitterMaxSize" = "Video max size 15Mb";
+"instagramMaxLenght" = "Video max lenght 60 seconds";
+"shareYourVideo" = "Share your video";

@@ -20,6 +20,9 @@
 "share_using"  = "Share video using ";
 "sharedWithVideona"  = "Shared with Videona";
 "videonaTags" = "#Videona";
+"no_whatsapp_installed" = "No whatsapp installed";
+"no_instagram_installed" = "No instagram installed";
+"no_facebook_installed" = "No facebook installed\n needed to share video content";
 
 "edit_title_name"  = "Edit Room";
 "edit_text_fx"  = "Working on effects";
@@ -81,6 +84,7 @@
 
 //<!-- Join/Leave beta Videona --"
 "title_advanced_section"  = "Advanced";
+"visitVideona" = "Visit Videona";
 
 //<!-- Email --"
 "enterEmail"  = "Enter a valid email";

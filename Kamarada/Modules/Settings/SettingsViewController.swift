@@ -54,6 +54,17 @@ UITableViewDelegate,UITableViewDataSource{
         self.section = section
     }
     
+    func addFooter() {
+        
+        let footer = UINib(nibName: "VideonaFooterView", bundle: nil).instantiateWithOwner(nil, options: nil)[0] as! UIView
+        
+        let footerTest = UIView.init(frame: footer.frame)
+        footerTest.addSubview(footer)
+        
+        settingsTableView.tableFooterView = footerTest
+        
+    }
+    
     //MARK: - UITableview datasource
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return self.section[section]
@@ -111,52 +122,12 @@ UITableViewDelegate,UITableViewDataSource{
     
     
     //MARK: - AlertViewController
-    func createAlertViewWithInputText(title:String){
-        let saveString = "Save"
-        let alertController = UIAlertController(title: title, message: "Insert your \(title.lowercaseString) here", preferredStyle: .Alert)
-        
-        alertController.addTextFieldWithConfigurationHandler { (textField : UITextField!) -> Void in
-            textField.placeholder = title
-        }
-        
-        let saveAction = UIAlertAction(title: saveString, style: .Default, handler: {alert -> Void in
-            let firstTextFieldText = (alertController.textFields![0] as UITextField).text
-            print("El \(title) introducido para mandar al presenter es: \(firstTextFieldText!)")
-            self.eventHandler?.getInputFromAlert(title, input: firstTextFieldText!)
-        })
-        
-        alertController.addAction(saveAction)
-        
-        self.presentViewController(alertController, animated: true, completion: nil)
-    }
-    
     func createAlertViewError(buttonText:String,message:String,title:String){
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .Alert)
         
         let saveAction = UIAlertAction(title: buttonText, style: .Destructive, handler: nil)
         
         alertController.addAction(saveAction)
-        
-        self.presentViewController(alertController, animated: true, completion: nil)
-    }
-    
-    func createActionSheetWithOptions(title:String,options:Array<String>){
-        let cancelString = "Cancel"
-        let title = title
-        
-        let alertController = UIAlertController(title: title, message: nil, preferredStyle: .ActionSheet)
-        
-        for option in options {
-            let optionAction = UIAlertAction(title: option, style: .Default, handler: {alert -> Void in
-                
-                self.eventHandler?.getInputFromAlert(title, input: option)
-                print("El \(title) introducido para mandar al presenter es: \(option)")
-            })
-            alertController.addAction(optionAction)
-        }
-        
-        let optionAction = UIAlertAction(title: cancelString, style: .Cancel, handler: nil)
-        alertController.addAction(optionAction)
         
         self.presentViewController(alertController, animated: true, completion: nil)
     }
@@ -178,6 +149,7 @@ UITableViewDelegate,UITableViewDataSource{
         // show the alert
         self.presentViewController(alert, animated: true, completion: nil)
     }
+    
     func reloadTableData() {
         self.settingsTableView.reloadData()
     }

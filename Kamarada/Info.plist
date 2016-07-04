@@ -42,6 +42,14 @@
 				<string>com.googleusercontent.apps.471435902044-lr4bifi6he20sgkfh8aqi41kba2bisq9</string>
 			</array>
 		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>KamaradaiOS</string>
+			</array>
+		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>8</string>

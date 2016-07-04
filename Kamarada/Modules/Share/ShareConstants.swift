@@ -20,6 +20,7 @@ class ShareConstants: NSObject {
     let UPLOAD_SUCCESFULL = "uploadSuccesfull"
     let UPLOAD_FAIL = "uploadFail"
     let VIDEONATIME_HASTAGH = "videonaHastagh"
+    let KAMARADA_HASTAGH = "kamaradaHastagh"
     let NO_TWITTER_ACCESS = "twitterNoAcces"
     let TWITTER_MAX_LENGHT = "twitterMaxLenght"
     let TWITTER_MAX_SIZE = "twitterMaxSize"

@@ -40,12 +40,19 @@ GIDSignInUIDelegate,GIDSignInDelegate{
     }
     
     //MARK: - Outlets
-    @IBOutlet weak var shareTableView: UITableView!
     @IBOutlet weak var playerView: UIView!
     @IBOutlet weak var settingsNavBar: UINavigationItem!
-    @IBOutlet weak var expandPlayerButton: UIButton!
+//    @IBOutlet weak var expandPlayerButton: UIButton!
     
-    
+    @IBOutlet weak var backgroundShareView: UIView!
+    @IBOutlet weak var whatsappImageView: UIImageView!
+    @IBOutlet weak var FBImageView: UIImageView!
+    @IBOutlet weak var youtubeImageView: UIImageView!
+    @IBOutlet weak var twitterImageView: UIImageView!
+    @IBOutlet weak var backgroundImageView: UIImageView!
+        
+    @IBOutlet weak var videoProgressView: UIProgressView!
+
     override func viewDidLoad() {
         super.viewDidLoad()
         print("ViewDid Load")
@@ -55,17 +62,13 @@ GIDSignInUIDelegate,GIDSignInDelegate{
     
     //MARK: - View Init
     func createShareInterface(){
-        let nib = UINib.init(nibName: shareNibName, bundle: nil)
-        shareTableView.registerNib(nib, forCellReuseIdentifier: reuseIdentifierCell)
-                
+        self.setUpImageTaps()
+        
         //Google Sign in
         GIDSignIn.sharedInstance().uiDelegate = self
         GIDSignIn.sharedInstance().delegate = self
     }
-
-    func bringToFrontExpandPlayerButton(){
-        self.playerView.bringSubviewToFront(expandPlayerButton)
-    }
+    
     func setNavBarTitle(title:String){
         settingsNavBar.title = title
     }
@@ -83,6 +86,43 @@ GIDSignInUIDelegate,GIDSignInDelegate{
         
     @IBAction func pushBackBarButton(sender: AnyObject) {
         eventHandler?.pushBack()
+    }
+    
+    func setUpImageTaps(){
+        //Get actions from ImageViews, could be buttons, but not the same shape image.
+        var tapGestureRecognizer = UITapGestureRecognizer(target:self, action:#selector(ShareViewController.whatsappImageTapped(_:)))
+        whatsappImageView.userInteractionEnabled = true
+        whatsappImageView.addGestureRecognizer(tapGestureRecognizer)
+        
+        tapGestureRecognizer = UITapGestureRecognizer(target:self, action:#selector(ShareViewController.FBImageTapped(_:)))
+        FBImageView.userInteractionEnabled = true
+        FBImageView.addGestureRecognizer(tapGestureRecognizer)
+        
+        tapGestureRecognizer = UITapGestureRecognizer(target:self, action:#selector(ShareViewController.youtubeImageTapped(_:)))
+        youtubeImageView.userInteractionEnabled = true
+        youtubeImageView.addGestureRecognizer(tapGestureRecognizer)
+        
+        tapGestureRecognizer = UITapGestureRecognizer(target:self, action:#selector(ShareViewController.instagramImageTapped(_:)))
+        twitterImageView.userInteractionEnabled = true
+        twitterImageView.addGestureRecognizer(tapGestureRecognizer)
+    }
+    
+    //MARK: - OnTapp Image functions
+    func whatsappImageTapped(img: AnyObject)
+    {
+        eventHandler?.pushShare("Whatsapp")
+    }
+    func FBImageTapped(img: AnyObject)
+    {
+        eventHandler?.pushShare("Facebook")
+    }
+    func youtubeImageTapped(img: AnyObject)
+    {
+        eventHandler?.pushShare("Youtube")
+    }
+    func instagramImageTapped(img: AnyObject)
+    {
+        eventHandler?.pushShare("Instagram")
     }
     
     //MARK: - Google methods

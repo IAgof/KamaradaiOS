@@ -93,9 +93,28 @@
 		A955F5121CA95B0D00B0CF62 /* KamaradaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A955F5111CA95B0D00B0CF62 /* KamaradaTests.swift */; };
 		A955F51D1CA95B0E00B0CF62 /* KamaradaUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A955F51C1CA95B0E00B0CF62 /* KamaradaUITests.swift */; };
 		A95EB5281CA97AD7000EAAB0 /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A95EB5271CA97AD7000EAAB0 /* SettingsController.swift */; };
+		A962293B1D2A729500FFAE49 /* DetailTextInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A96229391D2A729500FFAE49 /* DetailTextInteractor.swift */; };
+		A962293C1D2A729500FFAE49 /* DetailTextInteractorInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = A962293A1D2A729500FFAE49 /* DetailTextInteractorInterface.swift */; };
+		A962293F1D2A729C00FFAE49 /* DetailTextPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A962293D1D2A729C00FFAE49 /* DetailTextPresenter.swift */; };
+		A96229401D2A729C00FFAE49 /* DetailTextPresenterInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = A962293E1D2A729C00FFAE49 /* DetailTextPresenterInterface.swift */; };
+		A96229421D2A72A100FFAE49 /* DetailTextWireframe.swift in Sources */ = {isa = PBXBuildFile; fileRef = A96229411D2A72A100FFAE49 /* DetailTextWireframe.swift */; };
+		A96229451D2A72A800FFAE49 /* DetailTextController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A96229431D2A72A800FFAE49 /* DetailTextController.swift */; };
+		A96229461D2A72A800FFAE49 /* DetailTextInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = A96229441D2A72A800FFAE49 /* DetailTextInterface.swift */; };
+		A96229501D2AA0B700FFAE49 /* PlayerWireframe.swift in Sources */ = {isa = PBXBuildFile; fileRef = A962294F1D2AA0B700FFAE49 /* PlayerWireframe.swift */; };
+		A962295A1D2AA0C000FFAE49 /* PlayerInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A96229511D2AA0C000FFAE49 /* PlayerInteractor.swift */; };
+		A962295B1D2AA0C000FFAE49 /* PlayerInteractorInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = A96229521D2AA0C000FFAE49 /* PlayerInteractorInterface.swift */; };
+		A962295C1D2AA0C000FFAE49 /* PlayerInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = A96229531D2AA0C000FFAE49 /* PlayerInterface.swift */; };
+		A962295D1D2AA0C000FFAE49 /* PlayerItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = A96229541D2AA0C000FFAE49 /* PlayerItem.swift */; };
+		A962295E1D2AA0C000FFAE49 /* PlayerPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A96229551D2AA0C000FFAE49 /* PlayerPresenter.swift */; };
+		A962295F1D2AA0C000FFAE49 /* PlayerPresenterInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = A96229561D2AA0C000FFAE49 /* PlayerPresenterInterface.swift */; };
+		A96229601D2AA0C000FFAE49 /* PlayerProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A96229571D2AA0C000FFAE49 /* PlayerProvider.swift */; };
+		A96229611D2AA0C000FFAE49 /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A96229581D2AA0C000FFAE49 /* PlayerView.swift */; };
+		A96229621D2AA0C000FFAE49 /* PlayerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A96229591D2AA0C000FFAE49 /* PlayerView.xib */; };
+		A96229641D2AA8AD00FFAE49 /* Share.strings in Resources */ = {isa = PBXBuildFile; fileRef = A96229631D2AA8AD00FFAE49 /* Share.strings */; };
 		A9981E0D1CC50695001659C3 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9981E0A1CC50695001659C3 /* FBSDKCoreKit.framework */; };
 		A9981E0E1CC50695001659C3 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9981E0B1CC50695001659C3 /* FBSDKLoginKit.framework */; };
 		A9981E0F1CC50695001659C3 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9981E0C1CC50695001659C3 /* FBSDKShareKit.framework */; };
+		A99CBFC91D2A6FA800F9BD40 /* VideonaFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A99CBFC81D2A6FA800F9BD40 /* VideonaFooterView.xib */; };
 		A9B903761CAA8E68001839C7 /* DetailSettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B903751CAA8E68001839C7 /* DetailSettingsController.swift */; };
 		A9CB568B1CCE2E6D00E39F11 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A9CB568A1CCE2E6D00E39F11 /* GoogleService-Info.plist */; };
 		A9DE88F01CAE8CA600767910 /* GPUImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9DE88ED1CAE8C9B00767910 /* GPUImage.framework */; };
@@ -260,10 +279,29 @@
 		A955F51C1CA95B0E00B0CF62 /* KamaradaUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KamaradaUITests.swift; sourceTree = "<group>"; };
 		A955F51E1CA95B0E00B0CF62 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A95EB5271CA97AD7000EAAB0 /* SettingsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = SettingsController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		A96229391D2A729500FFAE49 /* DetailTextInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DetailTextInteractor.swift; path = Modules/DetailText/DetailTextInteractor.swift; sourceTree = "<group>"; };
+		A962293A1D2A729500FFAE49 /* DetailTextInteractorInterface.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DetailTextInteractorInterface.swift; path = Modules/DetailText/DetailTextInteractorInterface.swift; sourceTree = "<group>"; };
+		A962293D1D2A729C00FFAE49 /* DetailTextPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DetailTextPresenter.swift; path = Modules/DetailText/DetailTextPresenter.swift; sourceTree = "<group>"; };
+		A962293E1D2A729C00FFAE49 /* DetailTextPresenterInterface.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DetailTextPresenterInterface.swift; path = Modules/DetailText/DetailTextPresenterInterface.swift; sourceTree = "<group>"; };
+		A96229411D2A72A100FFAE49 /* DetailTextWireframe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DetailTextWireframe.swift; path = Modules/DetailText/DetailTextWireframe.swift; sourceTree = "<group>"; };
+		A96229431D2A72A800FFAE49 /* DetailTextController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DetailTextController.swift; path = Modules/DetailText/DetailTextController.swift; sourceTree = "<group>"; };
+		A96229441D2A72A800FFAE49 /* DetailTextInterface.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DetailTextInterface.swift; path = Modules/DetailText/DetailTextInterface.swift; sourceTree = "<group>"; };
+		A962294F1D2AA0B700FFAE49 /* PlayerWireframe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlayerWireframe.swift; path = Modules/Player/PlayerWireframe.swift; sourceTree = "<group>"; };
+		A96229511D2AA0C000FFAE49 /* PlayerInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlayerInteractor.swift; path = Modules/Player/PlayerInteractor.swift; sourceTree = "<group>"; };
+		A96229521D2AA0C000FFAE49 /* PlayerInteractorInterface.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlayerInteractorInterface.swift; path = Modules/Player/PlayerInteractorInterface.swift; sourceTree = "<group>"; };
+		A96229531D2AA0C000FFAE49 /* PlayerInterface.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlayerInterface.swift; path = Modules/Player/PlayerInterface.swift; sourceTree = "<group>"; };
+		A96229541D2AA0C000FFAE49 /* PlayerItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlayerItem.swift; path = Modules/Player/PlayerItem.swift; sourceTree = "<group>"; };
+		A96229551D2AA0C000FFAE49 /* PlayerPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlayerPresenter.swift; path = Modules/Player/PlayerPresenter.swift; sourceTree = "<group>"; };
+		A96229561D2AA0C000FFAE49 /* PlayerPresenterInterface.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlayerPresenterInterface.swift; path = Modules/Player/PlayerPresenterInterface.swift; sourceTree = "<group>"; };
+		A96229571D2AA0C000FFAE49 /* PlayerProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlayerProvider.swift; path = Modules/Player/PlayerProvider.swift; sourceTree = "<group>"; };
+		A96229581D2AA0C000FFAE49 /* PlayerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlayerView.swift; path = Modules/Player/PlayerView.swift; sourceTree = "<group>"; };
+		A96229591D2AA0C000FFAE49 /* PlayerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PlayerView.xib; path = Modules/Player/PlayerView.xib; sourceTree = "<group>"; };
+		A96229631D2AA8AD00FFAE49 /* Share.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = Share.strings; path = Modules/Share/Share.strings; sourceTree = "<group>"; };
 		A9981E011CC501D0001659C3 /* Kamarada-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Kamarada-Bridging-Header.h"; sourceTree = "<group>"; };
 		A9981E0A1CC50695001659C3 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		A9981E0B1CC50695001659C3 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		A9981E0C1CC50695001659C3 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKShareKit.framework; sourceTree = "<group>"; };
+		A99CBFC81D2A6FA800F9BD40 /* VideonaFooterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VideonaFooterView.xib; sourceTree = "<group>"; };
 		A9B903751CAA8E68001839C7 /* DetailSettingsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = DetailSettingsController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		A9CB568A1CCE2E6D00E39F11 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A9DE88E41CAE8C9B00767910 /* GPUImage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = GPUImage.xcodeproj; path = ../GPUImage/framework/GPUImage.xcodeproj; sourceTree = "<group>"; };
@@ -372,6 +410,8 @@
 		A9301F831D23AEAD00C414A0 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				A96229471D2AA05E00FFAE49 /* Player */,
+				A96229301D2A724E00FFAE49 /* DetailText */,
 				A9301F921D23AFAB00C414A0 /* Mixpanel Tracker */,
 				A9301F881D23AEC600C414A0 /* Settings */,
 				A9301F871D23AEC100C414A0 /* Share */,
@@ -449,6 +489,7 @@
 		A9301F8F1D23AF6C00C414A0 /* User Interface */ = {
 			isa = PBXGroup;
 			children = (
+				A99CBFC81D2A6FA800F9BD40 /* VideonaFooterView.xib */,
 				A9301F901D23AF8400C414A0 /* KamaradaController.swift */,
 			);
 			name = "User Interface";
@@ -519,6 +560,7 @@
 		A9301F9B1D23B0A400C414A0 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				A918CBE01CAAD175009F2A50 /* Settings.strings */,
 				A9301FBB1D23B2FB00C414A0 /* SettingsProvider.swift */,
 				A9301FBD1D23B31900C414A0 /* SettingsContent.swift */,
 				A9301FBF1D23B32F00C414A0 /* SettingsConstants.swift */,
@@ -574,6 +616,7 @@
 		A9301FC61D23B3BA00C414A0 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				A96229631D2AA8AD00FFAE49 /* Share.strings */,
 				A95339141D2539E5006890E7 /* ShareConstants.swift */,
 				A9301FE31D23B46A00C414A0 /* SocialNetwork.swift */,
 				A9301FE41D23B46A00C414A0 /* SocialNetworkProvider.swift */,
@@ -795,6 +838,141 @@
 			path = KamaradaUITests;
 			sourceTree = "<group>";
 		};
+		A96229301D2A724E00FFAE49 /* DetailText */ = {
+			isa = PBXGroup;
+			children = (
+				A96229341D2A725C00FFAE49 /* App Logic */,
+				A96229331D2A725500FFAE49 /* User Interface */,
+			);
+			name = DetailText;
+			sourceTree = "<group>";
+		};
+		A96229331D2A725500FFAE49 /* User Interface */ = {
+			isa = PBXGroup;
+			children = (
+				A96229381D2A727600FFAE49 /* Presenter */,
+				A96229371D2A727000FFAE49 /* View */,
+				A96229361D2A726B00FFAE49 /* Wireframe */,
+			);
+			name = "User Interface";
+			sourceTree = "<group>";
+		};
+		A96229341D2A725C00FFAE49 /* App Logic */ = {
+			isa = PBXGroup;
+			children = (
+				A96229351D2A726200FFAE49 /* Interactor */,
+			);
+			name = "App Logic";
+			sourceTree = "<group>";
+		};
+		A96229351D2A726200FFAE49 /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				A96229391D2A729500FFAE49 /* DetailTextInteractor.swift */,
+				A962293A1D2A729500FFAE49 /* DetailTextInteractorInterface.swift */,
+			);
+			name = Interactor;
+			sourceTree = "<group>";
+		};
+		A96229361D2A726B00FFAE49 /* Wireframe */ = {
+			isa = PBXGroup;
+			children = (
+				A96229411D2A72A100FFAE49 /* DetailTextWireframe.swift */,
+			);
+			name = Wireframe;
+			sourceTree = "<group>";
+		};
+		A96229371D2A727000FFAE49 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				A96229431D2A72A800FFAE49 /* DetailTextController.swift */,
+				A96229441D2A72A800FFAE49 /* DetailTextInterface.swift */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		A96229381D2A727600FFAE49 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				A962293D1D2A729C00FFAE49 /* DetailTextPresenter.swift */,
+				A962293E1D2A729C00FFAE49 /* DetailTextPresenterInterface.swift */,
+			);
+			name = Presenter;
+			sourceTree = "<group>";
+		};
+		A96229471D2AA05E00FFAE49 /* Player */ = {
+			isa = PBXGroup;
+			children = (
+				A96229491D2AA08B00FFAE49 /* App Logic */,
+				A96229481D2AA07F00FFAE49 /* User Interface */,
+			);
+			name = Player;
+			sourceTree = "<group>";
+		};
+		A96229481D2AA07F00FFAE49 /* User Interface */ = {
+			isa = PBXGroup;
+			children = (
+				A962294C1D2AA09A00FFAE49 /* Presenter */,
+				A962294B1D2AA09600FFAE49 /* View */,
+				A962294A1D2AA09100FFAE49 /* Wireframe */,
+			);
+			name = "User Interface";
+			sourceTree = "<group>";
+		};
+		A96229491D2AA08B00FFAE49 /* App Logic */ = {
+			isa = PBXGroup;
+			children = (
+				A962294E1D2AA0A500FFAE49 /* Interactor */,
+				A962294D1D2AA09F00FFAE49 /* Model */,
+			);
+			name = "App Logic";
+			sourceTree = "<group>";
+		};
+		A962294A1D2AA09100FFAE49 /* Wireframe */ = {
+			isa = PBXGroup;
+			children = (
+				A962294F1D2AA0B700FFAE49 /* PlayerWireframe.swift */,
+			);
+			name = Wireframe;
+			sourceTree = "<group>";
+		};
+		A962294B1D2AA09600FFAE49 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				A96229531D2AA0C000FFAE49 /* PlayerInterface.swift */,
+				A96229581D2AA0C000FFAE49 /* PlayerView.swift */,
+				A96229591D2AA0C000FFAE49 /* PlayerView.xib */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		A962294C1D2AA09A00FFAE49 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				A96229551D2AA0C000FFAE49 /* PlayerPresenter.swift */,
+				A96229561D2AA0C000FFAE49 /* PlayerPresenterInterface.swift */,
+			);
+			name = Presenter;
+			sourceTree = "<group>";
+		};
+		A962294D1D2AA09F00FFAE49 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				A96229541D2AA0C000FFAE49 /* PlayerItem.swift */,
+				A96229571D2AA0C000FFAE49 /* PlayerProvider.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		A962294E1D2AA0A500FFAE49 /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				A96229511D2AA0C000FFAE49 /* PlayerInteractor.swift */,
+				A96229521D2AA0C000FFAE49 /* PlayerInteractorInterface.swift */,
+			);
+			name = Interactor;
+			sourceTree = "<group>";
+		};
 		A9DBA8671CB6A18A00F3E3F5 /* GrainFilter */ = {
 			isa = PBXGroup;
 			children = (
@@ -834,7 +1012,6 @@
 		A9E0BFE61CD3558A0087D089 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				A918CBE01CAAD175009F2A50 /* Settings.strings */,
 				A9DBA8671CB6A18A00F3E3F5 /* GrainFilter */,
 				A90E10F11CC6413E00FC3172 /* Fonts */,
 				A9F43F061CB4F13400007FD4 /* Audio */,
@@ -1021,6 +1198,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A99CBFC91D2A6FA800F9BD40 /* VideonaFooterView.xib in Resources */,
 				A91AD8651CE1F4DE0026867B /* silent_film_overlay_c.png in Resources */,
 				A90E10F21CC6425800FC3172 /* Roboto-Regular.ttf in Resources */,
 				A91AD87E1CE200F20026867B /* silent_film_overlay_g_320_240.png in Resources */,
@@ -1044,11 +1222,13 @@
 				A91AD86A1CE1F4DE0026867B /* silent_film_overlay_h.png in Resources */,
 				A91AD86C1CE1F4DE0026867B /* silent_film_overlay_j.png in Resources */,
 				A91AD8681CE1F4DE0026867B /* silent_film_overlay_f.png in Resources */,
+				A96229641D2AA8AD00FFAE49 /* Share.strings in Resources */,
 				A9093CE71CD1134D00A099A6 /* iso639_2.bundle in Resources */,
 				A91AD87A1CE200F20026867B /* silent_film_overlay_c_320_240.png in Resources */,
 				A91AD8801CE200F20026867B /* silent_film_overlay_i_320_240.png in Resources */,
 				A9F43F031CB4F13000007FD4 /* kamarada_audio.mp3 in Resources */,
 				A9F777B31D268D22008D479B /* filter_free.png in Resources */,
+				A96229621D2AA0C000FFAE49 /* PlayerView.xib in Resources */,
 				A91AD8671CE1F4DE0026867B /* silent_film_overlay_e.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1124,15 +1304,21 @@
 			files = (
 				A9301FDF1D23B45B00C414A0 /* ShareSocialNetworkInteractor.swift in Sources */,
 				A9301FF61D23B4DD00C414A0 /* RecordController.swift in Sources */,
+				A962295D1D2AA0C000FFAE49 /* PlayerItem.swift in Sources */,
+				A962293F1D2A729C00FFAE49 /* DetailTextPresenter.swift in Sources */,
 				A9301FEF1D23B4CC00C414A0 /* RecordWireframe.swift in Sources */,
 				A93020061D23B60000C414A0 /* CameraRecorderInteractor.swift in Sources */,
 				A9301FF71D23B4DD00C414A0 /* RecordViewInterface.swift in Sources */,
 				A93020071D23B60000C414A0 /* CameraRecorderInterface.swift in Sources */,
 				A9301FDD1D23B45B00C414A0 /* ShareFacebookInteractor.swift in Sources */,
 				A9301F941D23AFBD00C414A0 /* KamaradaTracker.swift in Sources */,
+				A962293B1D2A729500FFAE49 /* DetailTextInteractor.swift in Sources */,
+				A96229421D2A72A100FFAE49 /* DetailTextWireframe.swift in Sources */,
 				A9DE88F91CAE922200767910 /* FilterOperationTypes.swift in Sources */,
 				A9301FE01D23B45B00C414A0 /* ShareTwitterInteractor.swift in Sources */,
 				A9301FD01D23B41B00C414A0 /* SharePresenter.swift in Sources */,
+				A962293C1D2A729500FFAE49 /* DetailTextInteractorInterface.swift in Sources */,
+				A962295F1D2AA0C000FFAE49 /* PlayerPresenterInterface.swift in Sources */,
 				A9301FD61D23B44800C414A0 /* ShareInteractorInterface.swift in Sources */,
 				A9301FF91D23B4FE00C414A0 /* RecorderConstants.swift in Sources */,
 				A900E45F1CC8CD0300C44271 /* AnalitycsConstants.swift in Sources */,
@@ -1143,18 +1329,23 @@
 				A93020161D23B65D00C414A0 /* ThumbnailInteractor.swift in Sources */,
 				A9B903761CAA8E68001839C7 /* DetailSettingsController.swift in Sources */,
 				A9301FDE1D23B45B00C414A0 /* ShareInstagramInteractor.swift in Sources */,
+				A962295A1D2AA0C000FFAE49 /* PlayerInteractor.swift in Sources */,
 				A93020141D23B65400C414A0 /* TimerInteractorInterface.swift in Sources */,
 				A9301FAD1D23B1F900C414A0 /* SettingsPresenter.swift in Sources */,
 				A93020181D23B68B00C414A0 /* AppDependencies.swift in Sources */,
 				A9301FF31D23B4D600C414A0 /* RecordPresenterInterfaceIO.swift in Sources */,
 				A9301FE61D23B46A00C414A0 /* SocialNetworkProvider.swift in Sources */,
+				A96229451D2A72A800FFAE49 /* DetailTextController.swift in Sources */,
 				A95339121D253950006890E7 /* ClipsAlbum.swift in Sources */,
 				A93020131D23B65400C414A0 /* TimerInteractor.swift in Sources */,
 				A9301FC91D23B3CD00C414A0 /* ShareWireframe.swift in Sources */,
 				A930200D1D23B62800C414A0 /* AddFilterInteractor.swift in Sources */,
 				A9301F911D23AF8400C414A0 /* KamaradaController.swift in Sources */,
 				A9301FF21D23B4D600C414A0 /* RecordPresenter.swift in Sources */,
+				A96229461D2A72A800FFAE49 /* DetailTextInterface.swift in Sources */,
+				A96229601D2AA0C000FFAE49 /* PlayerProvider.swift in Sources */,
 				A9DE88F81CAE922200767910 /* FilterOperations.swift in Sources */,
+				A962295C1D2AA0C000FFAE49 /* PlayerInterface.swift in Sources */,
 				A9301FE21D23B45B00C414A0 /* ShareYoutubeInteractor.swift in Sources */,
 				A9301FBC1D23B2FB00C414A0 /* SettingsProvider.swift in Sources */,
 				A900E4F91CC9026800C44271 /* Utils.swift in Sources */,
@@ -1168,17 +1359,22 @@
 				A930200F1D23B62800C414A0 /* RemoveFilterInteractor.swift in Sources */,
 				A95339151D2539E5006890E7 /* ShareConstants.swift in Sources */,
 				A9F777BE1D2A4448008D479B /* CameraInteractor.swift in Sources */,
+				A962295B1D2AA0C000FFAE49 /* PlayerInteractorInterface.swift in Sources */,
 				A93020091D23B60A00C414A0 /* ExporterInteractor.swift in Sources */,
 				A955F4FF1CA95B0D00B0CF62 /* MainViewController.swift in Sources */,
 				A9301FC01D23B32F00C414A0 /* SettingsConstants.swift in Sources */,
 				A9301FAA1D23B1EE00C414A0 /* SettingsInteractor.swift in Sources */,
 				A900E46A1CC8E36A00C44271 /* ConfigPreferences.swift in Sources */,
 				A9F777BF1D2A4448008D479B /* CameraInteractorInterface.swift in Sources */,
+				A96229401D2A729C00FFAE49 /* DetailTextPresenterInterface.swift in Sources */,
+				A96229501D2AA0B700FFAE49 /* PlayerWireframe.swift in Sources */,
 				A9301FD51D23B44800C414A0 /* ShareInteractor.swift in Sources */,
 				A953390D1D2535F2006890E7 /* FlashInteractor.swift in Sources */,
 				A9301FB61D23B24D00C414A0 /* SettingsWireframe.swift in Sources */,
 				A9301FBA1D23B28F00C414A0 /* SettingsInteractorInterface.swift in Sources */,
 				A930200E1D23B62800C414A0 /* ChangeFilterInteractor.swift in Sources */,
+				A962295E1D2AA0C000FFAE49 /* PlayerPresenter.swift in Sources */,
+				A96229611D2AA0C000FFAE49 /* PlayerView.swift in Sources */,
 				A953390F1D253922006890E7 /* AVResolutionParse.swift in Sources */,
 				A955F4FD1CA95B0D00B0CF62 /* AppDelegate.swift in Sources */,
 				A9301FD11D23B41B00C414A0 /* SharePresenterInterface.swift in Sources */,

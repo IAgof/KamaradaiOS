@@ -15,10 +15,11 @@ import Alamofire
 import Mixpanel
 
 
-class SharedViewController: UIViewController,GIDSignInUIDelegate,GIDSignInDelegate,FBSDKLoginButtonDelegate{
+class SharedViewController: UIViewController,
+GIDSignInUIDelegate,GIDSignInDelegate,
+FBSDKLoginButtonDelegate{
     
     //MARK: - Outlets
-    @IBOutlet weak var socialTableView: UITableView!
     @IBOutlet weak var backgroundShareView: UIView!
     @IBOutlet weak var whatsappImageView: UIImageView!
     @IBOutlet weak var FBImageView: UIImageView!
@@ -106,6 +107,7 @@ class SharedViewController: UIViewController,GIDSignInUIDelegate,GIDSignInDelega
         self.sendTimeInActivity()
         
     }
+    
     
     func setUpImageTaps(){
         //Get actions from ImageViews, could be buttons, but not the same shape image.

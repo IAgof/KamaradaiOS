@@ -18,4 +18,5 @@ protocol SettingsInterface {
     func createAlertExit()
     func setNavBarTitle(title:String)
     func createActiviyVCShareVideona(text:String)
+    func addFooter()
 }

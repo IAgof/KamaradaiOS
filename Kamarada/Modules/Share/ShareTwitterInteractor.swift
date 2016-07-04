@@ -19,7 +19,7 @@ class ShareTwitterInteractor: ShareSocialNetworkInteractor {
         if canUploadVideoToTwitter(videoURL) {
             let videoData = self.getVideoData(videoURL)
             var status = TwitterVideoUpload.instance().setVideoData(videoData)
-            TwitterVideoUpload.instance().statusContent = Utils().getStringByKeyFromShare(ShareConstants().VIDEONATIME_HASTAGH)
+            TwitterVideoUpload.instance().statusContent = Utils().getStringByKeyFromShare(ShareConstants().KAMARADA_HASTAGH)
             
             if status == false {
                 self.createAlert(Utils().getStringByKeyFromShare(ShareConstants().TWITTER_MAX_SIZE))

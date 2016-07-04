@@ -79,6 +79,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
         
         FBSDKAppEvents.activateApp()
+        FBSDKAppLinkUtility.fetchDeferredAppLink({ (URL, error) -> Void in
+            if error != nil {
+                //Handle error
+            }
+            if URL != nil {
+                application.openURL(URL)
+            }
+        })  
     }
     
     func applicationWillTerminate(application: UIApplication) {

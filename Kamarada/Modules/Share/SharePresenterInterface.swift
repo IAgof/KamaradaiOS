@@ -13,9 +13,6 @@ protocol SharePresenterInterface {
     
     func viewDidLoad()
     func pushBack()
-    func getListData()
-    func setListTitleData(titleArray:Array<String>)
-    func setListImageData(imageArray:Array<UIImage>)
     func setVideoExportedPath(path:String)
     func setNumberOfClipsToExport(numberOfClips:Int)
     func pushShare(socialNetwork:String)

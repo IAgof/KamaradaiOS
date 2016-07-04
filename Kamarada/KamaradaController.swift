@@ -26,6 +26,10 @@ class VideonaController: UIViewController {
         
     }
     
+    override func prefersStatusBarHidden() -> Bool {
+        return true
+    }
+    
     override func viewWillDisappear(animated: Bool) {
         print("View will dissappear in \n \(self)")
         

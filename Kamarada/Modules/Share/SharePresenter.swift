@@ -16,7 +16,8 @@ class SharePresenter:NSObject,SharePresenterInterface{
     var controller: ShareViewController?
     var interactor: ShareInteractor?
     var recordWireframe: RecordWireframe?
-    
+    var playerPresenter: PlayerPresenterInterface?
+
     var videoPath = ""
     var numberOfClips = 0
     
@@ -24,10 +25,9 @@ class SharePresenter:NSObject,SharePresenterInterface{
     func viewDidLoad() {
         controller!.createShareInterface()
         controller?.setNavBarTitle(Utils().getStringByKeyFromSettings(SettingsConstants().SHARE_VIDEONA_TITLE))
-                
-        self.getListData()
+        wireframe?.presentPlayerInterface()
         
-        controller?.bringToFrontExpandPlayerButton()
+        playerPresenter?.createVideoPlayer(videoPath)
     }
     
     func setVideoExportedPath(path: String) {
@@ -43,25 +43,6 @@ class SharePresenter:NSObject,SharePresenterInterface{
         wireframe?.goPrevController()
     }
     
-    func getListData (){
-       let socialNetworks = interactor?.findSocialNetworks()
-        
-        self.setListImageData((socialNetworks?.socialNetworkImageArray)!)
-        self.setListTitleData((socialNetworks?.socialNetworkTitleArray)!)
-        self.setListImagePressedData((socialNetworks?.socialNetworkImagePressedArray)!)
-    }
-    
-    func setListTitleData(titleArray:Array<String>){
-        controller?.setTitleList(titleArray)
-    }
-    
-    func setListImageData(imageArray:Array<UIImage>){
-        controller?.setImageList(imageArray)
-    }
-    
-    func setListImagePressedData(imageArray:Array<UIImage>){
-        controller?.setImagePressedList(imageArray)
-    }
     func pushShare(socialNetwork: String) {
         interactor?.shareVideo(socialNetwork, videoPath: videoPath)
         

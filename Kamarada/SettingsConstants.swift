@@ -21,6 +21,7 @@ class SettingsConstants: NSObject {
     let FOLLOW_US_ON_TWITTER_TITLE = "followUsInTwitter"
     let VIDEONA_TWITTER = "videonaTwitter"
     let VIDEONA_TWITTER_USER = "videonaUser"
+    let VISIT_VIDEONA = "visitVideona"
     
     //MARK: - EMAIL
     let ENTER_MAIL = "enterEmail"

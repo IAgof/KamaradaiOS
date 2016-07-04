@@ -64,10 +64,6 @@ class RecordController: VideonaController,RecordViewInterface,UINavigationContro
         self.cameraView.addGestureRecognizer(pinchDisplay!)
     }
     
-    override func prefersStatusBarHidden() -> Bool {
-        return true
-    }
-    
     func displayTapped(){
         eventHandler!.displayHasTapped(tapDisplay!)
     }

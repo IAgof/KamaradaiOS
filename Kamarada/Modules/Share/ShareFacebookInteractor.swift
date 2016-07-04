@@ -23,7 +23,7 @@ class ShareFacebookInteractor: ShareSocialNetworkInteractor,FBSDKLoginButtonDele
         
         let content:FBSDKShareVideoContent = FBSDKShareVideoContent()
         content.video = video
-        content.hashtag = FBSDKHashtag.init(string: Utils().getStringByKeyFromShare(ShareConstants().VIDEONATIME_HASTAGH))
+        content.hashtag = FBSDKHashtag.init(string: Utils().getStringByKeyFromShare(ShareConstants().KAMARADA_HASTAGH))
         
         let dialog = FBSDKShareDialog.init()
         if UIApplication.sharedApplication().canOpenURL(NSURL.init(string:"fbauth2:/")!){

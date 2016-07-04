@@ -14,8 +14,8 @@ class AppDependencies {
     var recordWireframe = RecordWireframe()
     var settingsWireframe = SettingsWireframe()
     var shareWireframe = ShareWireframe()
-//    var playerWireframe = PlayerWireframe()
-//    var detailTextWireframe = DetailTextWireframe()
+    var playerWireframe = PlayerWireframe()
+    var detailTextWireframe = DetailTextWireframe()
 
     init(){
         configureDependencies()
@@ -29,11 +29,11 @@ class AppDependencies {
         let sharePresenter = SharePresenter()
         let shareInteractor = ShareInteractor()
        
-//        let playerPresenter = PlayerPresenter()
-//        let playerInteractor = PlayerInteractor()
-//        
-//        let detailTextPresenter = DetailTextPresenter()
-//        let detailTextInteractor = DetailTextInteractor()
+        let playerPresenter = PlayerPresenter()
+        let playerInteractor = PlayerInteractor()
+        
+        let detailTextPresenter = DetailTextPresenter()
+        let detailTextInteractor = DetailTextInteractor()
 
         //RECORD MODULE
         recordPresenter.recordWireframe = recordWireframe
@@ -47,7 +47,7 @@ class AppDependencies {
         settingsPresenter.wireframe = settingsWireframe
         settingsPresenter.recordWireframe = recordWireframe
         settingsPresenter.interactor = settingsInteractor
-//        settingsPresenter.detailTextWireframe = detailTextWireframe
+        settingsPresenter.detailTextWireframe = detailTextWireframe
         
         settingsWireframe.settingsPresenter = settingsPresenter
         settingsWireframe.rootWireframe = rootWireframe
@@ -59,26 +59,26 @@ class AppDependencies {
         sharePresenter.recordWireframe = recordWireframe
 //        sharePresenter.playerWireframe = playerWireframe
         sharePresenter.interactor = shareInteractor
-//        sharePresenter.playerPresenter = playerPresenter
+        sharePresenter.playerPresenter = playerPresenter
         
         shareWireframe.sharePresenter = sharePresenter
         shareWireframe.rootWireframe = rootWireframe
-//        shareWireframe.playerWireframe = playerWireframe
+        shareWireframe.playerWireframe = playerWireframe
         
         //PLAYER MODULE
-//        playerPresenter.wireframe = playerWireframe
-//        playerPresenter.recordWireframe = recordWireframe
-//        playerPresenter.playerInteractor = playerInteractor
-//        
-//        playerWireframe.playerPresenter = playerPresenter
-//        playerWireframe.rootWireframe = rootWireframe
+        playerPresenter.wireframe = playerWireframe
+        playerPresenter.recordWireframe = recordWireframe
+        playerPresenter.playerInteractor = playerInteractor
+        
+        playerWireframe.playerPresenter = playerPresenter
+        playerWireframe.rootWireframe = rootWireframe
        
         //DETAIL TEXT MODULE
-//        detailTextPresenter.wireframe = detailTextWireframe
-//        detailTextPresenter.interactor = detailTextInteractor
-//        
-//        detailTextWireframe.detailTextPresenter = detailTextPresenter
-//        detailTextWireframe.rootWireframe = rootWireframe
+        detailTextPresenter.wireframe = detailTextWireframe
+        detailTextPresenter.interactor = detailTextInteractor
+        
+        detailTextWireframe.detailTextPresenter = detailTextPresenter
+        detailTextWireframe.rootWireframe = rootWireframe
 
     }
     
