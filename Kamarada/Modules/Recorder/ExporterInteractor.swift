@@ -43,7 +43,9 @@ class ExporterInteractor:NSObject{
         
         let videoTrack = mixComposition.addMutableTrackWithMediaType(AVMediaTypeVideo,
                                                                      preferredTrackID: Int32(kCMPersistentTrackID_Invalid))
-        let audioTrack = mixComposition.addMutableTrackWithMediaType(AVMediaTypeAudio,preferredTrackID: Int32(kCMPersistentTrackID_Invalid))
+        // 2 - Get Audio asset
+        let audioURL = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("kamarada_audio", ofType: "mp3")!)
+        let audioAsset = AVAsset.init(URL: audioURL)
         
         // - Add assets to the composition
         for path in videosArray{
@@ -57,16 +59,21 @@ class ExporterInteractor:NSObject{
                                                ofTrack: videoAsset.tracksWithMediaType(AVMediaTypeVideo)[0] ,
                                                atTime: videoTotalTime)
                 
-                try audioTrack.insertTimeRange(CMTimeRangeMake(kCMTimeZero, videoAsset.duration),
-                                               ofTrack: videoAsset.tracksWithMediaType(AVMediaTypeAudio)[0] ,
-                                               atTime: videoTotalTime)
-                
                 Utils().debugLog("el tiempo total del video es: \(videoTotalTime.seconds)")
                 videoTotalTime = CMTimeAdd(videoTotalTime, videoAsset.duration)
             } catch _ {
 //                Utils().debugLog("Error trying to create videoTrack")
                 completionHandler("Error trying to create videoTrack",0.0)
             }
+        }
+        // 3.2 - Audio track
+        let audioTrack = mixComposition.addMutableTrackWithMediaType(AVMediaTypeAudio, preferredTrackID: 0)
+        do {
+            try audioTrack.insertTimeRange(CMTimeRangeMake(kCMTimeZero, videoTotalTime),
+                                           ofTrack: audioAsset.tracksWithMediaType(AVMediaTypeAudio)[0] ,
+                                           atTime: kCMTimeZero)
+        } catch _ {
+            Utils().debugLog("Error trying to create audioTrack")
         }
         
         // 4 - Get path
