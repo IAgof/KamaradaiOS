@@ -17,4 +17,6 @@ protocol SharePresenterInterface {
     func setNumberOfClipsToExport(numberOfClips:Int)
     func pushShare(socialNetwork:String)
     func postToYoutube(token:String)
+    func goToSettings()
+    func pushShareButton()
 }

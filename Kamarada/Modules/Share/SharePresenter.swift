@@ -15,7 +15,6 @@ class SharePresenter:NSObject,SharePresenterInterface{
     var wireframe: ShareWireframe?
     var controller: ShareViewController?
     var interactor: ShareInteractor?
-    var recordWireframe: RecordWireframe?
     var playerPresenter: PlayerPresenterInterface?
 
     var videoPath = ""
@@ -24,7 +23,6 @@ class SharePresenter:NSObject,SharePresenterInterface{
     //LifeCicle
     func viewDidLoad() {
         controller!.createShareInterface()
-        controller?.setNavBarTitle(Utils().getStringByKeyFromSettings(SettingsConstants().SHARE_VIDEONA_TITLE))
         wireframe?.presentPlayerInterface()
         
         playerPresenter?.createVideoPlayer(videoPath)
@@ -49,8 +47,18 @@ class SharePresenter:NSObject,SharePresenterInterface{
         trackVideoShared(socialNetwork)
     }
     
+    func pushShareButton() {
+        let movieURL = NSURL.fileURLWithPath(videoPath)
+
+        controller?.shareVideoFromDefault(movieURL)
+    }
+    
     func postToYoutube(token:String){
         interactor!.postToYoutube(token)
+    }
+    
+    func goToSettings(){
+        wireframe?.presentSettings()
     }
     
     //MARK: - Mixpanel Tracking

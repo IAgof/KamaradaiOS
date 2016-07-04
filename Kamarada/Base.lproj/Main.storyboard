@@ -335,39 +335,32 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UZC-DP-b7V">
-                                <rect key="frame" x="-4" y="0.0" width="328" height="44"/>
-                                <items>
-                                    <navigationItem id="0rT-w7-jZ5">
-                                        <barButtonItem key="leftBarButtonItem" image="activity_edit_back_normal" id="QWz-5M-P4Q">
-                                            <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                            <connections>
-                                                <action selector="pushBackBarButton:" destination="uIi-Rf-O4r" id="Z3N-ys-0ET"/>
-                                            </connections>
-                                        </barButtonItem>
-                                    </navigationItem>
-                                </items>
-                            </navigationBar>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="activity_record_background_leather" translatesAutoresizingMaskIntoConstraints="NO" id="FvR-Io-Xpz">
-                                <rect key="frame" x="-4" y="44" width="328" height="524"/>
+                                <rect key="frame" x="-4" y="0.0" width="328" height="568"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tPB-hL-UbF" userLabel="Settings">
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tPB-hL-UbF" userLabel="Settings">
                                 <rect key="frame" x="260" y="52" width="44" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="44" id="PVp-Zn-4d2"/>
                                 </constraints>
                                 <state key="normal" image="common_icon_settings_normal"/>
                                 <state key="selected" image="common_icon_settings_pressed"/>
+                                <connections>
+                                    <action selector="pushSettingsButton:" destination="d0r-28-Qlf" eventType="touchUpInside" id="aUi-u2-cy4"/>
+                                </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5ih-eU-ka9" userLabel="Share">
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5ih-eU-ka9" userLabel="Share">
                                 <rect key="frame" x="117" y="473" width="87" height="87"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="53" id="Wzs-fC-aaa"/>
                                     <constraint firstAttribute="width" secondItem="5ih-eU-ka9" secondAttribute="height" multiplier="1:1" id="rOI-Io-jFH"/>
                                 </constraints>
                                 <state key="normal" image="activity_share_add_icon_normal"/>
+                                <connections>
+                                    <action selector="shareButtonClicked:" destination="d0r-28-Qlf" eventType="touchUpInside" id="Ihs-A0-ySX"/>
+                                </connections>
                             </button>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nkm-aY-E1E">
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nkm-aY-E1E">
                                 <rect key="frame" x="16" y="100" width="288" height="365"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="activity_share_background" translatesAutoresizingMaskIntoConstraints="NO" id="IjF-R4-Ok9">
@@ -496,7 +489,7 @@
                                     <constraint firstItem="IjF-R4-Ok9" firstAttribute="leading" secondItem="nkm-aY-E1E" secondAttribute="leading" id="yzh-0a-hqd"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4wx-K1-PPd">
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4wx-K1-PPd">
                                 <rect key="frame" x="16" y="52" width="44" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="4wx-K1-PPd" secondAttribute="height" multiplier="1:1" id="8cJ-F3-Ese"/>
@@ -511,24 +504,20 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="nkm-aY-E1E" firstAttribute="leading" secondItem="xCE-UW-y8G" secondAttribute="leadingMargin" id="1tz-LR-Doj"/>
-                            <constraint firstItem="UZC-DP-b7V" firstAttribute="top" secondItem="Xg5-31-6CN" secondAttribute="bottom" id="5on-Xd-oDP"/>
                             <constraint firstItem="4wx-K1-PPd" firstAttribute="height" secondItem="tPB-hL-UbF" secondAttribute="height" id="77C-dd-Yfu"/>
                             <constraint firstAttribute="trailingMargin" secondItem="FvR-Io-Xpz" secondAttribute="trailing" constant="-20" id="AFh-Yt-KGk"/>
                             <constraint firstItem="4wx-K1-PPd" firstAttribute="leading" secondItem="xCE-UW-y8G" secondAttribute="leadingMargin" id="AcE-Cy-l9X"/>
                             <constraint firstItem="5ih-eU-ka9" firstAttribute="top" secondItem="nkm-aY-E1E" secondAttribute="bottom" constant="8" id="H2e-Oj-Wey"/>
-                            <constraint firstItem="FvR-Io-Xpz" firstAttribute="top" secondItem="UZC-DP-b7V" secondAttribute="bottom" id="Vfz-sf-6Iq"/>
+                            <constraint firstItem="FvR-Io-Xpz" firstAttribute="top" secondItem="Xg5-31-6CN" secondAttribute="bottom" id="KFx-Dt-zFW"/>
                             <constraint firstItem="4wx-K1-PPd" firstAttribute="centerY" secondItem="tPB-hL-UbF" secondAttribute="centerY" id="WNF-70-fDK"/>
                             <constraint firstItem="nkm-aY-E1E" firstAttribute="top" secondItem="tPB-hL-UbF" secondAttribute="bottom" constant="4" id="WPr-0Q-skv"/>
-                            <constraint firstItem="tPB-hL-UbF" firstAttribute="top" secondItem="UZC-DP-b7V" secondAttribute="bottom" constant="8" id="YjV-dH-R6F"/>
                             <constraint firstItem="fqP-ab-5iq" firstAttribute="top" secondItem="FvR-Io-Xpz" secondAttribute="bottom" id="ZSX-BP-6yF"/>
                             <constraint firstItem="5ih-eU-ka9" firstAttribute="centerX" secondItem="xCE-UW-y8G" secondAttribute="centerX" id="aSf-hl-vCE"/>
                             <constraint firstItem="FvR-Io-Xpz" firstAttribute="leading" secondItem="xCE-UW-y8G" secondAttribute="leadingMargin" constant="-20" id="fzR-eK-0iZ"/>
                             <constraint firstItem="nkm-aY-E1E" firstAttribute="leading" secondItem="4wx-K1-PPd" secondAttribute="trailing" constant="-44" id="jaz-3C-jjG"/>
                             <constraint firstAttribute="trailingMargin" secondItem="nkm-aY-E1E" secondAttribute="trailing" id="kaV-Tw-TdK"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="UZC-DP-b7V" secondAttribute="trailing" constant="-20" id="n6o-W0-3TH"/>
                             <constraint firstItem="4wx-K1-PPd" firstAttribute="width" secondItem="tPB-hL-UbF" secondAttribute="width" id="oZR-CI-fnN"/>
                             <constraint firstAttribute="trailingMargin" secondItem="tPB-hL-UbF" secondAttribute="trailing" id="pe2-sh-qg0"/>
-                            <constraint firstItem="UZC-DP-b7V" firstAttribute="leading" secondItem="xCE-UW-y8G" secondAttribute="leadingMargin" constant="-20" id="sf4-FQ-8Gs"/>
                             <constraint firstItem="fqP-ab-5iq" firstAttribute="top" secondItem="5ih-eU-ka9" secondAttribute="bottom" constant="8" id="wUo-a3-nYC"/>
                         </constraints>
                         <variation key="default">
@@ -545,7 +534,6 @@
                         <outlet property="backgroundImageView" destination="FvR-Io-Xpz" id="7Ey-u6-nYb"/>
                         <outlet property="backgroundShareView" destination="IjF-R4-Ok9" id="dV3-qw-ojj"/>
                         <outlet property="playerView" destination="jTO-uf-tP4" id="PV3-S9-O1D"/>
-                        <outlet property="settingsNavBar" destination="0rT-w7-jZ5" id="Hny-qU-xhO"/>
                         <outlet property="twitterImageView" destination="yVw-wV-Uoe" id="bGK-g6-naD"/>
                         <outlet property="videoProgressView" destination="jR0-lB-8bW" id="IVT-WI-Ber"/>
                         <outlet property="whatsappImageView" destination="b7j-Lw-sEI" id="M6n-RG-hau"/>

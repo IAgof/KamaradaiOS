@@ -56,14 +56,13 @@ class AppDependencies {
         
         //SHARE MODULE
         sharePresenter.wireframe = shareWireframe
-        sharePresenter.recordWireframe = recordWireframe
-//        sharePresenter.playerWireframe = playerWireframe
         sharePresenter.interactor = shareInteractor
         sharePresenter.playerPresenter = playerPresenter
         
         shareWireframe.sharePresenter = sharePresenter
         shareWireframe.rootWireframe = rootWireframe
         shareWireframe.playerWireframe = playerWireframe
+        shareWireframe.settingsWireframe = settingsWireframe
         
         //PLAYER MODULE
         playerPresenter.wireframe = playerWireframe

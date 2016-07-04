@@ -17,7 +17,8 @@ class ShareWireframe : NSObject {
     var shareViewController : ShareViewController?
     var sharePresenter : SharePresenter?
     var playerWireframe: PlayerWireframe?
-
+    var settingsWireframe: SettingsWireframe?
+    
     var prevController:UIViewController?
 
     func presentShareInterfaceFromWindow(window: UIWindow) {
@@ -57,6 +58,10 @@ class ShareWireframe : NSObject {
     
     func presentPlayerInterface() {
         playerWireframe?.presentPlayerInterfaceFromViewController(shareViewController!)
+    }
+    
+    func presentSettings(){
+        settingsWireframe?.presentSettingsInterfaceFromViewController(shareViewController!)
     }
     
     func goPrevController(){

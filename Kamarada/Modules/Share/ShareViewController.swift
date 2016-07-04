@@ -26,6 +26,7 @@ GIDSignInUIDelegate,GIDSignInDelegate{
     var listImagesPressed = Array<UIImage>()
     var listTitles = Array<String>()
     var token:String!
+    var documentationInteractionController:UIDocumentInteractionController!
 
     var exportPath: String? {
         didSet {
@@ -42,7 +43,6 @@ GIDSignInUIDelegate,GIDSignInDelegate{
     //MARK: - Outlets
     @IBOutlet weak var playerView: UIView!
     @IBOutlet weak var settingsNavBar: UINavigationItem!
-//    @IBOutlet weak var expandPlayerButton: UIButton!
     
     @IBOutlet weak var backgroundShareView: UIView!
     @IBOutlet weak var whatsappImageView: UIImageView!
@@ -50,7 +50,7 @@ GIDSignInUIDelegate,GIDSignInDelegate{
     @IBOutlet weak var youtubeImageView: UIImageView!
     @IBOutlet weak var twitterImageView: UIImageView!
     @IBOutlet weak var backgroundImageView: UIImageView!
-        
+    
     @IBOutlet weak var videoProgressView: UIProgressView!
 
     override func viewDidLoad() {
@@ -68,11 +68,7 @@ GIDSignInUIDelegate,GIDSignInDelegate{
         GIDSignIn.sharedInstance().uiDelegate = self
         GIDSignIn.sharedInstance().delegate = self
     }
-    
-    func setNavBarTitle(title:String){
-        settingsNavBar.title = title
-    }
-    
+        
     func setTitleList(titleList: Array<String>) {
         self.listTitles = titleList
     }
@@ -83,7 +79,12 @@ GIDSignInUIDelegate,GIDSignInDelegate{
     func setImagePressedList(imageList: Array<UIImage>) {
         self.listImagesPressed = imageList
     }
-        
+    
+    //MARK: - Button Actions
+    @IBAction func shareButtonClicked(sender: UIButton) {
+        eventHandler?.pushShareButton()
+    }
+    
     @IBAction func pushBackBarButton(sender: AnyObject) {
         eventHandler?.pushBack()
     }
@@ -125,6 +126,18 @@ GIDSignInUIDelegate,GIDSignInDelegate{
         eventHandler?.pushShare("Instagram")
     }
     
+    @IBAction func pushSettingsButton(sender: AnyObject) {
+        eventHandler?.goToSettings()
+    }
+    
+    func shareVideoFromDefault(movieURL: NSURL) {
+        documentationInteractionController = UIDocumentInteractionController.init(URL: movieURL)
+        
+        documentationInteractionController.UTI = "public.movie"
+        
+        documentationInteractionController.presentOpenInMenuFromRect(CGRectZero, inView: self.view, animated: true)
+
+    }
     //MARK: - Google methods
     
     // Stop the UIActivityIndicatorView animation that was started when the user
