@@ -49,7 +49,7 @@ class RecordPresenter: NSObject
     }
     
     func viewWillAppear() {
-        cameraInteractor!.setResolution()
+
     }
     
     func pushSettings() {
@@ -134,7 +134,6 @@ class RecordPresenter: NSObject
         controller?.disableShareButton()
         
         cameraInteractor?.resetClipsArray()
-        cameraInteractor?.removeFilters()
     }
     
     func displayHasTapped(tapGesture:UIGestureRecognizer){

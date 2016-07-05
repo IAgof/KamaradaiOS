@@ -22,6 +22,12 @@ class PlayerPresenter:NSObject,PlayerPresenterInterface{
 
     //MARK: - Variables
     var isPlaying = false
+
+    //Timer
+    var progressTime = 0.0
+    var progressTimer:NSTimer!
+    var videoDuration = 0.0
+    let progressSteps = 400.0
     
     //MARK: - Init
     func createVideoPlayer(videoPath:String) {
@@ -38,11 +44,14 @@ class PlayerPresenter:NSObject,PlayerPresenterInterface{
             self.controller?.updateLayers()
         }
     }
+    
     //MARK: - Handler
     func onVideoStops() {
         isPlaying = false
         
         controller?.setUpVideoFinished()
+        
+        self.stopTimer()
     }
     
     func pushPlayButton() {
@@ -54,6 +63,8 @@ class PlayerPresenter:NSObject,PlayerPresenterInterface{
     func videoPlayerViewTapped() {
         if(isPlaying){
             controller?.pauseVideoPlayer()
+            self.pauseTimer()
+            
             isPlaying = false
         }else{
             playPlayer()
@@ -62,9 +73,55 @@ class PlayerPresenter:NSObject,PlayerPresenterInterface{
     
     func playPlayer() {
         controller?.playVideoPlayer()
+        
+        self.startTimer()
+        
         isPlaying = true
     }
+    
     func updateSeekBar() {
         controller!.updateSeekBarOnUI()
+    }
+    
+    func setVideoPlayerDuration(duration:Double) {
+        self.videoDuration = duration
+    }
+    
+    //MARK: - Progress Bar
+    @objc func updateProgressBar(){
+        
+        let delay = videoDuration/(progressSteps*Double(videoDuration))
+        
+        progressTime  += delay
+        
+        if((progressTime <= 1.0)){
+            playerDelegate?.setProgressToSeekBar(Float(progressTime))
+            //            Utils().debugLog("progress time = \(progressTime)")
+        }else{
+            self.stopTimer()
+            Utils().debugLog("Reset progress time")
+        }
+    }
+    
+    func startTimer(){
+        let videoStepDuration = videoDuration / progressSteps
+
+        //Start timer
+        progressTimer = NSTimer.scheduledTimerWithTimeInterval(videoStepDuration,
+                                                               target: self,
+                                                               selector: #selector(self.updateProgressBar),
+                                                               userInfo: nil,
+                                                               repeats: true)
+    }
+    
+    func pauseTimer() {
+        progressTimer.invalidate()
+    }
+    
+    func stopTimer()  {
+        progressTimer.invalidate()
+        
+        progressTime = 0.0
+        playerDelegate?.setProgressToSeekBar(Float(progressTime))
     }
 }

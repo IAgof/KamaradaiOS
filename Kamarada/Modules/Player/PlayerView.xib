@@ -7,46 +7,82 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="PlayerView" customModule="Kamarada" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="185"/>
+            <rect key="frame" x="0.0" y="0.0" width="320" height="210"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gv3-4N-IXm">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="185"/>
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="192"/>
                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
                 <slider hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="Cww-rs-SeF">
-                    <rect key="frame" x="6" y="147" width="308" height="31"/>
+                    <rect key="frame" x="6" y="172" width="308" height="31"/>
                 </slider>
-                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8f9-Er-ZVm">
-                    <rect key="frame" x="143" y="76" width="34" height="34"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8f9-Er-ZVm">
+                    <rect key="frame" x="121" y="66" width="78" height="78"/>
                     <state key="normal" image="common_icon_play_on_normal"/>
                     <connections>
                         <action selector="pushPlayButton:" destination="iN0-l3-epB" eventType="touchUpInside" id="6Fq-Va-9fq"/>
                     </connections>
                 </button>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9bh-24-Ba5">
+                    <rect key="frame" x="0.0" y="192" width="320" height="18"/>
+                    <subviews>
+                        <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progressViewStyle="bar" translatesAutoresizingMaskIntoConstraints="NO" id="YtP-5S-4KG">
+                            <rect key="frame" x="4" y="8" width="312" height="3"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <color key="tintColor" red="0.60745255239999996" green="0.2716826249" blue="0.077956410249999997" alpha="1" colorSpace="calibratedRGB"/>
+                        </progressView>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="record_activity_progress_bar" translatesAutoresizingMaskIntoConstraints="NO" id="suh-bq-JZ6">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="20"/>
+                        </imageView>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="YtP-5S-4KG" firstAttribute="centerY" secondItem="9bh-24-Ba5" secondAttribute="centerY" id="0zq-2s-lVr"/>
+                        <constraint firstAttribute="bottom" secondItem="suh-bq-JZ6" secondAttribute="bottom" constant="-2" id="3kW-8y-dsE"/>
+                        <constraint firstAttribute="trailing" secondItem="YtP-5S-4KG" secondAttribute="trailing" constant="4" id="5wW-Q3-zZh"/>
+                        <constraint firstItem="suh-bq-JZ6" firstAttribute="top" secondItem="9bh-24-Ba5" secondAttribute="top" id="Rlm-yc-tkh"/>
+                        <constraint firstItem="YtP-5S-4KG" firstAttribute="centerX" secondItem="9bh-24-Ba5" secondAttribute="centerX" id="YjH-cC-s1Q"/>
+                        <constraint firstItem="suh-bq-JZ6" firstAttribute="leading" secondItem="9bh-24-Ba5" secondAttribute="leading" id="kXC-zp-n31"/>
+                        <constraint firstAttribute="trailing" secondItem="suh-bq-JZ6" secondAttribute="trailing" id="lMG-6P-o29"/>
+                        <constraint firstAttribute="height" constant="18" id="m48-v2-Wkf"/>
+                        <constraint firstItem="YtP-5S-4KG" firstAttribute="leading" secondItem="9bh-24-Ba5" secondAttribute="leading" constant="4" id="t7X-f8-Gva"/>
+                    </constraints>
+                </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="8f9-Er-ZVm" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="1CM-cl-kWe"/>
+                <constraint firstAttribute="trailing" secondItem="9bh-24-Ba5" secondAttribute="trailing" id="7xR-Ca-E8R"/>
                 <constraint firstAttribute="trailing" secondItem="Cww-rs-SeF" secondAttribute="trailing" constant="8" id="8MM-zM-R80"/>
                 <constraint firstItem="Gv3-4N-IXm" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="C7e-d2-fGC"/>
                 <constraint firstItem="Cww-rs-SeF" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="CCN-eP-Nzs"/>
                 <constraint firstAttribute="bottom" secondItem="Cww-rs-SeF" secondAttribute="bottom" constant="8" id="CGx-WI-zJy"/>
+                <constraint firstItem="9bh-24-Ba5" firstAttribute="top" secondItem="Gv3-4N-IXm" secondAttribute="bottom" id="CRc-in-ekU"/>
                 <constraint firstItem="Gv3-4N-IXm" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="KSz-qa-OY9"/>
+                <constraint firstItem="9bh-24-Ba5" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="WDz-Ij-lEq"/>
                 <constraint firstItem="8f9-Er-ZVm" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="Zeb-Wf-2Ba"/>
+                <constraint firstAttribute="bottom" secondItem="9bh-24-Ba5" secondAttribute="bottom" id="dfv-MN-UG1"/>
                 <constraint firstAttribute="trailing" secondItem="Gv3-4N-IXm" secondAttribute="trailing" id="fDP-yg-i3k"/>
                 <constraint firstAttribute="bottom" secondItem="Gv3-4N-IXm" secondAttribute="bottom" id="xAB-hK-XAW"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="xAB-hK-XAW"/>
+                </mask>
+            </variation>
             <connections>
                 <outlet property="playOrPauseButton" destination="8f9-Er-ZVm" id="j4y-ev-ofB"/>
                 <outlet property="playerContainer" destination="Gv3-4N-IXm" id="vWD-I5-TC4"/>
                 <outlet property="seekSlider" destination="Cww-rs-SeF" id="rgW-1n-blY"/>
+                <outlet property="videoProgressView" destination="YtP-5S-4KG" id="0Lz-rr-KN2"/>
             </connections>
-            <point key="canvasLocation" x="50" y="126.5"/>
+            <point key="canvasLocation" x="50" y="139"/>
         </view>
     </objects>
     <resources>
         <image name="common_icon_play_on_normal" width="78" height="78"/>
+        <image name="record_activity_progress_bar" width="233" height="15"/>
     </resources>
 </document>

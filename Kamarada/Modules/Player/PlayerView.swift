@@ -10,7 +10,9 @@ import Foundation
 import UIKit
 import AVFoundation
 
-class PlayerView: UIView,PlayerInterface {
+class PlayerView: UIView,
+    PlayerInterface,
+PlayerDelegate {
     //MARK: - VIPER
     var eventHandler: PlayerPresenterInterface?
     
@@ -24,6 +26,8 @@ class PlayerView: UIView,PlayerInterface {
     @IBOutlet weak var playerContainer: UIView!
     @IBOutlet weak var seekSlider: UISlider!
     
+    @IBOutlet weak var videoProgressView: UIProgressView!
+
     var playerRateBeforeSeek: Float = 0
 
     class func instanceFromNib() -> UIView {
@@ -35,27 +39,9 @@ class PlayerView: UIView,PlayerInterface {
         
     }
     
-    func setPlayerMovieURL(movieURL: NSURL) {
-        self.movieURL = movieURL
-    }
-    
     override func layoutSubviews() {
         self.eventHandler?.layoutSubViews()
-    }
-    
-    func updateLayers(){
-        self.superview?.layoutIfNeeded()
-        let superViewFrame = (self.superview?.frame)!
-        self.frame = CGRectMake(0, 0, superViewFrame.width, superViewFrame.height)
-
-        if (playerLayer != nil){
-            playerLayer!.frame = self.frame
-            self.playerContainer.frame = self.frame
-        }
-    }
-    
-    func getView() -> UIView {
-        return self
+        videoProgressView.transform = CGAffineTransformScale(videoProgressView.transform, 1, 2)
     }
     
     //MARK: - Player Interface
@@ -84,6 +70,8 @@ class PlayerView: UIView,PlayerInterface {
         playerLayer!.frame = self.frame
         player?.currentItem?.seekToTime(CMTime.init(value: 3, timescale: 10))
 
+        eventHandler?.setVideoPlayerDuration(avAsset.duration.seconds)
+
         self.playerContainer.layoutIfNeeded()
         self.playerContainer.layer.addSublayer(playerLayer!)
         
@@ -97,6 +85,46 @@ class PlayerView: UIView,PlayerInterface {
         seekSlider.setValue(Float((currentTime!/duration!)), animated: true)
     }
     
+    func pauseVideoPlayer(){
+        player!.pause()
+        
+        playOrPauseButton.hidden = false
+        
+        Utils().debugLog("Video has stopped")
+    }
+    
+    func playVideoPlayer(){
+        player!.play()
+        
+        playOrPauseButton.hidden = true
+                
+        Utils().debugLog("Playing video")
+    }
+    
+    func setUpVideoFinished(){
+        player?.currentItem?.seekToTime(CMTime.init(value: 1, timescale: 10))
+        playOrPauseButton.hidden = false
+    }
+    
+    func setPlayerMovieURL(movieURL: NSURL) {
+        self.movieURL = movieURL
+    }
+    
+    func updateLayers(){
+        self.superview?.layoutIfNeeded()
+        let superViewFrame = (self.superview?.frame)!
+        self.frame = CGRectMake(0, 0, superViewFrame.width, superViewFrame.height)
+        
+        if (playerLayer != nil){
+            playerLayer!.frame = self.frame
+            self.playerContainer.frame = self.frame
+        }
+    }
+    
+    func getView() -> UIView {
+        return self
+    }
+    //MARK: - Inner functions
     func setViewPlayerTappable(){
         let singleFingerTap:UITapGestureRecognizer = UITapGestureRecognizer.init(target: self, action:#selector(PlayerView.videoPlayerViewTapped))
         playerContainer.addGestureRecognizer(singleFingerTap)
@@ -137,30 +165,21 @@ class PlayerView: UIView,PlayerInterface {
 
     }
     
-    func setUpVideoFinished(){
-        player?.currentItem?.seekToTime(CMTime.init(value: 1, timescale: 10))
-        playOrPauseButton.hidden = false
-    }
-    
     func onVideoStops(){
         eventHandler?.onVideoStops()
     }
     
-    func pauseVideoPlayer(){
-        player!.pause()
-        
-        playOrPauseButton.hidden = false
-        
-        Utils().debugLog("Video has stopped")
+    func updateProgressBar(){
+        eventHandler?.updateProgressBar()
     }
     
-    func playVideoPlayer(){
-        player!.play()
+    //MARK: Player delegate
+    func PlayerDidCancelAddAction() {
         
-        playOrPauseButton.hidden = true
-        
-        //Start timer
-
-        Utils().debugLog("Playing video")
+    }
+    
+    func setProgressToSeekBar(progressTime: Float) {
+        Utils().debugLog("Player View \t Progress time: \(progressTime)")
+        videoProgressView.setProgress(progressTime, animated: false)
     }
 }

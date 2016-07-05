@@ -27,6 +27,7 @@ class PlayerWireframe : NSObject{//, UIViewAnimationTransition {
             
             playerView.eventHandler = playerPresenter
             playerPresenter?.controller = playerView
+            playerPresenter?.playerDelegate = playerView
             
             presentedView = playerView
         }

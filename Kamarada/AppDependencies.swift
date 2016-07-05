@@ -68,7 +68,7 @@ class AppDependencies {
         playerPresenter.wireframe = playerWireframe
         playerPresenter.recordWireframe = recordWireframe
         playerPresenter.playerInteractor = playerInteractor
-        
+
         playerWireframe.playerPresenter = playerPresenter
         playerWireframe.rootWireframe = rootWireframe
        

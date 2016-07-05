@@ -16,9 +16,12 @@ protocol PlayerPresenterInterface {
     func videoPlayerViewTapped()
     func pushPlayButton()
     func updateSeekBar()
+    func setVideoPlayerDuration(duration:Double)
+    func updateProgressBar()
 }
 
 
 protocol PlayerDelegate {
     func PlayerDidCancelAddAction()
+    func setProgressToSeekBar(progressTime:Float)
 }
