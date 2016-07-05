@@ -187,7 +187,8 @@ class RecordPresenter: NSObject
             self.cameraInteractor?.setIsRecording(false)
             
             let videosArray = self.cameraInteractor?.getClipsArray()
-            let thumb = ThumbnailInteractor.init(videosArray: videosArray!).getThumbnailImageView()
+            let thumb = ThumbnailInteractor.init(videosArray: videosArray!,
+                diameter: (self.controller?.getThumbnailSize())!).getThumbnailImageView()
             dispatch_async(dispatch_get_main_queue(), {
                 // update some UI
                 self.controller?.showRecordedVideoThumb(thumb)

@@ -202,9 +202,6 @@ class RecordController: VideonaController,RecordViewInterface,RecordPresenterDel
         bwFilterButton.selected = false
     }
     
-
-    
-    
     func createAlertWaitToExport(){
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -228,6 +225,10 @@ class RecordController: VideonaController,RecordViewInterface,RecordPresenterDel
     func resetView() {
         videoProgress.setProgress(0, animated: false)
         eventHandler?.resetRecorder()
+    }
+    
+    func getThumbnailSize() -> CGFloat {
+        return self.thumbnailView.frame.size.height
     }
     
     //MARK: - Presenter delegate

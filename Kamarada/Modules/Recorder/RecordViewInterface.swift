@@ -56,4 +56,7 @@ protocol RecordViewInterface {
     func dissmissAlertWaitToExport(completion:()->Void)
     
     func resetView()
+    
+    func getThumbnailSize()->CGFloat
+
 }

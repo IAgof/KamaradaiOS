@@ -15,9 +15,10 @@ class ThumbnailInteractor: NSObject {
     var videosArray:[String] = []
     var diameter:CGFloat = 40.0
 
-    init(videosArray:[String]) {
+    init(videosArray:[String],diameter:CGFloat) {
         self.videosArray = videosArray
-        self.thumbnailImageView = UIImageView.init(frame: CGRectMake(0, 0, diameter, diameter))
+        self.diameter = diameter
+        self.thumbnailImageView = UIImageView.init(frame: CGRectMake(0, 0, self.diameter , self.diameter ))
     }
     
     func getThumbnailImageView()->UIImageView{

@@ -95,6 +95,9 @@
                                 <rect key="frame" x="41" y="375" width="59" height="59"/>
                                 <state key="normal" image="activity_record_skin_wood_icon_normal"/>
                                 <state key="selected" image="activity_record_skin_leather_icon_pressed"/>
+                                <variation key="widthClass=regular" misplaced="YES">
+                                    <rect key="frame" x="165" y="164" width="59" height="59"/>
+                                </variation>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A1u-cM-TQo">
                                 <rect key="frame" x="118" y="362" width="84" height="84"/>
@@ -103,6 +106,9 @@
                                     <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </state>
                                 <state key="selected" image="activity_record_rec_icon_pressed"/>
+                                <variation key="widthClass=regular" misplaced="YES">
+                                    <rect key="frame" x="242" y="151" width="84" height="84"/>
+                                </variation>
                                 <connections>
                                     <action selector="pushRecord:" destination="BYZ-38-t0r" eventType="touchUpInside" id="t5r-4E-cY7"/>
                                 </connections>
@@ -122,6 +128,9 @@
                                 <rect key="frame" x="227" y="329" width="40" height="40"/>
                                 <state key="normal" image="activity_record_filter_sepia_icon_normal"/>
                                 <state key="selected" image="activity_record_filter_sepia_icon_selected"/>
+                                <variation key="widthClass=regular" misplaced="YES">
+                                    <rect key="frame" x="351" y="118" width="40" height="40"/>
+                                </variation>
                                 <connections>
                                     <action selector="pushSepiaFilter:" destination="BYZ-38-t0r" eventType="touchUpInside" id="eJY-Fg-3H7"/>
                                 </connections>
@@ -130,6 +139,9 @@
                                 <rect key="frame" x="227" y="384" width="40" height="40"/>
                                 <state key="normal" image="activity_record_filter_blue_icon_normal"/>
                                 <state key="selected" image="activity_record_filter_blue_icon_selected"/>
+                                <variation key="widthClass=regular" misplaced="YES">
+                                    <rect key="frame" x="351" y="173" width="40" height="40"/>
+                                </variation>
                                 <connections>
                                     <action selector="pushBlueFilter:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Vei-Vf-Vbd"/>
                                 </connections>
@@ -138,6 +150,9 @@
                                 <rect key="frame" x="227" y="439" width="40" height="40"/>
                                 <state key="normal" image="activity_record_filter_bw_icon_normal"/>
                                 <state key="selected" image="activity_record_filter_bw_icon_selected"/>
+                                <variation key="widthClass=regular" misplaced="YES">
+                                    <rect key="frame" x="351" y="228" width="40" height="40"/>
+                                </variation>
                                 <connections>
                                     <action selector="pushBWFilter:" destination="BYZ-38-t0r" eventType="touchUpInside" id="l4Z-LB-V9P"/>
                                 </connections>
@@ -156,9 +171,15 @@
                                     <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progressViewStyle="bar" translatesAutoresizingMaskIntoConstraints="NO" id="pOB-ig-rXa">
                                         <rect key="frame" x="4" y="8" width="225" height="3"/>
                                         <color key="tintColor" red="0.60745255239999996" green="0.2716826249" blue="0.077956410249999997" alpha="1" colorSpace="calibratedRGB"/>
+                                        <variation key="widthClass=regular" misplaced="YES">
+                                            <rect key="frame" x="4" y="9" width="226" height="3"/>
+                                        </variation>
                                     </progressView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="record_activity_progress_bar" translatesAutoresizingMaskIntoConstraints="NO" id="4a1-BB-2uS">
                                         <rect key="frame" x="0.0" y="0.0" width="233" height="18"/>
+                                        <variation key="widthClass=regular" misplaced="YES">
+                                            <rect key="frame" x="0.0" y="1" width="234" height="18"/>
+                                        </variation>
                                     </imageView>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -172,6 +193,9 @@
                                     <constraint firstItem="4a1-BB-2uS" firstAttribute="top" secondItem="9Fg-38-2iE" secondAttribute="top" id="RbS-u7-uY4"/>
                                     <constraint firstAttribute="trailing" secondItem="pOB-ig-rXa" secondAttribute="trailing" constant="4" id="uk5-41-W7e"/>
                                 </constraints>
+                                <variation key="widthClass=regular" misplaced="YES">
+                                    <rect key="frame" x="-17" y="76" width="234" height="0.0"/>
+                                </variation>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XyK-sL-mrq">
                                 <rect key="frame" x="114" y="490" width="92" height="46"/>
@@ -180,6 +204,9 @@
                                         <rect key="frame" x="0.0" y="0.0" width="46" height="46"/>
                                         <state key="normal" image="activity_record_flash_icon_normal"/>
                                         <state key="selected" image="activity_record_flash_icon_pressed"/>
+                                        <variation key="widthClass=regular" misplaced="YES">
+                                            <rect key="frame" x="0.0" y="0.0" width="46" height="28"/>
+                                        </variation>
                                         <connections>
                                             <action selector="pushFlash:" destination="BYZ-38-t0r" eventType="touchUpInside" id="MCy-p7-EPj"/>
                                         </connections>
@@ -188,11 +215,17 @@
                                         <rect key="frame" x="46" y="0.0" width="46" height="46"/>
                                         <state key="normal" image="activity_record_change_camera_icon_normal"/>
                                         <state key="selected" image="activity_record_change_camera_icon_pressed"/>
+                                        <variation key="widthClass=regular" misplaced="YES">
+                                            <rect key="frame" x="46" y="0.0" width="46" height="28"/>
+                                        </variation>
                                         <connections>
                                             <action selector="pushRotateCamera:" destination="BYZ-38-t0r" eventType="touchUpInside" id="el1-HM-zbU"/>
                                         </connections>
                                     </button>
                                 </subviews>
+                                <variation key="widthClass=regular" misplaced="YES">
+                                    <rect key="frame" x="238" y="243" width="92" height="28"/>
+                                </variation>
                             </stackView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I67-Zu-yLI" customClass="GPUImageView">
                                 <rect key="frame" x="31" y="71" width="258" height="194"/>
@@ -200,6 +233,9 @@
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="I67-Zu-yLI" secondAttribute="height" multiplier="4:3" id="Fd4-nR-mks"/>
                                 </constraints>
+                                <variation key="widthClass=regular" misplaced="YES">
+                                    <rect key="frame" x="100" y="71" width="0.0" height="1"/>
+                                </variation>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kdj-Uh-Pf2">
                                 <rect key="frame" x="20" y="18" width="40" height="40"/>
@@ -216,14 +252,17 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="87" id="5EH-oQ-Yre"/>
                                     <constraint firstItem="Ua1-Iu-XaH" firstAttribute="leading" secondItem="Kdj-Uh-Pf2" secondAttribute="leading" id="7cy-IL-uOs"/>
+                                    <constraint firstItem="Ua1-Iu-XaH" firstAttribute="centerY" secondItem="Kdj-Uh-Pf2" secondAttribute="centerY" id="9kj-h3-V3W"/>
                                     <constraint firstAttribute="trailing" secondItem="Ua1-Iu-XaH" secondAttribute="trailing" id="9rd-QK-PxY"/>
-                                    <constraint firstAttribute="width" constant="40" id="Gcq-8i-LU8"/>
+                                    <constraint firstAttribute="width" constant="40" id="Gcq-8i-LU8">
+                                        <variation key="widthClass=regular" constant="80"/>
+                                    </constraint>
                                     <constraint firstAttribute="width" constant="50" id="HlM-aX-QOo"/>
                                     <constraint firstAttribute="height" constant="40" id="LFy-on-Uu0"/>
                                     <constraint firstItem="Ua1-Iu-XaH" firstAttribute="centerY" secondItem="Kdj-Uh-Pf2" secondAttribute="centerY" id="OHF-EQ-qwj"/>
                                     <constraint firstAttribute="width" constant="40" id="OYA-S0-Qc4"/>
+                                    <constraint firstItem="Ua1-Iu-XaH" firstAttribute="centerX" secondItem="Kdj-Uh-Pf2" secondAttribute="centerX" id="PjS-LW-QnX"/>
                                     <constraint firstAttribute="bottom" secondItem="Ua1-Iu-XaH" secondAttribute="bottom" id="WTP-ak-mWP"/>
                                     <constraint firstAttribute="width" secondItem="Kdj-Uh-Pf2" secondAttribute="height" multiplier="1:1" id="d4s-jq-KDY"/>
                                     <constraint firstItem="Ua1-Iu-XaH" firstAttribute="top" secondItem="Kdj-Uh-Pf2" secondAttribute="top" id="gST-Mm-gre"/>
@@ -231,7 +270,6 @@
                                 </constraints>
                                 <variation key="default">
                                     <mask key="constraints">
-                                        <exclude reference="5EH-oQ-Yre"/>
                                         <exclude reference="HlM-aX-QOo"/>
                                         <exclude reference="LFy-on-Uu0"/>
                                         <exclude reference="OYA-S0-Qc4"/>
@@ -244,11 +282,6 @@
                                         <include reference="HlM-aX-QOo"/>
                                         <include reference="OHF-EQ-qwj"/>
                                         <include reference="iv5-N3-FmV"/>
-                                    </mask>
-                                </variation>
-                                <variation key="widthClass=regular">
-                                    <mask key="constraints">
-                                        <include reference="5EH-oQ-Yre"/>
                                     </mask>
                                 </variation>
                             </view>
@@ -267,7 +300,9 @@
                             <constraint firstItem="odv-2u-eR9" firstAttribute="centerY" secondItem="A1u-cM-TQo" secondAttribute="centerY" id="BCQ-my-kZt"/>
                             <constraint firstItem="VFY-bO-VWA" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-20" id="C16-N1-d10"/>
                             <constraint firstItem="Kdj-Uh-Pf2" firstAttribute="centerY" secondItem="DUe-h6-ymF" secondAttribute="centerY" id="D3f-LJ-rfN"/>
-                            <constraint firstItem="I67-Zu-yLI" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="15" id="EOj-qN-pWO"/>
+                            <constraint firstItem="I67-Zu-yLI" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="15" id="EOj-qN-pWO">
+                                <variation key="widthClass=regular" constant="80"/>
+                            </constraint>
                             <constraint firstItem="8kM-x8-DLI" firstAttribute="leading" secondItem="A1u-cM-TQo" secondAttribute="trailing" constant="25" id="FMc-4B-si8"/>
                             <constraint firstItem="8kM-x8-DLI" firstAttribute="top" secondItem="kxG-QA-TTi" secondAttribute="bottom" constant="15" id="GIZ-sz-XkP"/>
                             <constraint firstItem="I67-Zu-yLI" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="28" id="K08-Am-TGd"/>
@@ -276,7 +311,9 @@
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="XyK-sL-mrq" secondAttribute="bottom" constant="32" id="YXg-rS-6b0"/>
                             <constraint firstItem="DUe-h6-ymF" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="ZAS-hs-mAy"/>
                             <constraint firstItem="I67-Zu-yLI" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="arr-Vt-AG2"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="I67-Zu-yLI" secondAttribute="trailing" constant="15" id="bJS-EE-R5G"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="I67-Zu-yLI" secondAttribute="trailing" constant="15" id="bJS-EE-R5G">
+                                <variation key="widthClass=regular" constant="80"/>
+                            </constraint>
                             <constraint firstItem="I67-Zu-yLI" firstAttribute="leading" secondItem="VFY-bO-VWA" secondAttribute="trailing" constant="-280" id="bq3-ol-SXg"/>
                             <constraint firstAttribute="trailingMargin" secondItem="VFY-bO-VWA" secondAttribute="trailing" constant="-20" id="cw6-Lm-yXB"/>
                             <constraint firstItem="9Fg-38-2iE" firstAttribute="top" secondItem="I67-Zu-yLI" secondAttribute="bottom" constant="4" id="ghf-v5-oud"/>
