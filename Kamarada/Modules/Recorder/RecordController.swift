@@ -30,7 +30,7 @@ class RecordController: VideonaController,RecordViewInterface,RecordPresenterDel
     
     @IBOutlet weak var videoProgress: UIProgressView!
 
-    var alertController:UIAlertController?
+    var alertController:UIViewController?
     var tapDisplay:UIGestureRecognizer?
     var pinchDisplay:UIPinchGestureRecognizer?
     
@@ -66,6 +66,12 @@ class RecordController: VideonaController,RecordViewInterface,RecordPresenterDel
         self.cameraView.addGestureRecognizer(pinchDisplay!)
         
         videoProgress.transform = CGAffineTransformScale(videoProgress.transform, 1, 4)
+        
+        cameraView.layer.borderWidth = 3
+        cameraView.layer.borderColor = UIColor.init(red: (253/255), green: (171/255), blue: (83/255), alpha: 1).CGColor
+        
+        thumbnailNumberClips.textColor = UIColor.init(red: (253/255), green: (171/255), blue: (83/255), alpha: 1)
+
     }
     
     func displayTapped(){
@@ -200,19 +206,16 @@ class RecordController: VideonaController,RecordViewInterface,RecordPresenterDel
     
     
     func createAlertWaitToExport(){
-        let title = Utils().getStringByKeyFromSettings(RecordConstants().WAIT_TITLE)
-        let message = Utils().getStringByKeyFromSettings(RecordConstants().WAIT_DESCRIPTION)
         
-        alertController = UIAlertController(title:title,message:message,preferredStyle: .Alert)
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        alertController = storyboard.instantiateViewControllerWithIdentifier("shareDialog") as UIViewController
         
-        let activityIndicator = UIActivityIndicatorView.init(activityIndicatorStyle: UIActivityIndicatorViewStyle.White)
+        self.navigationController?.definesPresentationContext = true
         
-
-        activityIndicator.center = CGPointMake(130.5, 75.5);
-        activityIndicator.startAnimating()
-
-        alertController?.view.addSubview(activityIndicator)
-        self.presentViewController(alertController!, animated: false, completion:{})
+        alertController?.modalTransitionStyle = UIModalTransitionStyle.CrossDissolve
+        alertController?.modalPresentationStyle = UIModalPresentationStyle.CurrentContext
+        
+        self.presentViewController(alertController!, animated: true, completion: nil)
     }
     
     func dissmissAlertWaitToExport(completion:()->Void){
