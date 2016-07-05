@@ -9,7 +9,7 @@
 import UIKit
 import GPUImage
 
-class RecordController: VideonaController,RecordViewInterface,UINavigationControllerDelegate {
+class RecordController: VideonaController,RecordViewInterface,RecordPresenterDelegate, UINavigationControllerDelegate {
     
     //MARK: - Variables VIPER
     var eventHandler: RecordPresenter?
@@ -28,6 +28,8 @@ class RecordController: VideonaController,RecordViewInterface,UINavigationContro
     @IBOutlet weak var thumbnailView: UIView!
     @IBOutlet weak var thumbnailNumberClips: UILabel!
     
+    @IBOutlet weak var videoProgress: UIProgressView!
+
     var alertController:UIAlertController?
     var tapDisplay:UIGestureRecognizer?
     var pinchDisplay:UIPinchGestureRecognizer?
@@ -62,6 +64,8 @@ class RecordController: VideonaController,RecordViewInterface,UINavigationContro
         
         pinchDisplay = UIPinchGestureRecognizer(target: self, action: #selector(RecordController.displayPinched))
         self.cameraView.addGestureRecognizer(pinchDisplay!)
+        
+        videoProgress.transform = CGAffineTransformScale(videoProgress.transform, 1, 4)
     }
     
     func displayTapped(){
@@ -219,7 +223,13 @@ class RecordController: VideonaController,RecordViewInterface,UINavigationContro
     }
     
     func resetView() {
+        videoProgress.setProgress(0, animated: false)
         eventHandler?.resetRecorder()
     }
     
+    //MARK: - Presenter delegate
+    func setProgressToSeekBar(progressTime: Float) {
+        Utils().debugLog("Player View \t Progress time: \(progressTime)")
+        videoProgress.setProgress(progressTime, animated: false)
+    }
 }

@@ -22,6 +22,7 @@ class RecordWireframe : NSObject {
         viewController.eventHandler = recordPresenter
         recordViewController = viewController
         recordPresenter?.controller = viewController
+        recordPresenter?.recorderDelegate = viewController
         
         rootWireframe?.showRootViewController(viewController, inWindow: window)
     }

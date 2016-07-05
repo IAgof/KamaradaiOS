@@ -13,8 +13,9 @@ protocol RecordPresenterInput{
     
 }
 
-protocol RecordPresenterOutput{
-    
+protocol RecordPresenterDelegate{
+    func setProgressToSeekBar(progressTime:Float)
+
 }
 
 protocol RecordPresenterInterface{

@@ -20,9 +20,14 @@ class RecordPresenter: NSObject
     var shareWireframe: ShareWireframe?
     var cameraInteractor: CameraInteractor?
     var timerInteractor: TimerInteractor?
-
+    var recorderDelegate:RecordPresenterDelegate?
+    
     //MARK: - Variables
     var isRecording = false
+    let videoDuration = 15.0
+    let progressSteps = 400.0
+    var progressTime = 0.0
+    var progressTimer:NSTimer?
 
     struct EffectOnView {
         var effectName:String
@@ -49,7 +54,7 @@ class RecordPresenter: NSObject
     }
     
     func viewWillAppear() {
-
+        progressTime = 0.0
     }
     
     func pushSettings() {
@@ -148,6 +153,7 @@ class RecordPresenter: NSObject
     
     //MARK: - Start/Stop Record
     func startRecord(){
+        self.startTimer()
         self.trackStartRecord()
         
         controller?.recordButtonEnable(false)
@@ -172,6 +178,7 @@ class RecordPresenter: NSObject
     
     func stopRecord(){
         self.trackStopRecord()
+        self.pauseTimer()
         
         isRecording = false
         
@@ -191,6 +198,35 @@ class RecordPresenter: NSObject
         });
         
     }
+    
+    //MARK: - Progress Bar
+    @objc func updateProgressBar(){
+        let delay = videoDuration/(progressSteps*Double(videoDuration))
+        
+        progressTime  += delay
+        if(progressTime >= 1.0){
+            recorderDelegate?.setProgressToSeekBar(Float(progressTime))
+            progressTime = 0.75
+        }else{
+            recorderDelegate?.setProgressToSeekBar(Float(progressTime))
+        }
+    }
+    
+    func startTimer(){
+        let videoStepDuration = videoDuration / progressSteps
+        
+        //Start timer
+        progressTimer = NSTimer.scheduledTimerWithTimeInterval(videoStepDuration,
+                                                               target: self,
+                                                               selector: #selector(self.updateProgressBar),
+                                                               userInfo: nil,
+                                                               repeats: true)
+    }
+    
+    func pauseTimer() {
+        progressTimer!.invalidate()
+    }
+    
     //MARK: - Track Events
     func trackFlash(flashState:Bool){
         let tracker = controller?.getTrackerObject()
