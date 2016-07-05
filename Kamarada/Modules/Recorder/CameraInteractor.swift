@@ -82,9 +82,6 @@ class CameraInteractor:CameraRecorderDelegate,
         
         videoCamera.startCameraCapture()
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(CameraInteractor.checkOrientation), name: UIDeviceOrientationDidChangeNotification, object: nil)
-        
-        
         self.loadGrainImages()
         
         dispatch_async(dispatch_get_main_queue()) {
@@ -133,24 +130,6 @@ class CameraInteractor:CameraRecorderDelegate,
     
     func resetClipsArray(){
         cameraRecorder.resetClipsArray()
-    }
-    
-    //MARK: - Orientation
-    @objc func checkOrientation(){
-        if !isRecording {
-            switch UIDevice.currentDevice().orientation{
-            case .Portrait,.PortraitUpsideDown:
-                print("Check Orientation: \(UIDevice.currentDevice().orientation)")
-            case .LandscapeLeft:
-                videoCamera.outputImageOrientation = .LandscapeRight
-                break
-            case .LandscapeRight:
-                videoCamera.outputImageOrientation = .LandscapeLeft
-                break
-            default:
-                break
-            }
-        }
     }
     
     func rotateCamera(){
