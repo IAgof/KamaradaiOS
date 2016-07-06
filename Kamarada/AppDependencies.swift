@@ -89,6 +89,7 @@ class AppDependencies {
         musicListPresenter.interactor = musicListInteractor
         
         musicListInteractor.presenter = musicListPresenter
+        musicListInteractor.delegate = musicListPresenter
         
         musicListWireframe.musicListPresenter = musicListPresenter
         musicListWireframe.rootWireframe = rootWireframe

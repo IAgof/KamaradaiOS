@@ -9,7 +9,7 @@
 import UIKit
 import Foundation
 
-class MusicListController: KamaradaController,MusicViewInterface,
+class MusicListController: KamaradaController,MusicViewInterface,MusicPresenterDelegate,
 UITableViewDataSource,UITableViewDelegate{
     //MARK: - VIPER
     var eventHandler: MusicListPresenterInterface?
@@ -18,14 +18,18 @@ UITableViewDataSource,UITableViewDelegate{
     @IBOutlet weak var musicListTableView: UITableView!
     
     //MARK: - Variables 
-    let reuseIdentifierCell = "MusicListCell"
+    let reuseIdentifierCell = "musicListCell"
+    var songsImages : Array<UIImage>!
     
     //MARK: - LifeCycle
     override func viewDidLoad() {
-        // Register custom cell
-        let nib = UINib(nibName: "MusicListCell", bundle: nil)
-        musicListTableView.registerNib(nib, forCellReuseIdentifier: reuseIdentifierCell)
+        self.navigationController?.navigationBarHidden = true
         
+        eventHandler?.viewDidLoad()
+    }
+    
+    func initVariables() {
+        songsImages = Array<UIImage>()
     }
     
     //MARK: - Actions
@@ -38,22 +42,36 @@ UITableViewDataSource,UITableViewDelegate{
     
     //MARK: - UITableView data source protocol
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 4
+        return songsImages.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(reuseIdentifierCell, forIndexPath: indexPath) as! MusicListCell
+        
+        cell.coverImageView.image = songsImages[indexPath.row]
+        
         cell.playPauseButton.tag = indexPath.row
-        cell.playPauseButton.addTarget(self, action: #selector(MusicListController.playPausePushed(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+        
+        cell.playPauseButton.addTarget(self, action: "pushPlayPauseButton:", forControlEvents: UIControlEvents.TouchUpInside)
 
         return cell
     }
     
-    func playPausePushed(sender:UIButton) {
-        Utils().debugLog("Music controller class \n playPausePushed")
-
+    
+    @IBAction func pushPlayPauseButton(sender:UIButton){
+        Utils().debugLog("play pause pushed in position \(sender.tag)")
+        
+        togglePlayOrPause(sender)
     }
     
+    func togglePlayOrPause(sender:UIButton){
+        if sender.selected {
+            sender.selected = false
+        }else{
+            sender.selected = true
+        }
+    }
+
     //MARK: - UITableView delegate
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let cell = tableView.cellForRowAtIndexPath(indexPath) as! MusicListCell
@@ -70,5 +88,10 @@ UITableViewDataSource,UITableViewDelegate{
         Utils().debugLog("Music controller class \n didDeselectRowAtIndexPath")
         let cell = tableView.cellForRowAtIndexPath(indexPath) as! MusicListCell
         cell.isSelectedMusic = false
+    }
+    
+    //MARK: - Presenter delegate
+    func setSongsImage(songsImages: Array<UIImage>) {
+        self.songsImages = songsImages
     }
 }

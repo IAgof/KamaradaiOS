@@ -7,7 +7,16 @@
 //
 
 import Foundation
+import UIKit
+import AVFoundation
 
 protocol MusicListInteractorInterface {
     
+    func getSongs()
+    func playSongAtIndex(index:Int)
+    func pauseSong()
+}
+
+protocol MusicInteractorDelegate {
+    func setSongsImage(songsImages:Array<UIImage>)
 }

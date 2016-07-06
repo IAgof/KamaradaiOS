@@ -12,7 +12,7 @@ import UIKit
 class MusicListCell: UITableViewCell {
     
     @IBOutlet weak var playPauseButton: UIButton!
-    @IBOutlet weak var previewImageView: UIImageView!
+    @IBOutlet weak var coverImageView: UIImageView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -37,16 +37,16 @@ class MusicListCell: UITableViewCell {
             Utils().debugLog("Music Cell class \n isSelectedMusic = \(isSelectedMusic)")
 
             if isSelectedMusic {
-                if (previewImageView != nil) {
-                    previewImageView.layer.borderWidth = 2
-                    previewImageView.layer.borderColor = UIColor.init(red: 0.7411, green: 0.854, blue: 0.074, alpha: 0.8).CGColor
+                if (coverImageView != nil) {
+                    coverImageView.layer.borderWidth = 2
+                    coverImageView.layer.borderColor = UIColor.init(red: 0.7411, green: 0.854, blue: 0.074, alpha: 0.8).CGColor
                     self.backgroundColor = UIColor.clearColor()
                     
                 }
             }else{
-                if (previewImageView != nil) {
-                    previewImageView.layer.borderWidth = 0
-                    previewImageView.layer.borderColor = UIColor.clearColor().CGColor
+                if (coverImageView != nil) {
+                    coverImageView.layer.borderWidth = 0
+                    coverImageView.layer.borderColor = UIColor.clearColor().CGColor
                 }
 
             }

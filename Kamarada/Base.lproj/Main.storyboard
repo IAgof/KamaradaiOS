@@ -106,13 +106,44 @@
                                     <action selector="pushValidationButton:" destination="HLv-k7-ezT" eventType="touchUpInside" id="h5Z-gb-ztd"/>
                                 </connections>
                             </button>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="81" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="s6f-Xz-HpA">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="90" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="s6f-Xz-HpA">
                                 <rect key="frame" x="36" y="93" width="248" height="382"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="sectionIndexTrackingBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="musicListCell" id="Bhr-4I-Kfr" customClass="MusicListCell" customModule="Kamarada" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="1" width="248" height="90"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Bhr-4I-Kfr" id="dc1-Ge-9GA">
+                                            <rect key="frame" x="0.0" y="0.0" width="248" height="90"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="music_list_breaktime" translatesAutoresizingMaskIntoConstraints="NO" id="NbK-OU-rGf">
+                                                    <rect key="frame" x="8" y="5" width="118" height="81"/>
+                                                </imageView>
+                                                <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sIV-Hw-LAw">
+                                                    <rect key="frame" x="195" y="23" width="45" height="45"/>
+                                                    <state key="normal" image="music_list_play"/>
+                                                    <state key="selected" image="music_list_pause"/>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="sIV-Hw-LAw" firstAttribute="centerY" secondItem="NbK-OU-rGf" secondAttribute="centerY" id="54j-RT-fCu"/>
+                                                <constraint firstItem="NbK-OU-rGf" firstAttribute="centerY" secondItem="dc1-Ge-9GA" secondAttribute="centerY" id="ImN-Y8-e7q"/>
+                                                <constraint firstItem="NbK-OU-rGf" firstAttribute="leading" secondItem="dc1-Ge-9GA" secondAttribute="leadingMargin" id="cSa-Fw-jqA"/>
+                                                <constraint firstItem="sIV-Hw-LAw" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="NbK-OU-rGf" secondAttribute="trailing" constant="8" id="eps-dQ-BHi"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="sIV-Hw-LAw" secondAttribute="trailing" id="kfM-yA-DtT"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="coverImageView" destination="NbK-OU-rGf" id="gNh-jR-mmc"/>
+                                            <outlet property="playPauseButton" destination="sIV-Hw-LAw" id="N9l-8f-TcL"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
                                 <connections>
                                     <outlet property="dataSource" destination="HLv-k7-ezT" id="HiD-53-Sop"/>
                                     <outlet property="delegate" destination="HLv-k7-ezT" id="e9X-Cm-8Pb"/>
@@ -127,7 +158,6 @@
                             <constraint firstItem="s6f-Xz-HpA" firstAttribute="leading" secondItem="D32-4y-Z7m" secondAttribute="leadingMargin" constant="20" id="TXA-Ag-BiX"/>
                             <constraint firstItem="kmx-6B-31v" firstAttribute="centerX" secondItem="D32-4y-Z7m" secondAttribute="centerX" id="Xki-w5-Cph"/>
                             <constraint firstItem="f9i-VC-hLG" firstAttribute="top" secondItem="C4U-88-95g" secondAttribute="bottom" constant="30" id="ZCn-Ng-nLp"/>
-                            <constraint firstItem="kmx-6B-31v" firstAttribute="top" relation="greaterThanOrEqual" secondItem="s6f-Xz-HpA" secondAttribute="bottom" constant="8" id="aYv-g8-KWJ"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Zsj-Hu-MX7" secondAttribute="trailing" constant="-20" id="cbw-h5-jJZ"/>
                             <constraint firstItem="4po-Tn-XAg" firstAttribute="top" secondItem="kmx-6B-31v" secondAttribute="bottom" constant="20" id="j5l-pv-yNv"/>
                             <constraint firstItem="f9i-VC-hLG" firstAttribute="centerX" secondItem="D32-4y-Z7m" secondAttribute="centerX" id="jE5-FF-L2r"/>
@@ -810,6 +840,9 @@
         <image name="music_list_accept_normal" width="61" height="31"/>
         <image name="music_list_accept_pressed" width="61" height="31"/>
         <image name="music_list_background" width="311" height="552"/>
+        <image name="music_list_breaktime" width="118" height="81"/>
+        <image name="music_list_pause" width="45" height="45"/>
+        <image name="music_list_play" width="45" height="45"/>
         <image name="record_activity_progress_bar" width="233" height="15"/>
         <image name="youtube_logo" width="40" height="40"/>
     </resources>

@@ -88,7 +88,6 @@
 		A9385A731D2BF48D0048071A /* Song.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9385A721D2BF48D0048071A /* Song.swift */; };
 		A9385A751D2BF4970048071A /* MusicListInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9385A741D2BF4970048071A /* MusicListInteractor.swift */; };
 		A9385A771D2BF4A10048071A /* MusicListInteractorInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9385A761D2BF4A10048071A /* MusicListInteractorInterface.swift */; };
-		A9385A8A1D2C000A0048071A /* MusicListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A9385A891D2C000A0048071A /* MusicListCell.xib */; };
 		A9385A8C1D2C00E20048071A /* MusicListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9385A8B1D2C00E20048071A /* MusicListCell.swift */; };
 		A953390A1D2530B0006890E7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A95339081D2530B0006890E7 /* Main.storyboard */; };
 		A953390D1D2535F2006890E7 /* FlashInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A953390C1D2535F2006890E7 /* FlashInteractor.swift */; };
@@ -102,6 +101,8 @@
 		A955F5071CA95B0D00B0CF62 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A955F5051CA95B0D00B0CF62 /* LaunchScreen.storyboard */; };
 		A955F5121CA95B0D00B0CF62 /* KamaradaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A955F5111CA95B0D00B0CF62 /* KamaradaTests.swift */; };
 		A955F51D1CA95B0E00B0CF62 /* KamaradaUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A955F51C1CA95B0E00B0CF62 /* KamaradaUITests.swift */; };
+		A95B714C1D2D1D700094B85A /* SongProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A95B714B1D2D1D700094B85A /* SongProvider.swift */; };
+		A95B714E1D2D1EBC0094B85A /* SongProviderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A95B714D1D2D1EBC0094B85A /* SongProviderTests.swift */; };
 		A95EB5281CA97AD7000EAAB0 /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A95EB5271CA97AD7000EAAB0 /* SettingsController.swift */; };
 		A962293B1D2A729500FFAE49 /* DetailTextInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A96229391D2A729500FFAE49 /* DetailTextInteractor.swift */; };
 		A962293C1D2A729500FFAE49 /* DetailTextInteractorInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = A962293A1D2A729500FFAE49 /* DetailTextInteractorInterface.swift */; };
@@ -278,7 +279,6 @@
 		A9385A721D2BF48D0048071A /* Song.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Song.swift; sourceTree = "<group>"; };
 		A9385A741D2BF4970048071A /* MusicListInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicListInteractor.swift; sourceTree = "<group>"; };
 		A9385A761D2BF4A10048071A /* MusicListInteractorInterface.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicListInteractorInterface.swift; sourceTree = "<group>"; };
-		A9385A891D2C000A0048071A /* MusicListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MusicListCell.xib; sourceTree = "<group>"; };
 		A9385A8B1D2C00E20048071A /* MusicListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicListCell.swift; sourceTree = "<group>"; };
 		A95339091D2530B0006890E7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A953390C1D2535F2006890E7 /* FlashInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FlashInteractor.swift; path = Modules/Recorder/FlashInteractor.swift; sourceTree = "<group>"; };
@@ -298,6 +298,8 @@
 		A955F5181CA95B0E00B0CF62 /* KamaradaUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KamaradaUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A955F51C1CA95B0E00B0CF62 /* KamaradaUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KamaradaUITests.swift; sourceTree = "<group>"; };
 		A955F51E1CA95B0E00B0CF62 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A95B714B1D2D1D700094B85A /* SongProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongProvider.swift; sourceTree = "<group>"; };
+		A95B714D1D2D1EBC0094B85A /* SongProviderTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongProviderTests.swift; sourceTree = "<group>"; };
 		A95EB5271CA97AD7000EAAB0 /* SettingsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = SettingsController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		A96229391D2A729500FFAE49 /* DetailTextInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DetailTextInteractor.swift; path = Modules/DetailText/DetailTextInteractor.swift; sourceTree = "<group>"; };
 		A962293A1D2A729500FFAE49 /* DetailTextInteractorInterface.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DetailTextInteractorInterface.swift; path = Modules/DetailText/DetailTextInteractorInterface.swift; sourceTree = "<group>"; };
@@ -840,7 +842,6 @@
 			children = (
 				A9385A6A1D2BF4530048071A /* MusicViewInterface.swift */,
 				A9385A6C1D2BF4630048071A /* MusicListController.swift */,
-				A9385A891D2C000A0048071A /* MusicListCell.xib */,
 				A9385A8B1D2C00E20048071A /* MusicListCell.swift */,
 			);
 			name = View;
@@ -859,6 +860,7 @@
 			isa = PBXGroup;
 			children = (
 				A9385A721D2BF48D0048071A /* Song.swift */,
+				A95B714B1D2D1D700094B85A /* SongProvider.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -918,6 +920,7 @@
 			isa = PBXGroup;
 			children = (
 				A955F5111CA95B0D00B0CF62 /* KamaradaTests.swift */,
+				A95B714D1D2D1EBC0094B85A /* SongProviderTests.swift */,
 				A955F5131CA95B0D00B0CF62 /* Info.plist */,
 			);
 			path = KamaradaTests;
@@ -1305,7 +1308,6 @@
 				A91AD8631CE1F4DE0026867B /* silent_film_overlay_a.png in Resources */,
 				A91AD86B1CE1F4DE0026867B /* silent_film_overlay_i.png in Resources */,
 				A91AD8641CE1F4DE0026867B /* silent_film_overlay_b.png in Resources */,
-				A9385A8A1D2C000A0048071A /* MusicListCell.xib in Resources */,
 				A91AD8811CE200F20026867B /* silent_film_overlay_j_320_240.png in Resources */,
 				A91AD8791CE200F20026867B /* silent_film_overlay_b_320_240.png in Resources */,
 				A91AD8661CE1F4DE0026867B /* silent_film_overlay_d.png in Resources */,
@@ -1446,6 +1448,7 @@
 				A9301FBC1D23B2FB00C414A0 /* SettingsProvider.swift in Sources */,
 				A900E4F91CC9026800C44271 /* Utils.swift in Sources */,
 				A9F777AC1D268386008D479B /* TwitterVideoUpload.m in Sources */,
+				A95B714C1D2D1D700094B85A /* SongProvider.swift in Sources */,
 				A9301FE51D23B46A00C414A0 /* SocialNetwork.swift in Sources */,
 				A9301FCC1D23B41000C414A0 /* ShareInterface.swift in Sources */,
 				A9385A691D2BF4440048071A /* MusicListWireframe.swift in Sources */,
@@ -1493,6 +1496,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A955F5121CA95B0D00B0CF62 /* KamaradaTests.swift in Sources */,
+				A95B714E1D2D1EBC0094B85A /* SongProviderTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1682,10 +1686,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				FRAMEWORK_SEARCH_PATHS = /Users/Alejandro/Desktop/Repos/KamaradaiOS/Kamarada;
+				HEADER_SEARCH_PATHS = "Pods/**";
 				INFOPLIST_FILE = KamaradaTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Videona.KamaradaTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "31430f87-f05d-4bfc-945a-7fb5e7250854";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Kamarada.app/Kamarada";
 			};
 			name = Debug;
@@ -1694,10 +1702,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				FRAMEWORK_SEARCH_PATHS = /Users/Alejandro/Desktop/Repos/KamaradaiOS/Kamarada;
+				HEADER_SEARCH_PATHS = "Pods/**";
 				INFOPLIST_FILE = KamaradaTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Videona.KamaradaTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "31430f87-f05d-4bfc-945a-7fb5e7250854";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Kamarada.app/Kamarada";
 			};
 			name = Release;
@@ -1705,10 +1717,12 @@
 		A955F5281CA95B0E00B0CF62 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				INFOPLIST_FILE = KamaradaUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Videona.KamaradaUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "e765f048-618c-4d1c-84bd-3bf1bd940a42";
 				TEST_TARGET_NAME = Kamarada;
 			};
 			name = Debug;
@@ -1716,10 +1730,12 @@
 		A955F5291CA95B0E00B0CF62 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				INFOPLIST_FILE = KamaradaUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Videona.KamaradaUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "e765f048-618c-4d1c-84bd-3bf1bd940a42";
 				TEST_TARGET_NAME = Kamarada;
 			};
 			name = Release;

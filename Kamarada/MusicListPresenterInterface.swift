@@ -10,5 +10,10 @@ import Foundation
 
 protocol MusicListPresenterInterface {
     func pushBack()
+    func viewDidLoad()
 
+}
+
+protocol MusicPresenterDelegate {
+    func setSongsImage(songsImages: Array<UIImage>) 
 }

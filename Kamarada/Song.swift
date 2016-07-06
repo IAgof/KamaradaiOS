@@ -7,3 +7,22 @@
 //
 
 import Foundation
+
+class Song: NSObject {
+    
+    var coverImage:UIImage!
+    var songName:String!
+    
+    init(coverImage:UIImage,songName:String) {
+        self.coverImage = coverImage
+        self.songName = songName
+    }
+    
+    func getCoverImage() -> UIImage {
+        return coverImage
+    }
+    
+    func getSongName() -> String {
+        return songName
+    }
+}

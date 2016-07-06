@@ -41,6 +41,7 @@ class MusicListWireframe : NSObject {
         viewController.eventHandler = musicListPresenter
         musicListViewController = viewController
         musicListPresenter?.controller = viewController
+        musicListPresenter?.delegate = viewController
         
         return viewController
     }
