@@ -103,6 +103,10 @@
 		A955F51D1CA95B0E00B0CF62 /* KamaradaUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A955F51C1CA95B0E00B0CF62 /* KamaradaUITests.swift */; };
 		A95B714C1D2D1D700094B85A /* SongProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A95B714B1D2D1D700094B85A /* SongProvider.swift */; };
 		A95B714E1D2D1EBC0094B85A /* SongProviderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A95B714D1D2D1EBC0094B85A /* SongProviderTests.swift */; };
+		A95B71531D2D2BBC0094B85A /* WagonWheel.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A95B714F1D2D2BBC0094B85A /* WagonWheel.mp3 */; };
+		A95B71541D2D2BBC0094B85A /* LivelyLumpsucker.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A95B71501D2D2BBC0094B85A /* LivelyLumpsucker.mp3 */; };
+		A95B71551D2D2BBC0094B85A /* Breaktime.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A95B71511D2D2BBC0094B85A /* Breaktime.mp3 */; };
+		A95B71561D2D2BBC0094B85A /* EvilPlanFX.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A95B71521D2D2BBC0094B85A /* EvilPlanFX.mp3 */; };
 		A95EB5281CA97AD7000EAAB0 /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A95EB5271CA97AD7000EAAB0 /* SettingsController.swift */; };
 		A962293B1D2A729500FFAE49 /* DetailTextInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A96229391D2A729500FFAE49 /* DetailTextInteractor.swift */; };
 		A962293C1D2A729500FFAE49 /* DetailTextInteractorInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = A962293A1D2A729500FFAE49 /* DetailTextInteractorInterface.swift */; };
@@ -300,6 +304,10 @@
 		A955F51E1CA95B0E00B0CF62 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A95B714B1D2D1D700094B85A /* SongProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongProvider.swift; sourceTree = "<group>"; };
 		A95B714D1D2D1EBC0094B85A /* SongProviderTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongProviderTests.swift; sourceTree = "<group>"; };
+		A95B714F1D2D2BBC0094B85A /* WagonWheel.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = WagonWheel.mp3; sourceTree = "<group>"; };
+		A95B71501D2D2BBC0094B85A /* LivelyLumpsucker.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = LivelyLumpsucker.mp3; sourceTree = "<group>"; };
+		A95B71511D2D2BBC0094B85A /* Breaktime.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Breaktime.mp3; sourceTree = "<group>"; };
+		A95B71521D2D2BBC0094B85A /* EvilPlanFX.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = EvilPlanFX.mp3; sourceTree = "<group>"; };
 		A95EB5271CA97AD7000EAAB0 /* SettingsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = SettingsController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		A96229391D2A729500FFAE49 /* DetailTextInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DetailTextInteractor.swift; path = Modules/DetailText/DetailTextInteractor.swift; sourceTree = "<group>"; };
 		A962293A1D2A729500FFAE49 /* DetailTextInteractorInterface.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DetailTextInteractorInterface.swift; path = Modules/DetailText/DetailTextInteractorInterface.swift; sourceTree = "<group>"; };
@@ -1128,6 +1136,10 @@
 		A9F43F061CB4F13400007FD4 /* Audio */ = {
 			isa = PBXGroup;
 			children = (
+				A95B714F1D2D2BBC0094B85A /* WagonWheel.mp3 */,
+				A95B71501D2D2BBC0094B85A /* LivelyLumpsucker.mp3 */,
+				A95B71511D2D2BBC0094B85A /* Breaktime.mp3 */,
+				A95B71521D2D2BBC0094B85A /* EvilPlanFX.mp3 */,
 				A9F43F021CB4F13000007FD4 /* kamarada_audio.mp3 */,
 			);
 			name = Audio;
@@ -1302,16 +1314,20 @@
 				A955F5071CA95B0D00B0CF62 /* LaunchScreen.storyboard in Resources */,
 				A91AD87D1CE200F20026867B /* silent_film_overlay_f_320_240.png in Resources */,
 				A918CBE11CAAD175009F2A50 /* Settings.strings in Resources */,
+				A95B71531D2D2BBC0094B85A /* WagonWheel.mp3 in Resources */,
 				A91AD87C1CE200F20026867B /* silent_film_overlay_e_320_240.png in Resources */,
 				A953390A1D2530B0006890E7 /* Main.storyboard in Resources */,
 				A91AD87F1CE200F20026867B /* silent_film_overlay_h_320_240.png in Resources */,
+				A95B71561D2D2BBC0094B85A /* EvilPlanFX.mp3 in Resources */,
 				A91AD8631CE1F4DE0026867B /* silent_film_overlay_a.png in Resources */,
 				A91AD86B1CE1F4DE0026867B /* silent_film_overlay_i.png in Resources */,
 				A91AD8641CE1F4DE0026867B /* silent_film_overlay_b.png in Resources */,
 				A91AD8811CE200F20026867B /* silent_film_overlay_j_320_240.png in Resources */,
+				A95B71541D2D2BBC0094B85A /* LivelyLumpsucker.mp3 in Resources */,
 				A91AD8791CE200F20026867B /* silent_film_overlay_b_320_240.png in Resources */,
 				A91AD8661CE1F4DE0026867B /* silent_film_overlay_d.png in Resources */,
 				A91AD8781CE200F20026867B /* silent_film_overlay_a_320_240.png in Resources */,
+				A95B71551D2D2BBC0094B85A /* Breaktime.mp3 in Resources */,
 				A955F5041CA95B0D00B0CF62 /* Assets.xcassets in Resources */,
 				A91AD87B1CE200F20026867B /* silent_film_overlay_d_320_240.png in Resources */,
 				A9CB568B1CCE2E6D00E39F11 /* GoogleService-Info.plist in Resources */,

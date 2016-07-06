@@ -11,9 +11,13 @@ import Foundation
 protocol MusicListPresenterInterface {
     func pushBack()
     func viewDidLoad()
-
+    func viewWillDisappear()
+    func playSongAtIndex(index:Int)
+    func pauseSong()
+    func togglePlayOrPause(index:Int)
 }
 
 protocol MusicPresenterDelegate {
-    func setSongsImage(songsImages: Array<UIImage>) 
+    func setSongsImage(songsImages: Array<UIImage>)
+    func setStateToPlayButton(index:Int, state:Bool)
 }

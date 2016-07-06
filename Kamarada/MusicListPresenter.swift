@@ -16,6 +16,10 @@ class MusicListPresenter: NSObject,MusicListPresenterInterface,MusicInteractorDe
     var interactor: MusicListInteractorInterface?
     var delegate:MusicPresenterDelegate?
     
+    //MARK: - Variables
+    let NO_SONG_PLAYING = -1
+    var lastSongSelectedIndex = -1
+
     //MARK: - Interface
     func pushBack(){
         wireframe?.goPrevController()
@@ -25,6 +29,33 @@ class MusicListPresenter: NSObject,MusicListPresenterInterface,MusicInteractorDe
         controller?.initVariables()
         
         interactor?.getSongs()
+    }
+
+    func togglePlayOrPause(index:Int){
+
+        if index == lastSongSelectedIndex { // Pause mode
+            lastSongSelectedIndex = NO_SONG_PLAYING
+            
+            delegate?.setStateToPlayButton(index, state: false)
+            self.pauseSong()
+        }else{              // Play mode
+            lastSongSelectedIndex = index
+            
+            delegate?.setStateToPlayButton(index, state: true)
+            self.playSongAtIndex(index)
+        }
+    }
+    
+    func viewWillDisappear() {
+        interactor?.pauseSong()
+    }
+    
+    func playSongAtIndex(index: Int) {
+        interactor?.playSongAtIndex(index)
+    }
+    
+    func pauseSong(){
+        interactor?.pauseSong()
     }
     
     //MARK: - Interactor delefate

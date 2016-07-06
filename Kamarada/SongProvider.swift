@@ -14,16 +14,16 @@ class SongProvider: NSObject {
         var songsArray = Array<Song>()
         
         songsArray.append(Song(coverImage: UIImage(named: "music_list_breaktime")!,
-            songName: ""))
+            songName: "Breaktime"))
         
         songsArray.append(Song(coverImage: UIImage(named: "music_list_evilplan")!,
-            songName: ""))
+            songName: "EvilPlanFX"))
         
         songsArray.append(Song(coverImage: UIImage(named: "music_list_lively")!,
-            songName: ""))
+            songName: "LivelyLumpsucker"))
         
         songsArray.append(Song(coverImage: UIImage(named: "music_list_wagon")!,
-            songName: ""))
+            songName: "WagonWheel"))
         
         return songsArray
     }

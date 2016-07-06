@@ -28,6 +28,11 @@ UITableViewDataSource,UITableViewDelegate{
         eventHandler?.viewDidLoad()
     }
     
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        eventHandler?.viewWillDisappear()
+    }
+    
     func initVariables() {
         songsImages = Array<UIImage>()
     }
@@ -61,16 +66,11 @@ UITableViewDataSource,UITableViewDelegate{
     @IBAction func pushPlayPauseButton(sender:UIButton){
         Utils().debugLog("play pause pushed in position \(sender.tag)")
         
-        togglePlayOrPause(sender)
+        eventHandler?.togglePlayOrPause(sender.tag)
+        
     }
     
-    func togglePlayOrPause(sender:UIButton){
-        if sender.selected {
-            sender.selected = false
-        }else{
-            sender.selected = true
-        }
-    }
+
 
     //MARK: - UITableView delegate
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
@@ -93,5 +93,14 @@ UITableViewDataSource,UITableViewDelegate{
     //MARK: - Presenter delegate
     func setSongsImage(songsImages: Array<UIImage>) {
         self.songsImages = songsImages
+    }
+    
+    func setStateToPlayButton(index: Int, state: Bool) {
+        let indexPath =  NSIndexPath(forRow: index, inSection: 0)
+
+        let cell = musicListTableView.cellForRowAtIndexPath(indexPath) as! MusicListCell
+        
+        cell.playPauseButton.selected = state
+        
     }
 }

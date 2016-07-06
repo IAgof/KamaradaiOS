@@ -16,6 +16,7 @@ class MusicListInteractor: NSObject,MusicListInteractorInterface {
     
     //MARK: - Variables
     var songs:Array<Song>!
+    var audioPlayer = AVAudioPlayer()
 
     //    var playingSong
     
@@ -28,11 +29,19 @@ class MusicListInteractor: NSObject,MusicListInteractorInterface {
     }
     
     func playSongAtIndex(index: Int) {
+        let url = getSongAsset(songs[index])
         
+        do {
+            let sound = try AVAudioPlayer(contentsOfURL: url)
+            audioPlayer = sound
+            sound.play()
+        } catch {
+            // couldn't load file :(
+        }
     }
     
     func pauseSong() {
-        
+        audioPlayer.pause()
     }
     
     
@@ -47,8 +56,8 @@ class MusicListInteractor: NSObject,MusicListInteractorInterface {
         delegate?.setSongsImage(songsImages)
     }
     
-    func getSongAsset(song:Song) -> AVAsset {
+    func getSongAsset(song:Song) -> NSURL {
         let audioURL = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource(song.getSongName(), ofType: "mp3")!)
-        return  AVAsset.init(URL: audioURL)
+        return  audioURL
     }
 }
