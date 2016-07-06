@@ -16,7 +16,8 @@ class AppDependencies {
     var shareWireframe = ShareWireframe()
     var playerWireframe = PlayerWireframe()
     var detailTextWireframe = DetailTextWireframe()
-
+    var musicListWireframe = MusicListWireframe()
+    
     init(){
         configureDependencies()
     }
@@ -35,10 +36,14 @@ class AppDependencies {
         let detailTextPresenter = DetailTextPresenter()
         let detailTextInteractor = DetailTextInteractor()
 
+        let musicListPresenter = MusicListPresenter()
+        let musicListInteractor = MusicListInteractor()
+        
         //RECORD MODULE
         recordPresenter.recordWireframe = recordWireframe
         recordPresenter.settingsWireframe = settingsWireframe
         recordPresenter.shareWireframe = shareWireframe
+        recordPresenter.musicWireframe = musicListWireframe
         
         recordWireframe.recordPresenter = recordPresenter
         recordWireframe.rootWireframe = rootWireframe
@@ -79,9 +84,21 @@ class AppDependencies {
         detailTextWireframe.detailTextPresenter = detailTextPresenter
         detailTextWireframe.rootWireframe = rootWireframe
 
+        //MUSIC LIST MODULE
+        musicListPresenter.wireframe = musicListWireframe
+        musicListPresenter.interactor = musicListInteractor
+        
+        musicListInteractor.presenter = musicListPresenter
+        
+        musicListWireframe.musicListPresenter = musicListPresenter
+        musicListWireframe.rootWireframe = rootWireframe
     }
     
     func installRecordToRootViewControllerIntoWindow(window: UIWindow){
         recordWireframe.presentRecordInterfaceFromWindow(window)
+    }
+    
+    func installMusicListToRootViewControllerIntoWindow(window: UIWindow){
+        musicListWireframe.presentMusicInterfaceFromWindow(window)
     }
 }

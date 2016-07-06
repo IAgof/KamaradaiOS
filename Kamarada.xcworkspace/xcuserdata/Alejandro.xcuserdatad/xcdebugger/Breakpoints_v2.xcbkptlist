@@ -6,64 +6,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Kamarada/Modules/Settings/SettingsPresenter.swift"
-            timestampString = "489321327.311788"
+            filePath = "Kamarada/Modules/Player/PlayerPresenter.swift"
+            timestampString = "489403979.549169"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "48"
-            endingLineNumber = "48"
-            landmarkName = "itemListSelected(_:)"
-            landmarkType = "5">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Kamarada.SettingsPresenter.itemListSelected (Swift.String) -&gt; ()"
-                  moduleName = "Kamarada"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/Alejandro/Desktop/Repos/KamaradaiOS/Kamarada/Modules/Settings/SettingsPresenter.swift"
-                  timestampString = "489335202.941338"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "49"
-                  endingLineNumber = "49"
-                  offsetFromSymbolStart = "32">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "protocol witness for Kamarada.SettingsPresenterInterface.itemListSelected (Swift.String) -&gt; () in conformance Kamarada.SettingsPresenter : Kamarada.SettingsPresenterInterface in Kamarada"
-                  moduleName = "Kamarada"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/Alejandro/Desktop/Repos/KamaradaiOS/Kamarada/Modules/Settings/SettingsPresenter.swift"
-                  timestampString = "489335202.941626"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "48"
-                  endingLineNumber = "48"
-                  offsetFromSymbolStart = "12">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Kamarada/SettingsProvider.swift"
-            timestampString = "489320295.383611"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "127"
-            endingLineNumber = "127"
-            landmarkName = "getStringForType(_:)"
+            startingLineNumber = "107"
+            endingLineNumber = "107"
+            landmarkName = "startTimer()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -73,13 +25,45 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Kamarada/Modules/Share/ShareViewController.swift"
-            timestampString = "489335201.734745"
+            filePath = "Kamarada/Modules/Player/PlayerPresenter.swift"
+            timestampString = "489403979.549169"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "113"
-            endingLineNumber = "113"
-            landmarkName = "whatsappImageTapped(_:)"
+            startingLineNumber = "118"
+            endingLineNumber = "118"
+            landmarkName = "pauseTimer()"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Kamarada/Modules/Player/PlayerPresenter.swift"
+            timestampString = "489403979.549169"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "122"
+            endingLineNumber = "122"
+            landmarkName = "stopTimer()"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Kamarada/MusicListController.swift"
+            timestampString = "489492570.863703"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "70"
+            endingLineNumber = "70"
+            landmarkName = "tableView(_:didDeselectRowAtIndexPath:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

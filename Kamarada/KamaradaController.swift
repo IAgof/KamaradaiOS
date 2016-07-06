@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import Mixpanel
 
-class VideonaController: UIViewController {
+class KamaradaController: UIViewController {
     let tracker = VideonaTracker()
     
     override func viewDidLoad() {

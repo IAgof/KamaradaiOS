@@ -80,6 +80,16 @@
 		A93020141D23B65400C414A0 /* TimerInteractorInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = A93020121D23B65400C414A0 /* TimerInteractorInterface.swift */; };
 		A93020161D23B65D00C414A0 /* ThumbnailInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A93020151D23B65D00C414A0 /* ThumbnailInteractor.swift */; };
 		A93020181D23B68B00C414A0 /* AppDependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = A93020171D23B68B00C414A0 /* AppDependencies.swift */; };
+		A9385A691D2BF4440048071A /* MusicListWireframe.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9385A681D2BF4440048071A /* MusicListWireframe.swift */; };
+		A9385A6B1D2BF4530048071A /* MusicViewInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9385A6A1D2BF4530048071A /* MusicViewInterface.swift */; };
+		A9385A6D1D2BF4630048071A /* MusicListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9385A6C1D2BF4630048071A /* MusicListController.swift */; };
+		A9385A6F1D2BF4740048071A /* MusicListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9385A6E1D2BF4740048071A /* MusicListPresenter.swift */; };
+		A9385A711D2BF4800048071A /* MusicListPresenterInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9385A701D2BF4800048071A /* MusicListPresenterInterface.swift */; };
+		A9385A731D2BF48D0048071A /* Song.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9385A721D2BF48D0048071A /* Song.swift */; };
+		A9385A751D2BF4970048071A /* MusicListInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9385A741D2BF4970048071A /* MusicListInteractor.swift */; };
+		A9385A771D2BF4A10048071A /* MusicListInteractorInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9385A761D2BF4A10048071A /* MusicListInteractorInterface.swift */; };
+		A9385A8A1D2C000A0048071A /* MusicListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A9385A891D2C000A0048071A /* MusicListCell.xib */; };
+		A9385A8C1D2C00E20048071A /* MusicListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9385A8B1D2C00E20048071A /* MusicListCell.swift */; };
 		A953390A1D2530B0006890E7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A95339081D2530B0006890E7 /* Main.storyboard */; };
 		A953390D1D2535F2006890E7 /* FlashInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A953390C1D2535F2006890E7 /* FlashInteractor.swift */; };
 		A953390F1D253922006890E7 /* AVResolutionParse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A953390E1D253922006890E7 /* AVResolutionParse.swift */; };
@@ -260,6 +270,16 @@
 		A93020121D23B65400C414A0 /* TimerInteractorInterface.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TimerInteractorInterface.swift; path = Modules/Recorder/TimerInteractorInterface.swift; sourceTree = "<group>"; };
 		A93020151D23B65D00C414A0 /* ThumbnailInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ThumbnailInteractor.swift; path = Modules/Recorder/ThumbnailInteractor.swift; sourceTree = "<group>"; };
 		A93020171D23B68B00C414A0 /* AppDependencies.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDependencies.swift; sourceTree = "<group>"; };
+		A9385A681D2BF4440048071A /* MusicListWireframe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicListWireframe.swift; sourceTree = "<group>"; };
+		A9385A6A1D2BF4530048071A /* MusicViewInterface.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicViewInterface.swift; sourceTree = "<group>"; };
+		A9385A6C1D2BF4630048071A /* MusicListController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicListController.swift; sourceTree = "<group>"; };
+		A9385A6E1D2BF4740048071A /* MusicListPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicListPresenter.swift; sourceTree = "<group>"; };
+		A9385A701D2BF4800048071A /* MusicListPresenterInterface.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicListPresenterInterface.swift; sourceTree = "<group>"; };
+		A9385A721D2BF48D0048071A /* Song.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Song.swift; sourceTree = "<group>"; };
+		A9385A741D2BF4970048071A /* MusicListInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicListInteractor.swift; sourceTree = "<group>"; };
+		A9385A761D2BF4A10048071A /* MusicListInteractorInterface.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicListInteractorInterface.swift; sourceTree = "<group>"; };
+		A9385A891D2C000A0048071A /* MusicListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MusicListCell.xib; sourceTree = "<group>"; };
+		A9385A8B1D2C00E20048071A /* MusicListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicListCell.swift; sourceTree = "<group>"; };
 		A95339091D2530B0006890E7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A953390C1D2535F2006890E7 /* FlashInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FlashInteractor.swift; path = Modules/Recorder/FlashInteractor.swift; sourceTree = "<group>"; };
 		A953390E1D253922006890E7 /* AVResolutionParse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AVResolutionParse.swift; sourceTree = "<group>"; };
@@ -410,6 +430,7 @@
 		A9301F831D23AEAD00C414A0 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				A9385A5E1D2BF3B50048071A /* Music selector List */,
 				A96229471D2AA05E00FFAE49 /* Player */,
 				A96229301D2A724E00FFAE49 /* DetailText */,
 				A9301F921D23AFAB00C414A0 /* Mixpanel Tracker */,
@@ -776,6 +797,79 @@
 				A930200C1D23B62800C414A0 /* RemoveFilterInteractor.swift */,
 			);
 			name = FiltersInteractor;
+			sourceTree = "<group>";
+		};
+		A9385A5E1D2BF3B50048071A /* Music selector List */ = {
+			isa = PBXGroup;
+			children = (
+				A9385A621D2BF4040048071A /* App Logic */,
+				A9385A611D2BF3FC0048071A /* User Interface */,
+			);
+			name = "Music selector List";
+			sourceTree = "<group>";
+		};
+		A9385A611D2BF3FC0048071A /* User Interface */ = {
+			isa = PBXGroup;
+			children = (
+				A9385A651D2BF4120048071A /* Presenter */,
+				A9385A641D2BF40E0048071A /* View */,
+				A9385A631D2BF4090048071A /* Wireframe */,
+			);
+			name = "User Interface";
+			sourceTree = "<group>";
+		};
+		A9385A621D2BF4040048071A /* App Logic */ = {
+			isa = PBXGroup;
+			children = (
+				A9385A671D2BF41F0048071A /* Interactor */,
+				A9385A661D2BF41B0048071A /* Model */,
+			);
+			name = "App Logic";
+			sourceTree = "<group>";
+		};
+		A9385A631D2BF4090048071A /* Wireframe */ = {
+			isa = PBXGroup;
+			children = (
+				A9385A681D2BF4440048071A /* MusicListWireframe.swift */,
+			);
+			name = Wireframe;
+			sourceTree = "<group>";
+		};
+		A9385A641D2BF40E0048071A /* View */ = {
+			isa = PBXGroup;
+			children = (
+				A9385A6A1D2BF4530048071A /* MusicViewInterface.swift */,
+				A9385A6C1D2BF4630048071A /* MusicListController.swift */,
+				A9385A891D2C000A0048071A /* MusicListCell.xib */,
+				A9385A8B1D2C00E20048071A /* MusicListCell.swift */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		A9385A651D2BF4120048071A /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				A9385A6E1D2BF4740048071A /* MusicListPresenter.swift */,
+				A9385A701D2BF4800048071A /* MusicListPresenterInterface.swift */,
+			);
+			name = Presenter;
+			sourceTree = "<group>";
+		};
+		A9385A661D2BF41B0048071A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				A9385A721D2BF48D0048071A /* Song.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		A9385A671D2BF41F0048071A /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				A9385A741D2BF4970048071A /* MusicListInteractor.swift */,
+				A9385A761D2BF4A10048071A /* MusicListInteractorInterface.swift */,
+			);
+			name = Interactor;
 			sourceTree = "<group>";
 		};
 		A955F4F01CA95B0D00B0CF62 = {
@@ -1211,6 +1305,7 @@
 				A91AD8631CE1F4DE0026867B /* silent_film_overlay_a.png in Resources */,
 				A91AD86B1CE1F4DE0026867B /* silent_film_overlay_i.png in Resources */,
 				A91AD8641CE1F4DE0026867B /* silent_film_overlay_b.png in Resources */,
+				A9385A8A1D2C000A0048071A /* MusicListCell.xib in Resources */,
 				A91AD8811CE200F20026867B /* silent_film_overlay_j_320_240.png in Resources */,
 				A91AD8791CE200F20026867B /* silent_film_overlay_b_320_240.png in Resources */,
 				A91AD8661CE1F4DE0026867B /* silent_film_overlay_d.png in Resources */,
@@ -1316,6 +1411,7 @@
 				A96229421D2A72A100FFAE49 /* DetailTextWireframe.swift in Sources */,
 				A9DE88F91CAE922200767910 /* FilterOperationTypes.swift in Sources */,
 				A9301FE01D23B45B00C414A0 /* ShareTwitterInteractor.swift in Sources */,
+				A9385A731D2BF48D0048071A /* Song.swift in Sources */,
 				A9301FD01D23B41B00C414A0 /* SharePresenter.swift in Sources */,
 				A962293C1D2A729500FFAE49 /* DetailTextInteractorInterface.swift in Sources */,
 				A962295F1D2AA0C000FFAE49 /* PlayerPresenterInterface.swift in Sources */,
@@ -1352,6 +1448,7 @@
 				A9F777AC1D268386008D479B /* TwitterVideoUpload.m in Sources */,
 				A9301FE51D23B46A00C414A0 /* SocialNetwork.swift in Sources */,
 				A9301FCC1D23B41000C414A0 /* ShareInterface.swift in Sources */,
+				A9385A691D2BF4440048071A /* MusicListWireframe.swift in Sources */,
 				A9301FE11D23B45B00C414A0 /* ShareWhatsappInteractor.swift in Sources */,
 				A95339131D253950006890E7 /* ExportedAlbum.swift in Sources */,
 				A9301F8D1D23AF3E00C414A0 /* RootWireframe.swift in Sources */,
@@ -1359,22 +1456,29 @@
 				A930200F1D23B62800C414A0 /* RemoveFilterInteractor.swift in Sources */,
 				A95339151D2539E5006890E7 /* ShareConstants.swift in Sources */,
 				A9F777BE1D2A4448008D479B /* CameraInteractor.swift in Sources */,
+				A9385A8C1D2C00E20048071A /* MusicListCell.swift in Sources */,
+				A9385A711D2BF4800048071A /* MusicListPresenterInterface.swift in Sources */,
 				A962295B1D2AA0C000FFAE49 /* PlayerInteractorInterface.swift in Sources */,
 				A93020091D23B60A00C414A0 /* ExporterInteractor.swift in Sources */,
 				A955F4FF1CA95B0D00B0CF62 /* MainViewController.swift in Sources */,
 				A9301FC01D23B32F00C414A0 /* SettingsConstants.swift in Sources */,
 				A9301FAA1D23B1EE00C414A0 /* SettingsInteractor.swift in Sources */,
 				A900E46A1CC8E36A00C44271 /* ConfigPreferences.swift in Sources */,
+				A9385A6D1D2BF4630048071A /* MusicListController.swift in Sources */,
+				A9385A771D2BF4A10048071A /* MusicListInteractorInterface.swift in Sources */,
 				A9F777BF1D2A4448008D479B /* CameraInteractorInterface.swift in Sources */,
 				A96229401D2A729C00FFAE49 /* DetailTextPresenterInterface.swift in Sources */,
 				A96229501D2AA0B700FFAE49 /* PlayerWireframe.swift in Sources */,
+				A9385A751D2BF4970048071A /* MusicListInteractor.swift in Sources */,
 				A9301FD51D23B44800C414A0 /* ShareInteractor.swift in Sources */,
 				A953390D1D2535F2006890E7 /* FlashInteractor.swift in Sources */,
 				A9301FB61D23B24D00C414A0 /* SettingsWireframe.swift in Sources */,
 				A9301FBA1D23B28F00C414A0 /* SettingsInteractorInterface.swift in Sources */,
 				A930200E1D23B62800C414A0 /* ChangeFilterInteractor.swift in Sources */,
+				A9385A6F1D2BF4740048071A /* MusicListPresenter.swift in Sources */,
 				A962295E1D2AA0C000FFAE49 /* PlayerPresenter.swift in Sources */,
 				A96229611D2AA0C000FFAE49 /* PlayerView.swift in Sources */,
+				A9385A6B1D2BF4530048071A /* MusicViewInterface.swift in Sources */,
 				A953390F1D253922006890E7 /* AVResolutionParse.swift in Sources */,
 				A955F4FD1CA95B0D00B0CF62 /* AppDelegate.swift in Sources */,
 				A9301FD11D23B41B00C414A0 /* SharePresenterInterface.swift in Sources */,

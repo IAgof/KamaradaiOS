@@ -9,6 +9,7 @@
 import Foundation
 
 class DetailTextPresenter: NSObject,DetailTextPresenterInterface {
+    //MARK: - VIPER
     var wireframe: DetailTextWireframe?
     var controller: DetailTextInterface?
     var interactor: DetailTextInteractorInterface?

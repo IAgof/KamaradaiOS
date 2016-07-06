@@ -18,6 +18,8 @@ class RecordPresenter: NSObject
     var recordWireframe: RecordWireframe?
     var settingsWireframe: SettingsWireframe?
     var shareWireframe: ShareWireframe?
+    var musicWireframe: MusicListWireframe?
+    
     var cameraInteractor: CameraInteractor?
     var timerInteractor: TimerInteractor?
     var recorderDelegate:RecordPresenterDelegate?
@@ -132,6 +134,10 @@ class RecordPresenter: NSObject
         controller?.unselectBlueButton()
         controller?.unselectSepiaButton()
         controller?.unselectBWButton()
+    }
+    
+    func pushChangeMusic() {
+        musicWireframe?.presentMusicInterfaceFromViewController(controller!)
     }
     
     func resetRecorder() {

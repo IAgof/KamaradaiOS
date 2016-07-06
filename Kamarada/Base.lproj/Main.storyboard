@@ -60,7 +60,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="78T-d4-esE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-302.5" y="-1192"/>
+            <point key="canvasLocation" x="-551.625" y="-1176"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="H2U-Ik-JN7">
@@ -75,6 +75,77 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XNM-TX-vwm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-416" y="-540"/>
+        </scene>
+        <!--Music List Controller-->
+        <scene sceneID="PkY-ch-tIy">
+            <objects>
+                <viewController storyboardIdentifier="MusicListController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="HLv-k7-ezT" customClass="MusicListController" customModule="Kamarada" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="C4U-88-95g"/>
+                        <viewControllerLayoutGuide type="bottom" id="4po-Tn-XAg"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="D32-4y-Z7m">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="music_list_background" translatesAutoresizingMaskIntoConstraints="NO" id="Zsj-Hu-MX7">
+                                <rect key="frame" x="-4" y="0.0" width="328" height="568"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f9i-VC-hLG">
+                                <rect key="frame" x="139" y="30" width="43" height="43"/>
+                                <state key="normal" image="common_icon_back_normal"/>
+                                <connections>
+                                    <action selector="pushBackButton:" destination="HLv-k7-ezT" eventType="touchUpInside" id="1Pz-3a-hqo"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kmx-6B-31v">
+                                <rect key="frame" x="130" y="517" width="61" height="31"/>
+                                <state key="normal" image="music_list_accept_normal"/>
+                                <state key="selected" image="music_list_accept_pressed"/>
+                                <connections>
+                                    <action selector="pushValidationButton:" destination="HLv-k7-ezT" eventType="touchUpInside" id="h5Z-gb-ztd"/>
+                                </connections>
+                            </button>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="81" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="s6f-Xz-HpA">
+                                <rect key="frame" x="36" y="93" width="248" height="382"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <color key="sectionIndexTrackingBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="HLv-k7-ezT" id="HiD-53-Sop"/>
+                                    <outlet property="delegate" destination="HLv-k7-ezT" id="e9X-Cm-8Pb"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Zsj-Hu-MX7" firstAttribute="top" secondItem="C4U-88-95g" secondAttribute="bottom" id="3K0-80-Ygf"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="s6f-Xz-HpA" secondAttribute="trailing" constant="20" id="8HH-IG-ZN3"/>
+                            <constraint firstItem="s6f-Xz-HpA" firstAttribute="centerY" secondItem="D32-4y-Z7m" secondAttribute="centerY" id="DhO-bD-Uwz"/>
+                            <constraint firstItem="s6f-Xz-HpA" firstAttribute="leading" secondItem="D32-4y-Z7m" secondAttribute="leadingMargin" constant="20" id="TXA-Ag-BiX"/>
+                            <constraint firstItem="kmx-6B-31v" firstAttribute="centerX" secondItem="D32-4y-Z7m" secondAttribute="centerX" id="Xki-w5-Cph"/>
+                            <constraint firstItem="f9i-VC-hLG" firstAttribute="top" secondItem="C4U-88-95g" secondAttribute="bottom" constant="30" id="ZCn-Ng-nLp"/>
+                            <constraint firstItem="kmx-6B-31v" firstAttribute="top" relation="greaterThanOrEqual" secondItem="s6f-Xz-HpA" secondAttribute="bottom" constant="8" id="aYv-g8-KWJ"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Zsj-Hu-MX7" secondAttribute="trailing" constant="-20" id="cbw-h5-jJZ"/>
+                            <constraint firstItem="4po-Tn-XAg" firstAttribute="top" secondItem="kmx-6B-31v" secondAttribute="bottom" constant="20" id="j5l-pv-yNv"/>
+                            <constraint firstItem="f9i-VC-hLG" firstAttribute="centerX" secondItem="D32-4y-Z7m" secondAttribute="centerX" id="jE5-FF-L2r"/>
+                            <constraint firstItem="4po-Tn-XAg" firstAttribute="top" secondItem="Zsj-Hu-MX7" secondAttribute="bottom" id="sZl-8A-aTp"/>
+                            <constraint firstItem="s6f-Xz-HpA" firstAttribute="centerX" secondItem="D32-4y-Z7m" secondAttribute="centerX" id="tZZ-ki-fPC"/>
+                            <constraint firstItem="s6f-Xz-HpA" firstAttribute="top" secondItem="f9i-VC-hLG" secondAttribute="bottom" constant="20" id="uZo-MH-KGv"/>
+                            <constraint firstItem="Zsj-Hu-MX7" firstAttribute="leading" secondItem="D32-4y-Z7m" secondAttribute="leadingMargin" constant="-20" id="zVX-9h-vmg"/>
+                        </constraints>
+                    </view>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <outlet property="musicListTableView" destination="s6f-Xz-HpA" id="lDA-Ad-2DL"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jTA-XZ-8aT" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="33" y="-1155"/>
         </scene>
         <!--Kamarada-->
         <scene sceneID="tne-QT-ifu">
@@ -98,6 +169,9 @@
                                 <variation key="widthClass=regular" misplaced="YES">
                                     <rect key="frame" x="165" y="164" width="59" height="59"/>
                                 </variation>
+                                <connections>
+                                    <action selector="pushChangeMusic:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Oet-NI-i29"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A1u-cM-TQo">
                                 <rect key="frame" x="118" y="362" width="84" height="84"/>
@@ -204,9 +278,6 @@
                                         <rect key="frame" x="0.0" y="0.0" width="46" height="46"/>
                                         <state key="normal" image="activity_record_flash_icon_normal"/>
                                         <state key="selected" image="activity_record_flash_icon_pressed"/>
-                                        <variation key="widthClass=regular" misplaced="YES">
-                                            <rect key="frame" x="0.0" y="0.0" width="46" height="28"/>
-                                        </variation>
                                         <connections>
                                             <action selector="pushFlash:" destination="BYZ-38-t0r" eventType="touchUpInside" id="MCy-p7-EPj"/>
                                         </connections>
@@ -215,9 +286,6 @@
                                         <rect key="frame" x="46" y="0.0" width="46" height="46"/>
                                         <state key="normal" image="activity_record_change_camera_icon_normal"/>
                                         <state key="selected" image="activity_record_change_camera_icon_pressed"/>
-                                        <variation key="widthClass=regular" misplaced="YES">
-                                            <rect key="frame" x="46" y="0.0" width="46" height="28"/>
-                                        </variation>
                                         <connections>
                                             <action selector="pushRotateCamera:" destination="BYZ-38-t0r" eventType="touchUpInside" id="el1-HM-zbU"/>
                                         </connections>
@@ -739,6 +807,9 @@
         <image name="common_icon_settings_normal" width="44" height="44"/>
         <image name="common_icon_settings_pressed" width="44" height="44"/>
         <image name="dialog_export_background" width="567" height="340"/>
+        <image name="music_list_accept_normal" width="61" height="31"/>
+        <image name="music_list_accept_pressed" width="61" height="31"/>
+        <image name="music_list_background" width="311" height="552"/>
         <image name="record_activity_progress_bar" width="233" height="15"/>
         <image name="youtube_logo" width="40" height="40"/>
     </resources>

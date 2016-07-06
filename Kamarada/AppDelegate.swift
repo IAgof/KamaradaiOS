@@ -172,7 +172,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
             
             trackAppStartupProperties(false);
             
-            appDependencies.installRecordToRootViewControllerIntoWindow(window!)
+            //            appDependencies.installRecordToRootViewControllerIntoWindow(window!)
+            
+            //TEST MUSIC LIST
+            appDependencies.installMusicListToRootViewControllerIntoWindow(window!)
 
         } else {
             // other version

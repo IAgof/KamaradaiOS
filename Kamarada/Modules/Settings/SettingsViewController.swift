@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class SettingsViewController: VideonaController,
+class SettingsViewController: KamaradaController,
     SettingsInterface ,
 UINavigationBarDelegate,
 UITableViewDelegate,UITableViewDataSource{

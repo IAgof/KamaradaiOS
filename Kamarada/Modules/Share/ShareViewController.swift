@@ -9,7 +9,7 @@
 import UIKit
 import Foundation
 
-class ShareViewController: VideonaController,ShareInterface ,
+class ShareViewController: KamaradaController,ShareInterface ,
 UINavigationBarDelegate ,
 GIDSignInUIDelegate,GIDSignInDelegate{
     

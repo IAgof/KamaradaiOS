@@ -30,6 +30,7 @@ protocol RecordPresenterInterface{
     func pushBlueFilter()
     func pushBWFilter()
     func pushRotateCamera()
+    func pushChangeMusic()
     func resetRecorder()
 //    func displayHasTapped(tapGesture:UIGestureRecognizer)
 //    func displayHasPinched(pinchGesture:UIPinchGestureRecognizer)

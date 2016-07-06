@@ -9,7 +9,7 @@
 import UIKit
 import GPUImage
 
-class RecordController: VideonaController,RecordViewInterface,RecordPresenterDelegate, UINavigationControllerDelegate {
+class RecordController: KamaradaController,RecordViewInterface,RecordPresenterDelegate, UINavigationControllerDelegate {
     
     //MARK: - Variables VIPER
     var eventHandler: RecordPresenter?
@@ -116,6 +116,10 @@ class RecordController: VideonaController,RecordViewInterface,RecordPresenterDel
     
     @IBAction func pushBWFilter(sender: AnyObject) {
         eventHandler?.pushBWFilter()
+    }
+    
+    @IBAction func pushChangeMusic(sender: AnyObject) {
+        eventHandler?.pushChangeMusic()
     }
     
     //MARK: - Protocol Interface

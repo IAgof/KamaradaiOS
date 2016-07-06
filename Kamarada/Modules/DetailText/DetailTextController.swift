@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DetailTextController: VideonaController,DetailTextInterface {
+class DetailTextController: KamaradaController,DetailTextInterface {
     var eventHandler: DetailTextPresenterInterface?
     
     @IBOutlet weak var detailTextFiled: UITextView!
