@@ -58,6 +58,7 @@ UITableViewDataSource,UITableViewDelegate{
         
         cell.coverImageView.image = songsImages[indexPath.row]
         cell.transitionImageView.image = songsTranstionImage[indexPath.row]
+        cell.backgroundColor = UIColor.clearColor()
         
         cell.playPauseButton.tag = indexPath.row
         
@@ -69,6 +70,11 @@ UITableViewDataSource,UITableViewDelegate{
         }
         
         return cell
+    }
+    
+    func tableView(tableView: UITableView,
+                            heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return songsImages[indexPath.row].size.height
     }
     
     

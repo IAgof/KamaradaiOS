@@ -8,6 +8,7 @@
 
 import UIKit
 import Mixpanel
+import AVFoundation
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
@@ -260,5 +261,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
             print("error removeAllTempFiles ")
         }
     }
+    
+
 }
 

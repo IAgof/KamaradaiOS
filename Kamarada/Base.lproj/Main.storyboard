@@ -133,6 +133,7 @@
                                                     <state key="selected" image="music_list_pause"/>
                                                 </button>
                                             </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             <constraints>
                                                 <constraint firstItem="sIV-Hw-LAw" firstAttribute="centerY" secondItem="NbK-OU-rGf" secondAttribute="centerY" id="54j-RT-fCu"/>
                                                 <constraint firstItem="YUJ-nm-qR0" firstAttribute="centerY" secondItem="NbK-OU-rGf" secondAttribute="centerY" id="HLW-q4-vle"/>
