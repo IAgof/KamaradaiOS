@@ -70,6 +70,20 @@ UITableViewDelegate,UITableViewDataSource{
         return self.section[section]
     }
     
+    func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int)
+    {
+        let title = UILabel()
+        title.textColor = UIColor.whiteColor()
+        
+        let header = view as! UITableViewHeaderFooterView
+        
+        
+        header.tintColor = UIColor.init(netHex: 0x9a352d)
+        
+        header.textLabel?.font=title.font
+        header.textLabel?.textColor=title.textColor
+    }
+    
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         
@@ -99,6 +113,9 @@ UITableViewDelegate,UITableViewDataSource{
         let subTitle = self.items[indexPath.section][1][indexPath.row]
         
         cell!.textLabel?.text = title
+        cell?.textLabel?.textColor = UIColor.init(netHex: 0x9a352d)
+        
+        cell?.backgroundColor = UIColor.clearColor()
         
         if subTitle != ""{
             cell!.detailTextLabel?.text = self.items[indexPath.section][1][indexPath.row]

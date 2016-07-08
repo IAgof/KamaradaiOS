@@ -122,12 +122,12 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="music_list_vinyl" translatesAutoresizingMaskIntoConstraints="NO" id="YUJ-nm-qR0">
-                                                    <rect key="frame" x="13" y="7" width="78" height="76"/>
+                                                    <rect key="frame" x="9" y="7" width="78" height="76"/>
                                                 </imageView>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="music_list_breaktime" translatesAutoresizingMaskIntoConstraints="NO" id="NbK-OU-rGf">
-                                                    <rect key="frame" x="8" y="4" width="87" height="82"/>
+                                                    <rect key="frame" x="8" y="6" width="79" height="79"/>
                                                 </imageView>
-                                                <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sIV-Hw-LAw">
+                                                <button opaque="NO" contentMode="scaleAspectFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sIV-Hw-LAw">
                                                     <rect key="frame" x="195" y="22" width="45" height="45"/>
                                                     <state key="normal" image="music_list_play"/>
                                                     <state key="selected" image="music_list_pause"/>
@@ -678,12 +678,19 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="activity_settings_background" translatesAutoresizingMaskIntoConstraints="NO" id="08v-Ke-Dum">
+                                <rect key="frame" x="-4" y="0.0" width="328" height="568"/>
+                            </imageView>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qoB-bZ-lSZ">
-                                <rect key="frame" x="-4" y="3" width="328" height="44"/>
+                                <rect key="frame" x="-4" y="0.0" width="328" height="44"/>
+                                <color key="barTintColor" red="0.50980392156862742" green="0.12156862745098039" blue="0.098039215686274508" alpha="1" colorSpace="calibratedRGB"/>
+                                <textAttributes key="titleTextAttributes">
+                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </textAttributes>
                                 <items>
                                     <navigationItem id="pQK-9T-1W8">
                                         <barButtonItem key="leftBarButtonItem" image="activity_edit_back_normal" id="y21-mU-zUF">
-                                            <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <connections>
                                                 <action selector="pushBackBarButton:" destination="uIi-Rf-O4r" id="9TX-Mm-mkH"/>
                                             </connections>
@@ -692,38 +699,45 @@
                                 </items>
                             </navigationBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="iAF-Ur-aUF">
-                                <rect key="frame" x="-4" y="47" width="328" height="521"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <rect key="frame" x="-8" y="44" width="336" height="524"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <color key="sectionIndexColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <color key="sectionIndexTrackingBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="settingsCell" textLabel="hm0-PQ-MOe" detailTextLabel="j4I-py-tfk" style="IBUITableViewCellStyleValue1" id="d5E-hz-OmV">
-                                        <rect key="frame" x="0.0" y="28" width="328" height="44"/>
+                                        <rect key="frame" x="0.0" y="28" width="336" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="d5E-hz-OmV" id="q0B-Ih-vgn">
-                                            <rect key="frame" x="0.0" y="0.0" width="328" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="336" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="hm0-PQ-MOe">
                                                     <rect key="frame" x="15" y="11" width="34" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="textColor" red="0.84625400640000004" green="0.076138660570000002" blue="0.029317244749999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                     <variation key="heightClass=compact">
                                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     </variation>
                                                 </label>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="j4I-py-tfk">
-                                                    <rect key="frame" x="269" y="11" width="44" height="21"/>
+                                                    <rect key="frame" x="277" y="11" width="44" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="textColor" red="0.80000000000000004" green="0.0" blue="0.039215686274509803" alpha="0.53332435344827589" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                     <variation key="heightClass=compact">
                                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     </variation>
                                                 </label>
                                             </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -734,14 +748,24 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="08v-Ke-Dum" firstAttribute="leading" secondItem="8ov-0g-clz" secondAttribute="leadingMargin" constant="-20" id="1fl-IK-1ph"/>
+                            <constraint firstItem="08v-Ke-Dum" firstAttribute="top" secondItem="uhO-8a-1hP" secondAttribute="bottom" id="2lI-NZ-a5d"/>
                             <constraint firstItem="bX5-jk-O4J" firstAttribute="top" secondItem="iAF-Ur-aUF" secondAttribute="bottom" id="2yn-S3-ayW"/>
+                            <constraint firstItem="bX5-jk-O4J" firstAttribute="top" secondItem="08v-Ke-Dum" secondAttribute="bottom" id="3re-hx-ahQ"/>
                             <constraint firstItem="qoB-bZ-lSZ" firstAttribute="leading" secondItem="8ov-0g-clz" secondAttribute="leadingMargin" constant="-20" id="4MK-fk-VW9"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="08v-Ke-Dum" secondAttribute="trailing" constant="-20" id="GX0-bU-oA5"/>
+                            <constraint firstItem="08v-Ke-Dum" firstAttribute="top" secondItem="qoB-bZ-lSZ" secondAttribute="bottom" id="MFB-lX-BYX"/>
                             <constraint firstItem="iAF-Ur-aUF" firstAttribute="top" secondItem="qoB-bZ-lSZ" secondAttribute="bottom" id="Qce-lg-D6h"/>
-                            <constraint firstItem="iAF-Ur-aUF" firstAttribute="leading" secondItem="8ov-0g-clz" secondAttribute="leadingMargin" constant="-20" id="VmV-Gu-b01"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="iAF-Ur-aUF" secondAttribute="trailing" constant="-20" id="efF-rX-NMD"/>
-                            <constraint firstItem="qoB-bZ-lSZ" firstAttribute="top" secondItem="uhO-8a-1hP" secondAttribute="bottom" constant="3" id="kns-Bx-ivD"/>
+                            <constraint firstItem="iAF-Ur-aUF" firstAttribute="leading" secondItem="8ov-0g-clz" secondAttribute="leadingMargin" constant="-24" id="VmV-Gu-b01"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="iAF-Ur-aUF" secondAttribute="trailing" constant="-24" id="efF-rX-NMD"/>
+                            <constraint firstItem="qoB-bZ-lSZ" firstAttribute="top" secondItem="uhO-8a-1hP" secondAttribute="bottom" id="kns-Bx-ivD"/>
                             <constraint firstAttribute="trailingMargin" secondItem="qoB-bZ-lSZ" secondAttribute="trailing" constant="-20" id="tZQ-of-Jjp"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="MFB-lX-BYX"/>
+                            </mask>
+                        </variation>
                     </view>
                     <nil key="simulatedStatusBarMetrics"/>
                     <nil key="simulatedTopBarMetrics"/>
@@ -838,6 +862,7 @@
         <image name="activity_record_rec_icon_pressed" width="84" height="84"/>
         <image name="activity_record_share_icon_normal" width="104" height="46"/>
         <image name="activity_record_skin_leather_icon_pressed" width="59" height="59"/>
+        <image name="activity_settings_background" width="338" height="600"/>
         <image name="activity_share_add_icon_normal" width="42" height="43"/>
         <image name="activity_share_background" width="219" height="309"/>
         <image name="common_icon_back_normal" width="43" height="43"/>
@@ -847,7 +872,7 @@
         <image name="music_list_accept_normal" width="61" height="31"/>
         <image name="music_list_accept_pressed" width="61" height="31"/>
         <image name="music_list_background" width="311" height="552"/>
-        <image name="music_list_breaktime" width="87" height="82"/>
+        <image name="music_list_breaktime" width="79" height="79"/>
         <image name="music_list_pause" width="45" height="45"/>
         <image name="music_list_play" width="45" height="45"/>
         <image name="music_list_vinyl" width="78" height="76"/>
