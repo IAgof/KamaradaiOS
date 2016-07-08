@@ -38,13 +38,15 @@ class ExporterInteractor:NSObject{
         
         var videoTotalTime:CMTime = kCMTimeZero
         
+        let audioName = Utils().getValueFromPreferences(ConfigPreferences().SONG_SAVED)
+        
         // - Create AVMutableComposition object. This object will hold your AVMutableCompositionTrack instances.
         let mixComposition = AVMutableComposition()
         
         let videoTrack = mixComposition.addMutableTrackWithMediaType(AVMediaTypeVideo,
                                                                      preferredTrackID: Int32(kCMPersistentTrackID_Invalid))
         // 2 - Get Audio asset
-        let audioURL = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("kamarada_audio", ofType: "mp3")!)
+        let audioURL = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource(audioName, ofType: "mp3")!)
         let audioAsset = AVAsset.init(URL: audioURL)
         
         // - Add assets to the composition

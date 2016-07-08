@@ -27,4 +27,6 @@ class ConfigPreferences {
     let TOTAL_VIDEOS_RECORDED = "total_videos_recorded"
     let TOTAL_VIDEOS_SHARED = "total_videos_shared"
     let ACTIVITY_BACKGROUND = "ACTIVITY_BACKGROUND"
+    let SONG_SAVED = "song_saved"
+    let KAMARADA_DEFAULT_SONG = "kamarada_audio"
 }

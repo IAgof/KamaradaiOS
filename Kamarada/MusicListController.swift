@@ -20,6 +20,7 @@ UITableViewDataSource,UITableViewDelegate{
     //MARK: - Variables 
     let reuseIdentifierCell = "musicListCell"
     var songsImages : Array<UIImage>!
+    var selectedCellIndexPath:NSIndexPath?
     
     //MARK: - LifeCycle
     override func viewDidLoad() {
@@ -42,7 +43,7 @@ UITableViewDataSource,UITableViewDelegate{
         eventHandler?.pushBack()
     }
     @IBAction func pushValidationButton(sender: AnyObject) {
-   
+        eventHandler?.validateSongEvent()
     }
     
     //MARK: - UITableView data source protocol
@@ -59,6 +60,11 @@ UITableViewDataSource,UITableViewDelegate{
         
         cell.playPauseButton.addTarget(self, action: "pushPlayPauseButton:", forControlEvents: UIControlEvents.TouchUpInside)
 
+        if indexPath == selectedCellIndexPath {
+            cell.isSelectedMusic = true
+            cell.selected = true
+        }
+        
         return cell
     }
     
@@ -70,24 +76,9 @@ UITableViewDataSource,UITableViewDelegate{
         
     }
     
-
-
     //MARK: - UITableView delegate
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let cell = tableView.cellForRowAtIndexPath(indexPath) as! MusicListCell
-        
-        if cell.isSelectedMusic {
-            cell.isSelectedMusic = false
-        }else{
-            cell.isSelectedMusic = true
-        }
-    }
-    
-    func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
-        
-        Utils().debugLog("Music controller class \n didDeselectRowAtIndexPath")
-        let cell = tableView.cellForRowAtIndexPath(indexPath) as! MusicListCell
-        cell.isSelectedMusic = false
+        eventHandler?.musicSelectedCell(indexPath.row)
     }
     
     //MARK: - Presenter delegate
@@ -102,5 +93,29 @@ UITableViewDataSource,UITableViewDelegate{
         
         cell.playPauseButton.selected = state
         
+    }
+    
+    func setCellIsMusicSelected(index: Int, state: Bool){
+        let indexPath =  NSIndexPath(forRow: index, inSection: 0)
+        
+        if let cell = musicListTableView.cellForRowAtIndexPath(indexPath){
+            let cell = cell as! MusicListCell
+            cell.isSelectedMusic = state
+            cell.selected = state
+        }
+        
+
+    }
+    
+    func selectCell(index: Int) {
+        self.setCellIsMusicSelected(index, state: true)
+    }
+    
+    func deselectCell(index: Int)  {
+        self.setCellIsMusicSelected(index, state: false)
+    }
+    
+    func setselectedCellIndexPath(index:NSIndexPath){
+        self.selectedCellIndexPath = index
     }
 }

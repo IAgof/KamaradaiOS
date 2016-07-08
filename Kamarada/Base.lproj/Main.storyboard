@@ -106,7 +106,7 @@
                                     <action selector="pushValidationButton:" destination="HLv-k7-ezT" eventType="touchUpInside" id="h5Z-gb-ztd"/>
                                 </connections>
                             </button>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="90" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="s6f-Xz-HpA">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="90" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="s6f-Xz-HpA">
                                 <rect key="frame" x="36" y="93" width="248" height="382"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -121,18 +121,23 @@
                                             <rect key="frame" x="0.0" y="0.0" width="248" height="90"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="music_list_vinyl" translatesAutoresizingMaskIntoConstraints="NO" id="YUJ-nm-qR0">
+                                                    <rect key="frame" x="13" y="7" width="78" height="76"/>
+                                                </imageView>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="music_list_breaktime" translatesAutoresizingMaskIntoConstraints="NO" id="NbK-OU-rGf">
-                                                    <rect key="frame" x="8" y="5" width="118" height="81"/>
+                                                    <rect key="frame" x="8" y="4" width="87" height="82"/>
                                                 </imageView>
                                                 <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sIV-Hw-LAw">
-                                                    <rect key="frame" x="195" y="23" width="45" height="45"/>
+                                                    <rect key="frame" x="195" y="22" width="45" height="45"/>
                                                     <state key="normal" image="music_list_play"/>
                                                     <state key="selected" image="music_list_pause"/>
                                                 </button>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="sIV-Hw-LAw" firstAttribute="centerY" secondItem="NbK-OU-rGf" secondAttribute="centerY" id="54j-RT-fCu"/>
+                                                <constraint firstItem="YUJ-nm-qR0" firstAttribute="centerY" secondItem="NbK-OU-rGf" secondAttribute="centerY" id="HLW-q4-vle"/>
                                                 <constraint firstItem="NbK-OU-rGf" firstAttribute="centerY" secondItem="dc1-Ge-9GA" secondAttribute="centerY" id="ImN-Y8-e7q"/>
+                                                <constraint firstItem="YUJ-nm-qR0" firstAttribute="centerX" secondItem="NbK-OU-rGf" secondAttribute="centerX" id="bgg-l6-K0g"/>
                                                 <constraint firstItem="NbK-OU-rGf" firstAttribute="leading" secondItem="dc1-Ge-9GA" secondAttribute="leadingMargin" id="cSa-Fw-jqA"/>
                                                 <constraint firstItem="sIV-Hw-LAw" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="NbK-OU-rGf" secondAttribute="trailing" constant="8" id="eps-dQ-BHi"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="sIV-Hw-LAw" secondAttribute="trailing" id="kfM-yA-DtT"/>
@@ -140,6 +145,7 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="coverImageView" destination="NbK-OU-rGf" id="gNh-jR-mmc"/>
+                                            <outlet property="discImageView" destination="YUJ-nm-qR0" id="Wcb-Re-o2O"/>
                                             <outlet property="playPauseButton" destination="sIV-Hw-LAw" id="N9l-8f-TcL"/>
                                         </connections>
                                     </tableViewCell>
@@ -192,9 +198,9 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="activity_record_background_leather" translatesAutoresizingMaskIntoConstraints="NO" id="VFY-bO-VWA">
                                 <rect key="frame" x="-4" y="0.0" width="328" height="568"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="odv-2u-eR9">
-                                <rect key="frame" x="41" y="375" width="59" height="59"/>
-                                <state key="normal" image="activity_record_skin_wood_icon_normal"/>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="odv-2u-eR9">
+                                <rect key="frame" x="44" y="377" width="56" height="56"/>
+                                <state key="normal" image="activity_record_music_default"/>
                                 <state key="selected" image="activity_record_skin_leather_icon_pressed"/>
                                 <variation key="widthClass=regular" misplaced="YES">
                                     <rect key="frame" x="165" y="164" width="59" height="59"/>
@@ -447,6 +453,7 @@
                         <outlet property="bwFilterButton" destination="LSa-l7-h1Z" id="n44-q9-ZbQ"/>
                         <outlet property="cameraRotationButton" destination="KU4-iX-VTt" id="UDf-FM-d8Z"/>
                         <outlet property="cameraView" destination="I67-Zu-yLI" id="J8K-Zv-d9a"/>
+                        <outlet property="changeMusicButton" destination="odv-2u-eR9" id="XPR-aU-FWS"/>
                         <outlet property="flashButton" destination="ctI-VS-Bb2" id="s1n-Ip-D27"/>
                         <outlet property="recordButton" destination="A1u-cM-TQo" id="DpH-2H-XTP"/>
                         <outlet property="sepiaFilterButton" destination="kxG-QA-TTi" id="TSO-Bi-gS9"/>
@@ -826,11 +833,11 @@
         <image name="activity_record_filter_sepia_icon_selected" width="40" height="40"/>
         <image name="activity_record_flash_icon_normal" width="46" height="46"/>
         <image name="activity_record_flash_icon_pressed" width="46" height="46"/>
+        <image name="activity_record_music_default" width="56" height="56"/>
         <image name="activity_record_rec_icon_normal" width="84" height="84"/>
         <image name="activity_record_rec_icon_pressed" width="84" height="84"/>
         <image name="activity_record_share_icon_normal" width="104" height="46"/>
         <image name="activity_record_skin_leather_icon_pressed" width="59" height="59"/>
-        <image name="activity_record_skin_wood_icon_normal" width="59" height="59"/>
         <image name="activity_share_add_icon_normal" width="42" height="43"/>
         <image name="activity_share_background" width="219" height="309"/>
         <image name="common_icon_back_normal" width="43" height="43"/>
@@ -840,9 +847,10 @@
         <image name="music_list_accept_normal" width="61" height="31"/>
         <image name="music_list_accept_pressed" width="61" height="31"/>
         <image name="music_list_background" width="311" height="552"/>
-        <image name="music_list_breaktime" width="118" height="81"/>
+        <image name="music_list_breaktime" width="87" height="82"/>
         <image name="music_list_pause" width="45" height="45"/>
         <image name="music_list_play" width="45" height="45"/>
+        <image name="music_list_vinyl" width="78" height="76"/>
         <image name="record_activity_progress_bar" width="233" height="15"/>
         <image name="youtube_logo" width="40" height="40"/>
     </resources>

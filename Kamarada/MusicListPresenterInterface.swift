@@ -15,9 +15,14 @@ protocol MusicListPresenterInterface {
     func playSongAtIndex(index:Int)
     func pauseSong()
     func togglePlayOrPause(index:Int)
+    func musicSelectedCell(index:Int)
+    func validateSongEvent()
 }
 
 protocol MusicPresenterDelegate {
     func setSongsImage(songsImages: Array<UIImage>)
     func setStateToPlayButton(index:Int, state:Bool)
+    func selectCell(index:Int)
+    func deselectCell(index:Int)
+    func setselectedCellIndexPath(index:NSIndexPath)
 }

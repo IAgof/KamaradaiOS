@@ -10,6 +10,7 @@ import Foundation
 
 class Utils{
     let udid = UIDevice.currentDevice().identifierForVendor!.UUIDString
+    let defaults = NSUserDefaults.standardUserDefaults()
 
     func getDoubleHourAndMinutes() -> Double{
         let date = NSDate()
@@ -59,4 +60,23 @@ class Utils{
         return NSBundle.mainBundle().localizedStringForKey(key,value: "",table: "Intro")
     }
     
+    func saveToPreferences(value:AnyObject, key:String){
+        defaults.setObject(value, forKey: key)
+        defaults.synchronize()
+    }
+    
+    func getValueFromPreferences(key:String)->String{
+        let objectSaved = defaults.stringForKey(key)
+        
+        var object = ""
+        
+        if (objectSaved != nil){
+            object = objectSaved!
+            
+        }else{
+            object = "kamarada_audio"
+        }
+        
+        return object
+    }
 }

@@ -25,6 +25,9 @@ class SongProvider: NSObject {
         songsArray.append(Song(coverImage: UIImage(named: "music_list_wagon")!,
             songName: "WagonWheel"))
         
+        songsArray.append(Song(coverImage: UIImage(named: "music_list_quit_music")!,
+            songName: "kamarada_audio"))
+        
         return songsArray
     }
 }

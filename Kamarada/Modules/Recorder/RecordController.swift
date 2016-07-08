@@ -24,6 +24,7 @@ class RecordController: KamaradaController,RecordViewInterface,RecordPresenterDe
     @IBOutlet weak var blueFilterButton: UIButton!
     @IBOutlet weak var bwFilterButton: UIButton!
     @IBOutlet weak var cameraView: GPUImageView!
+    @IBOutlet weak var changeMusicButton: UIButton!
 
     @IBOutlet weak var thumbnailView: UIView!
     @IBOutlet weak var thumbnailNumberClips: UILabel!
@@ -233,6 +234,12 @@ class RecordController: KamaradaController,RecordViewInterface,RecordPresenterDe
     
     func getThumbnailSize() -> CGFloat {
         return self.thumbnailView.frame.size.height
+    }
+    
+    func setSongImage(image: UIImage) {
+        Utils().debugLog("Set song image \(image.accessibilityFrame)")
+        
+        self.changeMusicButton.setImage(image, forState: .Normal)
     }
     
     //MARK: - Presenter delegate

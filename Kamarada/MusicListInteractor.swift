@@ -17,9 +17,7 @@ class MusicListInteractor: NSObject,MusicListInteractorInterface {
     //MARK: - Variables
     var songs:Array<Song>!
     var audioPlayer = AVAudioPlayer()
-
-    //    var playingSong
-    
+    var isPlaying = false
     
     //MARK: - Interface
     func getSongs() {
@@ -38,12 +36,44 @@ class MusicListInteractor: NSObject,MusicListInteractorInterface {
         } catch {
             // couldn't load file :(
         }
+        
+        isPlaying = true
     }
     
     func pauseSong() {
-        audioPlayer.pause()
+        if isPlaying {
+            audioPlayer.pause()
+        }
+        isPlaying = false
     }
     
+    func saveSongToPreferences(index:Int) {
+        var song = ""
+
+        if index == -1 {
+            song = self.getDefaultSongName()
+        }else{
+            song = songs[index].getSongName()
+        }
+        
+        Utils().saveToPreferences(song, key: ConfigPreferences().SONG_SAVED)
+    }
+    
+    func getDefaultSongName() -> String {
+        return ConfigPreferences().KAMARADA_DEFAULT_SONG
+    }
+    
+    func getSongSaved() -> Int{
+        let song = Utils().getValueFromPreferences(ConfigPreferences().SONG_SAVED)
+        
+        var songPosition = -1
+        for i in 0...(songs.count - 1) {
+            if song == songs[i].getSongName(){
+                songPosition = i
+            }
+        }
+        return songPosition
+    }
     
     //MARK: - Inner functions
     func retrieveSongsImageToView(songs:Array<Song>) {

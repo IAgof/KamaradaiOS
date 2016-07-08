@@ -107,7 +107,10 @@
 		A95B71541D2D2BBC0094B85A /* LivelyLumpsucker.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A95B71501D2D2BBC0094B85A /* LivelyLumpsucker.mp3 */; };
 		A95B71551D2D2BBC0094B85A /* Breaktime.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A95B71511D2D2BBC0094B85A /* Breaktime.mp3 */; };
 		A95B71561D2D2BBC0094B85A /* EvilPlanFX.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A95B71521D2D2BBC0094B85A /* EvilPlanFX.mp3 */; };
+		A95B71591D2D465D0094B85A /* ShowDiscTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = A95B71581D2D465D0094B85A /* ShowDiscTransition.swift */; };
+		A95B715B1D2D46800094B85A /* HideDiscTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = A95B715A1D2D46800094B85A /* HideDiscTransition.swift */; };
 		A95EB5281CA97AD7000EAAB0 /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A95EB5271CA97AD7000EAAB0 /* SettingsController.swift */; };
+		A96120301D2FA82C000F3690 /* kamarada_audio.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A961202F1D2FA82C000F3690 /* kamarada_audio.mp3 */; };
 		A962293B1D2A729500FFAE49 /* DetailTextInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A96229391D2A729500FFAE49 /* DetailTextInteractor.swift */; };
 		A962293C1D2A729500FFAE49 /* DetailTextInteractorInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = A962293A1D2A729500FFAE49 /* DetailTextInteractorInterface.swift */; };
 		A962293F1D2A729C00FFAE49 /* DetailTextPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A962293D1D2A729C00FFAE49 /* DetailTextPresenter.swift */; };
@@ -132,11 +135,11 @@
 		A99CBFC91D2A6FA800F9BD40 /* VideonaFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A99CBFC81D2A6FA800F9BD40 /* VideonaFooterView.xib */; };
 		A9B903761CAA8E68001839C7 /* DetailSettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B903751CAA8E68001839C7 /* DetailSettingsController.swift */; };
 		A9CB568B1CCE2E6D00E39F11 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A9CB568A1CCE2E6D00E39F11 /* GoogleService-Info.plist */; };
+		A9D630D81D2E57EE009F932D /* GetVinylDiscImageUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D630D71D2E57EE009F932D /* GetVinylDiscImageUseCase.swift */; };
 		A9DE88F01CAE8CA600767910 /* GPUImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9DE88ED1CAE8C9B00767910 /* GPUImage.framework */; };
 		A9DE88F21CAE8CDB00767910 /* GPUImage.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = A9DE88ED1CAE8C9B00767910 /* GPUImage.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A9DE88F81CAE922200767910 /* FilterOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DE88F61CAE922200767910 /* FilterOperations.swift */; };
 		A9DE88F91CAE922200767910 /* FilterOperationTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DE88F71CAE922200767910 /* FilterOperationTypes.swift */; };
-		A9F43F031CB4F13000007FD4 /* kamarada_audio.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A9F43F021CB4F13000007FD4 /* kamarada_audio.mp3 */; };
 		A9F43F0C1CB54A7000007FD4 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9F43F0B1CB54A7000007FD4 /* AssetsLibrary.framework */; };
 		A9F777AC1D268386008D479B /* TwitterVideoUpload.m in Sources */ = {isa = PBXBuildFile; fileRef = A9F777AB1D268386008D479B /* TwitterVideoUpload.m */; };
 		A9F777B31D268D22008D479B /* filter_free.png in Resources */ = {isa = PBXBuildFile; fileRef = A9F777B21D268D22008D479B /* filter_free.png */; };
@@ -308,7 +311,10 @@
 		A95B71501D2D2BBC0094B85A /* LivelyLumpsucker.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = LivelyLumpsucker.mp3; sourceTree = "<group>"; };
 		A95B71511D2D2BBC0094B85A /* Breaktime.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Breaktime.mp3; sourceTree = "<group>"; };
 		A95B71521D2D2BBC0094B85A /* EvilPlanFX.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = EvilPlanFX.mp3; sourceTree = "<group>"; };
+		A95B71581D2D465D0094B85A /* ShowDiscTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowDiscTransition.swift; sourceTree = "<group>"; };
+		A95B715A1D2D46800094B85A /* HideDiscTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HideDiscTransition.swift; sourceTree = "<group>"; };
 		A95EB5271CA97AD7000EAAB0 /* SettingsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = SettingsController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		A961202F1D2FA82C000F3690 /* kamarada_audio.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = kamarada_audio.mp3; path = ../../../../Downloads/kamarada_audio.mp3; sourceTree = "<group>"; };
 		A96229391D2A729500FFAE49 /* DetailTextInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DetailTextInteractor.swift; path = Modules/DetailText/DetailTextInteractor.swift; sourceTree = "<group>"; };
 		A962293A1D2A729500FFAE49 /* DetailTextInteractorInterface.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DetailTextInteractorInterface.swift; path = Modules/DetailText/DetailTextInteractorInterface.swift; sourceTree = "<group>"; };
 		A962293D1D2A729C00FFAE49 /* DetailTextPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DetailTextPresenter.swift; path = Modules/DetailText/DetailTextPresenter.swift; sourceTree = "<group>"; };
@@ -334,10 +340,10 @@
 		A99CBFC81D2A6FA800F9BD40 /* VideonaFooterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VideonaFooterView.xib; sourceTree = "<group>"; };
 		A9B903751CAA8E68001839C7 /* DetailSettingsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = DetailSettingsController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		A9CB568A1CCE2E6D00E39F11 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		A9D630D71D2E57EE009F932D /* GetVinylDiscImageUseCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetVinylDiscImageUseCase.swift; sourceTree = "<group>"; };
 		A9DE88E41CAE8C9B00767910 /* GPUImage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = GPUImage.xcodeproj; path = ../GPUImage/framework/GPUImage.xcodeproj; sourceTree = "<group>"; };
 		A9DE88F61CAE922200767910 /* FilterOperations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterOperations.swift; sourceTree = "<group>"; };
 		A9DE88F71CAE922200767910 /* FilterOperationTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterOperationTypes.swift; sourceTree = "<group>"; };
-		A9F43F021CB4F13000007FD4 /* kamarada_audio.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = kamarada_audio.mp3; path = Audio/kamarada_audio.mp3; sourceTree = "<group>"; };
 		A9F43F0B1CB54A7000007FD4 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		A9F777AA1D268386008D479B /* TwitterVideoUpload.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TwitterVideoUpload.h; path = Modules/Share/TwitterVideoUpload.h; sourceTree = "<group>"; };
 		A9F777AB1D268386008D479B /* TwitterVideoUpload.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TwitterVideoUpload.m; path = Modules/Share/TwitterVideoUpload.m; sourceTree = "<group>"; };
@@ -744,6 +750,7 @@
 				A93020001D23B5CD00C414A0 /* ExporterInteractor */,
 				A9301FFF1D23B5C100C414A0 /* RecorderInteractor */,
 				A9301FFE1D23B52000C414A0 /* Kamarada Album */,
+				A9D630D71D2E57EE009F932D /* GetVinylDiscImageUseCase.swift */,
 			);
 			name = Interactor;
 			sourceTree = "<group>";
@@ -821,6 +828,7 @@
 		A9385A611D2BF3FC0048071A /* User Interface */ = {
 			isa = PBXGroup;
 			children = (
+				A95B71571D2D46300094B85A /* Transition */,
 				A9385A651D2BF4120048071A /* Presenter */,
 				A9385A641D2BF40E0048071A /* View */,
 				A9385A631D2BF4090048071A /* Wireframe */,
@@ -941,6 +949,15 @@
 				A955F51E1CA95B0E00B0CF62 /* Info.plist */,
 			);
 			path = KamaradaUITests;
+			sourceTree = "<group>";
+		};
+		A95B71571D2D46300094B85A /* Transition */ = {
+			isa = PBXGroup;
+			children = (
+				A95B71581D2D465D0094B85A /* ShowDiscTransition.swift */,
+				A95B715A1D2D46800094B85A /* HideDiscTransition.swift */,
+			);
+			name = Transition;
 			sourceTree = "<group>";
 		};
 		A96229301D2A724E00FFAE49 /* DetailText */ = {
@@ -1136,11 +1153,11 @@
 		A9F43F061CB4F13400007FD4 /* Audio */ = {
 			isa = PBXGroup;
 			children = (
+				A961202F1D2FA82C000F3690 /* kamarada_audio.mp3 */,
 				A95B714F1D2D2BBC0094B85A /* WagonWheel.mp3 */,
 				A95B71501D2D2BBC0094B85A /* LivelyLumpsucker.mp3 */,
 				A95B71511D2D2BBC0094B85A /* Breaktime.mp3 */,
 				A95B71521D2D2BBC0094B85A /* EvilPlanFX.mp3 */,
-				A9F43F021CB4F13000007FD4 /* kamarada_audio.mp3 */,
 			);
 			name = Audio;
 			sourceTree = "<group>";
@@ -1188,6 +1205,7 @@
 				A9DE88F11CAE8CC600767910 /* CopyFiles */,
 				9A5F9C9127D6FDB9920FCC72 /* Embed Pods Frameworks */,
 				F3AAA5F6F1BAF5D9B782018E /* Copy Pods Resources */,
+				A90769AE1D2E87FF00643739 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -1338,8 +1356,8 @@
 				A96229641D2AA8AD00FFAE49 /* Share.strings in Resources */,
 				A9093CE71CD1134D00A099A6 /* iso639_2.bundle in Resources */,
 				A91AD87A1CE200F20026867B /* silent_film_overlay_c_320_240.png in Resources */,
+				A96120301D2FA82C000F3690 /* kamarada_audio.mp3 in Resources */,
 				A91AD8801CE200F20026867B /* silent_film_overlay_i_320_240.png in Resources */,
-				A9F43F031CB4F13000007FD4 /* kamarada_audio.mp3 in Resources */,
 				A9F777B31D268D22008D479B /* filter_free.png in Resources */,
 				A96229621D2AA0C000FFAE49 /* PlayerView.xib in Resources */,
 				A91AD8671CE1F4DE0026867B /* silent_film_overlay_e.png in Resources */,
@@ -1393,6 +1411,19 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Kamarada/Pods-Kamarada-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		A90769AE1D2E87FF00643739 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "#!/bin/bash\nbuildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"$INFOPLIST_FILE\")\nbuildNumber=$(($buildNumber + 1))\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"$INFOPLIST_FILE\"";
+		};
 		F3AAA5F6F1BAF5D9B782018E /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1419,6 +1450,7 @@
 				A9301FF61D23B4DD00C414A0 /* RecordController.swift in Sources */,
 				A962295D1D2AA0C000FFAE49 /* PlayerItem.swift in Sources */,
 				A962293F1D2A729C00FFAE49 /* DetailTextPresenter.swift in Sources */,
+				A95B71591D2D465D0094B85A /* ShowDiscTransition.swift in Sources */,
 				A9301FEF1D23B4CC00C414A0 /* RecordWireframe.swift in Sources */,
 				A93020061D23B60000C414A0 /* CameraRecorderInteractor.swift in Sources */,
 				A9301FF71D23B4DD00C414A0 /* RecordViewInterface.swift in Sources */,
@@ -1444,6 +1476,7 @@
 				A9B903761CAA8E68001839C7 /* DetailSettingsController.swift in Sources */,
 				A9301FDE1D23B45B00C414A0 /* ShareInstagramInteractor.swift in Sources */,
 				A962295A1D2AA0C000FFAE49 /* PlayerInteractor.swift in Sources */,
+				A9D630D81D2E57EE009F932D /* GetVinylDiscImageUseCase.swift in Sources */,
 				A93020141D23B65400C414A0 /* TimerInteractorInterface.swift in Sources */,
 				A9301FAD1D23B1F900C414A0 /* SettingsPresenter.swift in Sources */,
 				A93020181D23B68B00C414A0 /* AppDependencies.swift in Sources */,
@@ -1464,6 +1497,7 @@
 				A9301FBC1D23B2FB00C414A0 /* SettingsProvider.swift in Sources */,
 				A900E4F91CC9026800C44271 /* Utils.swift in Sources */,
 				A9F777AC1D268386008D479B /* TwitterVideoUpload.m in Sources */,
+				A95B715B1D2D46800094B85A /* HideDiscTransition.swift in Sources */,
 				A95B714C1D2D1D700094B85A /* SongProvider.swift in Sources */,
 				A9301FE51D23B46A00C414A0 /* SocialNetwork.swift in Sources */,
 				A9301FCC1D23B41000C414A0 /* ShareInterface.swift in Sources */,

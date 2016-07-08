@@ -60,6 +60,10 @@ GIDSignInUIDelegate,GIDSignInDelegate{
         eventHandler?.viewDidLoad()
     }
     
+    override func viewWillDisappear(animated: Bool) {
+        
+    }
+    
     //MARK: - View Init
     func createShareInterface(){
         self.setUpImageTaps()

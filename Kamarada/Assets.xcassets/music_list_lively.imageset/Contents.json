@@ -2,17 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "music_list_lively@1x.png",
+      "filename" : "music_list_lively_pressed@1x.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "music_list_lively@2x.png",
+      "filename" : "music_list_lively_pressed@2x.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "music_list_lively@3x.png",
+      "filename" : "music_list_lively_pressed@3x.png",
       "scale" : "3x"
     }
   ],

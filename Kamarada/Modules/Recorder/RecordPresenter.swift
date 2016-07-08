@@ -57,6 +57,13 @@ class RecordPresenter: NSObject
     
     func viewWillAppear() {
         progressTime = 0.0
+        
+        let songSaved = Utils().getValueFromPreferences(ConfigPreferences().SONG_SAVED)
+        
+        let songImage = GetVinylDiscImageUseCase().getSongVinylImage(songSaved)
+        Utils().debugLog("Song saved is : \(songSaved)")
+        
+        controller?.setSongImage(songImage)
     }
     
     func pushSettings() {

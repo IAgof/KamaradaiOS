@@ -28,6 +28,7 @@ class SharePresenter:NSObject,SharePresenterInterface{
         playerPresenter?.createVideoPlayer(videoPath)
     }
     
+    
     func setVideoExportedPath(path: String) {
         self.videoPath = path
         
@@ -38,6 +39,11 @@ class SharePresenter:NSObject,SharePresenterInterface{
     }
     
     func pushBack() {
+        let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
+        dispatch_async(dispatch_get_global_queue(priority, 0)) {
+            self.playerPresenter?.resetVideoPlayer()
+        }
+
         wireframe?.goPrevController()
     }
     

@@ -13,8 +13,10 @@ import AVFoundation
 protocol MusicListInteractorInterface {
     
     func getSongs()
+    func getSongSaved() -> Int
     func playSongAtIndex(index:Int)
     func pauseSong()
+    func saveSongToPreferences(index:Int) 
 }
 
 protocol MusicInteractorDelegate {

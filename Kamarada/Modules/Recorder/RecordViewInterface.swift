@@ -58,5 +58,7 @@ protocol RecordViewInterface {
     func resetView()
     
     func getThumbnailSize()->CGFloat
+    
+    func setSongImage(image:UIImage)
 
 }
