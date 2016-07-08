@@ -78,12 +78,15 @@ class MusicListInteractor: NSObject,MusicListInteractorInterface {
     //MARK: - Inner functions
     func retrieveSongsImageToView(songs:Array<Song>) {
         var songsImages = Array<UIImage>()
+        var songsTransitionImage = Array<UIImage>()
         
         for song in songs {
             songsImages.append(song.coverImage)
+            songsTransitionImage.append(song.transitionImage)
         }
 
         delegate?.setSongsImage(songsImages)
+        delegate?.setSongsTransitionImage(songsTransitionImage)
     }
     
     func getSongAsset(song:Song) -> NSURL {

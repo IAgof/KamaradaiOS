@@ -20,6 +20,8 @@ UITableViewDataSource,UITableViewDelegate{
     //MARK: - Variables 
     let reuseIdentifierCell = "musicListCell"
     var songsImages : Array<UIImage>!
+    var songsTranstionImage : Array<UIImage>!
+    
     var selectedCellIndexPath:NSIndexPath?
     
     //MARK: - LifeCycle
@@ -55,6 +57,7 @@ UITableViewDataSource,UITableViewDelegate{
         let cell = tableView.dequeueReusableCellWithIdentifier(reuseIdentifierCell, forIndexPath: indexPath) as! MusicListCell
         
         cell.coverImageView.image = songsImages[indexPath.row]
+        cell.transitionImageView.image = songsTranstionImage[indexPath.row]
         
         cell.playPauseButton.tag = indexPath.row
         
@@ -86,6 +89,9 @@ UITableViewDataSource,UITableViewDelegate{
         self.songsImages = songsImages
     }
     
+    func setSongsTransitionImage(songsImages: Array<UIImage>) {
+        self.songsTranstionImage = songsImages
+    }
     func setStateToPlayButton(index: Int, state: Bool) {
         let indexPath =  NSIndexPath(forRow: index, inSection: 0)
 

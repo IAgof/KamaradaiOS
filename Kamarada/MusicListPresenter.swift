@@ -111,4 +111,8 @@ class MusicListPresenter: NSObject,MusicListPresenterInterface,MusicInteractorDe
     func setSongsImage(songsImages: Array<UIImage>) {
         delegate?.setSongsImage(songsImages)
     }
+    
+    func setSongsTransitionImage(songsImages: Array<UIImage>) {
+        delegate?.setSongsTransitionImage(songsImages)
+    }
 }

@@ -21,6 +21,7 @@ protocol MusicListPresenterInterface {
 
 protocol MusicPresenterDelegate {
     func setSongsImage(songsImages: Array<UIImage>)
+    func setSongsTransitionImage(songsImages: Array<UIImage>)
     func setStateToPlayButton(index:Int, state:Bool)
     func selectCell(index:Int)
     func deselectCell(index:Int)

@@ -145,8 +145,8 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="coverImageView" destination="NbK-OU-rGf" id="gNh-jR-mmc"/>
-                                            <outlet property="discImageView" destination="YUJ-nm-qR0" id="Wcb-Re-o2O"/>
                                             <outlet property="playPauseButton" destination="sIV-Hw-LAw" id="N9l-8f-TcL"/>
+                                            <outlet property="transitionImageView" destination="YUJ-nm-qR0" id="Wcb-Re-o2O"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>

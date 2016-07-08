@@ -11,10 +11,15 @@ import Foundation
 class Song: NSObject {
     
     var coverImage:UIImage!
+    var transitionImage:UIImage!
     var songName:String!
     
-    init(coverImage:UIImage,songName:String) {
+    init(coverImage:UIImage,
+         transitionImage:UIImage,
+         songName:String) {
+        
         self.coverImage = coverImage
+        self.transitionImage = transitionImage
         self.songName = songName
     }
     

@@ -13,7 +13,7 @@ class MusicListCell: UITableViewCell {
     
     @IBOutlet weak var playPauseButton: UIButton!
     @IBOutlet weak var coverImageView: UIImageView!
-    @IBOutlet weak var discImageView: UIImageView!
+    @IBOutlet weak var transitionImageView: UIImageView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -39,13 +39,13 @@ class MusicListCell: UITableViewCell {
 
             if isSelectedMusic {
                 if (coverImageView != nil) {
-                    ShowDiscTransition().animateTransition(discImageView, completion: nil)
+                    ShowDiscTransition().animateTransition(transitionImageView, completion: nil)
                     self.coverImageView.layer.borderWidth = 3
                     self.coverImageView.layer.borderColor = UIColor.init(red: (253/255), green: (171/255), blue: (83/255), alpha: 1).CGColor
                 }
             }else{
                 if (coverImageView != nil) {
-                    HideDiscTransition().animateTransition(discImageView, completion: nil)
+                    HideDiscTransition().animateTransition(transitionImageView, completion: nil)
                     self.coverImageView.layer.borderColor = UIColor.clearColor().CGColor
                     
                 }

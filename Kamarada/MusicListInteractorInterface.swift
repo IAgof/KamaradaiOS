@@ -21,4 +21,5 @@ protocol MusicListInteractorInterface {
 
 protocol MusicInteractorDelegate {
     func setSongsImage(songsImages:Array<UIImage>)
+    func setSongsTransitionImage(songsImages:Array<UIImage>)
 }
