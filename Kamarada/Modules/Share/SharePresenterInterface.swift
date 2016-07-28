@@ -12,6 +12,7 @@ import UIKit
 protocol SharePresenterInterface {
     
     func viewDidLoad()
+    func viewWillDissappear()
     func pushBack()
     func setVideoExportedPath(path:String)
     func setNumberOfClipsToExport(numberOfClips:Int)

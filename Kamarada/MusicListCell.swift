@@ -32,22 +32,26 @@ class MusicListCell: UITableViewCell {
         self.selectedBackgroundView = backView
         
     }
+    var hasMoved:Bool = false
     
    var isSelectedMusic: Bool {
         didSet {
-            Utils().debugLog("Music Cell class \n isSelectedMusic = \(isSelectedMusic)")
+//            Utils().debugLog("Music Cell class \n isSelectedMusic = \(isSelectedMusic)")
 
-            if isSelectedMusic {
+            if (isSelectedMusic && !hasMoved) {
                 if (coverImageView != nil) {
                     ShowDiscTransition().animateTransition(transitionImageView, completion: nil)
                     self.coverImageView.layer.borderWidth = 3
                     self.coverImageView.layer.borderColor = UIColor.init(red: (253/255), green: (171/255), blue: (83/255), alpha: 1).CGColor
+                    
+                    self.hasMoved = true
                 }
-            }else{
+            }else if (!isSelectedMusic){
                 if (coverImageView != nil) {
                     HideDiscTransition().animateTransition(transitionImageView, completion: nil)
                     self.coverImageView.layer.borderColor = UIColor.clearColor().CGColor
                     
+                    self.hasMoved = false
                 }
 
             }

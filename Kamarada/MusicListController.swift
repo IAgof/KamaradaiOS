@@ -64,6 +64,8 @@ UITableViewDataSource,UITableViewDelegate{
         
         cell.playPauseButton.addTarget(self, action: "pushPlayPauseButton:", forControlEvents: UIControlEvents.TouchUpInside)
 
+        print("Actual index path\(indexPath.item + 1) \n selected indexPath \((selectedCellIndexPath?.item)! + 1)")
+        
         if indexPath == selectedCellIndexPath {
             cell.isSelectedMusic = true
             cell.selected = true
@@ -121,6 +123,7 @@ UITableViewDataSource,UITableViewDelegate{
     
     func selectCell(index: Int) {
         self.setCellIsMusicSelected(index, state: true)
+        self.selectedCellIndexPath = NSIndexPath(forItem: index, inSection: 0)
     }
     
     func deselectCell(index: Int)  {

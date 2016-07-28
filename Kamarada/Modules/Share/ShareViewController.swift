@@ -51,6 +51,7 @@ GIDSignInUIDelegate,GIDSignInDelegate{
     @IBOutlet weak var twitterImageView: UIImageView!
     @IBOutlet weak var backgroundImageView: UIImageView!
     
+    @IBOutlet weak var shareButton: UIButton!
     @IBOutlet weak var videoProgressView: UIProgressView!
 
     override func viewDidLoad() {
@@ -61,7 +62,7 @@ GIDSignInUIDelegate,GIDSignInDelegate{
     }
     
     override func viewWillDisappear(animated: Bool) {
-        
+        eventHandler?.viewWillDissappear()
     }
     
     //MARK: - View Init
@@ -135,11 +136,17 @@ GIDSignInUIDelegate,GIDSignInDelegate{
     }
     
     func shareVideoFromDefault(movieURL: NSURL) {
-        documentationInteractionController = UIDocumentInteractionController.init(URL: movieURL)
+       let objectsToShare = [movieURL] //comment!, imageData!, myWebsite!]
+
+        let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
         
-        documentationInteractionController.UTI = "public.movie"
+        if (activityVC.popoverPresentationController != nil) {
+            activityVC.popoverPresentationController!.sourceView = self.shareButton
+        }
         
-        documentationInteractionController.presentOpenInMenuFromRect(CGRectZero, inView: self.view, animated: true)
+        activityVC.setValue("Video", forKey: "subject")
+        
+        self.presentViewController(activityVC, animated: true, completion: nil)
 
     }
     //MARK: - Google methods

@@ -33,4 +33,8 @@ protocol CameraInteractorInterface {
     func removeFilters()
     func removeOverlay()
     func removeShaders()
+    
+    
+    func stopCamera()
+    func startCamera()
 }

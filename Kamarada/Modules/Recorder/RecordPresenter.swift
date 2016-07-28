@@ -44,6 +44,7 @@ class RecordPresenter: NSObject
     }
     
     func viewWillDisappear() {
+        self.cameraInteractor?.stopCamera()
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
             if self.isRecording{
                 self.stopRecord()
@@ -56,6 +57,8 @@ class RecordPresenter: NSObject
     }
     
     func viewWillAppear() {
+        cameraInteractor?.startCamera()
+
         progressTime = 0.0
         
         let songSaved = Utils().getValueFromPreferences(ConfigPreferences().SONG_SAVED)

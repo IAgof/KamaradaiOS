@@ -28,6 +28,10 @@ class SharePresenter:NSObject,SharePresenterInterface{
         playerPresenter?.createVideoPlayer(videoPath)
     }
     
+    func viewWillDissappear() {
+        playerPresenter?.resetVideoPlayer()
+        
+    }
     
     func setVideoExportedPath(path: String) {
         self.videoPath = path

@@ -91,6 +91,14 @@ class CameraInteractor:CameraRecorderDelegate,
         self.addFilter(GPUImageSepiaFilter())
     }
     
+    func startCamera() {
+        videoCamera.startCameraCapture()
+    }
+    
+    func stopCamera() {
+        videoCamera.stopCameraCapture()
+    }
+    
     func loadGrainImages(){
         let filterArray:[AnyObject]?
         let deviceType = UIDevice.currentDevice().deviceType
